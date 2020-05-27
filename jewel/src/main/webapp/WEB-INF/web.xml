@@ -42,11 +42,9 @@
 	
 	<servlet-mapping>
 		<servlet-name>action</servlet-name>
-<<<<<<< HEAD
+
 		<url-pattern>/</url-pattern>
-=======
-		<url-pattern>/*</url-pattern>
->>>>>>> branch 'master' of https://github.com/nmlkj123/jewel.git
+
 	</servlet-mapping>
      
      
