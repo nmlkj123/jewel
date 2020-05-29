@@ -10,13 +10,13 @@ import com.jewel.common.dao.AbstractDAO;
 @Repository("joinDAO")
 public class JoinDAO extends AbstractDAO{
 	
-	public int selectIdCheck(Map<String, Object> map) throws Exception{
-		return (Integer)selectOne("member.selectIdCheck",map);
+	public int selectIdCheck(String id) throws Exception{
+		return (Integer)selectOne("member.selectIdCheck",id);
 	}
 	public void insertMember(Map<String, Object> map) throws Exception {
 		insert("member.insertMember",map);
 	}
-	public int selectNickCheck(Map<String, Object> map) throws Exception{
-		return (Integer) selectOne("member.selectNickCheck",map);
+	public int selectNickCheck(String nick) throws Exception{
+		return (Integer) selectOne("member.selectNickCheck",nick);
 	}
 }

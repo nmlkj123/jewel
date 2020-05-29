@@ -22,9 +22,9 @@ public class JoinServiceImpl implements JoinService{
 	private JoinDAO joinDAO;
 	
 	@Override
-	public int selectIdCheck(Map<String, Object> map) throws Exception {
+	public int selectIdCheck(String id) throws Exception {
 		// TODO Auto-generated method stub
-		return joinDAO.selectIdCheck(map);
+		return joinDAO.selectIdCheck(id);
 	}
 
 	@Override
@@ -35,9 +35,9 @@ public class JoinServiceImpl implements JoinService{
 
 
 	@Override
-	public int selectNickCheck(Map<String, Object> map) throws Exception {
+	public int selectNickCheck(String nick) throws Exception {
 		// TODO Auto-generated method stub
-		return joinDAO.selectNickCheck(map);
+		return joinDAO.selectNickCheck(nick);
 	}
 
 }
