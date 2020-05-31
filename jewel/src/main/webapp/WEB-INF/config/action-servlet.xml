@@ -12,7 +12,7 @@
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 	<!--자바스크립트 css location  -->
-	<mvc:resources mapping="/resources/**" location="/WEB-INF/resources/mytheme/" />
+	<mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" />
 	
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven>
@@ -38,7 +38,11 @@
     	class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="1">
     	<property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/>
    	</bean>
-   	
+   	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:order="2">
+	  <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+	  <property name="prefix" value="/WEB-INF/viewtiles2/"/>
+	  <property name="suffix" value=".jsp"/>
+	</bean>
    	<!--타일즈2  -->
    	<bean id="tilesConfigurer" 
       class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">

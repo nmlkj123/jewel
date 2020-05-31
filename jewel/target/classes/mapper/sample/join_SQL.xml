@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="join">
+	<!-- 아이디찾기 -->
+	<select id="selectIdCheck" parameterType="String" resultType = "int">
+			SELECT
+				count(*)
+			FROM 
+				MEMBER WHERE MEM_ID=#{id}	
+	</select>
+	<!-- 닉네임찾기 -->
+	<select id="selectNickCheck" parameterType="String" resultType = "int">
+			SELECT
+				count(*)
+			FROM 
+				MEMBER WHERE MEM_NICK=#{nick}	
+	</select>
+	<!--회원가입  -->
+	<insert id="insertMember" parameterType="hashmap">
+         INSERT INTO MEMBER
+         (
+            MEM_NUM,
+            MEM_ID,
+            MEM_PWD,
+            MEM_NAME,
+            MEM_NICK,
+            MEM_EMAIL,
+            MEM_PHONE,
+            MEM_ADDR1,
+            MEM_ADDR2,
+            MEM_RANK,
+            MEM_JOINDATE
+         )
+         VALUES
+         (
+            MEM_NUM_SEQ.NEXTVAL,
+            #{MEM_ID},
+            #{MEM_PWD},
+            #{MEM_NAME},
+            #{MEM_NICK},
+            #{MEM_EMAIL},
+            #{MEM_PHONE},
+            #{MEM_ADDR1},
+            #{MEM_ADDR2},
+            '일반',
+            SYSDATE
+         )
+		
+	
+	</insert>
+	
+	
+</mapper>

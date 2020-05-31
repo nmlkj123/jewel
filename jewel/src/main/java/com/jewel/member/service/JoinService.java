@@ -11,4 +11,5 @@ public interface JoinService {
 	int selectNickCheck(String nick) throws Exception;
 	
 
+
 }

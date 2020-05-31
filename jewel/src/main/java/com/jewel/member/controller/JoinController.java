@@ -39,13 +39,18 @@ public class JoinController {
       mv.addObject("random", ran);
       return mv;      
    }
+   /* 메인 */
+   @RequestMapping(value="/main/main", method=RequestMethod.GET)
+   public ModelAndView main(CommandMap commandMap) throws Exception{
+      ModelAndView mv=new ModelAndView("main");
+      return mv;
+   }
    
-   
-   
-   @RequestMapping(value="/join/emailAuth", method=RequestMethod.POST)
-   public ModelAndView emailAuth(CommandMap commandMap) throws Exception{
-      ModelAndView mv=new ModelAndView("/join/joinConfirm");
-      joinService.insertMember(commandMap.getMap());
+	/* 회원가입 */
+   @RequestMapping(value="/join/memberVerify", method=RequestMethod.POST)
+   public ModelAndView memberVerify(CommandMap commandMap) throws Exception{
+      ModelAndView mv=new ModelAndView("main");
+	  joinService.insertMember(commandMap.getMap()); 
       return mv;
    }
 
@@ -60,9 +65,10 @@ public class JoinController {
 	   String authCode = String.valueOf(ran);
 	   session.setAttribute("authCode", authCode);
 	   session.setAttribute("random", random);
+	   session.setAttribute("userEmail", userEmail);
 	   String subject = "회원가입 인증 코드 발급 안내 입니다.";
 	   StringBuilder sb = new StringBuilder();
-	   sb.append("귀하의 인증 코드는 " + authCode + "입니다.");
+	   sb.append("귀하의 인증 코드는 <span style=\"color:red;font-weight:bold;font-size:15px; \">" + authCode + " </span>입니다.");
 	   return mailService.send(subject, sb.toString(), sendEmailId, userEmail, null);
    }
 
@@ -85,6 +91,7 @@ public class JoinController {
    public boolean checkId(@RequestParam String id)throws Exception{
 	   
 	   int check=joinService.selectIdCheck(id);
+	   
 	   if(check>0) {
 		   return true;
 	   }else 

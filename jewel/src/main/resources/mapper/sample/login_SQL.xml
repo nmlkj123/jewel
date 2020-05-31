@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="login">
+
+	<!-- 로그인, 회원정보수정 -->
+	<select id="selectId" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT 
+			MEM_NUM,
+			MEM_ID,
+			MEM_PWD,
+			MEM_NAME,
+			MEM_RANK
+		FROM
+			MEMBER 
+		WHERE 
+			MEM_ID = #{MEM_ID} and 
+			MEM_DEL_GB ='N'
+	]]>
+	</select>
+	
+		<select id="findIdWithEmail" parameterType="hashmap" resultType="hashmap">
+	
+	<![CDATA[
+		SELECT 
+			MEM_ID
+		FROM
+			MEMBER 
+		WHERE 
+			MEM_EMAIL = #{email1}||'@'||#{email2} and MEM_DEL_GB ='N' 
+	]]>
+	</select>
+	
+		
+	<select id="PwdEmailCheck" parameterType="hashMap" resultType="Integer">
+	<![CDATA[
+    SELECT 
+    	count(*) 
+    FROM 
+    	member 
+    WHERE 
+    	mem_id=#{MEM_ID} and mem_email=#{MEM_EMAIL} and MEM_DEL_GB = 'N'
+	]]>
+	</select>
+	
+	
+	
+	<update id="updateTempPw" parameterType="hashMap">
+	<![CDATA[
+    update 
+    	member 
+    set 
+    	mem_pwd=#{MEM_PWD} 
+    where 
+    	mem_id=#{MEM_ID} and mem_email=#{MEM_EMAIL} and MEM_DEL_GB = 'N'
+	]]>
+	</update>
+</mapper>
