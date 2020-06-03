@@ -59,5 +59,10 @@
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/login/findPwConfirm.jsp" />
 			</definition>	
-			
+			<!--아이템리스트  -->
+			<definition name="itemList" extends="base_layout">
+				<put-attribute name="title" value="비밀번호찾기" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/item/itemList.jsp" />
+			</definition>	
 		</tiles-definitions>
