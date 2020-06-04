@@ -34,6 +34,9 @@
 		        <div style="margin-right: 80px; float: right;">
 				<a href="<c:url value='/login/logout'/>">로그아웃 </a>
 				</div>
+				<div style="margin-right: 80px; float: right;">
+				<a href="<c:url value='/myPage/myOrderList'/>">마이페이지 </a>
+				</div>
 		    </c:when>
 		    <c:otherwise>
 		        
@@ -85,5 +88,9 @@
       <input class="form-control mr-sm-1" type="text" name="keyword" placeholder="Search" aria-label="Search">
       <button class="btn btn-secondary my-2 my-sm-0 "  type="submit">Search</button>
     </form>
+     <input type="button" onclick="location.href='<c:url value="/adminItemList"/>'" value="상품 관리">
+ <input type="button" onclick="location.href='<c:url value="/adminQnAList"/>'" value="QnA 관리">
+ <input type="button" onclick="location.href='<c:url value="/openAdminItemDaySaleList"/>'" value="매출관리">
+ <input type="button" onclick="location.href='<c:url value="/graph"/>'" value="그래프">
   </div>
 </nav>

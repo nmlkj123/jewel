@@ -20,10 +20,10 @@ public class MyjjimController {
 	@Resource(name="myJJimService")
 	MyjjimListService myJJimListService;
 	
-	@RequestMapping(value="/myPage/myjjimList")
+	@RequestMapping(value="/myPage/myJJimList")
 	public ModelAndView myJJimList(CommandMap commandMap, HttpServletRequest request)
 			throws Exception{
-		ModelAndView mv = new ModelAndView("/myPage/myJJim");
+		ModelAndView mv = new ModelAndView("myJJim");
 		
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("MEM_ID");

@@ -21,7 +21,7 @@ public class MyQnAController {
 	
 	@RequestMapping(value="/myPage/myQnAList")
 	public ModelAndView myQnAList(CommandMap commandMap, HttpServletRequest request) throws Exception{
-		ModelAndView mv = new ModelAndView("myPage/myQnA");
+		ModelAndView mv = new ModelAndView("myQnA");
 		
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("MEM_ID");

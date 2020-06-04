@@ -29,7 +29,7 @@ public class MyInfoController {
 	///회원정보수정폼(myPageModifyForm)
 	@RequestMapping(value="/myPage/myInfoModify", method=RequestMethod.GET)
 	public ModelAndView myInfoModifyForm(CommandMap commandMap, HttpServletRequest request) throws Exception{
-		ModelAndView mv = new ModelAndView("/myPage/myInfoModify");
+		ModelAndView mv = new ModelAndView("myInfoModify");
 		
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("MEM_ID");

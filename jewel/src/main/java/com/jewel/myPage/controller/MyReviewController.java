@@ -22,7 +22,7 @@ public class MyReviewController {
 	
 	@RequestMapping(value="/myPage/myReviewList")
 	public ModelAndView myQnAList(CommandMap commandMap, HttpServletRequest request) throws Exception{
-		ModelAndView mv = new ModelAndView("myPage/myReview");
+		ModelAndView mv = new ModelAndView("myReview");
 		
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("MEM_ID");

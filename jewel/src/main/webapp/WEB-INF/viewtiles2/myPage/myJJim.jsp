@@ -41,7 +41,7 @@ function fn_deleteMember(){
 	<div>
 		<p>
 		 <a href="<c:url value="/myPage/myOrderList"/>">주문내역</a>
-		 <a href="<c:url value="/myPage/myjjimList"/>">찜한상품</a>
+		 <a href="<c:url value="/myPage/myJJimList"/>">찜한상품</a>
 		 <a href="<c:url value="/myPage/myQnAList"/>">나의Q&A</a>
 		 <a href="<c:url value="/myPage/myReviewList"/>">나의리뷰</a>
 		 <a href="<c:url value="/myPage/myInfoModify"/>">정보수정</a>

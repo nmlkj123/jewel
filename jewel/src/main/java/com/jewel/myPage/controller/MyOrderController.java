@@ -22,7 +22,7 @@ public class MyOrderController {
 	
 	@RequestMapping(value="/myPage/myOrderList")
 	public ModelAndView myOrderList(CommandMap commandMap, HttpServletRequest request) throws Exception{
-		ModelAndView mv = new ModelAndView("/myPage/myOrderList");
+		ModelAndView mv = new ModelAndView("myOrderList");
 		
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("MEM_ID");
