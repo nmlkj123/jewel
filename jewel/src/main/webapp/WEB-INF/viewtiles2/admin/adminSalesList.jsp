@@ -52,8 +52,13 @@ crossorigin="anonymous">
 var select=$("#selectBox option:selected").val();
 $(function(){
 	$('#selectBox').change(function(){
-		select=$("#selectBox option:selected").val();	
-		day();
+		select=$("#selectBox option:selected").val();
+		if($('#monthPicker').val()!="")
+			month();
+		else
+			
+			day();
+		
 	})
 	
 });
@@ -133,7 +138,7 @@ function createidChart(){
 		options :{
 			title:{
 			display:true,
-			text:'일일 상품별 매출현황'
+			text:'일간 상품별 매출현황'
 			},
 			scales : {
 				yAxes : [{
@@ -158,7 +163,7 @@ function createcdChart(){
 		options :{
 			title:{
 			display:true,
-			text:'일일 카테고리별 매출현황'
+			text:'일간 카테고리별 매출현황'
 			},
 			scales : {
 				yAxes : [{display: false,
@@ -181,154 +186,12 @@ $('#monthPicker').datepicker({
 	autoclose: true
 	
 }).on('change',function(){
-	myChart.destroy();
-	changeDate($('#monthPicker').val());
-	$('#datePicker').val("");
-	if(select=='상품별'){
-		$.ajax({
-		      type : "POST",
-		      url : '<c:url value="/adminItemMonthSaleList"/>',
-		      data : "OR_DATE="+$('#monthPicker').val(), 
-		      success : function(data){
-		    	  if(Object.keys(data.list).length==0){
-		    		  myChart=new Chart(ctx, {type:'bar',data:[],options:{
-		    				
-		    				scales : {
-		    					yAxes : [{
-		    						ticks :{
-		    							beginAtZero : true,
-		    							stepSize:1,
-		    						}
-		    					}]
-		    				}
-		    			}});
-		    		  alert("데이터가 존재하지 않습니다.");
-		    		 
-		    		  return false;
-		    	  }
-		    	  chartlabels=[];
-		    	  chartData=[];
-		         $.each(data.list,function(index,items){
-		        	 chartlabels.push(items.ITEM_NAME);
-		        	 chartData.push(items.CNT);
-		        	 
-		        	  
-		         })
-		    
-		      var j=0;
-		      for(var i=0;i<chartData.length;i++){
-		    	  if(j==6){
-		    		  j=0;
-		    	  }
-		    	  a.push(bgcolor[j]);
-		    	  b.push(dbordercolor[j]);
-		    	  j++;
-		    	  
-		    	
-		      }
-		    
-		      lineChartData = {
-			labels : chartlabels,
-			datasets : [{
-					label : "매출",
-					data : chartData,
-					backgroundColor:a,
-					
-					borderColor:b,
-					
-					borderWidth:1,
-
-					
-					}
-
-				]
-		
-	}
-		      	
-		         createmChart();
-		         
-		      }
-		      
-		   })
-	}
-	else{$.ajax({
-	      type : "POST",
-	      url : '<c:url value="/adminCateDaySaleList"/>',
-	      data : "OR_DATE="+$('#datePicker').val(), 
-	      success : function(data){
-	    	  if(Object.keys(data.list).length==0){
-	    		  
-	    		  myChart=new Chart(ctx, {type:'doughnut',data:[],options:{
-	    				scales : {
-	    					yAxes : [{display: false,
-	    						ticks :{
-	    							beginAtZero : true,
-	    							stepSize:1,
-	    						}
-	    					}]
-	    				}
-	    			}});
-	    		  alert("데이터가 존재하지 않습니다.");
-	    		 
-	    		  return false;
-	    	  }
-	    	  chartlabels=[];
-	    	  chartData=[];
-	         $.each(data.list,function(index,items){
-	        	 chartlabels.push(items.CATEGORY);
-	        	 chartData.push(items.CNT);
-	        	 
-	        	  
-	         })
 	
-	      var j=0;
-	         a=[];
-		       b=[];
-	      for(var i=0;i<chartData.length;i++){
-	    	  if(j==6){
-	    		  j=0;
-	    	  }
-	    	  a.push(cbgcolor[j]);
-	    	  b.push(cbordercolor[j]);
-	    	  j++;
-	    	  
-	    	
-	      }
-	    
-	      lineChartData = {
-		labels : chartlabels,
-		datasets : [{
-				label : "매출",
-				data : chartData,
-				backgroundColor:a,
-				
-				borderColor:b,
-				
-				borderWidth:1,
-
-				
-				}
-
-			]
+	month();
 	
-}
-	      	
-	         createcdChart();
-	         
-	      }
-	      
-	   })   
-	
-	
-	
-	
-}
-		
-		
-	}
 	        	
 });
-function createmChart(){
+function createimChart(){
 	
 	
 	
@@ -340,7 +203,7 @@ function createmChart(){
 		options :{
 			title:{
 			display:true,
-			text:'월 상품별 매출현황'
+			text:'월간 상품별 매출현황'
 			},
 			scales : {
 				yAxes : [{
@@ -503,6 +366,186 @@ else{
 	
 }
 
+}
+function createcmChart(){
+	
+	
+	
+	
+	
+    myChart = new Chart(ctx,{
+    	type: 'doughnut',
+		data : lineChartData,
+		options :{
+			title:{
+			display:true,
+			text:'월간 카테고리별 매출현황'
+			},
+			scales : {
+				yAxes : [{display: false,
+					ticks :{
+						beginAtZero : true,
+						stepSize:1,
+					}
+				}]
+			}
+		}
+	})
+}
+
+function month(){
+	myChart.destroy();
+	changeDate($('#monthPicker').val());
+	$('#datePicker').val("");
+	if(select=='상품별'){
+		$.ajax({
+		      type : "POST",
+		      url : '<c:url value="/adminItemMonthSaleList"/>',
+		      data : "OR_DATE="+$('#monthPicker').val(), 
+		      success : function(data){
+		    	  if(Object.keys(data.list).length==0){
+		    		  myChart=new Chart(ctx, {type:'bar',data:[],options:{
+		    				
+		    				scales : {
+		    					yAxes : [{
+		    						ticks :{
+		    							beginAtZero : true,
+		    							stepSize:1,
+		    						}
+		    					}]
+		    				}
+		    			}});
+		    		  alert("데이터가 존재하지 않습니다.");
+		    		 
+		    		  return false;
+		    	  }
+		    	  chartlabels=[];
+		    	  chartData=[];
+		         $.each(data.list,function(index,items){
+		        	 chartlabels.push(items.ITEM_NAME);
+		        	 chartData.push(items.CNT);
+		        	 
+		        	  
+		         })
+		    
+		      var j=0;
+		      a=[];
+		      b=[];
+		      for(var i=0;i<chartData.length;i++){
+		    	  if(j==6){
+		    		  j=0;
+		    	  }
+		    	  a.push(bgcolor[j]);
+		    	  b.push(dbordercolor[j]);
+		    	  j++;
+		    	  
+		    	
+		      }
+		    
+		      lineChartData = {
+			labels : chartlabels,
+			datasets : [{
+					label : "매출",
+					data : chartData,
+					backgroundColor:a,
+					
+					borderColor:b,
+					
+					borderWidth:1,
+
+					
+					}
+
+				]
+		
+	}
+		      	
+		         createimChart();
+		         
+		      }
+		      
+		   })
+	}
+	else{
+		
+		$.ajax({
+	      type : "POST",
+	      url : '<c:url value="/adminCateMonthSaleList"/>',
+	      data : "OR_DATE="+$('#monthPicker').val(), 
+	      success : function(data){
+	    	  if(Object.keys(data.list).length==0){
+	    		  
+	    		  myChart=new Chart(ctx, {type:'doughnut',data:[],options:{
+	    				scales : {
+	    					yAxes : [{display: false,
+	    						ticks :{
+	    							beginAtZero : true,
+	    							stepSize:1,
+	    						}
+	    					}]
+	    				}
+	    			}});
+	    		  alert("데이터가 존재하지 않습니다.");
+	    		 
+	    		  return false;
+	    	  }
+	    	  chartlabels=[];
+	    	  chartData=[];
+	         $.each(data.list,function(index,items){
+	        	 chartlabels.push(items.CATEGORY);
+	        	 chartData.push(items.CNT);
+	        	 
+	        	  
+	         })
+	
+	      var j=0;
+	         a=[];
+		       b=[];
+	      for(var i=0;i<chartData.length;i++){
+	    	  if(j==6){
+	    		  j=0;
+	    	  }
+	    	  a.push(cbgcolor[j]);
+	    	  b.push(cbordercolor[j]);
+	    	  j++;
+	    	  
+	    	
+	      }
+	    
+	      lineChartData = {
+		labels : chartlabels,
+		datasets : [{
+				label : "매출",
+				data : chartData,
+				backgroundColor:a,
+				
+				borderColor:b,
+				
+				borderWidth:1,
+
+				
+				}
+
+			]
+	
+}
+	      	
+	         createcmChart();
+	         
+	      }
+	      
+	   })   
+	
+	
+	
+	
+
+		
+
+	
+}
+	
+	
 }	
 </script>
 

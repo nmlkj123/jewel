@@ -109,10 +109,41 @@
 				<put-attribute name="title" value="그래프" />
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/admin/graph.jsp" />
+
 			</definition>	
 			<definition name="graph" extends="base_layout">
 				<put-attribute name="title" value="그래프" />
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/admin/graph.jsp" />
 			</definition>	
+
+			
+			
+			<definition name="myOrderList" extends="base_layout">
+				<put-attribute name="title" value="마이페이지주문내역" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/myPage/myOrderList.jsp" />
+			</definition>
+			<definition name="myInfoModify" extends="base_layout">
+				<put-attribute name="title" value="마이페이지회원수정" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/myPage/myInfoModify.jsp" />
+			</definition>
+			<definition name="myJJim" extends="base_layout">
+				<put-attribute name="title" value="마이페이지찜목록" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/myPage/myJJim.jsp" />
+			</definition>
+			<definition name="myQnA" extends="base_layout">
+				<put-attribute name="title" value="마이페이지QnA" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/myPage/myQnA.jsp" />
+			</definition>
+			<definition name="myReview" extends="base_layout">
+				<put-attribute name="title" value="마이페이지Review" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/myPage/myReview.jsp" />
+			</definition>
+				
+
 		</tiles-definitions>
