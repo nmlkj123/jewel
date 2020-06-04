@@ -110,4 +110,9 @@
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/admin/graph.jsp" />
 			</definition>	
+			<definition name="graph" extends="base_layout">
+				<put-attribute name="title" value="그래프" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/graph.jsp" />
+			</definition>	
 		</tiles-definitions>

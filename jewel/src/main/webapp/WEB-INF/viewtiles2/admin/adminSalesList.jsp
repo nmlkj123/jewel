@@ -52,7 +52,8 @@ crossorigin="anonymous">
 var select=$("#selectBox option:selected").val();
 $(function(){
 	$('#selectBox').change(function(){
-		select=$("#selectBox option:selected").val();		
+		select=$("#selectBox option:selected").val();	
+		day();
 	})
 	
 });
@@ -113,153 +114,8 @@ $('#datePicker').datepicker({
 	autoclose: true
 	
 }).on('change',function(){
-	
-	myChart.destroy();
-	changeDate($('#datePicker').val());
-	$('#monthPicker').val("");
-	
-	
-	if(select=='상품별'){
-		$.ajax({
-		      type : "POST",
-		      url : '<c:url value="/adminItemDaySaleList"/>',
-		      data : "OR_DATE="+$('#datePicker').val(), 
-		      success : function(data){
-		    	  if(Object.keys(data.list).length==0){
-		    		  myChart=new Chart(ctx, {type:'bar',data:[],options:{
-		    				scales : {
-		    					yAxes : [{
-		    						ticks :{
-		    							beginAtZero : true,
-		    							stepSize:1,
-		    						}
-		    					}]
-		    				}
-		    			}});
-		    		  alert("데이터가 존재하지 않습니다.");
-		    		 
-		    		  return false;
-		    	  }
-		    	  chartlabels=[];
-		    	  chartData=[];
-		         $.each(data.list,function(index,items){
-		        	 chartlabels.push(items.ITEM_NAME);
-		        	 chartData.push(items.CNT);
-		        	 
-		        	  
-		         })
-		
-		      var j=0;
-		       a=[];
-		       b=[];
-		      for(var i=0;i<chartData.length;i++){
-		    	  if(j==6){
-		    		  j=0;
-		    	  }
-		    	  a.push(bgcolor[j]);
-		    	  b.push(dbordercolor[j]);
-		    	  j++;
-		    	  
-		    	
-		      }
-		    
-		      lineChartData = {
-			labels : chartlabels,
-			datasets : [{
-					label : "매출",
-					data : chartData,
-					backgroundColor:a,
-					
-					borderColor:b,
-					
-					borderWidth:1,
 
-					
-					}
-
-				]
-		
-	}
-		      	
-		         createidChart();
-		         
-		      }
-		      
-		   })   
-	}
-	else{
-		$.ajax({
-		      type : "POST",
-		      url : '<c:url value="/adminCateDaySaleList"/>',
-		      data : "OR_DATE="+$('#datePicker').val(), 
-		      success : function(data){
-		    	  if(Object.keys(data.list).length==0){
-		    		  alert($('#datePicker').val()); 
-		    		  myChart=new Chart(ctx, {type:'doughnut',data:[],options:{
-		    				scales : {
-		    					yAxes : [{display: false,
-		    						ticks :{
-		    							beginAtZero : true,
-		    							stepSize:1,
-		    						}
-		    					}]
-		    				}
-		    			}});
-		    		  alert("데이터가 존재하지 않습니다.");
-		    		 
-		    		  return false;
-		    	  }
-		    	  chartlabels=[];
-		    	  chartData=[];
-		         $.each(data.list,function(index,items){
-		        	 chartlabels.push(items.CATEGORY);
-		        	 chartData.push(items.CNT);
-		        	 
-		        	  
-		         })
-		
-		      var j=0;
-		         a=[];
-			       b=[];
-		      for(var i=0;i<chartData.length;i++){
-		    	  if(j==6){
-		    		  j=0;
-		    	  }
-		    	  a.push(cbgcolor[j]);
-		    	  b.push(cbordercolor[j]);
-		    	  j++;
-		    	  
-		    	
-		      }
-		    
-		      lineChartData = {
-			labels : chartlabels,
-			datasets : [{
-					label : "매출",
-					data : chartData,
-					backgroundColor:a,
-					
-					borderColor:b,
-					
-					borderWidth:1,
-
-					
-					}
-
-				]
-		
-	}
-		      	
-		         createcdChart();
-		         
-		      }
-		      
-		   })   
-		
-		
-		
-		
-	}
+	day();
 	
      	
 });
@@ -365,7 +221,7 @@ $('#monthPicker').datepicker({
 	    		  j=0;
 	    	  }
 	    	  a.push(bgcolor[j]);
-	    	  b.push(bordercolor[j]);
+	    	  b.push(dbordercolor[j]);
 	    	  j++;
 	    	  
 	    	
@@ -420,7 +276,153 @@ function createmChart(){
 		}
 	})
 }
+function day(){myChart.destroy();
+changeDate($('#datePicker').val());
+$('#monthPicker').val("");
 
+
+if(select=='상품별'){
+	
+	$.ajax({
+	      type : "POST",
+	      url : '<c:url value="/adminItemDaySaleList"/>',
+	      data : "OR_DATE="+$('#datePicker').val(), 
+	      success : function(data){
+	    	  if(Object.keys(data.list).length==0){
+	    		  myChart=new Chart(ctx, {type:'bar',data:[],options:{
+	    				scales : {
+	    					yAxes : [{
+	    						ticks :{
+	    							beginAtZero : true,
+	    							stepSize:1,
+	    						}
+	    					}]
+	    				}
+	    			}});
+	    		  alert("데이터가 존재하지 않습니다.");
+	    		 
+	    		  return false;
+	    	  }
+	    	  chartlabels=[];
+	    	  chartData=[];
+	         $.each(data.list,function(index,items){
+	        	 chartlabels.push(items.ITEM_NAME);
+	        	 chartData.push(items.CNT);
+	        	 
+	        	  
+	         })
+	
+	      var j=0;
+	       a=[];
+	       b=[];
+	      for(var i=0;i<chartData.length;i++){
+	    	  if(j==6){
+	    		  j=0;
+	    	  }
+	    	  a.push(bgcolor[j]);
+	    	  b.push(dbordercolor[j]);
+	    	  j++;
+	    	  
+	    	
+	      }
+	    
+	      lineChartData = {
+		labels : chartlabels,
+		datasets : [{
+				label : "매출",
+				data : chartData,
+				backgroundColor:a,
+				
+				borderColor:b,
+				
+				borderWidth:1,
+
+				
+				}
+
+			]
+	
+}
+	      	
+	         createidChart();
+	         
+	      }
+	      
+	   })   
+}
+else{
+	$.ajax({
+	      type : "POST",
+	      url : '<c:url value="/adminCateDaySaleList"/>',
+	      data : "OR_DATE="+$('#datePicker').val(), 
+	      success : function(data){
+	    	  if(Object.keys(data.list).length==0){
+	    		  
+	    		  myChart=new Chart(ctx, {type:'doughnut',data:[],options:{
+	    				scales : {
+	    					yAxes : [{display: false,
+	    						ticks :{
+	    							beginAtZero : true,
+	    							stepSize:1,
+	    						}
+	    					}]
+	    				}
+	    			}});
+	    		  alert("데이터가 존재하지 않습니다.");
+	    		 
+	    		  return false;
+	    	  }
+	    	  chartlabels=[];
+	    	  chartData=[];
+	         $.each(data.list,function(index,items){
+	        	 chartlabels.push(items.CATEGORY);
+	        	 chartData.push(items.CNT);
+	        	 
+	        	  
+	         })
+	
+	      var j=0;
+	         a=[];
+		       b=[];
+	      for(var i=0;i<chartData.length;i++){
+	    	  if(j==6){
+	    		  j=0;
+	    	  }
+	    	  a.push(cbgcolor[j]);
+	    	  b.push(cbordercolor[j]);
+	    	  j++;
+	    	  
+	    	
+	      }
+	    
+	      lineChartData = {
+		labels : chartlabels,
+		datasets : [{
+				label : "매출",
+				data : chartData,
+				backgroundColor:a,
+				
+				borderColor:b,
+				
+				borderWidth:1,
+
+				
+				}
+
+			]
+	
+}
+	      	
+	         createcdChart();
+	         
+	      }
+	      
+	   })   
+	
+	
+	
+	
+}}	
 </script>
 
 
