@@ -184,17 +184,83 @@ $('#monthPicker').datepicker({
 	myChart.destroy();
 	changeDate($('#monthPicker').val());
 	$('#datePicker').val("");
-	
-	$.ajax({
+	if(select=='상품별'){
+		$.ajax({
+		      type : "POST",
+		      url : '<c:url value="/adminItemMonthSaleList"/>',
+		      data : "OR_DATE="+$('#monthPicker').val(), 
+		      success : function(data){
+		    	  if(Object.keys(data.list).length==0){
+		    		  myChart=new Chart(ctx, {type:'bar',data:[],options:{
+		    				
+		    				scales : {
+		    					yAxes : [{
+		    						ticks :{
+		    							beginAtZero : true,
+		    							stepSize:1,
+		    						}
+		    					}]
+		    				}
+		    			}});
+		    		  alert("데이터가 존재하지 않습니다.");
+		    		 
+		    		  return false;
+		    	  }
+		    	  chartlabels=[];
+		    	  chartData=[];
+		         $.each(data.list,function(index,items){
+		        	 chartlabels.push(items.ITEM_NAME);
+		        	 chartData.push(items.CNT);
+		        	 
+		        	  
+		         })
+		    
+		      var j=0;
+		      for(var i=0;i<chartData.length;i++){
+		    	  if(j==6){
+		    		  j=0;
+		    	  }
+		    	  a.push(bgcolor[j]);
+		    	  b.push(dbordercolor[j]);
+		    	  j++;
+		    	  
+		    	
+		      }
+		    
+		      lineChartData = {
+			labels : chartlabels,
+			datasets : [{
+					label : "매출",
+					data : chartData,
+					backgroundColor:a,
+					
+					borderColor:b,
+					
+					borderWidth:1,
+
+					
+					}
+
+				]
+		
+	}
+		      	
+		         createmChart();
+		         
+		      }
+		      
+		   })
+	}
+	else{$.ajax({
 	      type : "POST",
-	      url : '<c:url value="/adminItemMonthSaleList"/>',
-	      data : "OR_DATE="+$('#monthPicker').val(), 
+	      url : '<c:url value="/adminCateDaySaleList"/>',
+	      data : "OR_DATE="+$('#datePicker').val(), 
 	      success : function(data){
 	    	  if(Object.keys(data.list).length==0){
-	    		  myChart=new Chart(ctx, {type:'bar',data:[],options:{
-	    				
+	    		  
+	    		  myChart=new Chart(ctx, {type:'doughnut',data:[],options:{
 	    				scales : {
-	    					yAxes : [{
+	    					yAxes : [{display: false,
 	    						ticks :{
 	    							beginAtZero : true,
 	    							stepSize:1,
@@ -209,19 +275,21 @@ $('#monthPicker').datepicker({
 	    	  chartlabels=[];
 	    	  chartData=[];
 	         $.each(data.list,function(index,items){
-	        	 chartlabels.push(items.ITEM_NAME);
+	        	 chartlabels.push(items.CATEGORY);
 	        	 chartData.push(items.CNT);
 	        	 
 	        	  
 	         })
-	    
+	
 	      var j=0;
+	         a=[];
+		       b=[];
 	      for(var i=0;i<chartData.length;i++){
 	    	  if(j==6){
 	    		  j=0;
 	    	  }
-	    	  a.push(bgcolor[j]);
-	    	  b.push(dbordercolor[j]);
+	    	  a.push(cbgcolor[j]);
+	    	  b.push(cbordercolor[j]);
 	    	  j++;
 	    	  
 	    	
@@ -245,11 +313,20 @@ $('#monthPicker').datepicker({
 	
 }
 	      	
-	         createmChart();
+	         createcdChart();
 	         
 	      }
 	      
-	   })        	
+	   })   
+	
+	
+	
+	
+}
+		
+		
+	}
+	        	
 });
 function createmChart(){
 	
@@ -276,7 +353,9 @@ function createmChart(){
 		}
 	})
 }
-function day(){myChart.destroy();
+function day(){
+	
+	myChart.destroy();
 changeDate($('#datePicker').val());
 $('#monthPicker').val("");
 
@@ -422,7 +501,9 @@ else{
 	
 	
 	
-}}	
+}
+
+}	
 </script>
 
 
