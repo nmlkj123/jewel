@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="myPage">
+	
+	<!-- 회원수정폼 -->
+	<select id="selectMyInfoDetail" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			select 
+			        MEM_NAME,
+			        MEM_NICK, 
+			        MEM_EMAIL,
+			        MEM_PHONE,
+			        MEM_ADDR1,
+			        MEM_ADDR2			        
+			from MEMBER
+			where MEM_ID =#{MEM_ID}
+		]]>
+	</select>
+
+	<!-- 회원수정 -->
+	<update id="updateMyInfo" parameterType="hashmap">
+		<![CDATA[
+			update MEMBER 
+			set
+			    MEM_NAME = #{MEM_NAME},		
+   				MEM_PWD = #{MEM_PWD},
+				MEM_NICK = #{MEM_NICK},				
+				MEM_PHONE = #{MEM_PHONE},
+				MEM_ADDR1 = #{MEM_ADDR1},
+				MEM_ADDR2 = #{MEM_ADDR2}			
+			where 
+				MEM_ID = #{MEM_ID}			
+		]]>
+	</update>
+
+	<!-- 회원탈퇴 -->
+	<update id="myInfoDelete" parameterType="hashmap">
+		<![CDATA[
+			update MEMBER 
+			SET MEM_DEL_GB = 'Y'
+			WHERE MEM_ID = #{MEM_ID}
+		]]>
+	</update>
+	
+	<!-- 마이페이지  -->
+	<select id="selectMyInfo" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT MEM_NAME, MEM_RANK, MEM_POINT
+			FROM MEMBER
+			WHERE MEM_ID = #{MEM_ID}
+		]]>
+	</select>
+	<!-- 나의 주문내역 -->
+	<select id="selectMyOrderList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT  				   
+				   i.ITEM_NAME,
+				   i.ITEM_NUM,
+				   i.ITEM_IMAGE1,
+				   to_char(o.OR_DATE,'YYYY.MM.DD') OR_DATE,
+				   o.OR_CNT,
+				   o.OR_FP,
+				   o.OR_OP,
+				   d.DEL_DS				   
+			FROM ITEM i, ORDERS o, MEMBER m, DELIVERY d
+			WHERE m.MEM_ID = #{MEM_ID}
+			AND m.MEM_NUM = o.MEM_NUM
+			AND o.ITEM_NUM = i.ITEM_NUM
+			AND o.OR_NUM = d.OR_NUM
+		]]>
+	</select>
+	<!-- 나의찜목록 -->
+	<select id="selectMyjjimList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT i.ITEM_IMAGE1, i.ITEM_NAME, i.ITEM_PRICE, i.ITEM_NUM
+			FROM JJIM j, ITEM i, MEMBER m
+			WHERE m.MEM_ID = #{MEM_ID}
+			AND m.MEM_NUM = j.MEM_NUM
+			AND i.ITEM_NUM = j.ITEM_NUM
+		]]>
+	</select>
+	
+	<!-- 회원 Q&A리스트 QNA_NUM로 상세보기 -->
+	<select id="selectMyQnAList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT
+			to_char(q.QNA_DATE,'YYYY.MM.DD') QNA_DATE,
+			q.QNA_NUM, 
+			q.QNA_CATE, 
+			i.ITEM_NAME, 
+			q.QNA_TITLE, 
+			DECODE( q.QNA_RSTATE, 'N','처리중','Y','답변완료') QNA_RSTATE
+		FROM ITEM i, QNA q, MEMBER m
+		WHERE m.MEM_ID = #{MEM_ID}
+		AND m.MEM_ID = q.MEM_ID
+		AND i.ITEM_NUM = q.ITEM_NUM
+	]]>
+	</select>
+	
+	<!-- 회원 Q&A 상세보기 QNA_NUM로 수정삭제-->
+	<select id="selectMyQnADetail" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				q.QNA_NUM,
+				q.QNA_TITLE, 
+				q.QNA_CONTENT, 
+				i.ITEM_NAME
+			FROM QNA q, ITEM i
+			WHERE q.QNA_NUM = #{QNA_NUM} 
+			AND i.ITEM_NUM = q.ITEM_NUM
+		]]>
+	</select>
+
+	<!-- 회원 Q&A 수정(컨트롤러에서 세션,QNA_NUM값 받아오기) -->
+	<update id="updateMyQnA" parameterType="hashmap">
+		<![CDATA[
+			UPDATE QNA SET 
+				QNA_TITLE = '#{QNA_TITLE}',
+				QNA_CONTENT='#{QNA_CONTENT}'
+			WHERE MEM_ID = #{MEM_ID}
+			AND QNA_NUM = #{QNA_NUM}
+		]]>
+	</update>
+
+	<!-- 회원 Q&A 삭제 (컨트롤러에서 세션,QNA_NUM값 받아오기)-->
+	<delete id="deleteMyQNA" parameterType="hashmap">
+		<![CDATA[
+			DELETE FROM QNA
+			WHERE MEM_ID = #{MEM_ID} 
+			AND QNA_NUM = #{QNA_NUM}
+		]]>
+	</delete>
+	
+	<!-- 회원 내가 쓴 리뷰 리스트 -->
+	<select id="selectMyReviewList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				r.RE_NUM, 
+				i.ITEM_NAME, 
+				r.RE_TITLE, 
+				TO_CHAR(r.RE_DATE,'YYYY.MM.DD') RE_DATE, 
+				RE_LIKE
+			FROM MEMBER m, ITEM i, REVIEW r
+			WHERE m.MEM_ID = #{MEM_ID}
+			AND m.MEM_NUM = r.MEM_NUM
+			AND i.ITEM_NUM = r.ITEM_NUM 
+		]]>
+	</select>
+
+	<!-- 회원 내가 쓴 리뷰 상세보기 -->
+	<!-- MYBATIS작성시 #리뷰조회수 증가해야됌! (RE_HIT.SEQ.NEXTVAL FROM DUAL) -->
+
+
+	<select id="selectMyReviewDetail" parameterType="hashmap">
+		<![CDATA[
+			SELECT 
+				r.RE_NUM, 
+				r.RE_TITLE, 
+				r.RE_CONTENT, 
+				TO_CHAR(r.RE_DATE,'YYYY.MM.DD') RE_DATE
+			FROM REVIEW r, MEMBER m
+			WHERE m.MEM_ID = #{MEM_ID}
+			AND m.MEM_NUM = r.MEM_NUM
+		]]>
+	</select>
+
+	<!-- 회원 내가 쓴 리뷰 수정 -->
+	<update id="updateMyReview" parameterType="hashmap">
+		<![CDATA[
+			UPDATE REVIEW SET 
+			RE_TITLE='#{RE_TITLE}',
+			RE_CONTENT='#{RE_CONTENT}'
+			WHERE RE_NUM = #{RE_NUM}
+		]]>
+	</update>
+
+	<!-- 회원 내가 쓴 리뷰 삭제 -->
+	<delete id="deleteMainList" parameterType="hashmap">
+		<![CDATA[
+			DELETE FROM REVIEW
+			WHERE RE_NUM = #{RE_NUM}
+		]]>
+	</delete>
+	
+</mapper>
