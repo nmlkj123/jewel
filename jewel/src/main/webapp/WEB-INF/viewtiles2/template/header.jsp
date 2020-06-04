@@ -85,5 +85,9 @@
       <input class="form-control mr-sm-1" type="text" name="keyword" placeholder="Search" aria-label="Search">
       <button class="btn btn-secondary my-2 my-sm-0 "  type="submit">Search</button>
     </form>
+     <input type="button" onclick="location.href='adminItemList'" value="상품 관리">
+ <input type="button" onclick="location.href='adminQnAList'" value="QnA 관리">
+ <input type="button" onclick="location.href='openAdminItemDaySaleList'" value="매출관리">
+ <input type="button" onclick="location.href='graph'" value="그래프">
   </div>
 </nav>

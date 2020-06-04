@@ -64,5 +64,50 @@
 				<put-attribute name="title" value="비밀번호찾기" />
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/item/itemList.jsp" />
+			</definition>
+			<definition name="adminItemList" extends="base_layout">
+				<put-attribute name="title" value="상품목록" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminItemList.jsp" />
+			</definition>
+			<definition name="adminItemWrite" extends="base_layout">
+				<put-attribute name="title" value="상품등록" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminItemWrite.jsp" />
+			</definition>
+			<definition name="adminItemDetail" extends="base_layout">
+				<put-attribute name="title" value="상품상세" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminItemDetail.jsp" />
+			</definition>
+			<definition name="adminItemUpdate" extends="base_layout">
+				<put-attribute name="title" value="상품수정" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminItemUpdate.jsp" />
+			</definition>
+			<definition name="adminQnAList" extends="base_layout">
+				<put-attribute name="title" value="QnA목록" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminQnAList.jsp" />
+			</definition>
+			<definition name="adminQnADetail" extends="base_layout">
+				<put-attribute name="title" value="QnA상세" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminQnADetail.jsp" />
+			</definition>
+			<definition name="adminQnAReply" extends="base_layout">
+				<put-attribute name="title" value="QnA답변" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminQnAReply.jsp" />
+			</definition>
+			<definition name="openAdminItemDaySaleList" extends="base_layout">
+				<put-attribute name="title" value="매출관리" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminSalesList.jsp" />
+			</definition>
+			<definition name="graph" extends="base_layout">
+				<put-attribute name="title" value="그래프" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/graph.jsp" />
 			</definition>	
 		</tiles-definitions>
