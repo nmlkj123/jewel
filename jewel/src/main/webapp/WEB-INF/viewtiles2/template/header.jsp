@@ -59,7 +59,7 @@
 </div> 
 <nav class="site-header sticky-top py-1">
   <div class="container d-flex flex-column flex-md-row justify-content-between">
-    <a class="py-2 pr-5" href="#" aria-label="주얼쓰" >
+    <a class="py-2 pr-5" href="<c:url value='/main/main'/>" aria-label="주얼쓰" >
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18pt" height="18pt" viewBox="0 0 18 18" version="1.1">
 		<defs>
 		<linearGradient id="linear0" gradientUnits="userSpaceOnUse" x1="-0.0039" y1="258.0318" x2="511.9553" y2="258.0318" gradientTransform="matrix(0.0351598,0,0,-0.0351598,0.000137109,18.072162)">
@@ -73,7 +73,7 @@
 		</svg>
 
     </a>
-    <a class="py-2 d-none d-md-inline-block" href="#">베스트100</a>
+    <a class="py-2 d-none d-md-inline-block" href="<c:url value='/item/itemList'/>">베스트100</a>
     <a class="py-2 d-none d-md-inline-block" href="<c:url value='/item/itemList?type=N'/>">목걸이</a>
     <a class="py-2 d-none d-md-inline-block" href="#">반지</a>
     <a class="py-2 d-none d-md-inline-block" href="#">귀걸이</a>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="item">
+	
+	<!-- 로그인, 회원정보수정 -->
+	<select id="getItemList" parameterType="hashmap" resultType="hashmap">
+		
+	<choose>
+
+	    <when test="sort==1">
+				SELECT
+				 *
+				FROM
+				(SELECT 
+					rownum as RNUM,s.* 
+				from
+				    (select 
+				    	ITEM_NUM,ITEM_TYPE,ITEM_NAME,ITEM_PRICE,ITEM_DCP,ITEM_IMAGE1,ITEM_IMAGE2,ITEM_DATE,ITEM_STOCK,ITEM_PRICE-(ITEM_PRICE*(ITEM_DCP/100)) AS ITEM_FP 
+				   	 from 
+				   	 	item  
+			   	 <choose>
+				   	 <when test="type!=null and  type !=''">	
+				   	 WHERE
+				   	 ITEM_TYPE=#{type}
+				   	 </when>
+				   	 <when test="keyword!=null and keyword!=''">	
+				   	 WHERE
+				   	 ITEM_NAME like '%' || #{keyword} ||'%'
+				   	 </when> 
+			   	 </choose>
+				   	 order by ITEM_NUM desc)s)
+		<choose>
+			<when test="type!=null and type !='' or keyword!=null and keyword!=''">  	 
+			<![CDATA[
+				 WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}
+			]]>
+			</when>
+			
+			<otherwise>
+			<![CDATA[
+				 WHERE RNUM >= 1 AND RNUM <= 100
+			]]>
+			</otherwise>
+    	</choose>
+	    	
+	    </when>
+	    <when test="sort==2">
+			SELECT
+			 	* 
+			FROM 
+				(SELECT
+					 ROWNUM as RNUM,s.* 
+				 FROM
+				 	(SELECT
+				 		 ITEM_NUM,ITEM_TYPE,ITEM_NAME,ITEM_PRICE,ITEM_DCP,ITEM_IMAGE1,ITEM_IMAGE2,ITEM_DATE,ITEM_STOCK,ITEM_PRICE-(ITEM_PRICE*(ITEM_DCP/100)) AS ITEM_FP,NVL(CN,0)AS CN 
+				 	FROM
+				 		(SELECT
+				 			 o.ITEM_NUM,COUNT(o.ITEM_NUM)AS CN 
+				 		 FROM 
+				 		 	ORDERS o GROUP BY o.ITEM_NUM) vw_order 
+				 	RIGHT JOIN ITEM 
+				 	USING (ITEM_NUM) 
+			 	<choose>
+				   	 <when test="type!=null and  type !=''">	
+				   	 WHERE
+				   	 ITEM_TYPE=#{type}
+				   	 </when>
+				   	 <when test="keyword!=null and keyword!=''">	
+				   	 WHERE
+				   	 ITEM_NAME like '%' || #{keyword} ||'%'
+				   	 </when> 
+			   	 </choose>
+				 	ORDER BY CN DESC)s) 
+		<choose>
+			<when test="type!=null and type !='' or keyword!=null and keyword!=''">  	 
+			<![CDATA[
+				 WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}
+			]]>
+			</when>
+			
+			<otherwise>
+			<![CDATA[
+				 WHERE RNUM >= 1 AND RNUM <= 100
+			]]>
+			</otherwise>
+    	</choose>
+	    </when>
+	    
+	    <when test="sort==3">
+			SELECT
+			 *
+			FROM
+			(SELECT 
+				rownum as RNUM,s.* 
+			from
+			    (select 
+			    	ITEM_NUM,ITEM_TYPE,ITEM_NAME,ITEM_PRICE,ITEM_DCP,ITEM_IMAGE1,ITEM_IMAGE2,ITEM_DATE,ITEM_STOCK,ITEM_PRICE-(ITEM_PRICE*(ITEM_DCP/100)) AS ITEM_FP 
+			    from 
+			    	item 
+			   <choose>
+				   	 <when test="type!=null and  type !=''">	
+				   	 WHERE
+				   	 ITEM_TYPE=#{type}
+				   	 </when>
+				   	 <when test="keyword!=null and keyword!=''">	
+				   	 WHERE
+				   	 ITEM_NAME like '%' || #{keyword} ||'%'
+				   	 </when> 
+		   	 </choose>
+			    order by ITEM_FP asc)s)
+		<choose>
+			<when test="type!=null and type !='' or keyword!=null and keyword!=''">  	 
+			<![CDATA[
+				 WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}
+			]]>
+			</when>
+			
+			<otherwise>
+			<![CDATA[
+				 WHERE RNUM >= 1 AND RNUM <= 100
+			]]>
+			</otherwise>
+    	</choose>
+	    </when>
+	    
+	    <when test="sort==4">
+			SELECT
+			 *
+			FROM
+			(SELECT 
+				rownum as RNUM,s.* 
+			from
+			    (select 
+			    	ITEM_NUM,ITEM_TYPE,ITEM_NAME,ITEM_PRICE,ITEM_DCP,ITEM_IMAGE1,ITEM_IMAGE2,ITEM_DATE,ITEM_STOCK,ITEM_PRICE-(ITEM_PRICE*(ITEM_DCP/100)) AS ITEM_FP 
+			    from 
+			    	item 
+			    <choose>
+				   	 <when test="type!=null and  type !=''">	
+				   	 WHERE
+				   	 ITEM_TYPE=#{type}
+				   	 </when>
+				   	 <when test="keyword!=null and keyword!=''">	
+				   	 WHERE
+				   	 ITEM_NAME like '%' || #{keyword} ||'%'
+				   	 </when> 
+		   	 </choose>
+			    order by ITEM_FP desc)s)
+		<choose>
+			<when test="type!=null and type !='' or keyword!=null and keyword!=''">  	 
+			<![CDATA[
+				 WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}
+			]]>
+			</when>
+			
+			<otherwise>
+			<![CDATA[
+				 WHERE RNUM >= 1 AND RNUM <= 100
+			]]>
+			</otherwise>
+    	</choose>
+	    </when>
+
+	    <otherwise>
+				SELECT
+				 *
+				FROM
+				(SELECT 
+					rownum as RNUM,s.* 
+				from
+				    (select 
+				    	ITEM_NUM,ITEM_TYPE,ITEM_NAME,ITEM_PRICE,ITEM_DCP,ITEM_IMAGE1,ITEM_IMAGE2,ITEM_DATE,ITEM_STOCK,ITEM_PRICE-(ITEM_PRICE*(ITEM_DCP/100)) AS ITEM_FP 
+				   	 from 
+				   	 	item  
+			   	 <choose>
+				   	 <when test="type!=null and  type !=''">	
+				   	 WHERE
+				   	 ITEM_TYPE=#{type}
+				   	 </when>
+				   	 <when test="keyword!=null and keyword!=''">	
+				   	 WHERE
+				   	 ITEM_NAME like '%' || #{keyword} ||'%'
+				   	 </when> 
+			   	 </choose> 
+				   	 order by ITEM_NUM desc)s)
+		<choose>
+			<when test="type!=null and type !='' or keyword!=null and keyword!=''">  	 
+			<![CDATA[
+				 WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}
+			]]>
+			</when>
+			
+			<otherwise>
+			<![CDATA[
+				 WHERE RNUM >= 1 AND RNUM <= 100
+			]]>
+			</otherwise>
+    	</choose>
+	    </otherwise>
+
+	</choose>
+	
+	</select>
+	<select id="getTotalList" parameterType="hashmap" resultType="int">
+		SELECT 
+			COUNT(*)as TOTAL 
+		FROM 
+			ITEM 
+		<choose>
+		  	<when test="type!=null and  type !=''">	
+		  	WHERE
+		  	ITEM_TYPE=#{type}
+		  	</when>
+		  	<when test="keyword!=null and keyword!=''">	
+		  	WHERE
+		  	ITEM_NAME like '%' || #{keyword} ||'%'
+		  	</when> 
+    	</choose>
+	</select>
+	
+</mapper>
