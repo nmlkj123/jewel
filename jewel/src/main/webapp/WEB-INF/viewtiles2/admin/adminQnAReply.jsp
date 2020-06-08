@@ -7,32 +7,6 @@
 
 
 </head>
-
-<script type="text/javascript">
-
-function fsubmit(){
-	
-	var QNA_RTITLE = document.getElementById("QNA_RTITLE").value;
-	
-
-
-	var QNA_RCONTENT =document.getElementById("QNA_RCONTENT").value;
-	
-	if(QNA_RTITLE==null || QNA_RTITLE==''){
-		alert("답변 제목을 입력하세요.");
-		return false;
-	}
-	alert("check");
-	if(QNA_RCONTENT==null || QNA_RCONTENT==''){
-		alert("답변 내용을 입력하세요.");
-		return false;
-	}
-	
-	alert("check");
-	frm.submit();
-}
-
-</script>
 <body>
     <h2>QnA 상세</h2>
     <form id="frm" name="frm" action="<c:url value='/adminQnAReply'/>" method="post">
@@ -79,24 +53,24 @@ function fsubmit(){
                 	<c:when test="${map.QNA_RSTATE =='Y'}">
                 	<tr>
                 		<th scope="col">답변 제목</th>
-                		<td><input type="text"  id="QNA_RTITLE" name="QNA_RTITLE" value="${map.QNA_RTITLE}"></input></td>
+                		<td><input type="text"  name="QNA_RTITLE" value="${map.QNA_RTITLE}"></input></td>
                			
                 	</tr>
                 	<tr>
                 		<th>답변 내용</th>
-                		<td><textarea id="QNA_RCONTENT" name="QNA_RCONTENT" rows="15" cols="40"> ${map.QNA_RCONTENT}</textarea></td>
+                		<td><textarea name="QNA_RCONTENT" rows="15" cols="40"> ${map.QNA_RCONTENT}</textarea></td>
                 	</tr>
                 	
                 	</c:when>
                 	<c:otherwise>
                 	<tr>
                 		<th scope="col">답변 제목</th>
-                		<td><input type="text" id="QNA_RTITLE" name="QNA_RTITLE"></input></td>
+                		<td><input type="text"  name="QNA_RTITLE"></input></td>
                			
                 	</tr>
                 	<tr>
                 		<th>답변 내용</th>
-                		<td><textarea  id="QNA_RCONTENT" name="QNA_RCONTENT" rows="15" cols="30"></textarea></td>
+                		<td><textarea name="QNA_RCONTENT" rows="15" cols="30"></textarea></td>
                 	</tr>
                 	
                 	</c:otherwise>
@@ -114,17 +88,17 @@ function fsubmit(){
     <div id="PAGE_NAVI"></div>
     <input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX"/>
     
-    <input type="button" onclick="location.href='<c:url value="/adminQnAList"/>'" value="목록으로">
-    <button type="button" onclick="fsubmit();">
+    <input type="button" onclick="location.href='adminQnAList'" value="목록으로">
+    <input type="submit"
     <c:choose>
     	<c:when test="${map.QNA_RSTATE =='Y'}">
-    	수정하기    		
+    		 value="수정하기"
+    		
     	</c:when>
         <c:otherwise>
-       		 답변 달기
+       		 value="답변 달기"
         </c:otherwise>
-    </c:choose>
-    </button>
+    </c:choose>>
     </form>
 </body>
 </html>

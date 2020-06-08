@@ -32,8 +32,4 @@ public class AdminQnADAO extends AbstractDAO{
 	public void deleteQnA(Map<String, Object> map) throws Exception{
 		update("admin.deleteQnA", map);
 	}
-	
-	public int qnaTotalList(Map<String, Object> map)throws Exception{
-		return (Integer) selectOne("admin.qnaTotalList", map);
-	}
 }

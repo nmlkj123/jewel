@@ -13,7 +13,7 @@
 	</context:component-scan>
 	<!--자바스크립트 css location  -->
 	<mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" />
-	<mvc:resources mapping="/images/**" location="/images/" />
+	
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven>
 		<mvc:argument-resolvers>
@@ -53,15 +53,7 @@
         </list>
     </property>
 	</bean> 
-	<bean id="multipartResolver"  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-
-
-         <property name="maxUploadSize" value="52428800" />
-
-
-         <property name="defaultEncoding" value="utf-8" />
-
-</bean>
+	
 	
 	
 </beans>

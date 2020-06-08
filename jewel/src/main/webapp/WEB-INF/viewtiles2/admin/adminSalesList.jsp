@@ -377,7 +377,6 @@ function createcmChart(){
     	type: 'doughnut',
 		data : lineChartData,
 		options :{
-			
 			title:{
 			display:true,
 			text:'월간 카테고리별 매출현황'
