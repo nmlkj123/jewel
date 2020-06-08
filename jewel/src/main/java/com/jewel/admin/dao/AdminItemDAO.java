@@ -31,8 +31,5 @@ public class AdminItemDAO extends AbstractDAO {
 	public void deleteItem(Map<String, Object> map) throws Exception{
 		update("admin.deleteItem", map);
 	}
-	public int getTotalList(Map<String, Object> map)throws Exception{
-		return (Integer) selectOne("admin.getTotalList", map);
-	}
 	
 }

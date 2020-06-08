@@ -1,178 +1,451 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/viewtiles2/include/include-header.jspf" %>
+<!DOCTYPE html>
 <html>
 <head>
    <title>상품정보</title>
 </head>
+
 <style type="text/css">
+  
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
 
-dl.MS_mark {
-    width: 350px;
+.tab-content{
+    border:none;
 }
-dl.MS_mark dt.MS_mark_title {
-    width: 50px;
-    float: left;
-    text-align: left;
-}
-dl.MS_mark dd.MS_mark_icon {
-    width: 300px;
-    float: left;
-    text-align: left;
-}
+nav > div a.nav-item.nav-link
+{
+  border-bottom: 1px solid #FC8D86;
 
-textarea.MS_review_content_box {
-width: 400px;
-height: 35px;
 }
+nav > div a.nav-item.nav-link.active
+{
+  border-top: 1px solid #FC8D86;
+  border-left: 1px solid #FC8D86;
+  border-right: 1px solid #FC8D86;
+}
+nav > div a.nav-item.nav-link:hover,
+nav > div a.nav-item.nav-link:focus
+{
+  border-top: 1px solid #FC8D86;
+  border-left: 1px solid #FC8D86;
+  border-right: 1px solid #FC8D86;
 
-#comment_password {
-    position: absolute;
-    display: none;
-    width: 300px;
-    border: 2px solid #757575;
-    padding: 7px;
-    background: #FFF;
-    z-index: 6;
 }
 
-div.MS_btn_scrap_tw {
-color: #666666;
-width: 170px;
-border: 1px solid #908E8F;
-padding: 10px 8px 8px;
-position: absolute;
-font-size: 8pt;
-margin-top: 10px;
-letter-spacing: -1px;
-background-color: white;
-font-family: dotum;
+
+
+
+.qty .count {
+    color: #000;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 20px;
+    padding: 0 2px;
+    min-width: 35px;
+    text-align: center;
+}
+.qty .plus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: white;
+    width: 20px;
+    height: 20px;
+    font: 20px/1 Arial,sans-serif;
+    text-align: center;
+    border-radius: 50%;
+    }
+.qty .minus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: white;
+    width: 20px;
+    height: 20px;
+    font: 20px/1 Arial,sans-serif;
+    text-align: center;
+    border-radius: 50%;
+    background-clip: padding-box;
 }
 
-div.MS_btn_scrap_fb {
-color: #666666;
-width: 170px;
-border: 1px solid #908E8F;
-padding: 10px 8px 8px;
-position: absolute;
-font-size: 8pt;
-margin-top: 10px;
-letter-spacing: -1px;
-background-color: white;
-font-family: dotum;
+.minus:hover{
+    background-color: #717fe0 !important;
 }
+.plus:hover{
+    background-color: #717fe0 !important;
+}
+/*Prevent text selection*/
 
+.count{  
+    border: 0;
+    width: 2%;
+}
+nput::-webkit-outer-spin-button,
+.count::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.count:disabled{
+    background-color:white;
+}
+  
+  
+  
+
+.fa-beat {
+  animation:fa-beat 5s ease infinite;
+}
+@keyframes fa-beat {
+  0% {
+    transform:scale(1);
+  }
+  5% {
+    transform:scale(1.25);
+  }
+  20% {
+    transform:scale(1);
+  }
+  30% {
+    transform:scale(1);
+  }
+  35% {
+    transform:scale(1.25);
+  }
+  50% {
+    transform:scale(1);
+  }
+  55% {
+    transform:scale(1.25);
+  }
+  70% {
+    transform:scale(1);
+  }
+}
+ 
 </style>
 <body>
+<script type="text/javascript">
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
-<form>
-   <div>
-   <div>
-      <img src="file:///C:/Users/학생용/Documents/workspace-sts-3.9.12.RELEASE/asdasd/WebContent/img/R_BF_001.jpg" width="300" height="210"/>
-   </div>
-   <input type="button" value="이전상품">
-   <input type="button" value="다음상품">
-      <table>
-      
-         <tr>
-            <td colspan="2">꽃길 반지</td>
-         </tr>
-         
-         <tr>
-            <td>판매가</td>
-            <td>289,300</td>
-         </tr>
-         
-         <tr>
-            <td>할인가</td>
-            <td>260,400</td>
-         </tr>
-         
-         <tr>
-            <td>종료일</td>
-            <td>6월11일</td>
-         </tr>
-         
-         <tr>
-            <td>적립급</td>
-            <td>2%</td>
-         </tr>
-         
-         <tr>
-            <td>제품선택</td>
-            <td>
-            <select>
-               <option value="option choice">옵션선택</option>
-               <option value="14K">14K</option>
-                <option value="18K">18K</option>
-             </select>
-             </td>
-         </tr>
+$(document).ready(function(){
+	$.ajax({
+		type : "POST",
+		url : '<c:url value="/item/getOption"/>',
+		data : {ITEM_NUM: "${item.ITEM_NUM}"},
+		success : function(data){
+			var str = "";
+			var he="";
+			$.each(data.list,function(index,items){
+				if(he==items.OP_TYPE){
+					str +="<option value='"+items.OP_NUM+"'>"+items.OP_VALUE;
+					if(items.OP_PRICE>0){
+						var price=numberWithCommas(items.OP_PRICE);
+						str +="(+"+price+"원)";
+					}
+					str +="</option>";
+					
+				}else{
+					if(he!=""){
+						str +="</td>"+
+							  "</tr>";
+					}
+					str += "<tr >" +
+					"<th class='pl-0' scope='row'>"+items.OP_TYPE+"<br></th>"+
+					"<td class='p-2' ><select id='op_se' class='form-control p-0 '>"+
+					"<option value='non_option'>--옵션선택--</option>"+
+					"<option value='"+items.OP_NUM+"'>"+items.OP_VALUE;
+					if(items.OP_PRICE>0){
+						var price=numberWithCommas(items.OP_PRICE);
+						str +="(+"+price+"원)";
+					}
+					str +="</option>";
+					he=items.OP_TYPE;
+				}
+				
 
-         <tr>
-            <td>색상선택</td>
-            <td>
-            <select>
-               <option value="option choice">옵션선택</option>
-               <option value="yellow">옐로우골드</option>
-                <option value="pink">핑크골드</option>
-             </select>
-            </td>
-         </tr>
-         
-         <tr>
-            <td>이니셜각인</td>
-            <td>
-            <select>
-               <option value="option choice">옵션선택</option>
-               <option value="no">각인안함</option>
-                <option value="yes">각인함</option>
-             </select>
-             </td>
-         </tr>
-         
-         <tr>
-            <td>이니셜글씨체</td>
-            <td>
-            <select>
-               <option value="option choice">옵션선택</option>
-               <option value="cooper">쿠퍼</option>
-                <option value="mint">민트</option>
-                <option value="gyungsu">궁서</option>
-                <option value="sudang">서당</option>
-             </select>
-             </td>
-         </tr>
-         
-         <tr>
-            <td>이니셜내용</td>
-            <td>
-            <select>
-               <option value="option choice">옵션선택</option>
-               <option value="content">주문메시지란에 적어주세요.</option>
-             </select>
-             </td>
-         </tr>
-         
-         <tr>
-            <td>선물포장</td>
-            <td>
-            <select>
-               <option value="option choice">옵션선택</option>
-               <option value="A">기본포장-A</option>
-                <option value="B">쇼핑백-B</option>
-             </select>
-             </td>
-         </tr>
-         
-         <tr>
-            <td colspan="2" align="left" style="border: solid gray 1px;">총 상품 금액 0원</td>
-         </tr>
-      </table>
-      <input type="button" value="찜하기">
-      <input type="button" value="장바구니 담기">
-      <input type="button" value="바로구매">
-   </div>
-</form>
+				
+			
+			})
+			$("#item_option tbody").append(str);
+			
+		}
+	});
+	
+	$('#item_option tbody').on('change','select',function(){
+		var index=$('select').index(this);
+		var items=$('select').get();
+		if($('select').index(this)>0 && $('select:eq('+(index-1)+')').val()=='non_option'){
+			alert("위 옵션을 입력해주세요");
+			$('select:eq('+index+') option:eq(0)').prop("selected", true);
+			return;
+		}
+		
+			for(var i=index+1;i<items.length;i++){
+				
+				$('select:eq('+i+') option:eq(0)').prop("selected", true);
+				
+			}
+			
+		
+		if(index==(items.length-1)&&$('select:eq('+(index)+')').val()!='non_option'){
+			var op_list= ["0"];
+			$.each(items,function(index,item){
+				if($(item).val()!='non_option'){
+					op_list.push($(item).val());
+				}
+			})
+			$.ajax({
+			type : "POST",
+			url : '<c:url value="/item/getSelectOption"/>',
+			data : {list: op_list},
+			traditional:true,
+			success : function(data){
+				var str="";
+				var price=0;
+				var op_num="";
+				str +="<li id='op_list' class='list-group-item p-2'>"+
+				"<span style='text-align: left;' id='op_text'>";
+				$.each(data.list,function(index,items){
+					if((data.list.length-1)==index){
+						str +=items.OP_VALUE;
+						op_num+=items.OP_NUM;
+					}else{
+						str +=items.OP_VALUE+",";
+						op_num+=items.OP_NUM+"_";
+					}
+					price+=items.OP_PRICE;
+				})
+				price+=${item.ITEM_FP};
+				
+				str +="</span>"+
+				"<div class='qty pull-right' style='text-align: right; display: inline-block;'id='"+op_num+"'>"+
+				"<span class='minus bg-dark'>-</span>"+
+				"<input type='number' class='count' name='qty' id='qty' value='1' disabled>"+
+				"<span class='plus bg-dark'>+</span>"+
+				"&nbsp<span style=' font-weight: 700;' id='op_price' op_price='"+price+"'>"+numberWithCommas(price)+"원</span>"+
+				"&nbsp<button type='button' id='op_c' class='btn btn-sm btn-primary' style='width: 20px; height: 20px; float: none; text-align: justify; padding-top: 0px; padding-right: 14px; padding-bottom: 2px; line-height: 0px; margin-right: 0px; min-width: 0px; margin-bottom: 0px; margin-top: -2px;'>"+
+				"x"+
+				"</button>"+
+				"</div>" +
+				"</li>";
+				if($('#'+op_num).attr('id')==op_num){
+					alert("이미있는 상품입니다");
+				}
+				else{
+					$("#sel_op").before(str);
+					totalPrice();
+				}
+				
+			}
+			
+			});
+		}
+		
+		
+	});
+	
+});
+
+
+</script>
+<script>
+
+
+$(document).ready(function(){
+
+    $('.count').prop('disabled', true);
+		$(document).on('click','.plus',function(){
+		$(this).prev('.count').val(parseInt($(this).prev('.count').val()) + 1 );
+		var p=$(this).parent().find('#op_price');
+		var num=parseInt(p.attr('op_price'));
+		var count=parseInt($(this).prev('.count').val())
+		p.text(numberWithCommas(num*count)+"원");
+		totalPrice();
+	});
+	$(document).on('click','.minus',function(){
+		$(this).next('.count').val(parseInt($(this).next('.count').val()) - 1 );
+			if ($(this).next('.count').val() == 0) {
+				$(this).next('.count').val(1);
+				return;
+			}
+			var p=$(this).parent().find('#op_price');
+			var num=parseInt(p.attr('op_price'));
+			var count=parseInt($(this).next('.count').val())
+			p.text(numberWithCommas(num*count)+"원");
+			totalPrice();
+    	});
+		$(document).on('click','#op_c',function(){
+			$(this).closest('li').remove();
+			totalPrice();
+		});
+	$("#addCart").click(function(){
+		addCart();
+
+	});
+	
+});
+	
+	
+function totalPrice(){
+	var items=$("li[id='op_list']").get();
+	
+	var total=0;
+	$.each(items,function(index,item){
+		var price=parseInt($("li[id='op_list']:eq("+index+")").find('#op_price').attr('op_price'));
+		var num=parseInt($("li[id='op_list']:eq("+index+")").find('.count').val());
+		total+=num*price;
+		
+	})
+	$("#tottalPrice").text(numberWithCommas(total));
+	
+}	
+function addCart(){
+var items=$("li[id='op_list']").get();
+	if(items.length==0){
+		alert("옵션항목을 추가하세요!");
+		return;
+	}
+	var total=0;
+	$.each(items,function(index,item){
+		var op_name=$("li[id='op_list']:eq("+index+")").find('#op_text').text();
+		var price=parseInt($("li[id='op_list']:eq("+index+")").find('#op_price').attr('op_price'));
+		var num=parseInt($("li[id='op_list']:eq("+index+")").find('.count').val());
+		 
+		$.ajax({
+			type : "POST",
+			url : '<c:url value="/item/addCart"/>',
+			data : {CART_CNT:num,OP_VALUE:op_name,ITEM_PRICE:price,ITEM_NUM:"${item.ITEM_NUM}"},
+			success : function(data){
+				
+			}
+		});  
+	})
+	alert("장바구니에담겼습니다!");
+	location.href="";
+}
+function buyItem(){
+
+	
+}
+</script>
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container pt-5 text-center" >
+		<div  >
+			<div class="container-fliud">
+				<div class="wrapper row">
+					<div class="preview col-md-6" style="width: 400px; height: auto; display: inline; float: none;">
+						
+						<img src="http://junjewelry.com/shopimages/koreajisuk/1270010011162.jpg?1569380755" height="350" width="350"><div class="preview-pic tab-content">
+						  <div class="tab-pane active" id="pic-1"></div>
+						  <div class="tab-pane" id="pic-2"><img src="http://placekitten.com/400/252"></div>
+						  <div class="tab-pane" id="pic-3"><img src="http://placekitten.com/400/252"></div>
+						  <div class="tab-pane" id="pic-4"><img src="http://placekitten.com/400/252"></div>
+						  <div class="tab-pane" id="pic-5"><img src="http://placekitten.com/400/252"></div>
+						</div>
+						
+						
+					</div>
+					<div class="details col-md-6  pl-0 ml-0" style="">
+						<h4 class="product-title text-left" style="width: 500px; display: inline-block;">${item.ITEM_NAME}</h4>
+
+						<hr style="line-height: 24px; width: 500px;">
+
+						<table class="table table-borderless pl-0 ml-0 " id="item_option"  style="display: inline-block;text-align:left; width: 500px;">
+							<thead>
+								<tr>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th class="pl-0" scope="row">판매가</th>
+									<td><fmt:formatNumber value="${item.ITEM_PRICE}" pattern="#,###"/>원</td>
+								</tr>
+								<tr>
+									<th class="pl-0" scope="row">할인가</th>
+									<td style="text-decoration:line-through;"><fmt:formatNumber value="${item.ITEM_FP}" pattern="#,###"/>원</td>
+								</tr>
+								
+								
+							</tbody>
+						</table>
+						<div class="text-left " style="display: inline-block;">
+							<ul class="list-group"
+								style="width: 500px; justify-content: center; display: inline-block;">
+								
+								<li class="list-group-item "id="sel_op"  style="text-align: right;">
+								<span style="text-align: right;">
+									총상품금액
+								<span id="tottalPrice">0</span>
+									 원
+								</span>
+									 
+								</li>
+
+							</ul>
+						</div>
+						<hr style="width: 500px;">
+						
+						<div class="btn-group ">
+						<button class="btn btn-warning" type="button">
+							<i class="fa fa-heart fa-beat"></i>
+						</button>
+						</div>
+						&nbsp
+						<div class="btn-group cart">
+							<button type="button" id="addCart" class="btn btn-success">
+							장바구니
+								</button>
+						</div>
+						<div class="btn-group wishlist">
+							<button type="button" id="buy" class="btn btn-danger">
+								바로구매</button>
+						</div>
+						
+					</div>
+						
+				</div>
+				</div>
+			</div>
+		</div>
+	
+ <div class="container pt-5">
+              <div class="row">
+                <div class="col-xs-12 ">
+                  <nav>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                      <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" style="font-weight: 700;">상세정보</a>
+                      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false" style="font-weight: 700;">같은상품</a>
+                      <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" style="font-weight: 700;">상품후기</a>
+                      <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false" style="font-weight: 700;">Q&A</a>
+                    </div>
+                  </nav>
+                  <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" >
+                      Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                      Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+                    </div>
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                      Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+                    </div>
+                    <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+                      Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+                    </div>
+                  </div>
+                
+                </div>
+              </div>
+        </div>
+
 
 </body>
 </html>

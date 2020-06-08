@@ -29,5 +29,28 @@ public class ItemServiceImpl implements ItemService{
 		return itemDAO.getTotalList(map);
 	}
 	
+	@Override
+	public Map<String, Object> getItem(Map<String, Object> map) {
+		return itemDAO.getItem(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> getOption(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return itemDAO.getOption(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> getSelectOption(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return itemDAO.getSelectOption(map);
+	}
+
+	@Override
+	public int addCart(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return itemDAO.addCart(map);
+	}
+	
 	
 }

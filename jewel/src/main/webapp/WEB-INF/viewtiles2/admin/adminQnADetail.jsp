@@ -82,15 +82,14 @@
     
     <c:choose>
     	<c:when test="${map.QNA_RSTATE =='Y'}">
-    		<input type="button" onclick="location.href='<c:url value="/openAdminQnAReply?QNA_NUM=${map.QNA_NUM}"/>'" value="답변 수정">
-    		<input type="button" onclick="location.href='<c:url value="/adminQnAReplyDelete?QNA_NUM=${map.QNA_NUM}"/>'" value="답변 삭제">
+    		<input type="button" onclick="location.href='openAdminQnAReply?QNA_NUM=${map.QNA_NUM}'" value="답변 수정">
+    		<input type="button" onclick="location.href='adminQnAReplyDelete?QNA_NUM=${map.QNA_NUM}'" value="답변 삭제">
     	</c:when>
         <c:otherwise>
-       		<input type="button" onclick="location.href='<c:url value="/openAdminQnAReply?QNA_NUM=${map.QNA_NUM}"/>'" value="답변 달기">
+       		<input type="button" onclick="location.href='openAdminQnAReply?QNA_NUM=${map.QNA_NUM}'" value="답변 달기">
         </c:otherwise>
     </c:choose>
-   <input type="button" onclick="location.href='<c:url value="/deleteQnA?QNA_NUM=${map.QNA_NUM}"/>'" value="QnA게시글 삭제">
- 
+   <input type="button" onclick="location.href='deleteQnA?QNA_NUM=${map.QNA_NUM}'" value="QnA게시글 삭제">
     
 </body>
 </html>
