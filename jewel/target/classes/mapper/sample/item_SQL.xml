@@ -216,5 +216,20 @@
 		  	</when> 
     	</choose>
 	</select>
+	<select id="getItem" parameterType="hashmap" resultType="hashmap">
+		SELECT ITEM_NUM,ITEM_TYPE,ITEM_NAME,ITEM_PRICE,ITEM_DCP,ITEM_IMAGE1,ITEM_IMAGE2,ITEM_DATE,ITEM_STOCK,ITEM_PRICE-(ITEM_PRICE*(ITEM_DCP/100)) AS ITEM_FP from item where item_num =#{ITEM_NUM}	
+	</select>
+	<select id="getOption" parameterType="hashmap" resultType="hashmap">
+		SELECT * FROM ITEM_OPTION WHERE ITEM_NUM=#{ITEM_NUM} ORDER BY OP_NUM ASC
+	</select>
+	<select id="getSelectOption" parameterType="hashmap" resultType="hashmap">
+		SELECT * FROM ITEM_OPTION WHERE OP_NUM in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+	</select>
+	<insert id="addCart" parameterType="hashmap" >
+		INSERT INTO CART VALUES(CART_NUM_SEQ.NEXTVAL,#{MEM_ID},#{ITEM_NUM},#{CART_CNT},#{OP_VALUE},#{ITEM_PRICE})
 	
+	</insert>
 </mapper>
