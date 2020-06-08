@@ -43,7 +43,7 @@ public class MyjjimController {
 	    	  pg="1";   	  
 		}
 		
-		int show=5;//페이지당 보여줄 상품 개수
+		int show=7;//페이지당 보여줄 상품 개수
     	int block=5;//페이지당 보여줄 페이지개수
     	int endNum = Integer.parseInt(pg)*show;
 		int startNum = endNum-(show-1);

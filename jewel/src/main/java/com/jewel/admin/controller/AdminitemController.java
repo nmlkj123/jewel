@@ -10,11 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jewel.admin.paging.AdminItemListPaging;
 import com.jewel.admin.service.AdminItemService;
 import com.jewel.common.CommandMap;
+import com.jewel.item.service.ItemService;
+import com.jewel.paging.ItemListPaging;
 
 
 
@@ -22,26 +27,66 @@ import com.jewel.common.CommandMap;
 
 @Controller
 public class AdminitemController {
-		
+	
+	@Resource(name="AdminItemListPaging")
+	AdminItemListPaging AdminItemListPaging;
 	@Resource(name="AdminItemService")
 	private AdminItemService AdminItemService;
 	
 	
-	@RequestMapping(value="/adminItemList")
-	public ModelAndView adminItemList(CommandMap commandMap)throws Exception{
+	
+	
+	@RequestMapping(value="/adminItemList", method=RequestMethod.GET)
+	public ModelAndView adminItemList(CommandMap commandMap,HttpServletRequest request)throws Exception{
 			ModelAndView mv=new ModelAndView("adminItemList");  
+			
+			int show=12;
+	    	int block=5;
+	    	int pg;
+	    	if(commandMap.get("pg")==null) {
+		    	  pg=1;
+		      }
+	    	else {
+	    	pg=Integer.parseInt((String)commandMap.get("pg"));
+	    	}
+	    	
+	    	int endNum = pg*show;
+			int startNum = endNum-(show-1);
+			
+			commandMap.put("START_NUM", startNum);
+			commandMap.put("END_NUM", endNum);
+			
+	    	@SuppressWarnings("unused")
+			int totalList=AdminItemService.getTotalList(commandMap.getMap());//ī�װ� �� ��ǰ �� ����
+	    	AdminItemListPaging.setPath(request.getContextPath());
+	    	AdminItemListPaging.setCurrentPage(pg);
+	    	AdminItemListPaging.setTotalList(totalList);
+	    	AdminItemListPaging.setPageBlock(block);
+	    	AdminItemListPaging.setPageSize(show);
+	    	
+	    	AdminItemListPaging.makePagingHTML();
+	    
+	    	mv.addObject("AdminItemListPaging",AdminItemListPaging);
+	    	  String path="/images/item";
+				String uploadPath=request.getSession().getServletContext().getRealPath("/");
+				System.out.println(uploadPath);
+				mv.addObject("path", uploadPath);
 			List<Map<String,Object>>list=AdminItemService.selectItemList(commandMap.getMap());
 		  mv.addObject("list",list);
+		  
 		 
 		return mv;
 	}
 	@RequestMapping(value="/adminItemDetail")
-	public ModelAndView openBoardDetail(CommandMap commandMap)throws Exception{
+	public ModelAndView openBoardDetail(CommandMap commandMap,HttpServletRequest request)throws Exception{
 		ModelAndView mv=new ModelAndView("adminItemDetail");
 		Map<String,Object> map=AdminItemService.selectItemDetail(commandMap.getMap());
 		mv.addObject("map",map);
-	
+		String path="/images/item";
+		String uploadPath=request.getSession().getServletContext().getRealPath(path);
+		mv.addObject("path", uploadPath);
 		return mv;
+		
 	}
 	@RequestMapping(value="/openAdminItemWrite")
 	public ModelAndView OpenadminItemWrite(CommandMap commandMap)throws Exception{
@@ -51,10 +96,18 @@ public class AdminitemController {
 		return mv;
 	}
 	@RequestMapping(value="/adminItemWrite")
-	public ModelAndView adminItemWrite(CommandMap commandMap)throws Exception{
-			
+	public ModelAndView adminItemWrite(CommandMap commandMap,HttpServletRequest request,@RequestParam("ITEM_IMAGE1") MultipartFile file1,@RequestParam("ITEM_IMAGE2") MultipartFile file2)throws Exception{
+			commandMap.put("ITEM_IMAGE1", file1.getOriginalFilename());
+			commandMap.put("ITEM_IMAGE2", file2.getOriginalFilename());
 			AdminItemService.insertItemWrite(commandMap.getMap());
 			ModelAndView mv=new ModelAndView("redirect:adminItemList");
+			String path="/images/item";
+			  String uploadPath=request.getSession().getServletContext().getRealPath(path);
+			  String ITEM_IMAGE1 = AdminItemService.restore(file1,uploadPath);
+			  String ITEM_IMAGE2 = AdminItemService.restore(file2,uploadPath);
+			  
+				mv.addObject("img1", ITEM_IMAGE1);
+				mv.addObject("img2",ITEM_IMAGE2);
 			
 		return mv;
 	}
@@ -67,9 +120,17 @@ public class AdminitemController {
 		return mv;
 	}
 	@RequestMapping(value="/adminItemUpdate")
-	public ModelAndView updateBoard(CommandMap commandMap,HttpServletRequest request) throws Exception{
+	public ModelAndView updateBoard(CommandMap commandMap,HttpServletRequest request,@RequestParam("ITEM_IMAGE1") MultipartFile file1,@RequestParam("ITEM_IMAGE2") MultipartFile file2) throws Exception{
 		ModelAndView mv = new ModelAndView("redirect:adminItemList");
-	
+		commandMap.put("ITEM_IMAGE1", file1.getOriginalFilename());
+		commandMap.put("ITEM_IMAGE2", file2.getOriginalFilename());
+		String path="/images/item";
+		  String uploadPath=request.getSession().getServletContext().getRealPath(path);
+		  String ITEM_IMAGE1 = AdminItemService.restore(file1,uploadPath);
+		  String ITEM_IMAGE2 = AdminItemService.restore(file2,uploadPath);
+		  
+			mv.addObject("img1", ITEM_IMAGE1);
+			mv.addObject("img2",ITEM_IMAGE2);
 		AdminItemService.updateItemModify(commandMap.getMap());
 		
 		

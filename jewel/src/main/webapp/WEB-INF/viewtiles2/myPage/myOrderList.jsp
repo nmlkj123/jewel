@@ -3,56 +3,18 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<%@ include file="/WEB-INF/viewtiles2/include/include-header.jspf" %>
+<%@include file="/WEB-INF/viewtiles2/template/myPageHeader.jsp" %>
 <meta charset="UTF-8">
 <title>마이페이지 메인</title>
 </head>
 <script type="text/javascript">
-function fn_deleteMember(){
-		 if (confirm("정말 삭제하시겠습니까??") == true){			 
-			 alert("탈퇴되었습니다.");
-			 location.href="/common/myPage/myInfoDelete";
-		 }else{   
-		     return false;
-		 }
-}
-
 
 </script>
 <body>
-<!-- 상단박스영역 -->
-	<div>
-	<!-- 상단박스1 -->
-		<div>
-			<p>
-			${myInfo.MEM_NAME}님 안녕하세요.
-			</p>
-		</div>
-	<!-- 상단박스2 -->
-		<div>
-			<p>
-			${myInfo.MEM_NAME}님은 <br>
-			${myInfo.MEM_RANK }등급입니다. <br>
-			적립금: ${myInfo.MEM_POINT }
-			</p>
-		</div>
-		
-	</div>
-	<!-- 목록박스 -->
-	<div>
-		<p>
-		 <a href="<c:url value="/myPage/myOrderList"/>">주문내역</a>
-		 <a href="<c:url value="/myPage/myJJimList"/>">찜한상품</a>
-		 <a href="<c:url value="/myPage/myQnAList"/>">나의Q&A</a>
-		 <a href="<c:url value="/myPage/myReviewList"/>">나의리뷰</a>
-		 <a href="<c:url value="/myPage/myInfoModify"/>">정보수정</a>
-		 <a href="#" onclick="fn_deleteMember(); return false;">회원탈퇴</a>
-		</p>
-	</div>
-	
-	<h3>마이페이지</h3>
-	<table>
-		<h4>주문내역</h4>
+
+	<table class="orderList">
+	<br><br>
+		<h5 style="margin-left:10%;">나의주문내역<h5>
 		<colgroup>
 			<col width="15%"/>
 			<col width="20"/>
@@ -61,6 +23,7 @@ function fn_deleteMember(){
 	        <col width="30%"/>
 	        <col width="10%"/>
         </colgroup>
+        <br>
         <thead>
         	<tr>
         		<th scope="col">주문일자</th>
@@ -81,7 +44,7 @@ function fn_deleteMember(){
         			<!-- 상품명을 클릭하면 상품디테일처리하는 컨트롤러에 상품번호를 보내서 처리한다. -->
         			<td>${items.OR_FP }</td>
         			<td>${items.OR_OP }<br>
-        				수량:&nbsp;${items.OR_CNT }개
+        				<p style="font-size:11px;">수량:&nbsp;${items.OR_CNT }개</p>
         			</td>
         			<td>${items.DEL_DS }</td>       			
         		</tr>       		

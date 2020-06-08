@@ -48,4 +48,10 @@ public class AdminQnAServiceImpl implements AdminQnAService{
 		adminQnADAO.deleteQnA(map);
 	}
 
+	@Override
+	public int qnaTotalList(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return adminQnADAO.qnaTotalList(map);
+	}
+
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="myPage">
 	
-	<!-- 회원수정폼 -->
+	<!-- 회원수정 값불러오기 -->
 	<select id="selectMyInfoDetail" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
 			select 
@@ -17,7 +17,7 @@
 		]]>
 	</select>
 
-	<!-- 회원수정 -->
+	<!-- 회원수정처리 -->
 	<update id="updateMyInfo" parameterType="hashmap">
 		<![CDATA[
 			update MEMBER 
@@ -42,7 +42,7 @@
 		]]>
 	</update>
 	
-	<!-- 마이페이지  -->
+	<!-- 마이페이지공통회원정보  -->
 	<select id="selectMyInfo" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
 			SELECT MEM_NAME, MEM_RANK, MEM_POINT
@@ -50,7 +50,7 @@
 			WHERE MEM_ID = #{MEM_ID}
 		]]>
 	</select>
-	<!-- 나의 주문내역 -->
+<!-- 나의 주문내역 -->
 	<select id="selectMyOrderList" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
 				SELECT
@@ -89,7 +89,7 @@
 		]]>
 	</select>
 	
-	<!-- 나의찜목록 -->
+<!-- 나의찜목록 -->
 	<select id="selectMyjjimList" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
 			SELECT
@@ -119,7 +119,7 @@
 		]]>
 	</select>
 		
-	<!-- 회원 Q&A리스트 QNA_NUM로 상세보기 -->
+<!-- 회원 Q&A리스트 QNA_NUM로 상세보기 -->
 	<select id="selectMyQnAList" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
 		SELECT
@@ -192,7 +192,7 @@
 		]]>
 	</delete>
 	
-	<!-- 회원 내가 쓴 리뷰 리스트 -->
+<!-- 회원 내가 쓴 리뷰 리스트 -->
 	<select id="selectMyReviewList" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
 			SELECT
@@ -216,6 +216,7 @@
 					WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}	
 		]]>
 	</select>
+	<!-- 나의리뷰페이징 -->
 	<select id="myReviewTotalList" parameterType="hashmap" resultType="int">
 		<![CDATA[
 			SELECT 
@@ -244,6 +245,8 @@
 			AND r.ITEM_NUM = i.ITEM_NUM
 		]]>
 	</select>
+	
+	<!-- 조회수증가 -->
 	<update id="updateHitCnt" parameterType="hashmap">
 		<![CDATA[
          UPDATE REVIEW 
@@ -271,5 +274,41 @@
 			WHERE RE_NUM = #{RE_NUM}
 		]]>
 	</delete>
+	
+<!-- 회원 장바구니  -->
+	<!-- 장바구니 목록 -->
+	<select id="selectMyCartList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				 *
+				FROM
+					(SELECT 
+						rownum as RNUM, s.* 
+					 FROM(
+						SELECT 
+							r.RE_NUM, 
+							i.ITEM_NAME, 
+							r.RE_TITLE, 
+							TO_CHAR(r.RE_DATE,'YYYY.MM.DD') RE_DATE, 
+							r.RE_LIKE,
+							r.RE_HIT
+						FROM MEMBER m, ITEM i, REVIEW r
+						WHERE m.MEM_ID = #{MEM_ID}
+						AND m.MEM_NUM = r.MEM_NUM
+						AND i.ITEM_NUM = r.ITEM_NUM 
+						order by RE_DATE desc)s)
+					WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}	
+		]]>
+	</select>
+	<!-- 나의장바구니 페이징 -->
+	<select id="myCartTotalList" parameterType="hashmap" resultType="int">
+		<![CDATA[
+			SELECT 
+				COUNT(*)as TOTAL 
+			FROM 
+				CART 
+			WHERE MEM_ID = #{MEM_ID}
+		]]>
+	</select>
 	
 </mapper>

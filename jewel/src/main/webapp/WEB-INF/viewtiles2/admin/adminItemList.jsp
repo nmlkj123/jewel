@@ -10,18 +10,15 @@
 <body>
     <h2>게시판 목록</h2>
     <table class="board_list">
-        <colgroup>
-            <col width="10%"/>
-            <col width="*"/>
-            <col width="15%"/>
-            <col width="20%"/>
-        </colgroup>
+     
         <thead>
             <tr>
                 <th scope="col">상품번호</th>
                 <th scope="col">카테고리</th>
+                <th scope="col">카테고리</th>
                 <th scope="col">이름</th>
                 <th scope="col">가격</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -34,6 +31,7 @@
                                 ${row.ITEM_TYPE }
                                
                             </td>
+                            <td><img src="${path}/${row.ITEM_IMAGE1}" style="width:50px"	></td>
                             <td><a href="adminItemDetail?ITEM_NUM=${row.ITEM_NUM}">${row.ITEM_NAME}</a></td>
                             <td>${row.ITEM_PRICE }</td>
                         </tr>
@@ -52,9 +50,12 @@
     <input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX"/>
     
     <br/>
-    <input type="button" onclick="location.href='openAdminItemWrite'" value="상품등록">
-     
+    <input type="button" onclick="location.href='<c:url value="/openAdminItemWrite"/>'" value="상품등록">
+    
+   <div align="center"class="container pt-5" id="categoryPaging" >
+   ${AdminItemListPaging.pagingHTML}
    
+   </div>	
     
 </body>
 </html>

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
 <body>
 	<table>
@@ -32,9 +32,9 @@
 			</tr>
 			<tr>
 				<th scope="row">이미지1</th>
-				<td>${map.ITEM_IMAGE1}</td>
+				 <td><img src="${path}/${map.ITEM_IMAGE1}" style="width:150px"	></td>
 				<th scope="row">이미지2</th>
-				<td>${map.ITEM_IMAGE2}</td>
+				<td><img src="${path}/${map.ITEM_IMAGE2}" style="width:150px"	></td>
 			</tr>
 			<tr>
 				<th scope="row">등록일</th>
@@ -45,9 +45,9 @@
 		</tbody>
 	</table>
 	
-	<input type="button" onclick="location.href='adminItemList'" value="목록으로">
-	 <input type="button" onclick="location.href='openAdminItemUpdate?ITEM_NUM=${map.ITEM_NUM}'" value="수정하기">
-	<input type="button" onclick="location.href='adminItemDelete?ITEM_NUM=${map.ITEM_NUM}'" value="삭제하기">
+	<input type="button" onclick="location.href='<c:url value="/adminItemList"/>'" value="목록으로">
+	 <input type="button" onclick="location.href='<c:url value="/openAdminItemUpdate?ITEM_NUM=${map.ITEM_NUM}"/>'" value="수정하기">
+	<input type="button" onclick="location.href='<c:url value="/adminItemDelete?ITEM_NUM=${map.ITEM_NUM}"/>'" value="삭제하기"/>
 
 	
 </body>
