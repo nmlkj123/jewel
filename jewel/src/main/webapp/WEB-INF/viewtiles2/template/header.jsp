@@ -84,13 +84,10 @@
     <a class="py-2 d-none d-md-inline-block" href="#">커플존</a>
     <a class="py-2 d-none d-md-inline-block" href="#">커뮤니티</a>
 	
-   
-     <input type="button" onclick="location.href='<c:url value="/adminItemList"/>'" value="상품 관리">
- <input type="button" onclick="location.href='<c:url value="/adminQnAList"/>'" value="QnA 관리">
- <input type="button" onclick="location.href='<c:url value="/openAdminItemDaySaleList"/>'" value="매출관리">
- <form class="form-inline my-2 my-lg-0 " action="<c:url value='/item/itemList'/>" >
+    <form class="form-inline my-2 my-lg-0 " action="<c:url value='/item/itemList'/>" >
       <input class="form-control mr-sm-1" type="text" name="keyword" placeholder="Search" aria-label="Search">
       <button class="btn btn-secondary my-2 my-sm-0 "  type="submit">Search</button>
     </form>
+
   </div>
 </nav>

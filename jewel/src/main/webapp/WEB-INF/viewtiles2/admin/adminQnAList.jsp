@@ -86,9 +86,10 @@
             
         </tbody>
     </table>
-    <div id="PAGE_NAVI"></div>
-    <input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX"/>
-    
+    <div align="center"class="container pt-5" id="categoryPaging" >
+   ${AdminQnaListPaging.pagingHTML}
+   
+   </div>
     <br/>
 
      

@@ -6,9 +6,52 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 </head>
+<script type="text/javascript">
 
+function fsubmit(){
+	var ITEM_TYPE = document.getElementById("ITEM_TYPE").value;
+	var ITEM_NAME = document.getElementById("ITEM_NAME").value;
+	var ITEM_PRICE = document.getElementById("ITEM_PRICE").value;
+	var ITEM_DCP = document.getElementById("ITEM_DCP").value;
+	var ITEM_IMAGE1 = document.getElementById("ITEM_IMAGE1").value;
+	var ITEM_IMAGE2 = document.getElementById("ITEM_IMAGE2").value;
+	var ITEM_STOCK = document.getElementById("ITEM_STOCK").value;
+	
+	
+	if(ITEM_TYPE==null || ITEM_TYPE==''){
+		alert("카테고리 종류를 입력하세요.");
+		return false;
+	}
+	if(ITEM_NAME==null || ITEM_NAME==''){
+		alert("상품 이름을 입력하세요.");
+		return false;
+	}
+	if(ITEM_PRICE==null || ITEM_PRICE==''){
+		alert("상품 가격을 입력하세요.");
+		return false;
+	}
+	if(ITEM_DCP==null || ITEM_DCP==''){
+		alert("할인율을 입력하세요.");
+		return false;
+	}
+	if(ITEM_IMAGE1==null || ITEM_IMAGE1==''){
+		alert("사진1 을 입력하세요.");
+		return false;
+	}
+	if(ITEM_IMAGE2==null || ITEM_IMAGE2==''){
+		alert("사진1 을 입력하세요.");
+		return false;
+	}
+	if(ITEM_STOCK ==null || ITEM_STOCK ==''){
+		alert("재고를 입력하세요.");
+		return false;
+	}
+	frm.submit();
+}
+
+</script>
 <body>
-	<form id="frm" name="frm" action="<c:url value='/adminItemUpdate'/>" method="post">
+	<form id="frm" name="frm" action="<c:url value='/adminItemUpdate'/>" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="ITEM_NUM" value="${map.ITEM_NUM}">
 		<table class="board_view">
 			<colgroup>
@@ -17,7 +60,7 @@
 				<col width="15%"/>
 				<col width="35%"/>
 			</colgroup>
-			<caption>게시글 상세</caption>
+			<caption>상품 수정</caption>
 			<tbody>
 				<tr>
 					<th scope="row">카테고리 종류</th>
@@ -34,33 +77,33 @@
 				</tr>
 				<tr>
 					<th scope="row">이름</th>
-					<td><input type="text"  name="ITEM_NAME" value="${map.ITEM_NAME}"></input></td>
+					<td><input type="text"  id="ITEM_NAME" name="ITEM_NAME" value="${map.ITEM_NAME}"></input></td>
 				</tr>
 				<tr>
 					<th scope="row">가격</th>
-					<td><input type="text"  name="ITEM_PRICE" value="${map.ITEM_PRICE}"></input></td>
+					<td><input type="text"  id="ITEM_PRICE" name="ITEM_PRICE" value="${map.ITEM_PRICE}"></input></td>
 				</tr>
 				<tr>
 					<th scope="row">할인율</th>
-					<td><input type="text"  name="ITEM_DCP" value="${map.ITEM_DCP}"></input></td>
+					<td><input type="text" id="ITEM_DCP" name="ITEM_DCP" value="${map.ITEM_DCP}"></input></td>
 				</tr>
 				<tr>
 					<th scope="row">이미지1</th>
-					<td><input type="text"  name="ITEM_IMAGE1" value="${map.ITEM_IMAGE1}"></input></td>
+					<td><input type="file" id="ITEM_IMAGE1" name="ITEM_IMAGE1" value="${map.ITEM_IMAGE1}"></input></td>
 				</tr>
 				<tr>
 					<th scope="row">이미지2</th>
-					<td><input type="text"  name="ITEM_IMAGE2" value="${map.ITEM_IMAGE2}"></input></td>
+					<td><input type="file"  id="ITEM_IMAGE2" name="ITEM_IMAGE2" value="${map.ITEM_IMAGE2}"></input></td>
 				</tr>
 				<tr>
 					<th scope="row">재고</th>
-					<td><input type="text"  name="ITEM_STOCK" value="${map.ITEM_STOCK}"></input></td>
+					<td><input type="text" id="ITEM_STOCK" name="ITEM_STOCK" value="${map.ITEM_STOCK}"></input></td>
 				</tr>
 			</tbody>
 		</table>
 	
-	<input type="submit" value="상품 수정">
-	<input type="button" onclick="location.href='adminItemList'" value="목록으로">
+	<button type="button" onclick="fsubmit();">수정하기</button>
+	<input type="button" onclick="location.href='<c:url value="/adminItemList"/>'" value="목록으로">
 	
 	
 	</form>
