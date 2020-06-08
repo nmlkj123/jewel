@@ -15,6 +15,14 @@
 			</definition>
 			
 			
+			<definition name="admin_layout"
+				template="/WEB-INF/viewtiles2/template/layout.jsp">
+				<put-attribute name="header"
+					value="/WEB-INF/viewtiles2/template/adminHeader.jsp" />
+			<put-attribute name="footer"
+					value="/WEB-INF/viewtiles2/template/footer.jsp" />
+			</definition>
+			
 			<definition name="joinForm" extends="base_layout">
 				<put-attribute name="title" value="회원가입" />
 				<put-attribute name="body"
@@ -65,57 +73,167 @@
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/item/itemList.jsp" />
 			</definition>
-			<definition name="adminItemList" extends="base_layout">
+			
+			
+			<definition name="adminItemList" extends="admin_layout">
 				<put-attribute name="title" value="상품목록" />
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/admin/adminItemList.jsp" />
 			</definition>
-			<definition name="adminItemWrite" extends="base_layout">
+			<definition name="adminItemWrite" extends="admin_layout">
 				<put-attribute name="title" value="상품등록" />
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/admin/adminItemWrite.jsp" />
 			</definition>
-			<definition name="adminItemDetail" extends="base_layout">
+			<definition name="adminItemDetail" extends="admin_layout">
 				<put-attribute name="title" value="상품상세" />
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/admin/adminItemDetail.jsp" />
 			</definition>
-			<definition name="adminItemUpdate" extends="base_layout">
+			<definition name="adminItemUpdate" extends="admin_layout">
 				<put-attribute name="title" value="상품수정" />
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/admin/adminItemUpdate.jsp" />
 			</definition>
-			<definition name="adminQnAList" extends="base_layout">
+			<definition name="adminQnAList" extends="admin_layout">
 				<put-attribute name="title" value="QnA목록" />
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/admin/adminQnAList.jsp" />
 			</definition>
-			<definition name="adminQnADetail" extends="base_layout">
+			<definition name="adminQnADetail" extends="admin_layout">
 				<put-attribute name="title" value="QnA상세" />
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/admin/adminQnADetail.jsp" />
 			</definition>
-			<definition name="adminQnAReply" extends="base_layout">
+			<definition name="adminQnAReply" extends="admin_layout">
 				<put-attribute name="title" value="QnA답변" />
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/admin/adminQnAReply.jsp" />
 			</definition>
-			<definition name="openAdminItemDaySaleList" extends="base_layout">
+			<definition name="openAdminItemDaySaleList" extends="admin_layout">
 				<put-attribute name="title" value="매출관리" />
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/admin/adminSalesList.jsp" />
 			</definition>
-			<definition name="graph" extends="base_layout">
+			<definition name="graph" extends="admin_layout">
 				<put-attribute name="title" value="그래프" />
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/admin/graph.jsp" />
 
 			</definition>	
-			<definition name="graph" extends="base_layout">
+			<definition name="graph" extends="admin_layout">
 				<put-attribute name="title" value="그래프" />
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/admin/graph.jsp" />
 			</definition>	
+			<definition name="adminIgnoreList" extends="admin_layout">
+				<put-attribute name="title" value="차단회원목록" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminIgnoreList.jsp" />
+			</definition>
+			<definition name="adminIgnoreDetail" extends="admin_layout">
+				<put-attribute name="title" value="차단회원상세" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminIgnoreDetail.jsp" />
+			</definition>
+			<definition name="adminEventList" extends="admin_layout">
+				<put-attribute name="title" value="이벤트 목록" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminEventList.jsp" />
+			</definition>
+			<definition name="adminNoticeList" extends="admin_layout">
+				<put-attribute name="title" value="공지 사항" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminNoticeList.jsp" />
+			</definition>
+			<definition name="adminNoticeDetail" extends="admin_layout">
+				<put-attribute name="title" value="공지 사항 상세" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminNoticeDetail.jsp" />
+			</definition>
+			<definition name="adminNoticeUpdate" extends="admin_layout">
+				<put-attribute name="title" value="공지 사항 수정" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminNoticeUpdate.jsp" />
+			</definition>
+			<definition name="adminNoticeWrite" extends="admin_layout">
+				<put-attribute name="title" value="공지 사항 수정" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminNoticeWrite.jsp" />
+			</definition>
+			
+			<definition name="adminFaqList" extends="admin_layout">
+				<put-attribute name="title" value="FAQ목록" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminFaqList.jsp" />
+			</definition>
+			<definition name="adminFaqDetail" extends="admin_layout">
+				<put-attribute name="title" value="FAQ상세" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminFaqDetail.jsp" />
+			</definition>
+			<definition name="adminFaqUpdate" extends="admin_layout">
+				<put-attribute name="title" value="이벤트 수정" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminFaqUpdate.jsp" />
+			</definition>
+			<definition name="adminFaqWrite" extends="admin_layout">
+				<put-attribute name="title" value="이벤트 등록" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminFaqWrite.jsp" />
+			</definition>
+			
+			<definition name="adminEventDetail" extends="admin_layout">
+				<put-attribute name="title" value="이벤트 상세" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminEventDetail.jsp" />
+			</definition>
+			<definition name="adminEventUpdate" extends="admin_layout">
+				<put-attribute name="title" value="이벤트 수정" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminEventUpdate.jsp" />
+			</definition>
+			<definition name="adminEventWrite" extends="admin_layout">
+				<put-attribute name="title" value="이벤트 등록" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminEventWrite.jsp" />
+			</definition>
+			<definition name="adminMemberList" extends="admin_layout">
+				<put-attribute name="title" value="회원 목록" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminMemberList.jsp" />
+			</definition>
+			<definition name="adminMemberDetail" extends="admin_layout">
+				<put-attribute name="title" value="회원 상세" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminMemberDetail.jsp" />
+			</definition>
+			<definition name="adminMemberIgnore" extends="admin_layout">
+				<put-attribute name="title" value="회원 차단" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminMemberIgnore.jsp" />
+			</definition>
+			<definition name="adminMemberPointUpdate" extends="admin_layout">
+				<put-attribute name="title" value="포인트 변경" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminMemberPointUpdate.jsp" />
+			</definition>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 			
 			
@@ -144,6 +262,7 @@
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/myPage/myReview.jsp" />
 			</definition>
+			
 				
 
 		</tiles-definitions>

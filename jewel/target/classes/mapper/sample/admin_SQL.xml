@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="admin">
-	<select id="selectitemList" parameterType="hashmap" resultType="hashmap">
-			SELECT 
-				ITEM_NUM,ITEM_TYPE,ITEM_NAME,ITEM_PRICE,ITEM_DCP,ITEM_IMAGE1,ITEM_IMAGE2,ITEM_DATE,ITEM_STOCK
-			FROM 
-				ITEM	
+<select id="selectitemList" parameterType="hashmap" resultType="hashmap">
+select * from(SELECT rownum as RNUM,s.* 
+ from  (SELECT ITEM_NUM,ITEM_TYPE,ITEM_NAME,ITEM_PRICE,ITEM_DCP,ITEM_IMAGE1,ITEM_IMAGE2,ITEM_DATE,ITEM_STOCK
+ FROM ITEM order by ITEM_NUM desc)s) 
+ <![CDATA[WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}]]>
+ 
 	</select>
+	<select id="getTotalList" parameterType="hashmap" resultType="int">
+		SELECT 
+			COUNT(*)as TOTAL 
+		FROM 
+			ITEM 
+	
+	</select>
+	
 	
 	<select id="selectItemDetail" parameterType="hashmap" resultType="hashmap">
 			SELECT 
@@ -37,10 +46,17 @@
 	
 	</update>
 	<select id="selectQnAList" parameterType="hashmap" resultType="hashmap">
-		SELECT  QNA_NUM,MEM_ID,CASE WHEN LENGTH(QNA_TITLE)>=10 THEN SUBSTR(QNA_TITLE,1,10)||'...' ELSE QNA_TITLE END QNA_TITLE,QNA_DATE,QNA_RTITLE,QNA_RCONTENT,QNA_RDATE,QNA_RSTATE,QNA_PWD,ITEM_NUM,QNA_CATE
+		<![CDATA[
+		select * from(SELECT rownum as RNUM,s.* FROM 
+		(SELECT  QNA_NUM,MEM_ID,CASE WHEN LENGTH(QNA_TITLE)>=10 THEN SUBSTR(QNA_TITLE,1,10)||'...' ELSE QNA_TITLE END QNA_TITLE,TO_CHAR(QNA_DATE,'YYYY-MM-DD') QNA_DATE,QNA_RTITLE,QNA_RCONTENT,QNA_RDATE,QNA_RSTATE,QNA_PWD,ITEM_NUM,QNA_CATE
     FROM QNA
 		ORDER BY
-			 QNA_RSTATE,QNA_DATE
+			 QNA_RSTATE,QNA_DATE)S) WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}]]>
+	</select>
+	
+	<select id="qnaTotalList" parameterType="hashmap" resultType="int">
+	SELECT COUNT(*)AS TOTAL
+FROM QNA
 	</select>
 	
 	<select id="selectQnADetail" parameterType="hashmap" resultType="hashmap">
@@ -93,4 +109,187 @@ GROUP BY SUBSTR(ITEM_NUM,1,1) order by CNT desc
 SELECT SUBSTR(ITEM_NUM,1,1) CATEGORY,SUM(OR_CNT) CNT  FROM ORDERS WHERE TO_CHAR(OR_DATE,'YYYY-MM')=#{OR_DATE}
 GROUP BY SUBSTR(ITEM_NUM,1,1) order by CNT desc
 	</select>
+	
+	<select id="selectIgnoreList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+select * from(SELECT rownum as RNUM,s.* 
+ from 
+(SELECT MEM_NUM,TO_CHAR(IG_DATE,'YYYY-MM-DD') IG_DATE,IG_MEM_ID,IG_WHY
+FROM IGNORE)S) WHERE RNUM>=#{START_NUM} AND RNUM<=#{END_NUM}
+ ]]>
+	</select>
+	<select id="IgnoreTotalList" parameterType="hashmap" resultType="int">
+	SELECT COUNT(*)AS TOTAL
+FROM IGNORE
+	</select>
+	<select id="selectIgnoreDetail" parameterType="hashmap" resultType="hashmap">
+	SELECT 
+		MEM_NUM,TO_CHAR(IG_DATE,'YYYY-MM-DD') IG_DATE,IG_MEM_ID,IG_WHY
+	FROM 
+		IGNORE
+	WHERE 
+		MEM_NUM=#{MEM_NUM}
+	</select>
+	<update id="deleteIgnore" parameterType="hashmap">
+	DELETE 	FROM 
+		IGNORE 
+	WHERE 
+		MEM_NUM=#{MEM_NUM}
+
+	
+	</update>
+<select id="selectNoticeList" parameterType="hashmap" resultType="hashmap">
+ <![CDATA[
+SELECT *FROM (SELECT rownum as RNUM,s.*  FROM(SELECT NT_NUM,NT_TITLE,NT_CONTENT,TO_CHAR(NT_DATE,'YYYY-MM-DD') NT_DATE,NT_TYPE
+ FROM NOTICE)S) WHERE RNUM>=#{START_NUM} AND RNUM<=#{END_NUM}
+]]>
+ 
+	</select>
+	<select id="noticeTotalList" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) TOTAL
+		FROM NOTICE
+	
+	</select>
+	
+	
+	<select id="selectNoticeDetail" parameterType="hashmap" resultType="hashmap">
+			SELECT  NT_NUM,NT_TITLE,NT_CONTENT,TO_CHAR(NT_DATE,'YYYY-MM-DD') NT_DATE,NT_TYPE
+FROM NOTICE
+WHERE NT_NUM=#{NT_NUM}
+	</select>
+	
+	<insert id="insertNoticeWrite" parameterType="hashmap" >
+		INSERT INTO NOTICE VALUES(NT_NUM_SEQ.NEXTVAL,#{NT_TITLE},#{NT_CONTENT},SYSDATE,#{NT_TYPE})
+	 
+	</insert>
+	<update id="updateNoticeModify" parameterType="hashmap">
+	UPDATE NOTICE SET NT_TITLE=#{NT_TITLE},NT_CONTENT=#{NT_CONTENT},NT_DATE=SYSDATE,NT_TYPE=#{NT_TYPE} WHERE NT_NUM=#{NT_NUM}
+  
+	</update>
+	<update id="deleteNotice" parameterType="hashmap">
+	DELETE FROM NOTICE WHERE NT_NUM=#{NT_NUM}
+	
+	</update>	
+
+
+<select id="selectEventList" parameterType="hashmap" resultType="hashmap">
+ <![CDATA[
+SELECT *FROM (SELECT rownum as RNUM,s.*  FROM(SELECT ET_NUM,ET_TITLE,ET_CONTENT,TO_CHAR(ET_SD,'YYYY-MM-DD')ET_SD,TO_CHAR(ET_FD,'YYYY-MM-DD')ET_FD 
+FROM EVENT)S) WHERE RNUM>=#{START_NUM} AND RNUM<=#{END_NUM}
+]]>
+ 
+	</select>
+	<select id="eventTotalList" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) TOTAL
+FROM EVENT
+	
+	</select>
+	
+	
+	<select id="selectEventDetail" parameterType="hashmap" resultType="hashmap">
+
+SELECT ET_NUM,ET_TITLE,ET_CONTENT,TO_CHAR(ET_SD,'YYYY-MM-DD')ET_SD,TO_CHAR(ET_FD,'YYYY-MM-DD')ET_FD 
+FROM EVENT
+WHERE ET_NUM=#{ET_NUM}
+	</select>
+	
+	<insert id="insertEventWrite" parameterType="hashmap" >
+		INSERT INTO EVENT VALUES(ET_NUM_SEQ.NEXTVAL,#{ET_TITLE},#{ET_CONTENT},#{ET_SD},#{ET_FD})
+	 
+	</insert>
+	<update id="updateEventModify" parameterType="hashmap">
+	UPDATE EVENT SET ET_TITLE=#{ET_TITLE},ET_CONTENT=#{ET_CONTENT},ET_SD=#{ET_SD},ET_FD=#{ET_FD} WHERE ET_NUM=#{ET_NUM}
+  
+	</update>
+	<update id="deleteEvent" parameterType="hashmap">
+	DELETE FROM EVENT WHERE ET_NUM=#{ET_NUM}
+	
+	</update>		
+	
+	<select id="selectFaqList" parameterType="hashmap" resultType="hashmap">
+ <![CDATA[
+SELECT *FROM (SELECT rownum as RNUM,s.*  FROM(SELECT  FAQ_NUM,FAQ_CONTENT,FAQ_TITLE,FAQ_CATE
+FROM FAQ)S) WHERE RNUM>=#{START_NUM} AND RNUM<=#{END_NUM} 
+]]>
+ 
+	</select>
+	<select id="faqTotalList" parameterType="hashmap" resultType="int">
+
+SELECT  COUNT(*) TOTAL
+FROM FAQ
+	</select>
+	
+	
+	<select id="selectFaqDetail" parameterType="hashmap" resultType="hashmap">
+
+SELECT FAQ_NUM,FAQ_CONTENT,FAQ_TITLE,FAQ_CATE
+FROM FAQ
+WHERE FAQ_NUM=#{FAQ_NUM}
+	</select>
+	
+	<insert id="insertFaqWrite" parameterType="hashmap" >
+		INSERT INTO FAQ VALUES(FAQ_NUM_SEQ.NEXTVAL,#{FAQ_CONTENT},#{FAQ_TITLE},#{FAQ_CATE})
+	 
+	</insert>
+	<update id="updateFaqModify" parameterType="hashmap">
+	UPDATE FAQ SET FAQ_TITLE=#{FAQ_TITLE},FAQ_CONTENT=#{FAQ_CONTENT},FAQ_CATE=#{FAQ_CATE} WHERE FAQ_NUM=#{FAQ_NUM}
+  
+	</update>
+	<update id="deleteFaq" parameterType="hashmap">
+	DELETE FROM FAQ WHERE FAQ_NUM=#{FAQ_NUM}
+	
+	</update>		
+	
+	<select id="selectMemberList" parameterType="hashmap" resultType="hashmap">
+
+SELECT *FROM (SELECT rownum as RNUM,s.*  FROM(SELECT MEM_NUM,MEM_ID,MEM_NAME,MEM_NICK,MEM_EMAIL,MEM_PHONE,MEM_ADDR1,MEM_ADDR2,MEM_RANK,MEM_JOINDATE,MEM_POINT,MEM_STACK
+ FROM MEMBER
+WHERE MEM_DEL_GB='N'
+<choose>
+				
+				   	 <when test="keyword!=null and keyword!=''">	
+				   	  AND 
+				   	 MEM_ID like '%' || #{keyword} ||'%'
+				   	 </when> 
+		   	 </choose>
+
+
+
+)S)
+
+ <![CDATA[ WHERE RNUM>=#{START_NUM} AND RNUM<=#{END_NUM} 
+]]>
+ 
+	</select>
+	<select id="memberTotalList" parameterType="hashmap" resultType="int">
+
+SELECT  COUNT(*) TOTAL
+FROM MEMBER
+	</select>
+	
+	
+	<select id="selectMemberDetail" parameterType="hashmap" resultType="hashmap">
+SELECT MEM_NUM,MEM_ID,MEM_NAME,MEM_NICK,MEM_EMAIL,MEM_PHONE,MEM_ADDR1,MEM_ADDR2,MEM_RANK,MEM_JOINDATE,MEM_POINT,MEM_STACK
+FROM MEMBER 
+WHERE MEM_NUM=#{MEM_NUM}
+	</select>
+	
+	
+	<update id="ignoreMember" parameterType="hashmap">
+	INSERT INTO IGNORE VALUES(#{MEM_NUM},SYSDATE,#{MEM_ID},#{IG_WHY})
+  
+	</update>
+	<update id="deleteMember" parameterType="hashmap">
+	UPDATE MEMBER
+SET MEM_DEL_GB='Y' 
+WHERE  MEM_NUM=#{MEM_NUM}
+	
+	</update>		
+	<update id="updateMemberPoint" parameterType="hashmap">
+	UPDATE MEMBER
+	SET MEM_POINT=#{MEM_POINT} 
+	WHERE  MEM_NUM=#{MEM_NUM}
+	
+	</update>		
+	
 </mapper>
