@@ -7,7 +7,7 @@
 <script type="text/javascript">
 
 function fsubmit(){
-	var MEM_POINT = $("#MEM_POINT")[0].value;
+	var MEM_POINT = document.getElementById("MEM_POINT").value;
 	
 	if(MEM_POINT==null || MEM_POINT==''){
 		alert("포인트를 입력하세요.");

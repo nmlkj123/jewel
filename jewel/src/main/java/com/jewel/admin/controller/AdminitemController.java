@@ -40,8 +40,8 @@ public class AdminitemController {
 	public ModelAndView adminItemList(CommandMap commandMap,HttpServletRequest request)throws Exception{
 			ModelAndView mv=new ModelAndView("adminItemList");  
 			
-			int show=12;//ÆäÀÌÁö´ç º¸¿©ÁÙ »óÇ° °³¼ö
-	    	int block=5;//ÆäÀÌÁö´ç º¸¿©ÁÙ ÆäÀÌÁö°³¼ö
+			int show=12;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½
+	    	int block=5;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    	int pg;
 	    	if(commandMap.get("pg")==null) {
 		    	  pg=1;
@@ -57,7 +57,7 @@ public class AdminitemController {
 			commandMap.put("END_NUM", endNum);
 			
 	    	@SuppressWarnings("unused")
-			int totalList=AdminItemService.getTotalList(commandMap.getMap());//Ä«Å×°í¸® ÀÇ »óÇ° ÃÑ °³¼ö
+			int totalList=AdminItemService.getTotalList(commandMap.getMap());//Ä«ï¿½×°ï¿½ ï¿½ï¿½ ï¿½ï¿½Ç° ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	    	AdminItemListPaging.setPath(request.getContextPath());
 	    	AdminItemListPaging.setCurrentPage(pg);
 	    	AdminItemListPaging.setTotalList(totalList);
@@ -70,6 +70,7 @@ public class AdminitemController {
 	    	  String path="/images/item";
 				String uploadPath=request.getSession().getServletContext().getRealPath(path);
 				mv.addObject("path", uploadPath);
+				System.out.print(uploadPath);
 			List<Map<String,Object>>list=AdminItemService.selectItemList(commandMap.getMap());
 		  mv.addObject("list",list);
 		

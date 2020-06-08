@@ -9,9 +9,9 @@
 <script type="text/javascript">
 
 function fsubmit(){
-	var title = $("#FAQ_TITLE")[0].value;
-	var cate = $("#FAQ_CATE")[0].value;
-	var content = $("#FAQ_CONTENT")[0].value;
+	var title = document.getElementById("FAQ_TITLE").value;
+	var cate = document.getElementById("FAQ_CATE").value;
+	var content = document.getElementById("FAQ_CONTENT").value;
 	if(title==null || title==''){
 		alert("FAQ 제목을 입력하세요.");
 		return false;

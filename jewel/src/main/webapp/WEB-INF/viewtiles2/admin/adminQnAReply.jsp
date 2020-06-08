@@ -11,21 +11,24 @@
 <script type="text/javascript">
 
 function fsubmit(){
-	var QNA_RTITLE = $("#QNA_RTITLE")[0].value;
-	var QNA_RCONTENT = $("#QNA_RCONTENT")[0].value;
 	
+	var QNA_RTITLE = document.getElementById("QNA_RTITLE").value;
 	
+
+
+	var QNA_RCONTENT =document.getElementById("QNA_RCONTENT").value;
 	
 	if(QNA_RTITLE==null || QNA_RTITLE==''){
 		alert("답변 제목을 입력하세요.");
 		return false;
 	}
+	alert("check");
 	if(QNA_RCONTENT==null || QNA_RCONTENT==''){
 		alert("답변 내용을 입력하세요.");
 		return false;
 	}
 	
-	
+	alert("check");
 	frm.submit();
 }
 

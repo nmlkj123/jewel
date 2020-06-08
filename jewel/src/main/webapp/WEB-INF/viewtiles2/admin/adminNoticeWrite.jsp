@@ -9,9 +9,9 @@
 <script type="text/javascript">
 
 function fsubmit(){
-	var NT_TITLE = $("#NT_TITLE")[0].value;
-	var NT_TYPE = $("#NT_TYPE")[0].value;
-	var NT_CONTENT = $("#NT_CONTENT")[0].value;
+	var NT_TITLE = document.getElementById("NT_TITLE").value;
+	var NT_TYPE = document.getElementById("NT_TYPE").value;
+	var NT_CONTENT = document.getElementById("NT_CONTENT").value;
 	
 	if(NT_TITLE==null || NT_TITLE==''){
 		alert("공지사항 제목을 입력하세요.");
