@@ -15,9 +15,10 @@ function fn_deleteMember(){
 		 }else{   
 		     return false;
 		 }
-	}
-</script>
+}
 
+
+</script>
 <body>
 <!-- 상단박스영역 -->
 	<div>
@@ -51,13 +52,13 @@ function fn_deleteMember(){
 	
 	<h3>마이페이지</h3>
 	<table>
-		<p align="left">주문내역</p>
+		<h4>주문내역</h4>
 		<colgroup>
-			<col width="10%"/>
+			<col width="15%"/>
 			<col width="20"/>
 	        <col width="*"/>
 	        <col width="10%"/>
-	        <col width="20%"/>
+	        <col width="30%"/>
 	        <col width="10%"/>
         </colgroup>
         <thead>
@@ -85,9 +86,11 @@ function fn_deleteMember(){
         			<td>${items.DEL_DS }</td>       			
         		</tr>       		
         	</c:forEach>        	
-        </tbody>
-               
+        </tbody>       
 	</table>
+	<div align="center"class="container pt-5" id="categoryPaging" >
+	${myOrderListPaging.pagingHTML}
+	</div>	
 	
 </body>
 </html>

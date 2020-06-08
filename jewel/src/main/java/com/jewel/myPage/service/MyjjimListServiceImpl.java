@@ -25,5 +25,11 @@ public class MyjjimListServiceImpl implements MyjjimListService {
 	public Map<String, Object> selectMyInfo(Map<String, Object> map) throws Exception {
 		return myJJimDAO.selectMyInfo(map);
 	}
+	@Override
+	public int myJJimTotalList(Map<String, Object> map) {
+		return myJJimDAO.myJJimTotalList(map);
+	}
+	
+	
 
 }

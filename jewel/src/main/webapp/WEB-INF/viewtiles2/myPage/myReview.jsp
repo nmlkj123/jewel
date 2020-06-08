@@ -16,6 +16,13 @@ function fn_deleteMember(){
 		     return false;
 		 }
 	}
+
+function reviewDetail(num){
+	var url= "/common/myPage/myReviewDetail?RE_NUM="+num;
+	var name = "myReviewDetail";
+	var option= "width=600, height=400, top=100, left=200, location=no";
+	window.open(url,name,option);
+}
 </script>
 
 <body>
@@ -54,8 +61,9 @@ function fn_deleteMember(){
 		<p align="left">나의리뷰</p>
 		<colgroup>
 			<col width="20%"/>
-	        <col width="*%"/>
+	        <col width="20%"/>
 	        <col width="30%"/>
+	        <col width="10%"/>
 	        <col width="10%"/>
         </colgroup>
         <thead>
@@ -64,6 +72,7 @@ function fn_deleteMember(){
         		<th scope="col">상품명</th>
         		<th scope="col">제목</th>
         		<th scope="col">추천수</th>
+        		<th scope="col">조회수</th>
         	</tr>
         </thead>
         <tbody>
@@ -72,15 +81,22 @@ function fn_deleteMember(){
         			<td>${items.RE_DATE}</td>
         			<td>${items.ITEM_NAME}</td>
         			<td>
-        				<a href="#" onclick="location.href='myReviewList/myReviewDetail?RE_NUM=${items.RE_NUM}'">
+        				<a href="#" onclick="reviewDetail(${items.RE_NUM})">
         				${items.RE_TITLE }
-        				</a></td>
-					<td>${items.RE_LIKE }</td>     			
+        				</a>
+        			</td>
+					<td>${items.RE_LIKE }</td>  
+					<td>${items.RE_HIT }</td>   			
         		</tr>       		
         	</c:forEach>        	
         </tbody>
                
 	</table>
+
+	<div align="center"class="container pt-5" id="categoryPaging" >
+	${myReviewListPaging.pagingHTML}
+	</div>
+	
 	
 </body>
 </html>

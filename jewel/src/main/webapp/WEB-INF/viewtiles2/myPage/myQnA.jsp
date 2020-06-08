@@ -20,7 +20,7 @@ function fn_deleteMember(){
 function popup(num){
 	var url= "/common/myPage/myQnADetail?QNA_NUM="+num;
 	var name = "myQnADetail";
-	var option= "width=300, height=300, top=100, left=200, location=no";
+	var option= "width=600, height=400, top=100, left=200, location=no";
 	window.open(url,name,option);	
 }
 </script>
@@ -93,6 +93,11 @@ function popup(num){
         </tbody>
                
 	</table>
+	
+	<div align="center"class="container pt-5" id="categoryPaging" >
+	${myQnAListPaging.pagingHTML}
+	</div>
+	
 	
 </body>
 </html>

@@ -76,6 +76,10 @@ function fn_deleteMember(){
         </tbody>
                
 	</table>
+	<div align="center"class="container pt-5" id="categoryPaging" >
+	${myJJimListPaging.pagingHTML}
+	</div>
+	
 	
 </body>
 </html>

@@ -19,9 +19,28 @@ public class MyQnADAO extends AbstractDAO {
 	public List<Map<String, Object>> selectMyQnAList(Map<String, Object> map){
 		return(List<Map<String, Object>>) selectList("myPage.selectMyQnAList", map);
 	}
+	public int myQnATotalList(Map<String, Object> map) {
+		return (Integer) selectOne("myPage.myQnATotalList", map);
+	}
+	
 	//나의 QNA 상세정보
 	public Map<String, Object> selectMyQnADetail(Map<String, Object> map){
 		return(Map<String, Object>) selectOne("myPage.selectMyQnADetail", map);
 	}
+	//나의 QNA 수정폼
+	public Map<String, Object> selectMyQnAModifyForm(Map<String, Object> map) {
+		return (Map<String, Object>) selectOne("myPage.selectMyQnADetail", map);
+	}
+	
+	//수정
+	public void updateMyQnA(Map<String, Object> map) throws Exception {
+		update("myPage.updateMyQnA", map);
+	}
+	
+	//삭제
+	public void deleteMyQnA(Map<String, Object> map) throws Exception{
+		update("myPage.deleteMyQnA", map);
+	}
+
 
 }

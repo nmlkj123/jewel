@@ -31,7 +31,7 @@ public class ItemController {
 	   public ModelAndView joinForm(CommandMap commandMap) throws Exception{
 	      ModelAndView mv=new ModelAndView("itemList");
 	      Map<String, Object> map =commandMap.getMap();
-			/* sort=½Å»óÇ°:1,ÀÎ±â¼ø:2,°¡°Ý³ôÀº¼ø:3,°¡°Ý³·Àº¼ø:4 ¸®ºä¼ø:5*/
+			/* sort=ï¿½Å»ï¿½Ç°:1,ï¿½Î±ï¿½ï¿½:2,ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½ï¿½ï¿½:3,ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½ï¿½ï¿½:4 ï¿½ï¿½ï¿½ï¿½ï¿½:5*/
 	      String pg=(String) commandMap.get("pg");
 	      String type=(String) commandMap.get("type");
 	      String sort=(String) commandMap.get("sort");
@@ -58,9 +58,9 @@ public class ItemController {
     public ModelAndView openBoardList(CommandMap commandMap,HttpServletRequest request) throws Exception{
     	ModelAndView mv = new ModelAndView("jsonView");
     	
-		/*3Á¶ ÆÀ¿øµé ÀÇ ÆäÀÌÂ¡ Ã³¸® ½ÃÀÛ*/
-    	int show=12;//ÆäÀÌÁö´ç º¸¿©ÁÙ »óÇ° °³¼ö
-    	int block=5;//ÆäÀÌÁö´ç º¸¿©ÁÙ ÆäÀÌÁö°³¼ö
+		/*3ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
+    	int show=12;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½
+    	int block=5;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     	int pg=Integer.parseInt((String)commandMap.get("pg"));
     	String keyword=(String) commandMap.get("keyword");
     	String sort=(String)commandMap.get("sort");
@@ -72,7 +72,7 @@ public class ItemController {
 		commandMap.put("END_NUM", endNum);
 		
     	@SuppressWarnings("unused")
-		int totalList=itemService.getTotalList(commandMap.getMap());//Ä«Å×°í¸® ÀÇ »óÇ° ÃÑ °³¼ö
+		int totalList=itemService.getTotalList(commandMap.getMap());//Ä«ï¿½×°ï¿½ ï¿½ï¿½ ï¿½ï¿½Ç° ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     	itemListPaging.setPath(request.getContextPath());
     	itemListPaging.setCurrentPage(pg);
     	itemListPaging.setSort(sort);
@@ -87,11 +87,11 @@ public class ItemController {
     		
     	}
     	else if(type!=null && !type.isEmpty()){
-    		itemListPaging.makePagingHTML();//StringBuffer¿¡ ÆäÀÌÂ¡ Ã³¸®
+    		itemListPaging.makePagingHTML();//StringBufferï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½
     		mv.addObject("itemListPaging",itemListPaging);
     	}
     	
-		/* ÆäÀÌÂ¡Ã³¸® ³¡ */
+		/* ï¿½ï¿½ï¿½ï¿½Â¡Ã³ï¿½ï¿½ ï¿½ï¿½ */
     	
     	List<Map<String,Object>> list = itemService.getItemList(commandMap.getMap());
     	mv.addObject("list", list);

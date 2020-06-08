@@ -18,5 +18,10 @@ public class MyOrderDAO extends AbstractDAO {
 	public Map<String, Object> selectMyInfo(Map<String, Object> map){
 		return(Map<String, Object>) selectOne("myPage.selectMyInfo", map);
 	}
+	//나의주문총개수
+	public int orderTotalList(Map<String, Object> map) {
+		return  (Integer) selectOne("myPage.orderTotalList", map);		
+	}
+	
 
 }

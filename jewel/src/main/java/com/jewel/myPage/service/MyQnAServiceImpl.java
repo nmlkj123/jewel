@@ -29,5 +29,25 @@ public class MyQnAServiceImpl implements MyQnAService {
 		return myQnADAO.selectMyQnADetail(map);
 	}
 	
+	@Override
+	public Map<String, Object> selectMyQnAModifyForm(Map<String, Object> map) throws Exception {
+		return myQnADAO.selectMyQnAModifyForm(map);
+	}
+	
+	@Override
+	public int myQnATotalList(Map<String, Object> map) {
+		return myQnADAO.myQnATotalList(map);
+	}
+	
+	@Override
+	public void updateMyQnA(Map<String, Object> map) throws Exception {
+		myQnADAO.updateMyQnA(map);
+	}
+	
+	@Override
+	public void deleteMyQnA(Map<String, Object> map) throws Exception {
+		myQnADAO.deleteMyQnA(map);
+	}
+	
 
 }
