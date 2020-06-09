@@ -7,7 +7,7 @@
 		<tiles-definitions>
 			
 			<definition name="base_layout"
-				template="/WEB-INF/viewtiles2/template/layout.jsp">
+				template="/WEB-INF/viewtiles2/template/adminLayout.jsp">
 				<put-attribute name="header"
 					value="/WEB-INF/viewtiles2/template/header.jsp" />
 				<put-attribute name="footer"
@@ -19,6 +19,8 @@
 				template="/WEB-INF/viewtiles2/template/layout.jsp">
 				<put-attribute name="header"
 					value="/WEB-INF/viewtiles2/template/adminHeader.jsp" />
+			<put-attribute name="left"
+					value="/WEB-INF/viewtiles2/template/sideBar.jsp" />
 			<put-attribute name="footer"
 					value="/WEB-INF/viewtiles2/template/footer.jsp" />
 			</definition>

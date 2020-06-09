@@ -28,8 +28,8 @@ public class AdminMemberController {
 	public ModelAndView adminMemberList(CommandMap commandMap,HttpServletRequest request)throws Exception{
 			ModelAndView mv=new ModelAndView("adminMemberList");  
 			
-			int show=12;//페이지당 보여줄 상품 개수
-	    	int block=5;//페이지당 보여줄 페이지개수
+			int show=12;
+	    	int block=5;
 	    	int pg;
 	    	String keyword=(String)commandMap.get("keyword");;
 	    	if(commandMap.get("pg")==null) {

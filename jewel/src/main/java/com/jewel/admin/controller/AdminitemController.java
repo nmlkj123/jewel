@@ -40,8 +40,8 @@ public class AdminitemController {
 	public ModelAndView adminItemList(CommandMap commandMap,HttpServletRequest request)throws Exception{
 			ModelAndView mv=new ModelAndView("adminItemList");  
 			
-			int show=12;//�������� ������ ��ǰ ����
-	    	int block=5;//�������� ������ ����������
+			int show=12;
+	    	int block=5;
 	    	int pg;
 	    	if(commandMap.get("pg")==null) {
 		    	  pg=1;
