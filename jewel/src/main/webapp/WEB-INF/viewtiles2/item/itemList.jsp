@@ -21,7 +21,7 @@ $(document).ready(function(){
 					class:"img-fluid",
 					src:"http://junjewelry.com/shopimages/koreajisuk/1270010011162.jpg?1569380755",
 					click:function(){
-						$(location).attr('href','#');
+						$(location).attr('href','<c:url value="/item/itemDetail?ITEM_NUM='+items.ITEM_NUM+'"/>');
 					}
 				})).append($('<h4/>',{
 					class:"text-center",
@@ -52,12 +52,10 @@ $(document).ready(function(){
 		location.href='<c:url value="/item/itemList?type=${type}&sort='+id+'&keyword=${keyword}"/>';
 		
 	});
+
+	
 		
 });
-	
-
-
-
 	
 
 </script>
@@ -116,7 +114,7 @@ $(document).ready(function(){
 	 
 
 	<div align="center"class="container pt-5" id="categoryPaging" ></div>	
-
+	
 
 		
 			

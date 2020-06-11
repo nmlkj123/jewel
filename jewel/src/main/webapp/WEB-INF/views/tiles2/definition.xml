@@ -73,7 +73,23 @@
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/item/itemList.jsp" />
 			</definition>
+			<!-- 아이템 상세페이지 -->
+			<definition name="itemDetail" extends="base_layout">
+				<put-attribute name="title" value="상세페이지" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/item/itemDetail.jsp" />
+			</definition>
+			<!-- 아이템 구매페이지 -->
+			<definition name="qmember" template="/WEB-INF/viewtiles2/item/qmember.jsp" >
+				
+
+			</definition>
 			
+			<definition name="itemOrder" extends="base_layout">
+				<put-attribute name="title" value="상품주문" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/item/itemOrder.jsp" />
+			</definition>
 			
 			<definition name="adminItemList" extends="admin_layout">
 				<put-attribute name="title" value="상품목록" />

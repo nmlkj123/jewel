@@ -29,5 +29,66 @@ public class ItemServiceImpl implements ItemService{
 		return itemDAO.getTotalList(map);
 	}
 	
+	@Override
+	public Map<String, Object> getItem(Map<String, Object> map) {
+		return itemDAO.getItem(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> getOption(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return itemDAO.getOption(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> getSelectOption(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return itemDAO.getSelectOption(map);
+	}
+
+	@Override
+	public int addCart(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return itemDAO.addCart(map);
+	}
+	@Override
+	public int checkGID(String id) {
+		return itemDAO.checkGID(id);
+	}
+	@Override
+	public int buyItemCart(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return itemDAO.addCart(map);
+	}
+	@Override
+	public int delBuyItemCart(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return itemDAO.delItemCart(map);
+	}
+	@Override
+	public List<Map<String, Object>> getOrderList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return itemDAO.getOrderList(map);
+	}
+
+	@Override
+	public int setOrder(Map<String,Object> map) {
+		
+		int i= itemDAO.setOrder(map);
+		itemDAO.setDelivery(map);
+		if(map.get("MEM_NUM")!=null) {
+			itemDAO.addPoint(map);
+		}
+		
+		 return i;
+	}
+
+	@Override
+	public int delPoint(Map<String, Object> map) {
+	
+		return itemDAO.delPoint(map);
+	}
+	
+	
 	
 }
