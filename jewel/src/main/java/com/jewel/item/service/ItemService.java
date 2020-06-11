@@ -16,4 +16,11 @@ public interface ItemService {
 	List<Map<String, Object>> getSelectOption(Map<String, Object> map);
 	
 	int addCart(Map<String, Object> map);
+	int buyItemCart(Map<String,Object>map);
+	int delBuyItemCart(Map<String,Object>map);
+	int checkGID(String id);
+	
+	List<Map<String, Object>> getOrderList(Map<String, Object> map);
+	int setOrder(Map<String,Object> map);
+	int delPoint(Map<String,Object> map);
 }

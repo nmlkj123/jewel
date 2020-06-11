@@ -228,8 +228,34 @@
             #{item}
         </foreach>
 	</select>
+	<select id="checkGID" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM CART WHERE MEM_ID=#{id}
+	</select>
 	<insert id="addCart" parameterType="hashmap" >
-		INSERT INTO CART VALUES(CART_NUM_SEQ.NEXTVAL,#{MEM_ID},#{ITEM_NUM},#{CART_CNT},#{OP_VALUE},#{ITEM_PRICE})
+		INSERT INTO CART VALUES(CART_NUM_SEQ.NEXTVAL,#{MEM_ID},#{ITEM_NUM},#{CART_CNT},#{OP_VALUE},#{ITEM_OP_PRICE})
 	
 	</insert>
+	<delete id="delItemCart" parameterType="hashmap">
+		DELETE FROM CART WHERE MEM_ID=#{MEM_ID} 
+	</delete>
+	
+	<select id="getOrderList" parameterType="hashmap" resultType="hashmap">
+
+		SELECT ITEM_NUM,ITEM_TYPE,ITEM_NAME,ITEM_PRICE,ITEM_DCP,ITEM_IMAGE1,ITEM_IMAGE2,ITEM_DATE,ITEM_STOCK,ITEM_PRICE-(ITEM_PRICE*(ITEM_DCP/100)) AS ITEM_FP,CART_NUM,MEM_ID,CART_CNT,OP_VALUE,ITEM_OP_PRICE FROM CART join ITEM USING(ITEM_NUM) WHERE MEM_ID=#{MEM_ID}
+
+	</select>
+	<insert id="setOrder" parameterType="hashmap">
+		INSERT INTO ORDERS(OR_UNQ,OR_NUM,MEM_NUM,ITEM_NUM,OR_NAME,OR_PHONE,OR_CNT,OR_USEP,OR_DCM,OR_OGP,OR_FP,OR_DATE,OR_HOW,OR_RE,OR_OP,OR_ADDR1,OR_ADDR2) VALUES(OR_UNQ_SEQ.NEXTVAL,#{ORNUM},#{MEM_NUM},#{ITEM_NUM},#{OR_NAME},#{OR_PHONE},#{OR_CNT},#{OR_USEP},#{OR_DCM},#{OR_OGP},#{OR_FP},sysdate,#{OR_HOW},#{OR_RE},#{OR_OP},#{OR_ADDR1},#{OR_ADDR2})
+	</insert>
+	<insert id="setDelivery" parameterType="hashmap">
+		INSERT INTO DELIVERY(DEL_NUM,OR_UNQ,DEL_DATE,OR_NUM) VALUES(DEL_NUM_SEQ.NEXTVAL,OR_UNQ_SEQ.CURRVAL,SYSDATE,#{OR_NUM})
+	</insert>
+	<update id="addPoint">
+		UPDATE MEMBER SET MEM_STACK=MEM_STACK+#{OR_FP},MEM_POINT=MEM_POINT+#{PLUS_POINT} WHERE MEM_NUM=#{MEM_NUM}
+	</update>
+	<update id="delPoint">
+		UPDATE MEMBER SET MEM_POINT=MEM_POINT-#{OR_USEP} WHERE MEM_NUM=#{MEM_NUM}
+	</update>
+	
+	
 </mapper>

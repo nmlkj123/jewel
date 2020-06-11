@@ -58,10 +58,6 @@ $(document).ready(function(){
 });
 	
 
-
-
-	
-
 </script>
 <style type="text/css">
 

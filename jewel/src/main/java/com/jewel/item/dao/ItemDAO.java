@@ -37,10 +37,35 @@ public class ItemDAO extends AbstractDAO {
 		// TODO Auto-generated method stub
 		return (List<Map<String, Object>>) selectList("item.getSelectOption",map);
 	}
-
+	public int checkGID(String id) {
+		return (Integer) selectOne("item.checkGID",id);
+	}
 	public int addCart(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return (Integer) insert("item.addCart",map);
 	}
+	public int delItemCart(Map<String, Object> map) {
+		return (Integer) delete("item.delItemCart",map);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> getOrderList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return (List<Map<String, Object>>) selectList("item.getOrderList",map);
+	}
+	public int setOrder(Map<String, Object> map) {
+		return (Integer) insert("item.setOrder",map);
+	}
+	public int setDelivery(Map<String, Object> map) {
+		return (Integer) insert("item.setDelivery",map);
+	}
+	public int addPoint(Map<String, Object> map) {
+		return (Integer) update("item.addPoint",map);
+	}
+	public int delPoint(Map<String, Object> map) {
+		return (Integer) update("item.delPoint",map);
+	}
+
+	
 
 }
