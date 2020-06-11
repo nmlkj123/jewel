@@ -70,11 +70,22 @@ $(document).ready(function() {
 .myPageInfo .info2 span{
 	font-weight: bold;
 }
+.myPageInfo .info3{
+	float:left;
+	height:100px;
+	padding-top:20px;
+	padding-left:10px;
+	width: 20%;
+	text-align: center;
+	border: 1px solid #e7e7e7;
+	
+}
 
-.orderList, .myJJimList, .myReviewList, .myQnAList {
+.orderList, .myJJimList, .myReviewList, .myQnAList, .myCart {
 	margin-left: 10%;
 	border: 1px solid #e7e7e7;
 	width:80%;
+	
 }
 
 
@@ -93,6 +104,9 @@ $(document).ready(function() {
 			<span>${myInfo.MEM_NAME}</span>님은<br>
 			<span>[${myInfo.MEM_RANK }]</span>등급입니다.<br>
 			적립금:&nbsp;&nbsp;<span style="color: red;">${myInfo.MEM_POINT }</span>원
+		</div>
+		<div class="info3">
+			<span><a href="<c:url value='/myPage/myCart'/>">장바구니</a></span>
 		</div>
 		<br>
 		<!-- 목록박스 -->

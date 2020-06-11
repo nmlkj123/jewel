@@ -31,7 +31,9 @@
         <tbody>
         	<c:forEach items="${jjimList }" var="items">
         		<tr align="center">
-        			<td>${items.ITEM_IMAGE1 }</td>
+        			<td>
+        			 <img src="<c:url value="/images/item/${items.ITEM_IMAGE1 }"/>" style="width:50px">
+        			</td>
         			<td><a href="#" onclick="location.href='item/itemDetail?ITEM_NUM=${items.ITEM_NUM}'">
         				${items.ITEM_NAME }</a></td>
         			<td>${items.ITEM_PRICE }</td>    			

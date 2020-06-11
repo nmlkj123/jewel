@@ -9,14 +9,13 @@
 <script type="text/javascript">
 
 function fsubmit(){
-	var ITEM_TYPE = $("#ITEM_TYPE")[0].value;
-	var ITEM_NAME = $("#ITEM_NAME")[0].value;
-	var ITEM_PRICE = $("#ITEM_PRICE")[0].value;
-	var ITEM_DCP = $("#ITEM_DCP")[0].value;
-	var ITEM_IMAGE1 = $("#ITEM_IMAGE1")[0].value;
-	var ITEM_IMAGE2 = $("#ITEM_IMAGE2")[0].value;
-	var ITEM_STOCK = $("#ITEM_STOCK")[0].value;
-	
+	var ITEM_TYPE = document.getElementById("ITEM_TYPE").value;
+	var ITEM_NAME = document.getElementById("ITEM_NAME").value;
+	var ITEM_PRICE = document.getElementById("ITEM_PRICE").value;
+	var ITEM_DCP = document.getElementById("ITEM_DCP").value;
+	var ITEM_IMAGE1 = document.getElementById("ITEM_IMAGE1").value;
+	var ITEM_IMAGE2 = document.getElementById("ITEM_IMAGE2").value;
+	var ITEM_STOCK = document.getElementById("ITEM_STOCK").value;
 	
 	if(ITEM_TYPE==null || ITEM_TYPE==''){
 		alert("카테고리 종류를 입력하세요.");

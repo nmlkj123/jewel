@@ -262,6 +262,17 @@
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/myPage/myReview.jsp" />
 			</definition>
+			<definition name="myCart" extends="base_layout">
+				<put-attribute name="title" value="마이페이지Cart" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/cart/memberCart.jsp" />
+			</definition>
+			
+			<definition name="cart" extends="base_layout">
+				<put-attribute name="title" value="비회원Cart" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/cart/nonMemberCart.jsp" />
+			</definition>
 			
 				
 

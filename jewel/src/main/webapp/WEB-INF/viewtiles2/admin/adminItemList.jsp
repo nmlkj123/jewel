@@ -31,7 +31,7 @@
                                 ${row.ITEM_TYPE }
                                
                             </td>
-                            <td><img src="${path}/${row.ITEM_IMAGE1}" style="width:50px"	></td>
+                            <td><img src="<c:url value="/images/item/${row.ITEM_IMAGE1}"/>" style="width:50px"	></td>
                             <td><a href="adminItemDetail?ITEM_NUM=${row.ITEM_NUM}">${row.ITEM_NAME}</a></td>
                             <td>${row.ITEM_PRICE }</td>
                         </tr>

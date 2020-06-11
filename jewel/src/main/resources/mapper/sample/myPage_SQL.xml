@@ -286,22 +286,21 @@
 						rownum as RNUM, s.* 
 					 FROM(
 						SELECT 
-							r.RE_NUM, 
-							i.ITEM_NAME, 
-							r.RE_TITLE, 
-							TO_CHAR(r.RE_DATE,'YYYY.MM.DD') RE_DATE, 
-							r.RE_LIKE,
-							r.RE_HIT
-						FROM MEMBER m, ITEM i, REVIEW r
-						WHERE m.MEM_ID = #{MEM_ID}
-						AND m.MEM_NUM = r.MEM_NUM
-						AND i.ITEM_NUM = r.ITEM_NUM 
-						order by RE_DATE desc)s)
+							i.ITEM_IMAGE1,
+							i.ITEM_NAME,
+							c.CART_NUM,
+							c.CART_CNT,
+							c.OP_VALUE,
+							c.ITEM_OP_PRICE
+						FROM CART c, ITEM i
+						WHERE c.MEM_ID = #{MEM_ID}
+						AND c.ITEM_NUM = i.ITEM_NUM 
+						order by CART_NUM desc)s)
 					WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}	
 		]]>
 	</select>
 	<!-- 나의장바구니 페이징 -->
-	<select id="myCartTotalList" parameterType="hashmap" resultType="int">
+	<select id="myCartTotal" parameterType="hashmap" resultType="int">
 		<![CDATA[
 			SELECT 
 				COUNT(*)as TOTAL 
@@ -310,5 +309,21 @@
 			WHERE MEM_ID = #{MEM_ID}
 		]]>
 	</select>
+	<update id="updateMyCart" parameterType="hashmap">
+		<![CDATA[
+			UPDATE CART SET 
+				CART_CNT= #{CART_CNT}
+			WHERE CART_NUM = #{CART_NUM}
+			AND MEM_ID = #{MEM_ID}
+		]]>
+	</update>
+	
+	<delete id="deleteMyCart" parameterType="hashmap">
+		<![CDATA[
+			DELETE CART 
+			WHERE CART_NUM = #{CART_NUM}
+			AND MEM_ID = #{MEM_ID}
+		]]>
+	</delete>
 	
 </mapper>
