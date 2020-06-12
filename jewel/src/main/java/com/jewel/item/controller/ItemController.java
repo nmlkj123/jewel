@@ -203,7 +203,7 @@ public class ItemController {
 		ModelAndView mv = new ModelAndView("jsonView"); 	
     	String TEMP_ID="";
     	CookieGenerator cg = new CookieGenerator();
-    	
+
 		if(cookie==null) {
 			Random rnd =new Random();
 			StringBuffer buf;
@@ -231,6 +231,7 @@ public class ItemController {
 			TEMP_ID=cookie.getValue();
 		}
 		commandMap.put("MEM_ID", TEMP_ID);	
+    	System.out.println(commandMap.getMap());
     	itemService.buyItemCart(commandMap.getMap());
     	return mv;
 	}
