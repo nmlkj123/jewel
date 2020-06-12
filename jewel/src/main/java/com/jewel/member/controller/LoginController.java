@@ -60,7 +60,8 @@ public class LoginController {
          
       } else { 
       if(result.get("MEM_PWD").equals(commandMap.get("MEM_PWD"))){ //비밀번호가 같다면
-         session.setAttribute("MEM_ID", commandMap.get("MEM_ID")); 
+         session.setAttribute("MEM_ID", commandMap.get("MEM_ID"));
+         session.setAttribute("MEM_NUM", result.get("MEM_NUM")); 
          session.setAttribute("MEM_RANK", result.get("MEM_RANK"));
       }
       else {//비밀번호가 일치하지않을 때
