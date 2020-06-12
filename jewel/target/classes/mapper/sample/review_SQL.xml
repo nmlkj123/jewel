@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="review">
+
+<select id="selectReviewList" parameterType="hashmap" resultType="hashmap">
+
+
+	<![CDATA[
+			SELECT
+				 *
+				FROM
+				(SELECT 
+					rownum as RNUM,s.* 
+				from
+					(SELECT  
+        r.RE_NUM,i.ITEM_NUM,r.RE_TITLE,r.RE_CONTENT,r.RE_HIT,r.MEM_NUM,
+        to_char(r.RE_DATE,'YYYY/MM/DD')RE_DATE,
+        r.RE_LIKE,m.MEM_ID
+		FROM REVIEW r, MEMBER m, ITEM i
+	WHERE
+	      i.ITEM_NUM = 1
+	      AND i.ITEM_NUM = i.ITEM_NUM
+	      AND m.MEM_NUM = r.MEM_NUM
+	      order by r.RE_NUM desc)s)
+	      WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}
+  
+		]]>
+	</select>
+
+
+<select id="selectReviewDetail" parameterType="hashmap" resultType="hashmap">
+			SELECT 
+        r.RE_NUM,r.ITEM_NUM,r.RE_TITLE,r.RE_CONTENT,
+        to_char(r.RE_DATE,'YYYY/MM/DD')RE_DATE,
+        m.MEM_ID
+			FROM REVIEW r, MEMBER m
+			WHERE 
+		 m.MEM_NUM = r.MEM_NUM and
+				r.RE_NUM=#{RE_NUM}
+	</select>
+	
+	<insert id="insertReviewWrite" parameterType="hashmap" >
+		
+		INSERT INTO REVIEW(
+				RE_NUM,
+				RE_TITLE,
+				RE_CONTENT,
+				RE_DATE,
+				RE_LIKE,
+				ITEM_NUM,
+				RE_HIT,
+				MEM_NUM
+			)
+			VALUES
+			(
+				RE_NUM_SEQ.NEXTVAL,  
+			    #{RE_TITLE},
+			    #{RE_CONTENT},
+			    SYSDATE,
+			    #{RE_LIKE},
+			   	#{ITEM_NUM},
+			    0,
+			    #{MEM_NUM}
+			)
+	 
+	 </insert>
+	 
+	 <update id="ReviewHit" parameterType="hashmap" >
+		
+			UPDATE REVIEW 
+			SET
+				RE_HIT = NVL(RE_HIT, 0) + 1
+			WHERE
+				RE_NUM = #{RE_NUM}	
+		
+	</update>
+	 
+	 <select id="ReviewCommentsList" parameterType="hashmap" resultType="hashmap">
+	 
+	 select c.CO_NUM,c.CO_CONTENT,c.RE_NUM,
+	 to_char(CO_DATE,'YYYY/MM/DD')CO_DATE,m.MEM_ID
+	 FROM COMMENTS c, MEMBER m
+	 WHERE 
+	 c.MEM_NUM = m.MEM_NUM AND
+	 RE_NUM=#{RE_NUM}
+	 
+	 
+	 
+	 </select>
+	 
+	<insert id="insertComments" parameterType="hashmap" >
+	INSERT INTO COMMENTS(
+				CO_NUM,
+				MEM_NUM,
+				CO_CONTENT,
+				CO_DATE,
+				RE_NUM
+			)
+			VALUES
+			(
+				CO_NUM_SEQ.NEXTVAL, 
+				#{MEM_NUM}, 
+			    #{CO_CONTENT},
+			    SYSDATE,
+			    #{RE_NUM}
+			)
+	 </insert>
+	 
+	 <update id="updateComments" parameterType="hashmap">
+		<![CDATA[
+			UPDATE QNA 
+			SET
+				CO_CONTENT = #{QNA_CONTENT}
+				
+			WHERE
+				CO_NUM = #{CO_NUM}	
+		]]>
+	</update>
+	
+	<update id="deleteComments" parameterType="hashmap">
+	DELETE FROM COMMENTS 
+		WHERE CO_NUM=#{CO_NUM} and MEM_NUM=#{MEM_NUM}
+	
+	</update>
+	 <select id="getTotalList" parameterType="hashmap" resultType="int">
+		SELECT 
+			COUNT(*)as TOTAL 
+		FROM 
+			REVIEW 
+		
+	</select>
+</mapper>
