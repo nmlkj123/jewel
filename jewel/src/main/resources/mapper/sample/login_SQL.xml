@@ -6,11 +6,7 @@
 	<select id="selectId" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
 		SELECT 
-			MEM_NUM,
-			MEM_ID,
-			MEM_PWD,
-			MEM_NAME,
-			MEM_RANK
+			*
 		FROM
 			MEMBER 
 		WHERE 

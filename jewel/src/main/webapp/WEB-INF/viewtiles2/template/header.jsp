@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/viewtiles2/include/include-header.jspf" %>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/minty/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/journal/bootstrap.min.css">
  <!-- JS --> 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script> 
@@ -33,6 +33,9 @@
 				</div>
 		        <div style="margin-right: 80px; float: right;">
 				<a href="<c:url value='/login/logout'/>">로그아웃 </a>
+				</div>
+				<div style="margin-right: 80px; float: right;">
+				<a href="<c:url value='/myPage/myOrderList'/>">마이페이지 </a>
 				</div>
 		    </c:when>
 		    <c:otherwise>
@@ -85,9 +88,6 @@
       <input class="form-control mr-sm-1" type="text" name="keyword" placeholder="Search" aria-label="Search">
       <button class="btn btn-secondary my-2 my-sm-0 "  type="submit">Search</button>
     </form>
-     <input type="button" onclick="location.href='adminItemList'" value="상품 관리">
- <input type="button" onclick="location.href='adminQnAList'" value="QnA 관리">
- <input type="button" onclick="location.href='openAdminItemDaySaleList'" value="매출관리">
- <input type="button" onclick="location.href='graph'" value="그래프">
+
   </div>
 </nav>

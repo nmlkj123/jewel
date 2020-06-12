@@ -1,21 +1,32 @@
 package com.jewel.item.controller;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.CookieGenerator;
+import org.springframework.web.util.HttpSessionMutexListener;
 
 import com.jewel.common.CommandMap;
 import com.jewel.item.dao.ItemDAO;
 import com.jewel.item.service.ItemService;
+import com.jewel.member.service.LoginService;
 import com.jewel.paging.ItemListPaging;
 import com.thoughtworks.xstream.mapper.Mapper.Null;
 
@@ -26,12 +37,14 @@ public class ItemController {
 	ItemService itemService;
 	@Resource(name="itemListPaging")
 	ItemListPaging itemListPaging;
+	@Resource(name="loginService")
+	LoginService loginService;
 	
 	@RequestMapping(value="/item/itemList")
 	   public ModelAndView joinForm(CommandMap commandMap) throws Exception{
 	      ModelAndView mv=new ModelAndView("itemList");
 	      Map<String, Object> map =commandMap.getMap();
-			/* sort=½Å»óÇ°:1,ÀÎ±â¼ø:2,°¡°İ³ôÀº¼ø:3,°¡°İ³·Àº¼ø:4 ¸®ºä¼ø:5*/
+
 	      String pg=(String) commandMap.get("pg");
 	      String type=(String) commandMap.get("type");
 	      String sort=(String) commandMap.get("sort");
@@ -58,13 +71,15 @@ public class ItemController {
     public ModelAndView openBoardList(CommandMap commandMap,HttpServletRequest request) throws Exception{
     	ModelAndView mv = new ModelAndView("jsonView");
     	
-		/*3Á¶ ÆÀ¿øµé ÀÇ ÆäÀÌÂ¡ Ã³¸® ½ÃÀÛ*/
-    	int show=12;//ÆäÀÌÁö´ç º¸¿©ÁÙ »óÇ° °³¼ö
-    	int block=5;//ÆäÀÌÁö´ç º¸¿©ÁÙ ÆäÀÌÁö°³¼ö
+
+    	int show=12;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½
+    	int block=5;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+
     	int pg=Integer.parseInt((String)commandMap.get("pg"));
     	String keyword=(String) commandMap.get("keyword");
     	String sort=(String)commandMap.get("sort");
     	String type=(String)commandMap.get("type");
+    	
     	int endNum = pg*show;
 		int startNum = endNum-(show-1);
 		
@@ -72,7 +87,8 @@ public class ItemController {
 		commandMap.put("END_NUM", endNum);
 		
     	@SuppressWarnings("unused")
-		int totalList=itemService.getTotalList(commandMap.getMap());//Ä«Å×°í¸® ÀÇ »óÇ° ÃÑ °³¼ö
+		int totalList=itemService.getTotalList(commandMap.getMap());//Ä«ï¿½×°ï¿½ ï¿½ï¿½ ï¿½ï¿½Ç° ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+
     	itemListPaging.setPath(request.getContextPath());
     	itemListPaging.setCurrentPage(pg);
     	itemListPaging.setSort(sort);
@@ -87,17 +103,232 @@ public class ItemController {
     		
     	}
     	else if(type!=null && !type.isEmpty()){
-    		itemListPaging.makePagingHTML();//StringBuffer¿¡ ÆäÀÌÂ¡ Ã³¸®
+
+    		itemListPaging.makePagingHTML();//StringBufferï¿½ë¿‰ ï¿½ëŸ¹ï¿½ì” ï§ï¿½ ï§£ì„â”
+
     		mv.addObject("itemListPaging",itemListPaging);
     	}
-    	
-		/* ÆäÀÌÂ¡Ã³¸® ³¡ */
+
     	
     	List<Map<String,Object>> list = itemService.getItemList(commandMap.getMap());
     	mv.addObject("list", list);
     	
     	return mv;
     }
+	@RequestMapping(value="/item/itemDetail")
+	   public ModelAndView joinDetail(CommandMap commandMap) throws Exception{
+	      ModelAndView mv=new ModelAndView("itemDetail");
+	      
+	      Map<String, Object> item= itemService.getItem(commandMap.getMap());
+	      
+	      mv.addObject("item",item);
+	      return mv;      
+	   }
+	@RequestMapping(value="/item/getOption", method=RequestMethod.POST)
+    public ModelAndView getOption(CommandMap commandMap,HttpServletRequest request) throws Exception{
+    	ModelAndView mv = new ModelAndView("jsonView");
+    	
+    	List<Map<String, Object>> option=itemService.getOption(commandMap.getMap());
+    	
+    	mv.addObject("list",option);
+    	return mv;
+	}
+	@RequestMapping(value="/item/getSelectOption", method=RequestMethod.POST)
+    public ModelAndView getSelectOption(CommandMap commandMap,HttpServletRequest request) throws Exception{
+    	ModelAndView mv = new ModelAndView("jsonView");
+    	System.out.println(commandMap.get("list"));
+
+    	List<Map<String, Object>> option=itemService.getSelectOption(commandMap.getMap());
+    	
+    	mv.addObject("list",option);
+    	return mv;
+	}
 	
+	@RequestMapping(value="/item/addCart", method=RequestMethod.POST)
+    public ModelAndView addCart(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response, @CookieValue(value="Guest_ID", required = false) Cookie cookie) throws Exception{
+    	ModelAndView mv = new ModelAndView("jsonView");
+    	HttpSession session = request.getSession(true);
+    	CookieGenerator cg = new CookieGenerator();
+
+    	
+    	
+    	String Guest_ID="";
+    	String MEM_ID="";
+    	
+    	if(session.getAttribute("MEM_ID")!=null) {
+    		MEM_ID=(String)session.getAttribute("MEM_ID");
+    	}
+		
+    	if(MEM_ID.isEmpty()) {
+			if(cookie==null) {
+				Random rnd =new Random();
+				StringBuffer buf;
+				
+				while(true) {
+				buf=new StringBuffer();
+				for(int i=0;i<8;i++){
+				    // rnd.nextBoolean() ï¿½ë’— ï¿½ì˜–ï¿½ëœ¡ï¿½ì‘æ¿¡ï¿½ true, false ç‘œï¿½ ç”±Ñ‹ê½©. trueï¿½ì”ª ï¿½ë–† ï¿½ì˜–ï¿½ëœ¡ ï¿½ë¸³ ï¿½ëƒ¼è‡¾ëª„ì˜„ç‘œï¿½, false ï¿½ì”ª ï¿½ë–† ï¿½ì˜–ï¿½ëœ¡ ï¿½ë¸³ ï¿½ë‹½ï¿½ì˜„ç‘œï¿½ StringBuffer ï¿½ë¿‰ append ï¿½ë¸³ï¿½ë–.
+				    if(rnd.nextBoolean()){
+				        buf.append((char)((int)(rnd.nextInt(26))+97));
+				    }else{
+				        buf.append((rnd.nextInt(10)));
+				    }
+				}
+				
+				int num=itemService.checkGID(buf.toString());
+					if(num==0) {
+						Guest_ID=buf.toString();
+						break;
+					}
+				}
+				cg.setCookieName("Guest_ID");
+		    	cg.addCookie(response, Guest_ID);
+	    		
+			}else {
+				Guest_ID=cookie.getValue();
+			}
+			commandMap.put("MEM_ID", Guest_ID);
+		
+    	}else {
+    		commandMap.put("MEM_ID", MEM_ID);
+    	}
+
+    	
+    	itemService.addCart(commandMap.getMap());
+    	
+    	return mv;
+	}
+	@RequestMapping(value="/item/buyItemCart", method=RequestMethod.POST)
+    public ModelAndView buyItemCart(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response, @CookieValue(value="TEMP_ID", required = false) Cookie cookie) throws Exception{
+		ModelAndView mv = new ModelAndView("jsonView"); 	
+    	String TEMP_ID="";
+    	CookieGenerator cg = new CookieGenerator();
+    	
+		if(cookie==null) {
+			Random rnd =new Random();
+			StringBuffer buf;
+			
+			while(true) {
+			buf=new StringBuffer();
+			for(int i=0;i<8;i++){
+			    // rnd.nextBoolean() ï¿½ë’— ï¿½ì˜–ï¿½ëœ¡ï¿½ì‘æ¿¡ï¿½ true, false ç‘œï¿½ ç”±Ñ‹ê½©. trueï¿½ì”ª ï¿½ë–† ï¿½ì˜–ï¿½ëœ¡ ï¿½ë¸³ ï¿½ëƒ¼è‡¾ëª„ì˜„ç‘œï¿½, false ï¿½ì”ª ï¿½ë–† ï¿½ì˜–ï¿½ëœ¡ ï¿½ë¸³ ï¿½ë‹½ï¿½ì˜„ç‘œï¿½ StringBuffer ï¿½ë¿‰ append ï¿½ë¸³ï¿½ë–.
+			    if(rnd.nextBoolean()){
+			        buf.append((char)((int)(rnd.nextInt(26))+97));
+			    }else{
+			        buf.append((rnd.nextInt(10)));
+			    }
+			}
+			
+			int num=itemService.checkGID(buf.toString());
+				if(num==0) {
+					TEMP_ID=buf.toString();
+					break;
+				}
+			}
+			cg.setCookieName("TEMP_ID");
+			cg.addCookie(response, TEMP_ID);
+		}else {
+			TEMP_ID=cookie.getValue();
+		}
+		commandMap.put("MEM_ID", TEMP_ID);	
+    	itemService.buyItemCart(commandMap.getMap());
+    	return mv;
+	}
+	@RequestMapping(value="/item/delBuyItemCart", method=RequestMethod.POST)
+    public ModelAndView delBuyItemCart(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response, @CookieValue(value="TEMP_ID", required = false) Cookie cookie) throws Exception{
+		ModelAndView mv = new ModelAndView("jsonView"); 	
+    	if(cookie==null) {
+    		return mv;
+    	}
+    	commandMap.put("MEM_ID", cookie.getValue());	
+		itemService.delBuyItemCart(commandMap.getMap());
+	
+    	return mv;
+	}
+	@RequestMapping(value="/item/qmember")
+	public ModelAndView qmember(CommandMap commandMap,HttpServletRequest request) throws Exception{
+		HttpSession session =request.getSession();
+		ModelAndView mv;
+		if(session.getAttribute("MEM_ID")!=null) {
+			mv= new ModelAndView("itemOrder");
+		}else {
+			mv= new ModelAndView("qmember");
+		}
+
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/item/itemLoginCheck")
+	@ResponseBody
+	public boolean itemLoginCheck(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response) throws Exception{
+	
+		HttpSession session = request.getSession(true);
+		Map<String,Object> result = loginService.loginCheck(commandMap.getMap());
+		if(result == null) { //ì•„ì´ë””ê°€ ìˆëŠ”ì§€ í™•ì¸
+			return false;
+			
+		} else { 
+			if(result.get("MEM_PWD").equals(commandMap.get("MEM_PWD"))){ //ë¹„ë°€ë²ˆí˜¸ê°€ ê°™ë‹¤ë©´
+				session.setAttribute("MEM_ID", commandMap.get("MEM_ID")); 
+				session.setAttribute("MEM_RANK", result.get("MEM_RANK"));
+				return true;
+			}
+		}
+		return false;
+		
+	}
+	
+	@RequestMapping(value="/item/itemOrder")
+	public ModelAndView itemOrder(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response) throws Exception{
+		ModelAndView mv= new ModelAndView("itemOrder");
+		
+		return mv;
+	}
+	@RequestMapping(value="/item/getOrderList", method=RequestMethod.POST)
+    public ModelAndView getOrderList(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response, @CookieValue(value="TEMP_ID", required = false) Cookie cookie) throws Exception{
+    	ModelAndView mv = new ModelAndView("jsonView");
+    	HttpSession session=request.getSession();
+    	String MEM_ID="";
+    	
+    	if(session.getAttribute("MEM_ID")!=null) {
+    		MEM_ID=(String) session.getAttribute("MEM_ID");
+    		commandMap.put("MEM_ID", MEM_ID);
+    		
+    		Map<String,Object> map=loginService.loginCheck(commandMap.getMap());
+    		if(!map.isEmpty()) {
+        		mv.addObject("member",map);
+        	}
+    	}
+    	
+    	
+    	System.out.println(cookie.getValue());
+    	commandMap.put("MEM_ID", cookie.getValue());
+    	List<Map<String, Object>> cart=itemService.getOrderList(commandMap.getMap());
+    	mv.addObject("list",cart);
+    	
+    	
+    	return mv;
+	}
+	
+	@RequestMapping(value="/item/payment", method=RequestMethod.POST)
+    public ModelAndView payment(CommandMap commandMap,HttpServletRequest request) throws Exception{
+    	ModelAndView mv = new ModelAndView("jsonView");
+
+		itemService.setOrder(commandMap.getMap());
+    	
+    	return mv;
+	}
+	@RequestMapping(value="/item/delPoint")
+	public ModelAndView delPoint(CommandMap commandMap,HttpServletRequest request) throws Exception{
+		ModelAndView mv = new ModelAndView("jsonView");
+ 
+		if(commandMap.getMap().get("MEM_NUM")!=null) {
+			itemService.delPoint(commandMap.getMap());
+		}
+
+		
+		return mv;
+	}
 	
 }

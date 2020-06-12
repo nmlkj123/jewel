@@ -25,7 +25,7 @@ import com.jewel.member.service.MailService;
 
 @Controller
 public class JoinController {
-	String sendEmailId="nmlkj66@gmail.com";
+   String sendEmailId="nmlkj66@gmail.com";
 
    @Resource(name="joinService")
    private JoinService joinService;
@@ -39,74 +39,74 @@ public class JoinController {
       mv.addObject("random", ran);
       return mv;      
    }
-   /* ¸ŞÀÎ */
+   /* ë©”ì¸ */
    @RequestMapping(value="/main/main", method=RequestMethod.GET)
    public ModelAndView main(CommandMap commandMap) throws Exception{
       ModelAndView mv=new ModelAndView("main");
       return mv;
    }
    
-	/* È¸¿ø°¡ÀÔ */
+   /* íšŒì›ê°€ì… */
    @RequestMapping(value="/join/memberVerify", method=RequestMethod.POST)
    public ModelAndView memberVerify(CommandMap commandMap) throws Exception{
       ModelAndView mv=new ModelAndView("main");
-	  joinService.insertMember(commandMap.getMap()); 
+     joinService.insertMember(commandMap.getMap()); 
       return mv;
    }
 
-	/* ÀÌ¸ŞÀÏÀÎÁõ ÄÚµå º¸³»±â */
+   /* ì´ë©”ì¼ì¸ì¦ ì½”ë“œ ë³´ë‚´ê¸° */
    @RequestMapping(value="/join/createEmailCheck", method=RequestMethod.GET)
    @ResponseBody
    public boolean createEmailCheck(@RequestParam String userEmail, @RequestParam int random, HttpServletRequest req){
-	   //ÀÌ¸ŞÀÏ ÀÎÁõ
-	   
-	   int ran = new Random().nextInt(900000) + 100000;
-	   HttpSession session = req.getSession(true);
-	   String authCode = String.valueOf(ran);
-	   session.setAttribute("authCode", authCode);
-	   session.setAttribute("random", random);
-	   session.setAttribute("userEmail", userEmail);
-	   String subject = "È¸¿ø°¡ÀÔ ÀÎÁõ ÄÚµå ¹ß±Ş ¾È³» ÀÔ´Ï´Ù.";
-	   StringBuilder sb = new StringBuilder();
-	   sb.append("±ÍÇÏÀÇ ÀÎÁõ ÄÚµå´Â <span style=\"color:red;font-weight:bold;font-size:15px; \">" + authCode + " </span>ÀÔ´Ï´Ù.");
-	   return mailService.send(subject, sb.toString(), sendEmailId, userEmail, null);
+      //ì´ë©”ì¼ ì¸ì¦
+      
+      int ran = new Random().nextInt(900000) + 100000;
+      HttpSession session = req.getSession(true);
+      String authCode = String.valueOf(ran);
+      session.setAttribute("authCode", authCode);
+      session.setAttribute("random", random);
+      session.setAttribute("userEmail", userEmail);
+      String subject = "íšŒì›ê°€ì… ì¸ì¦ ì½”ë“œ ë°œê¸‰ ì•ˆë‚´ ì…ë‹ˆë‹¤.";
+      StringBuilder sb = new StringBuilder();
+      sb.append("ê·€í•˜ì˜ ì¸ì¦ ì½”ë“œëŠ” <span style=\"color:red;font-weight:bold;font-size:15px; \">" + authCode + " </span>ì…ë‹ˆë‹¤.");
+      return mailService.send(subject, sb.toString(), sendEmailId, userEmail, null);
    }
 
-	/* ÀÌ¸ŞÀÏÀÎÁõÄÚµå È®ÀÎ */
+   /* ì´ë©”ì¼ì¸ì¦ì½”ë“œ í™•ì¸ */
    @RequestMapping(value="/join/emailAuth", method=RequestMethod.GET)
    @ResponseBody
    public ResponseEntity<String> emailAuth(@RequestParam String authCode, @RequestParam String random, HttpSession session){
-	   String originalJoinCode = (String) session.getAttribute("authCode");
-	   String originalRandom = Integer.toString((Integer)session.getAttribute("random"));
-	   
-	   if(originalJoinCode.equals(authCode) && originalRandom.equals(random))
-		   return new ResponseEntity<String>("complete", HttpStatus.OK);
-	   else 
-		   return new ResponseEntity<String>("false", HttpStatus.OK);
+      String originalJoinCode = (String) session.getAttribute("authCode");
+      String originalRandom = Integer.toString((Integer)session.getAttribute("random"));
+      
+      if(originalJoinCode.equals(authCode) && originalRandom.equals(random))
+         return new ResponseEntity<String>("complete", HttpStatus.OK);
+      else 
+         return new ResponseEntity<String>("false", HttpStatus.OK);
    }
 
-	/* idÁßº¹Ã¼Å© */
+   /* idì¤‘ë³µì²´í¬ */
    @RequestMapping(value="/join/checkId", method=RequestMethod.POST)
    @ResponseBody
    public boolean checkId(@RequestParam String id)throws Exception{
-	   
-	   int check=joinService.selectIdCheck(id);
-	   
-	   if(check>0) {
-		   return true;
-	   }else 
-		   return false;
+      
+      int check=joinService.selectIdCheck(id);
+      
+      if(check>0) {
+         return true;
+      }else 
+         return false;
    }
-   /* ´Ğ³×ÀÓ Áßº¹Ã¼Å© */
+   /* ë‹‰ë„¤ì„ ì¤‘ë³µì²´í¬ */
    @RequestMapping(value="/join/checkNick", method=RequestMethod.POST)
    @ResponseBody
    public boolean checkNick(@RequestParam String nick)throws Exception{
-	   
-	   int check=joinService.selectNickCheck(nick);
-	   if(check>0) {
-		   return true;
-	   }else 
-		   return false;
+      
+      int check=joinService.selectNickCheck(nick);
+      if(check>0) {
+         return true;
+      }else 
+         return false;
    }
 
 
