@@ -31,13 +31,9 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public void insertReviewWrite(Map<String, Object> map,HttpServletRequest request) throws Exception {
+	public void insertReviewWrite(Map<String, Object> map) throws Exception {
 		reviewDAO.insertReviewWrite(map);
-		
-		List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(map, request);
-		for(int i=0, size=list.size(); i<size; i++){
-			reviewDAO.insertReviewWrite(list.get(i));
-		}
+
 	}
 
 	@Override

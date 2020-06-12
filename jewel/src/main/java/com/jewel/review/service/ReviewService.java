@@ -10,7 +10,7 @@ public interface ReviewService {
 
 	List<Map<String, Object>> selectReviewList(Map<String, Object> map) throws Exception;
 	
-	void insertReviewWrite(Map<String, Object> map, HttpServletRequest request) throws Exception;
+	void insertReviewWrite(Map<String, Object> map) throws Exception;
 
 	Map<String, Object> selectReviewDetail(Map<String, Object> map) throws Exception;
 

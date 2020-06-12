@@ -74,7 +74,7 @@ public class ReviewController {
 
 	System.out.println(commandMap.getMap());
 	mv.addObject("list", list);
-	mv.addObject("ITEM_NUM", commandMap.get("ITEM_NUM"));
+
 	return mv;
 }
 	@RequestMapping(value="/review/reviewWriteForm")
@@ -106,16 +106,10 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value="/review/reviewWrite",method=RequestMethod.POST)
-	public ModelAndView reviewWrite(CommandMap commandMap,HttpServletRequest request) throws Exception{
+	public ModelAndView reviewWrite(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("redirect:/review/reviewList");
-		
-		String path = "/images/reviewImage";
-		
-		String uploadPath=request.getSession().getServletContext().getRealPath(path);
-		mv.addObject("path", uploadPath);
-		
 
-		reviewService.insertReviewWrite(commandMap.getMap(),request);
+		reviewService.insertReviewWrite(commandMap.getMap());
 		mv.addObject("RE_CONTENT",commandMap.get("RE_CONTENT"));
 		mv.addObject("ITEM_NUM",commandMap.get("ITEM_NUM"));
 		mv.addObject("MEM_NUM",commandMap.get("MEM_NUM"));
