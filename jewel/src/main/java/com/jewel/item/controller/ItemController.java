@@ -145,7 +145,7 @@ public class ItemController {
 	
 	@RequestMapping(value="/item/addCart", method=RequestMethod.POST)
     public ModelAndView addCart(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response, @CookieValue(value="Guest_ID", required = false) Cookie cookie) throws Exception{
-    	ModelAndView mv = new ModelAndView("jsonView");
+    	ModelAndView mv = new ModelAndView("redirect:/cartList");
     	HttpSession session = request.getSession(true);
     	
     	String Guest_ID="";
@@ -236,6 +236,7 @@ public class ItemController {
 	
     	return mv;
 	}
+	
 	@RequestMapping(value="/item/qmember")
 	public ModelAndView qmember(CommandMap commandMap,HttpServletRequest request) throws Exception{
 		HttpSession session =request.getSession();

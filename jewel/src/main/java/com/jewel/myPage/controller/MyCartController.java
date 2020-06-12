@@ -2,12 +2,16 @@ package com.jewel.myPage.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -93,6 +97,45 @@ public class MyCartController {
 		myCartService.deleteMyCart(commandMap.getMap());
 		
 		return mv;
+	}
+	
+	@RequestMapping(value="/cart/orderPage")
+	public ModelAndView buyCartItem(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response, @CookieValue(value="TEMP_ID", required = false) Cookie cookie) throws Exception{
+		ModelAndView mv = new ModelAndView("jsonView"); 	
+    	String TEMP_ID="";
+
+		if(cookie == null) {
+			Random random = new Random();
+			StringBuffer buf;
+			
+			while(true) {
+				buf = new StringBuffer();
+				for(int i=0;i<8;i++){
+					if(random.nextBoolean()){
+						buf.append((char)((int)(random.nextInt(26))+97));
+					}else{
+						buf.append((random.nextInt(10)));
+					}
+				}
+				//같은 값의 TEMP_ID가있는지 확인.-->주문번호로 사용!
+				int num = myCartService.checkOrderId(commandMap.getMap());
+				if(num == 0) {
+					TEMP_ID = buf.toString();
+					break;
+				}
+			}
+    			response.addCookie(new Cookie("TEMP_ID", TEMP_ID));
+		} else {
+			
+			TEMP_ID = cookie.getValue();
+		}
+		
+		commandMap.put("MEM_ID", TEMP_ID);	
+		
+		//cart폼값넘기기...
+		
+		
+    	return mv;
 	}
 	
 }

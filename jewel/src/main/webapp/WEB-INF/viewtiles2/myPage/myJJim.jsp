@@ -34,7 +34,7 @@
         			<td>
         			 <img src="<c:url value="/images/item/${items.ITEM_IMAGE1 }"/>" style="width:50px">
         			</td>
-        			<td><a href="#" onclick="location.href='item/itemDetail?ITEM_NUM=${items.ITEM_NUM}'">
+        			<td><a href="<c:url value='/item/itemDetail?ITEM_NUM=${items.ITEM_NUM}'/>">
         				${items.ITEM_NAME }</a></td>
         			<td>${items.ITEM_PRICE }</td>    			
         		</tr>       		

@@ -41,7 +41,7 @@
         			<td>
         				<img src="<c:url value="/images/item/${items.ITEM_IMAGE1 }"/>" style="width:50px">
         			</td>
-        			<td><a href="#" onclick="location.href='item/itemDetail?ITEM_NUM=${items.ITEM_NUM}'">
+        			<td><a href="<c:url value='/item/itemDetail?ITEM_NUM=${items.ITEM_NUM}'/>">
         				${items.ITEM_NAME }</a></td>
         			<!-- 상품명을 클릭하면 상품디테일처리하는 컨트롤러에 상품번호를 보내서 처리한다. -->
         			<td>${items.OR_FP }</td>
