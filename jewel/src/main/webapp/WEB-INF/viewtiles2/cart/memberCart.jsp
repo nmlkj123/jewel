@@ -319,6 +319,7 @@ function buyItem(){
  				}
  			});
 	    });
+	    location.href="<c:url value='/item/qmember'/>";
  	        
 	}
 	
