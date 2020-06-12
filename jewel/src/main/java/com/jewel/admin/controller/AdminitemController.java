@@ -72,7 +72,7 @@ public class AdminitemController {
 				String uploadPath=request.getSession().getServletContext().getRealPath("/");
 				System.out.println(uploadPath);
 				mv.addObject("path", uploadPath);
-				System.out.print(uploadPath);
+				
 			List<Map<String,Object>>list=AdminItemService.selectItemList(commandMap.getMap());
 		  mv.addObject("list",list);
 		  
@@ -83,6 +83,8 @@ public class AdminitemController {
 	public ModelAndView openBoardDetail(CommandMap commandMap,HttpServletRequest request)throws Exception{
 		ModelAndView mv=new ModelAndView("adminItemDetail");
 		Map<String,Object> map=AdminItemService.selectItemDetail(commandMap.getMap());
+		List<Map<String,Object>>list=AdminItemService.selectOptionList(commandMap.getMap());
+		mv.addObject("list",list);
 		mv.addObject("map",map);
 		String path="/images/item";
 		String uploadPath=request.getSession().getServletContext().getRealPath(path);
@@ -102,7 +104,7 @@ public class AdminitemController {
 			commandMap.put("ITEM_IMAGE1", file1.getOriginalFilename());
 			commandMap.put("ITEM_IMAGE2", file2.getOriginalFilename());
 			AdminItemService.insertItemWrite(commandMap.getMap());
-			ModelAndView mv=new ModelAndView("redirect:adminItemList");
+			ModelAndView mv=new ModelAndView("jsonView");
 			String path="/images/item";
 			  String uploadPath=request.getSession().getServletContext().getRealPath(path);
 			  String ITEM_IMAGE1 = AdminItemService.restore(file1,uploadPath);
@@ -117,13 +119,15 @@ public class AdminitemController {
 	public ModelAndView openBoardUpdate(CommandMap commandMap)throws Exception{
 		ModelAndView mv=new ModelAndView("adminItemUpdate");
 		Map<String,Object> map=AdminItemService.selectItemDetail(commandMap.getMap());
+		List<Map<String,Object>>list=AdminItemService.selectOptionList(commandMap.getMap());
+		mv.addObject("list",list);
 		mv.addObject("map",map);
 	
 		return mv;
 	}
 	@RequestMapping(value="/adminItemUpdate")
 	public ModelAndView updateBoard(CommandMap commandMap,HttpServletRequest request,@RequestParam("ITEM_IMAGE1") MultipartFile file1,@RequestParam("ITEM_IMAGE2") MultipartFile file2) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:adminItemList");
+		ModelAndView mv = new ModelAndView("jsonView");
 		commandMap.put("ITEM_IMAGE1", file1.getOriginalFilename());
 		commandMap.put("ITEM_IMAGE2", file2.getOriginalFilename());
 		String path="/images/item";
@@ -134,7 +138,7 @@ public class AdminitemController {
 			mv.addObject("img1", ITEM_IMAGE1);
 			mv.addObject("img2",ITEM_IMAGE2);
 		AdminItemService.updateItemModify(commandMap.getMap());
-		
+		AdminItemService.deleteOption(commandMap.getMap());
 		
 		return mv;
 	}
@@ -146,6 +150,33 @@ public class AdminitemController {
 		
 		return mv;
 	}
-
+	@RequestMapping(value="/selectItemNum",method=RequestMethod.POST)
+	public ModelAndView selectItemNum(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("jsonView");
+		
+		String ITEM_NUM=AdminItemService.selectItemNum(commandMap.getMap());
+		mv.addObject("ITEM_NUM",ITEM_NUM);
+		
+		return mv;
+	}
+	@RequestMapping(value="/insertOption",method=RequestMethod.POST)
+	public ModelAndView insertOption(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("jsonView");
+		
+		AdminItemService.insertOption(commandMap.getMap());
+		
+		
+		return mv;
+	}
+	@RequestMapping(value="/selectOptionList",method=RequestMethod.POST)
+	public ModelAndView selectOptionList(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("jsonView");
+		List<Map<String,Object>>list=AdminItemService.selectOptionList(commandMap.getMap());
+		mv.addObject("list",list);
+		
+		
+		
+		return mv;
+	}
 
 }

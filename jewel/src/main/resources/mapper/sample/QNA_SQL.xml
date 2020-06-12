@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="qna">
+	
+	<select id="selectQNAList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				 *
+				FROM
+				(SELECT 
+					rownum as RNUM,s.* 
+				from
+					(SELECT  
+						QNA_NUM,
+						MEM_ID,
+						CASE 
+						WHEN 
+						LENGTH(QNA_TITLE)>=10 
+						THEN SUBSTR(QNA_TITLE,1,10)||'...' 
+						ELSE QNA_TITLE END 
+						QNA_TITLE,
+						QNA_DATE,
+						QNA_RSTATE,
+						QNA_PWD,
+						ITEM_NUM,
+						QNA_CATE,
+						QNA_NAME
+		    		FROM QNA
+		    		
+		      		ORDER BY
+		          		QNA_NUM desc)s)
+		       WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}
+  
+		]]>
+	</select>
+	
+	<select id="selectConfirm" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+			SELECT  
+			QNA_NUM,
+			QNA_PWD	
+		FROM
+		    QNA
+		WHERE
+		    QNA_NUM = #{QNA_NUM}
+			]]>
+	</select>
+	
+		<insert id="insertQNA" parameterType="hashmap">
+		<![CDATA[
+			
+				INSERT INTO QNA(
+				QNA_NUM,
+				QNA_TITLE,
+				QNA_CONTENT,
+				QNA_PWD,
+				QNA_DATE,
+				QNA_NAME,
+				QNA_CATE,
+				QNA_RSTATE
+			)
+			VALUES
+			(
+				QNA_NUM_SEQ.NEXTVAL,  
+			    #{QNA_TITLE},
+			    #{QNA_CONTENT},
+			    #{QNA_PWD},
+			    SYSDATE,
+			    #{QNA_NAME},
+			    #{QNA_CATE}, 
+			    'N'
+			)
+		]]>
+	</insert>
+	
+	<select id="selectQNADetail" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				QNA_NUM,
+				ITEM_NUM,
+				MEM_ID,
+				QNA_CATE,
+				QNA_DATE,
+				QNA_NAME,
+				QNA_CONTENT,
+				QNA_DATE,
+		        QNA_RTITLE,
+		        QNA_RCONTENT
+		       
+			FROM
+				QNA
+			WHERE
+				QNA_NUM = #{QNA_NUM}		
+		]]>
+	</select>
+	
+	<update id="updateQNA" parameterType="hashmap">
+		<![CDATA[
+			UPDATE QNA 
+			SET
+				QNA_CATE= #{QNA_CATE},
+				QNA_TITLE = #{QNA_TITLE},
+				QNA_CONTENT = #{QNA_CONTENT}
+				
+			WHERE
+				QNA_NUM = #{QNA_NUM}	
+		]]>
+	</update>
+	
+	<update id="qnaDelete" parameterType="hashmap">
+	DELETE FROM QNA 
+		WHERE QNA_NUM=#{QNA_NUM}
+	
+	</update>
+	
+	<select id="getTotalList" parameterType="hashmap" resultType="int">
+		SELECT 
+			COUNT(*)as TOTAL 
+		FROM 
+			QNA 
+		
+	</select>
+</mapper>

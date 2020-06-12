@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/viewtiles2/include/include-header.jspf" %>
 <!DOCTYPE html>
 <html>
 <head>
-<%@include file="/WEB-INF/viewtiles2/template/myPageHeader.jsp" %>
+
 <meta charset="UTF-8">
 <title>회원장바구니</title>
 </head>
@@ -20,6 +21,59 @@
  }
 
 </script>
+<style>
+.btn-group{
+	align:center;
+	width:100%;
+	
+}
+.myPageInfo{
+	border: 1px solid #e7e7e7;
+	font-size: 14px;
+	width:80%;
+	margin-left:10%;
+	margin-right:10%;
+}
+.myPageInfo .info1{
+	border: 1px solid #e7e7e7;
+	width: 20%;
+	text-align: center;
+	height:100px;
+	padding-top:20px;
+	float:left;
+}
+.myPageInfo .info2{
+	border: 1px solid #e7e7e7;
+	width: 40%;
+	text-align: left;
+	height:100px;
+	padding-top:20px;
+	padding-left:10px;
+	float:left;
+}
+.myPageInfo .info2 span{
+	font-weight: bold;
+}
+.myPageInfo .info3{
+	float:left;
+	height:100px;
+	padding-top:20px;
+	padding-left:10px;
+	width: 20%;
+	text-align: center;
+	border: 1px solid #e7e7e7;
+	
+}
+
+.orderList, .myJJimList, .myReviewList, .myQnAList, .myCart {
+	margin-left: 10%;
+	border: 1px solid #e7e7e7;
+	width:80%;
+	
+}
+
+
+</style>
 <style>
 .qty .count {
     color: #000;
@@ -73,7 +127,7 @@ nput::-webkit-outer-spin-button,
     -webkit-appearance: none;
     margin: 0;
 }
-.count:disabled{
+.count:readonly{
     background-color:white;
 }
 .myCart .price, .sum{
@@ -111,7 +165,8 @@ nput::-webkit-outer-spin-button,
         	</tr>
         </thead>
         <tbody id="tbody">
-        	<c:forEach items="${myCart }" var="cart">
+        
+        	<c:forEach items="${myCart }" var="cart" varStatus="status" >
         		<c:set var="sum1" value="${cart.CART_CNT * cart.ITEM_OP_PRICE}"/>
         		<tr align="center" id="row">
         			<td>
@@ -122,13 +177,19 @@ nput::-webkit-outer-spin-button,
         			</td>
         			<td>${cart.ITEM_NAME }</td>
         			<td>${cart.OP_VALUE }</td>
+        			
         			<td>
-	        			<input type="hidden" value="${cart.CART_NUM }" id="num" name="CART_NUM" >      			
+        				<form id="items">
+        				<input type="hidden" value="${cart.OP_VALUE }"  name="OP_VALUE" >      	
+        				<input type="hidden" value="${cart.ITEM_OP_PRICE }" name="ITEM_OP_PRICE" >      	
+        				<input type="hidden" value="${cart.ITEM_NUM }"  name="ITEM_NUM" >      	
+	        			<input type="hidden" value="${cart.CART_NUM }" id="num" name="CART_NUM" >    		
 	        			<div class="qty">
              				<span class='minus bg-dark'>-</span>
-            				<input type='number' class='count' name='CART_CNT' id="cnt" value='${cart.CART_CNT }' disabled>
+            				<input type='number' class="count" name="CART_CNT" id="cnt" value="${cart.CART_CNT }" readonly>
 							<span class='plus bg-dark'>+</span>
 						</div>
+						</form>
         			</td>
         			<td>
         			 <input class="price" type="text" name="ITEM_OP_PRICE" id="price" class="price" value="${cart.ITEM_OP_PRICE}" readonly>
@@ -147,7 +208,7 @@ nput::-webkit-outer-spin-button,
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<button type="button" class="btn btn-danger" id="deleteChk">선택삭제</button>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<button type="button" class="btn btn-danger">선택주문</button>
+		<button type="button" class="btn btn-danger" onclick="buyItem()">선택주문</button>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<button type="button" class="btn btn-danger">메인으로</button>
 	</div>
@@ -158,14 +219,16 @@ nput::-webkit-outer-spin-button,
 <script>
 $(document).ready(function(){
 
-	$('.count').prop('disabled', true);
+
     $(document).on('click','.plus',function(){
     	$(this).prev('.count').val(parseInt($(this).prev('.count').val()) + 1 );
+		
     	var cnt = parseInt($(this).prev('.count').val());
-    	var price =parseInt($(this).parent().parent().parent().find('.price').val());
+    	var price =parseInt($(this).closest("tr").find('.price').val());
     	var sum = cnt*price; 
-    	$(this).parent().parent().parent().find('#sum').val(sum);
+    	$(this).closest("tr").find('#sum').val(sum);
     	var num = parseInt($(this).parent().siblings("#num").val());
+    	alert(cnt+" "+price+" "+sum+" "+num);
     	$.ajax({
 			type: "POST",
 			url:"<c:url value='/myPage/myCartUpdate'/>",
@@ -179,20 +242,30 @@ $(document).ready(function(){
  	
  	$(document).on('click','.minus',function(){
    		 $(this).next('.count').val(parseInt($(this).next('.count').val()) - 1 );
+<<<<<<< HEAD
    		 var cnt = parseInt($(this).next('.count').val());
     	 var price =parseInt($(this).parent().parent().parent().find('.price').val());
     	 var sum = cnt*price; 
     	 $(this).parent().parent().parent().find('#sum').val(sum);
     	 var num = parseInt($(this).parent().siblings("#num").val());
     	 		 
+=======
+   		var cnt = parseInt($(this).next('.count').val());
+    	var price =parseInt($(this).closest("tr").find('.price').val());
+    	var sum = cnt*price; 
+    	$(this).closest("tr").find('#sum').val(sum);
+    
+   		 
+>>>>>>> branch 'master' of https://github.com/nmlkj123/jewel.git
        	 if ($(this).next('.count').val() == 0) {
           	$(this).next('.count').val(1);
           	cnt = parseInt($(this).next('.count').val());
-        	price = parseInt($(this).parent().parent().parent().find('.price').val());
+        	price = parseInt($(this).closest("tr").find('.price').val());
         	sum = cnt*price; 
-        	$(this).parent().parent().parent().find('#sum').val(sum);
+        	$(this).closest("tr").find('#sum').val(sum);
         	
          	return;
+<<<<<<< HEAD
     	 }
        	 $.ajax({
 			type: "POST",
@@ -202,6 +275,18 @@ $(document).ready(function(){
 					alert("굳");
 				}	
          });   	 
+=======
+    	 }   
+	       	var num = parseInt($(this).parent().siblings("#num").val());
+	    	$.ajax({
+				type: "POST",
+				url:"<c:url value='/myPage/myCartUpdate'/>",
+				data:{CART_NUM:num, CART_CNT:cnt},
+				success: function(data){
+						alert("굳");
+					}	
+	        });	 
+>>>>>>> branch 'master' of https://github.com/nmlkj123/jewel.git
 	});
 
 	$(document).on('click','#deleteChk', function(){
@@ -210,7 +295,8 @@ $(document).ready(function(){
  			return false;
  	 	} else if(confirm("선택한 상품을 삭제하시겠습니까?")== true){
  	 		$("input:checkbox[name=checkRow]:checked").each(function(){
- 				var tr = $(this).parent().parent().index();
+ 	 	 		
+ 				var tr = $(this).closest("tr").index();
  				var num = $("#tbody tr").eq(tr).find("#num").val();
  				alert(num);
  				  $.ajax({
@@ -228,7 +314,38 @@ $(document).ready(function(){
  	
  		
 });
+function buyItem(){
 
+	if($("input:checkbox[name=checkRow]:checked").length == 0){
+			alert("상품체크하삼.");
+			return false;
+ 	} else if(confirm("주문할꺼임?")== true){
+ 		$.ajax({
+		      type : "POST",
+		      url : '<c:url value="/item/delBuyItemCart"/>',
+		      async: false,
+		      success : function(data){
+		      }
+		   }); 
+ 		$("input:checkbox[name=checkRow]:checked").each(function(){
+ 			
+ 			var formOrder=$(this).closest("tr").find("form").serialize();
+ 			$.ajax({
+ 				type : "POST",
+ 				url : "<c:url value='/item/buyItemCart'/>",
+ 				data : formOrder,
+ 				async: false,
+ 				success : function(data){
+ 					alert("d");
+ 					
+ 				}
+ 			});
+	    });
+ 	        
+	}
+	
+	
+}
 </script>
 		
 </body>

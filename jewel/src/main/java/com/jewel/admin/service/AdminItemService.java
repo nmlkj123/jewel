@@ -15,4 +15,8 @@ public interface AdminItemService {
 	void deleteItem(Map<String,Object>map )throws Exception;
 	int getTotalList(Map<String,Object>map)throws Exception;
 	String restore(MultipartFile multipartFile, String uploadPath) throws Exception;
+	String selectItemNum(Map<String,Object>map)throws Exception;
+	void insertOption(Map<String,Object>map) throws Exception;
+	List<Map<String,Object>> selectOptionList(Map<String,Object>map) throws Exception;
+	void deleteOption(Map<String,Object>map )throws Exception;
 }

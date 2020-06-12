@@ -4,10 +4,10 @@ import org.springframework.stereotype.Component;
 
 @Component(value = "AdminQnaListPaging")
 public class AdminQnaListPaging {
-	private int currentPage;//ÇöÀçÆäÀÌÁö
-	private int pageBlock;//[ÀÌÀü][][][´ÙÀ½]
-	private int pageSize;//1ÆäÀÌÁö¿¡ 12°³¾¿
-	private int totalList;//ÃÑ±Û¼ö
+	private int currentPage;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private int pageBlock;//[ï¿½ï¿½ï¿½ï¿½][][][ï¿½ï¿½ï¿½ï¿½]
+	private int pageSize;//1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 12ï¿½ï¿½ï¿½ï¿½
+	private int totalList;//ï¿½Ñ±Û¼ï¿½
 	private StringBuffer pagingHTML;
 	private String type;
 	private String sort;
@@ -21,7 +21,7 @@ public class AdminQnaListPaging {
 		if(endPage>totalP)endPage=totalP;
 		pagingHTML.append("<ul class='pagination' style='justify-content: center;'>");
 		if(startPage>pageBlock)
-			pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/adminQnAList?pg="+(startPage-1)+"'>ÀÌÀü</a></li>");
+			pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/adminQnAList?pg="+(startPage-1)+"'>ì´ì „</a></li>");
 		
 		for(int i=startPage;i<=endPage;i++) {
 			if(i==currentPage) {
@@ -34,7 +34,7 @@ public class AdminQnaListPaging {
 		}
 		
 		if(endPage<totalP) {
-			pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/adminItemList?type="+type+"&pg="+(endPage+1)+"'>´ÙÀ½</a></li>");
+			pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/adminItemList?type="+type+"&pg="+(endPage+1)+"'>ë‹¤ìŒ</a></li>");
 		}
 		pagingHTML.append("</ul>");
 	}
@@ -47,7 +47,7 @@ public class AdminQnaListPaging {
 		if(endPage>totalP)endPage=totalP;
 		pagingHTML.append("<ul class='pagination' style='justify-content: center;'>");
 		if(startPage>pageBlock)
-			pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/item/itemList?keyword="+keyword+"&pg="+(startPage-1)+"&sort="+sort+"'>ÀÌÀü</a></li>");
+			pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/item/itemList?keyword="+keyword+"&pg="+(startPage-1)+"&sort="+sort+"'>ì´ì „</a></li>");
 		
 		for(int i=startPage;i<=endPage;i++) {
 			if(i==currentPage) {
@@ -60,7 +60,7 @@ public class AdminQnaListPaging {
 		}
 		
 		if(endPage<totalP) {
-			pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/item/itemList?keyword="+keyword+"&pg="+(endPage+1)+"&sort="+sort+"'>´ÙÀ½</a></li>");
+			pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/item/itemList?keyword="+keyword+"&pg="+(endPage+1)+"&sort="+sort+"'>ë‹¤ìŒ</a></li>");
 		}
 		pagingHTML.append("</ul>");
 	}

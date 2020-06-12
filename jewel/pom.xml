@@ -64,6 +64,7 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 		
+		
 		<dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
@@ -188,7 +189,9 @@
 		    <artifactId>mail</artifactId>
 		    <version>1.4</version>
 		</dependency>
-				
+		
+		
+		
 		
          <!-- MyBatis -->
         <dependency>

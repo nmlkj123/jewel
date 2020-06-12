@@ -8,9 +8,14 @@
 
 function fsubmit(){
 	var MEM_POINT = document.getElementById("MEM_POINT").value;
+	var MEM_RANK = document.getElementById("MEM_RANK").value;
 	
 	if(MEM_POINT==null || MEM_POINT==''){
 		alert("포인트를 입력하세요.");
+		return false;
+	}
+	if(MEM_RANK==null || MEM_RANK==''){
+		alert("등급을 입력하세요.");
 		return false;
 	}
 	
@@ -37,6 +42,10 @@ function fsubmit(){
 			<tr>
 				<th scope="row">포인트</th>
 				<td><input type="text" id="MEM_POINT" name="MEM_POINT" value="${map.MEM_POINT}"></td>
+			</tr>
+			<tr>	
+				<th scope="row">회원 등급</th>
+				<td><input type="text" id="MEM_RANK" name="MEM_RANK" value="${map.MEM_RANK}"></td>
 			</tr>
 			
 		<%-- 	<tr>	
@@ -83,7 +92,7 @@ function fsubmit(){
 		</tbody>
 		</table>
 	
-	<button type="button" onclick="fsubmit();">포인트 변경</button>
+	<button type="button" onclick="fsubmit();">포인트/등급 변경</button>
 	<input type="button" onclick="location.href='<c:url value="/adminNoticelist"/>'" value="목록으로">
 	
 

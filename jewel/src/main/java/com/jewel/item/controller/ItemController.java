@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.CookieGenerator;
 import org.springframework.web.util.HttpSessionMutexListener;
 
 import com.jewel.common.CommandMap;
@@ -147,9 +148,13 @@ public class ItemController {
     public ModelAndView addCart(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response, @CookieValue(value="Guest_ID", required = false) Cookie cookie) throws Exception{
     	ModelAndView mv = new ModelAndView("redirect:/cartList");
     	HttpSession session = request.getSession(true);
+    	CookieGenerator cg = new CookieGenerator();
+
+    	
     	
     	String Guest_ID="";
     	String MEM_ID="";
+    	
     	if(session.getAttribute("MEM_ID")!=null) {
     		MEM_ID=(String)session.getAttribute("MEM_ID");
     	}
@@ -176,7 +181,9 @@ public class ItemController {
 						break;
 					}
 				}
-	    		response.addCookie(new Cookie("Guest_ID", Guest_ID));
+				cg.setCookieName("Guest_ID");
+		    	cg.addCookie(response, Guest_ID);
+	    		
 			}else {
 				Guest_ID=cookie.getValue();
 			}
@@ -195,6 +202,7 @@ public class ItemController {
     public ModelAndView buyItemCart(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response, @CookieValue(value="TEMP_ID", required = false) Cookie cookie) throws Exception{
 		ModelAndView mv = new ModelAndView("jsonView"); 	
     	String TEMP_ID="";
+    	CookieGenerator cg = new CookieGenerator();
 
 		if(cookie==null) {
 			Random rnd =new Random();
@@ -217,11 +225,13 @@ public class ItemController {
 					break;
 				}
 			}
-    		response.addCookie(new Cookie("TEMP_ID", TEMP_ID));
+			cg.setCookieName("TEMP_ID");
+			cg.addCookie(response, TEMP_ID);
 		}else {
 			TEMP_ID=cookie.getValue();
 		}
 		commandMap.put("MEM_ID", TEMP_ID);	
+    	System.out.println(commandMap.getMap());
     	itemService.buyItemCart(commandMap.getMap());
     	return mv;
 	}
@@ -319,11 +329,8 @@ public class ItemController {
 			itemService.delPoint(commandMap.getMap());
 		}
 
-
-		
-
-
 		
 		return mv;
 	}
+	
 }

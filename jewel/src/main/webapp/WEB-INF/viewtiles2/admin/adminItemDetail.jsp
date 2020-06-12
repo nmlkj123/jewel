@@ -3,6 +3,7 @@
 <html lang="ko">
 <head>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 </head>
 <body>
 	<table>
@@ -41,7 +42,32 @@
 				<td>${map.ITEM_DATE}</td>
 				<th scope="row">재고</th>
 				<td>${map.ITEM_STOCK}</td>
+				
 			</tr>
+			<tr>
+                        	<th>옵션 종류</th>
+                        	<th>옵션 값</th>
+                        	<th>가격</th>
+                        </tr>
+			<c:choose>
+                <c:when test="${fn:length(list) > 0}">
+                    <c:forEach items="${list}" var="row">
+                        
+                        <tr>
+                            <td>${row.OP_TYPE}</td>
+                            <td>${row.OP_VALUE}</td>
+                            <td>${row.OP_PRICE}</td>
+                            
+                          
+                        </tr>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <tr>
+                        <td colspan="3">조회된 결과가 없습니다.</td>
+                    </tr>
+                </c:otherwise>
+            </c:choose> 
 		</tbody>
 	</table>
 	

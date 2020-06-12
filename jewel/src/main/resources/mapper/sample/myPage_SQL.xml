@@ -288,6 +288,7 @@
 						SELECT 
 							i.ITEM_IMAGE1,
 							i.ITEM_NAME,
+							i.ITEM_NUM,
 							c.CART_NUM,
 							c.CART_CNT,
 							c.OP_VALUE,
