@@ -12,13 +12,8 @@ public class FaqDAO extends AbstractDAO{
 
 	
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> faqListAll(Map<String, Object> map) throws Exception{
-		return (List<Map<String, Object>>)selectList("faq.faqListAll", map);
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> faqList(Map<String, Object> map) throws Exception{
-		return (List<Map<String, Object>>)selectList("faq.faqList", map);
+	public List<Map<String, Object>> faqlist(Map<String, Object> map) throws Exception{
+		return (List<Map<String, Object>>)selectList("faq.faqlist", map);
 	}
 	
 	@SuppressWarnings("unchecked")

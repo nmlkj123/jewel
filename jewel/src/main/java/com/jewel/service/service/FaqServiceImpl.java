@@ -22,8 +22,8 @@ Logger log = Logger.getLogger(this.getClass());
 	private FaqDAO faqDAO;
 	
 	@Override
-	public List<Map<String, Object>> faqList(Map<String, Object> map) throws Exception {
-		return faqDAO.faqList(map);
+	public List<Map<String, Object>> faqlist(Map<String, Object> map) throws Exception {
+		return faqDAO.faqlist(map);
 		
 	}
 		
@@ -36,11 +36,6 @@ Logger log = Logger.getLogger(this.getClass());
 		return resultMap;
 	}
 
-	@Override
-	public List<Map<String, Object>> faqListAll(Map<String, Object> map) throws Exception {
-		return faqDAO.faqListAll(map);
-		
-	}
 	
 	@Override
 	public int getTotalList(Map<String, Object> map) {

@@ -15,7 +15,7 @@
 </head>
 <body>
 	<h2>FAQ</h2>
-	<input type="button" value="전체" class="btn3" onClick="location.href='<c:url value='/faq/faqlistAll'/>';">	    
+	<input type="button" value="전체" class="btn3" onClick="location.href='<c:url value='/faq/faqlist'/>';">	    
 <input type="button" value="상품관련" class="btn3" onClick="location.href='<c:url value='/faq/faqlist?FAQ_CATE=goods'/>';">	    
 <input type="button" value="문의관련" class="btn3" onClick="location.href='<c:url value='/faq/faqlist?FAQ_CATE=inquire'/>';">	    
 <input type="button" value="교환/반품관련" class="btn3" onClick="location.href='<c:url value='/faq/faqlist?FAQ_CATE=change'/>';">    
@@ -63,6 +63,9 @@
 			</c:choose>
 		</tbody>
 	</table>
+	<div align="center"class="container pt-5" id="categoryPaging" >
+		${faqListPaging.pagingHTML}
+		</div>
 	</form>
 	<br/>
 

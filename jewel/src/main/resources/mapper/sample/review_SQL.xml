@@ -19,8 +19,8 @@
         r.RE_LIKE,m.MEM_ID
 		FROM REVIEW r, MEMBER m, ITEM i
 	WHERE
-	      i.ITEM_NUM = 1
-	      AND i.ITEM_NUM = i.ITEM_NUM
+	      i.ITEM_NUM = #{ITEM_NUM}
+	      AND i.ITEM_NUM = r.ITEM_NUM
 	      AND m.MEM_NUM = r.MEM_NUM
 	      order by r.RE_NUM desc)s)
 	      WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}

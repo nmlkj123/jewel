@@ -28,20 +28,11 @@ public class FAQController {
 	
 	@Resource(name="faqListPaging")
 	 FAQListPaging faqListPaging;
+
 	
 	@RequestMapping(value="/faq/faqlist")
-    public ModelAndView faqlist(CommandMap commandMap) throws Exception{
+    public ModelAndView faqlist(CommandMap commandMap,HttpServletRequest request) throws Exception{
     	ModelAndView mv = new ModelAndView("faqlist");
-    	List<Map<String,Object>> list = faqService.faqList(commandMap.getMap());
-    	mv.addObject("FAQ_CATE",commandMap.get("FAQ_CATE"));
-    	mv.addObject("list", list);
-    	
-    	return mv;
-	}
-	
-	@RequestMapping(value="/faq/faqlistAll")
-    public ModelAndView faqlistAll(CommandMap commandMap,HttpServletRequest request) throws Exception{
-    	ModelAndView mv = new ModelAndView("faqlistAll");
     	
     	Map<String, Object> map =commandMap.getMap();
 		String pg=(String) commandMap.get("pg");  
@@ -68,7 +59,7 @@ public class FAQController {
 		faqListPaging.makePagingHTML();
 	      mv.addObject("faqListPaging",faqListPaging);
 	      
-    	List<Map<String,Object>> list = faqService.faqListAll(commandMap.getMap());
+    	List<Map<String,Object>> list = faqService.faqlist(commandMap.getMap());
     	mv.addObject("FAQ_CATE",commandMap.get("FAQ_CATE"));
     	mv.addObject("list", list);
     	

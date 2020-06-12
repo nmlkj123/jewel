@@ -138,11 +138,6 @@
 
 			</definition>	
 
-			<definition name="faqlistAll" extends="base_layout">
-				<put-attribute name="title" value="faq" />
-				<put-attribute name="body"
-					value="/WEB-INF/viewtiles2/faq/faqlistAll.jsp" />
-			</definition>
 			
 			<definition name="faqlist" extends="base_layout">
 				<put-attribute name="title" value="faq" />

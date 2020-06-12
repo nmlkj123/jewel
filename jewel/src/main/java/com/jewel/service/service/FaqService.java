@@ -6,9 +6,8 @@ import java.util.Map;
 public interface FaqService {
 
 	
-	List<Map<String, Object>> faqListAll(Map<String, Object> map) throws Exception;
 
-	List<Map<String, Object>> faqList(Map<String, Object> map) throws Exception;
+	List<Map<String, Object>> faqlist(Map<String, Object> map) throws Exception;
 	
 	Map<String, Object> faqDetail(Map<String, Object> map) throws Exception;
 	
