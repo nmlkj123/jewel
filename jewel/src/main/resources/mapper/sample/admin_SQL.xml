@@ -16,7 +16,15 @@ select * from(SELECT rownum as RNUM,s.*
 	
 	</select>
 	
+	<select id="selectOptionList" parameterType="hashmap" resultType="hashmap">
+		select 
+			OP_NUM,OP_VALUE,OP_TYPE,OP_PRICE
+		FROM 
+			ITEM_OPTION
+		WHERE
+			 ITEM_NUM=#{ITEM_NUM}
 	
+	</select>
 	<select id="selectItemDetail" parameterType="hashmap" resultType="hashmap">
 			SELECT 
 				ITEM_NUM,ITEM_TYPE,ITEM_NAME,ITEM_PRICE,ITEM_DCP,ITEM_IMAGE1,ITEM_IMAGE2,ITEM_DATE,ITEM_STOCK
@@ -25,14 +33,20 @@ select * from(SELECT rownum as RNUM,s.*
 			WHERE 
 				ITEM_NUM=#{ITEM_NUM}
 	</select>
+	<select id="selectItemNum" parameterType="hashmap" resultType="String">
+	SELECT #{ITEM_TYPE} || LPAD(MAX(to_number(LTRIM(SUBSTR(ITEM_NUM,2,3),0)))+1,3,0) 
+						FROM ITEM WHERE ITEM_TYPE=#{ITEM_TYPE}	</select>
 	
 	<insert id="insertItemWrite" parameterType="hashmap" >
 		INSERT INTO ITEM 
-			VALUES((SELECT #{ITEM_TYPE} || LPAD(MAX(to_number(LTRIM(SUBSTR(ITEM_NUM,2,3),0)))+1,3,0) 
-						FROM ITEM WHERE ITEM_TYPE=#{ITEM_TYPE})
+			VALUES(#{ITEM_NUM}
 			,#{ITEM_TYPE},#{ITEM_NAME},#{ITEM_PRICE},#{ITEM_DCP},#{ITEM_IMAGE1},#{ITEM_IMAGE2},SYSDATE,#{ITEM_STOCK} )
 	 
 	</insert>
+	<insert id="insertOption" parameterType="hashmap" >
+		INSERT INTO ITEM_OPTION (OP_NUM,ITEM_NUM,OP_PRICE,OP_TYPE,OP_VALUE) VALUES(ITEM_OPTION_NUM_SEQ.NEXTVAL,#{ITEM_NUM},#{OP_PRICE},#{OP_TYPE},#{OP_VALUE})
+	</insert>
+	
 	<update id="updateItemModify" parameterType="hashmap">
 	UPDATE ITEM 
 		SET ITEM_NAME=#{ITEM_NAME},ITEM_PRICE=#{ITEM_PRICE},ITEM_DCP=#{ITEM_DCP},ITEM_IMAGE1=#{ITEM_IMAGE1},ITEM_IMAGE2=#{ITEM_IMAGE2},ITEM_DATE=SYSDATE,ITEM_STOCK=#{ITEM_STOCK}
@@ -287,9 +301,54 @@ WHERE  MEM_NUM=#{MEM_NUM}
 	</update>		
 	<update id="updateMemberPoint" parameterType="hashmap">
 	UPDATE MEMBER
-	SET MEM_POINT=#{MEM_POINT} 
+	SET MEM_POINT=#{MEM_POINT},MEM_RANK=#{MEM_RANK} 
 	WHERE  MEM_NUM=#{MEM_NUM}
 	
-	</update>		
+	</update>
+	<update id="deleteOption" parameterType="hashmap">
+	Delete
+	FROM 
+		ITEM_OPTION
+	WHERE 
+		ITEM_NUM=#{ITEM_NUM}
 	
+	</update>		
+	<select id="selectNormalList" parameterType="hashmap" resultType="hashmap">
+<![CDATA[select * from(SELECT rownum as RNUM,s.* 
+ from  (SELECT DEL_NUM,OR_UNQ,DEL_DATE,OR_NUM,DEL_DS   FROM DELIVERY WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND NOT delivery.del_ds IN(select delivery.del_ds FROM DELIVERY WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND delivery.del_ds LIKE '교환%' OR delivery.del_ds LIKE '환불%' ) 
+ORDER BY OR_NUM)s) 
+ WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}]]>
+ 
+	</select>
+	<select id="selectRefundList" parameterType="hashmap" resultType="hashmap">
+ <![CDATA[select * from(SELECT rownum as RNUM,s.* 
+ from  (SELECT  DEL_NUM,OR_UNQ,DEL_DATE,OR_NUM,DEL_DS    FROM DELIVERY WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND delivery.del_ds IN(select delivery.del_ds FROM DELIVERY WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND delivery.del_ds LIKE '교환%' OR delivery.del_ds LIKE '환불%' ) 
+ORDER BY OR_NUM)s) 
+WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}]]>
+ 
+	</select>
+	<select id="selectDeliveryDetail" parameterType="hashmap" resultType="hashmap">
+SELECT  DEL_NUM,OR_UNQ,TO_CHAR(DEL_DATE,'YY/MM/DD') DEL_DATE,OR_NUM,DEL_DS    FROM DELIVERY WHERE DEL_NUM=#{DEL_NUM} 
+
+	</select>
+	<update id="updateDelivery" parameterType="hashmap">
+	UPDATE DELIVERY SET DEL_DS=#{DEL_DS} WHERE DEL_NUM=#{DEL_NUM}
+	
+	</update>
+	<update id="deleteRefund" parameterType="hashmap">
+	DELETE FROM ORDERS WHERE OR_NUM=#{OR_NUM} AND ITEM_NUM=#{ITEM_NUM}
+	
+	</update>	
+	<select id="normalTotalList" parameterType="hashmap" resultType="int">
+
+SELECT  COUNT(*) TOTAL
+FROM delivery
+WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND NOT delivery.del_ds IN(select delivery.del_ds FROM DELIVERY WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND delivery.del_ds LIKE '교환%' OR delivery.del_ds LIKE '환불%' )
+	</select>
+	<select id="refundTotalList" parameterType="hashmap" resultType="int">
+
+SELECT  COUNT(*) TOTAL
+FROM delivery
+WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND delivery.del_ds IN(select delivery.del_ds FROM DELIVERY WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND delivery.del_ds LIKE '교환%' OR delivery.del_ds LIKE '환불%' )
+	</select>	
 </mapper>

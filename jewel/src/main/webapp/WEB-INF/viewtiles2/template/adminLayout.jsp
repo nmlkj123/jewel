@@ -7,18 +7,31 @@
 <head>
 <meta charset="UTF-8">
 <title><tiles:getAsString name="title" /></title>
+<style>
 
+#left{
+            float:left;
+             width:15%;
+            
+        }
+        #content{
+            float:left;
+             width:85%;
+           
+        }
+</style>
 </head>
 <body>
 <div class='wrap'>
 	<tiles:insertAttribute name="header" />
 	<hr />
-	<div class='content'>
+	<div id="left">
 		<tiles:insertAttribute name="left"/>
-		<div class='page_content'>
+	</div>
+		<div id="content">
 			<tiles:insertAttribute name="body" />
 		</div>
-	</div>
+	
 	<hr/>
 	<tiles:insertAttribute name="footer" />
 </div>

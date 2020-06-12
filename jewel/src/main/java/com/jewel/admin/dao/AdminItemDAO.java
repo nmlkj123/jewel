@@ -22,7 +22,9 @@ public class AdminItemDAO extends AbstractDAO {
 		insert("admin.insertItemWrite",map);
 	}
 	
-	
+	public String selectItemNum(Map<String,Object> map)throws Exception{
+		return (String)selectOne("admin.selectItemNum",map);
+	}
 	
 	public void updateItemModify(Map<String, Object> map) throws Exception{
 		update("admin.updateItemModify", map);
@@ -34,5 +36,14 @@ public class AdminItemDAO extends AbstractDAO {
 	public int getTotalList(Map<String, Object> map)throws Exception{
 		return (Integer) selectOne("admin.getTotalList", map);
 	}
-	
+	public void insertOption(Map<String, Object> map) throws Exception{
+		insert("admin.insertOption",map);
+	}
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> selectOptionList(Map<String, Object> map) throws Exception{
+		return (List<Map<String, Object>>)selectList("admin.selectOptionList", map);
+	}
+	public void deleteOption(Map<String, Object> map) throws Exception{
+		update("admin.deleteOption", map);
+	}
 }

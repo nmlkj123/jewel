@@ -7,7 +7,7 @@
 		<tiles-definitions>
 			
 			<definition name="base_layout"
-				template="/WEB-INF/viewtiles2/template/adminLayout.jsp">
+				template="/WEB-INF/viewtiles2/template/layout.jsp">
 				<put-attribute name="header"
 					value="/WEB-INF/viewtiles2/template/header.jsp" />
 				<put-attribute name="footer"
@@ -16,7 +16,7 @@
 			
 			
 			<definition name="admin_layout"
-				template="/WEB-INF/viewtiles2/template/layout.jsp">
+				template="/WEB-INF/viewtiles2/template/adminLayout.jsp">
 				<put-attribute name="header"
 					value="/WEB-INF/viewtiles2/template/adminHeader.jsp" />
 			<put-attribute name="left"
@@ -75,7 +75,12 @@
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/item/itemList.jsp" />
 			</definition>
-			
+			<!-- 아이템 상세페이지 -->
+			<definition name="itemDetail" extends="base_layout">
+				<put-attribute name="title" value="상세페이지" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/item/itemDetail.jsp" />
+			</definition>
 			
 			<definition name="adminItemList" extends="admin_layout">
 				<put-attribute name="title" value="상품목록" />
@@ -220,7 +225,16 @@
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/admin/adminMemberPointUpdate.jsp" />
 			</definition>
-
+			<definition name="adminDeliveryList" extends="admin_layout">
+				<put-attribute name="title" value="배송 관리" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminDeliveryList.jsp" />
+			</definition>
+			<definition name="adminDeliveryDetail" extends="admin_layout">
+				<put-attribute name="title" value="배송 상세" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminDeliveryDetail.jsp" />
+			</definition>
 
 
 

@@ -1,13 +1,18 @@
 package com.jewel.item.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,7 +36,7 @@ public class ItemController {
 	   public ModelAndView joinForm(CommandMap commandMap) throws Exception{
 	      ModelAndView mv=new ModelAndView("itemList");
 	      Map<String, Object> map =commandMap.getMap();
-			/* sort=½Å»óÇ°:1,ÀÎ±â¼ø:2,°¡°İ³ôÀº¼ø:3,°¡°İ³·Àº¼ø:4 ¸®ºä¼ø:5*/
+			/* sort=ì‹ ìƒí’ˆ:1,ì¸ê¸°ìˆœ:2,ê°€ê²©ë†’ì€ìˆœ:3,ê°€ê²©ë‚®ì€ìˆœ:4 ë¦¬ë·°ìˆœ:5*/
 	      String pg=(String) commandMap.get("pg");
 	      String type=(String) commandMap.get("type");
 	      String sort=(String) commandMap.get("sort");
@@ -58,13 +63,14 @@ public class ItemController {
     public ModelAndView openBoardList(CommandMap commandMap,HttpServletRequest request) throws Exception{
     	ModelAndView mv = new ModelAndView("jsonView");
     	
-		/*3Á¶ ÆÀ¿øµé ÀÇ ÆäÀÌÂ¡ Ã³¸® ½ÃÀÛ*/
-    	int show=12;//ÆäÀÌÁö´ç º¸¿©ÁÙ »óÇ° °³¼ö
-    	int block=5;//ÆäÀÌÁö´ç º¸¿©ÁÙ ÆäÀÌÁö°³¼ö
+		/*3ì¡° íŒ€ì›ë“¤ ì˜ í˜ì´ì§• ì²˜ë¦¬ ì‹œì‘*/
+    	int show=12;//í˜ì´ì§€ë‹¹ ë³´ì—¬ì¤„ ìƒí’ˆ ê°œìˆ˜
+    	int block=5;//í˜ì´ì§€ë‹¹ ë³´ì—¬ì¤„ í˜ì´ì§€ê°œìˆ˜
     	int pg=Integer.parseInt((String)commandMap.get("pg"));
     	String keyword=(String) commandMap.get("keyword");
     	String sort=(String)commandMap.get("sort");
     	String type=(String)commandMap.get("type");
+    	
     	int endNum = pg*show;
 		int startNum = endNum-(show-1);
 		
@@ -72,7 +78,8 @@ public class ItemController {
 		commandMap.put("END_NUM", endNum);
 		
     	@SuppressWarnings("unused")
-		int totalList=itemService.getTotalList(commandMap.getMap());//Ä«Å×°í¸® ÀÇ »óÇ° ÃÑ °³¼ö
+		int totalList=itemService.getTotalList(commandMap.getMap());//ì¹´í…Œê³ ë¦¬ ì˜ ìƒí’ˆ ì´ ê°œìˆ˜
+    	
     	itemListPaging.setPath(request.getContextPath());
     	itemListPaging.setCurrentPage(pg);
     	itemListPaging.setSort(sort);
@@ -87,17 +94,84 @@ public class ItemController {
     		
     	}
     	else if(type!=null && !type.isEmpty()){
-    		itemListPaging.makePagingHTML();//StringBuffer¿¡ ÆäÀÌÂ¡ Ã³¸®
+    		itemListPaging.makePagingHTML();//StringBufferì— í˜ì´ì§• ì²˜ë¦¬
     		mv.addObject("itemListPaging",itemListPaging);
     	}
     	
-		/* ÆäÀÌÂ¡Ã³¸® ³¡ */
+		/* í˜ì´ì§•ì²˜ë¦¬ ë */
     	
     	List<Map<String,Object>> list = itemService.getItemList(commandMap.getMap());
     	mv.addObject("list", list);
     	
     	return mv;
     }
+	@RequestMapping(value="/item/itemDetail")
+	   public ModelAndView joinDetail(CommandMap commandMap) throws Exception{
+	      ModelAndView mv=new ModelAndView("itemDetail");
+	      
+	      Map<String, Object> item= itemService.getItem(commandMap.getMap());
+	      
+	      mv.addObject("item",item);
+	      return mv;      
+	   }
+	@RequestMapping(value="/item/getOption", method=RequestMethod.POST)
+    public ModelAndView getOption(CommandMap commandMap,HttpServletRequest request) throws Exception{
+    	ModelAndView mv = new ModelAndView("jsonView");
+    	
+    	List<Map<String, Object>> option=itemService.getOption(commandMap.getMap());
+    	
+    	mv.addObject("list",option);
+    	return mv;
+	}
+	@RequestMapping(value="/item/getSelectOption", method=RequestMethod.POST)
+    public ModelAndView getSelectOption(CommandMap commandMap,HttpServletRequest request) throws Exception{
+    	ModelAndView mv = new ModelAndView("jsonView");
+    	System.out.println(commandMap.get("list"));
+
+    	List<Map<String, Object>> option=itemService.getSelectOption(commandMap.getMap());
+    	
+    	mv.addObject("list",option);
+    	return mv;
+	}
 	
+	@RequestMapping(value="/item/addCart", method=RequestMethod.POST)
+    public ModelAndView addCart(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response, @CookieValue(value="Guest_ID", required = false) Cookie cookie) throws Exception{
+    	ModelAndView mv = new ModelAndView("jsonView");
+    	HttpSession session = request.getSession(true);
+    	
+    	String Guest_ID="";
+    	String MEM_ID="";
+    	if(session.getAttribute("MEM_ID")!=null) {
+    		MEM_ID=(String)session.getAttribute("MEM_ID");
+    	}
+		
+    	if(MEM_ID.isEmpty()) {
+			if(cookie==null) {
+				Random rnd =new Random();
+				StringBuffer buf =new StringBuffer();
+				for(int i=0;i<8;i++){
+				    // rnd.nextBoolean() ëŠ” ëœë¤ìœ¼ë¡œ true, false ë¥¼ ë¦¬í„´. trueì¼ ì‹œ ëœë¤ í•œ ì†Œë¬¸ìë¥¼, false ì¼ ì‹œ ëœë¤ í•œ ìˆ«ìë¥¼ StringBuffer ì— append í•œë‹¤.
+				    if(rnd.nextBoolean()){
+				        buf.append((char)((int)(rnd.nextInt(26))+97));
+				    }else{
+				        buf.append((rnd.nextInt(10)));
+				    }
+				}
+				Guest_ID=buf.toString();
+	    		response.addCookie(new Cookie("Guest_ID", Guest_ID));
+			}else {
+				Guest_ID=cookie.getValue();
+			}
+			commandMap.put("MEM_ID", Guest_ID);
+		
+    	}else {
+    		commandMap.put("MEM_ID", MEM_ID);
+    	}
+
+    	
+    	itemService.addCart(commandMap.getMap());
+    	
+    	return mv;
+	}
 	
 }
