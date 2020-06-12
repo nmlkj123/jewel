@@ -311,29 +311,6 @@ function totalPrice(){
 
 function addCart(){
 var items=$("li[id='op_list']").get();
-<<<<<<< HEAD
-	if(items.length==0){
-		alert("옵션항목을 추가하세요!");
-		return;
-	}
-	var total=0;
-	$.each(items,function(index,item){
-		var op_name=$("li[id='op_list']:eq("+index+")").find('#op_text').text();
-		var price=parseInt($("li[id='op_list']:eq("+index+")").find('#op_price').attr('op_price'));
-		var num=parseInt($("li[id='op_list']:eq("+index+")").find('.count').val());
-		 
-		$.ajax({
-			type : "POST",
-			url : '<c:url value="/item/addCart"/>',
-			data : {CART_CNT:num,OP_VALUE:op_name,ITEM_OP_PRICE:price,ITEM_NUM:"${item.ITEM_NUM}"},
-			success : function(data){
-				
-			}
-		});  
-	})
-	alert("장바구니에담겼습니다!");
-	location.href="<c:url value='/myPage/myCart'/>";
-
    if(items.length==0){
       alert("옵션항목을 추가하세요!");
       return;
@@ -355,7 +332,6 @@ var items=$("li[id='op_list']").get();
    })
    alert("장바구니에담겼습니다!");
    location.href="";
-
 }
 function buyItem(){
    var items=$("li[id='op_list']").get();
@@ -437,41 +413,13 @@ function buyItem(){
                         
                         <li class="list-group-item "id="sel_op"  style="text-align: right;">
                         <span style="text-align: right;">
-                                               총상품금액
+                           총상품금액
                         <span id="tottalPrice">0</span>
                             원
                         </span>
                             
                         </li>
 
-							</ul>
-						</div>
-						<hr style="width: 500px;">
-						
-						<div class="btn-group ">
-						<button class="btn btn-warning" type="button">
-							<i class="fa fa-heart fa-beat"></i>
-						</button>
-						</div>
-						&nbsp
-						<div class="btn-group cart">
-							<button type="button" id="addCart" class="btn btn-success" >
-							장바구니
-								</button>
-						</div>
-						<div class="btn-group wishlist">
-							<button type="button" id="buyItem" class="btn btn-danger">
-								바로구매</button>
-						</div>
-						
-					</div>
-						
-				</div>
-				</div>
-			</div>
-		</div>
-	
-=======
                      </ul>
                   </div>
                   <hr style="width: 500px;">
@@ -481,16 +429,15 @@ function buyItem(){
                      <i class="fa fa-heart fa-beat"></i>
                   </button>
                   </div>
-                  &nbsp;
+                  &nbsp
                   <div class="btn-group cart">
                      <button type="button" id="addCart" class="btn btn-success">
-                    	 장바구니
-                     </button>
+                     장바구니
+                        </button>
                   </div>
                   <div class="btn-group wishlist">
                      <button type="button" id="buyItem" class="btn btn-danger">
-                      	 바로구매
-                     </button>
+                        바로구매</button>
                   </div>
                   
                </div>
@@ -499,7 +446,7 @@ function buyItem(){
             </div>
          </div>
       </div>
-
+   
  <div class="container pt-5">
               <div class="row">
                 <div class="col-xs-12 ">
