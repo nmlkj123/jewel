@@ -20,7 +20,7 @@
 		FROM REVIEW r, MEMBER m, ITEM i
 	WHERE
 	      i.ITEM_NUM = 1
-	      AND i.ITEM_NUM = i.ITEM_NUM
+	      AND r.ITEM_NUM = i.ITEM_NUM
 	      AND m.MEM_NUM = r.MEM_NUM
 	      order by r.RE_NUM desc)s)
 	      WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}
