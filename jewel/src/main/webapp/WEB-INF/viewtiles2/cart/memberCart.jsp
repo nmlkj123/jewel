@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/viewtiles2/include/include-header.jspf" %>
 <!DOCTYPE html>
 <html>
 <head>
-<%@include file="/WEB-INF/viewtiles2/template/myPageHeader.jsp" %>
+
 <meta charset="UTF-8">
 <title>회원장바구니</title>
 </head>
@@ -20,6 +21,59 @@
  }
 
 </script>
+<style>
+.btn-group{
+	align:center;
+	width:100%;
+	
+}
+.myPageInfo{
+	border: 1px solid #e7e7e7;
+	font-size: 14px;
+	width:80%;
+	margin-left:10%;
+	margin-right:10%;
+}
+.myPageInfo .info1{
+	border: 1px solid #e7e7e7;
+	width: 20%;
+	text-align: center;
+	height:100px;
+	padding-top:20px;
+	float:left;
+}
+.myPageInfo .info2{
+	border: 1px solid #e7e7e7;
+	width: 40%;
+	text-align: left;
+	height:100px;
+	padding-top:20px;
+	padding-left:10px;
+	float:left;
+}
+.myPageInfo .info2 span{
+	font-weight: bold;
+}
+.myPageInfo .info3{
+	float:left;
+	height:100px;
+	padding-top:20px;
+	padding-left:10px;
+	width: 20%;
+	text-align: center;
+	border: 1px solid #e7e7e7;
+	
+}
+
+.orderList, .myJJimList, .myReviewList, .myQnAList, .myCart {
+	margin-left: 10%;
+	border: 1px solid #e7e7e7;
+	width:80%;
+	
+}
+
+
+</style>
 <style>
 .qty .count {
     color: #000;
@@ -183,15 +237,7 @@ $(document).ready(function(){
     	var price =parseInt($(this).parent().parent().parent().find('.price').val());
     	var sum = cnt*price; 
     	$(this).parent().parent().parent().find('#sum').val(sum);
-    	var num = parseInt($(this).parent().siblings("#num").val());
-    	$.ajax({
-			type: "POST",
-			url:"<c:url value='/myPage/myCartUpdate'/>",
-			data:{CART_NUM:num, CART_CNT:cnt},
-			success: function(data){
-					alert("굳");
-				}	
-        });
+    
    		 
        	 if ($(this).next('.count').val() == 0) {
           	$(this).next('.count').val(1);
@@ -201,7 +247,16 @@ $(document).ready(function(){
         	$(this).parent().parent().parent().find('#sum').val(sum);
         	
          	return;
-    	 }   	 
+    	 }   
+	       	var num = parseInt($(this).parent().siblings("#num").val());
+	    	$.ajax({
+				type: "POST",
+				url:"<c:url value='/myPage/myCartUpdate'/>",
+				data:{CART_NUM:num, CART_CNT:cnt},
+				success: function(data){
+						alert("굳");
+					}	
+	        });	 
 	});
 
 	$(document).on('click','#deleteChk', function(){
