@@ -129,16 +129,19 @@ nput::-webkit-outer-spin-button,
 </style>
 <body>
 <script type="text/javascript">
+
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 $(document).ready(function(){
+	alert("메롱");
 	$.ajax({
 		type : "POST",
 		url : '<c:url value="/item/getOption"/>',
 		data : {ITEM_NUM: "${item.ITEM_NUM}"},
 		success : function(data){
+			
 			var str = "";
 			var he="";
 			$.each(data.list,function(index,items){
@@ -278,6 +281,9 @@ $(document).ready(function(){
 		addCart();
 
 	});
+	$("#buyItem").click(function(){
+		buyItem();
+	});
 	
 });
 	
@@ -295,6 +301,7 @@ function totalPrice(){
 	$("#tottalPrice").text(numberWithCommas(total));
 	
 }	
+
 function addCart(){
 var items=$("li[id='op_list']").get();
 	if(items.length==0){
@@ -310,7 +317,7 @@ var items=$("li[id='op_list']").get();
 		$.ajax({
 			type : "POST",
 			url : '<c:url value="/item/addCart"/>',
-			data : {CART_CNT:num,OP_VALUE:op_name,ITEM_PRICE:price,ITEM_NUM:"${item.ITEM_NUM}"},
+			data : {CART_CNT:num,OP_VALUE:op_name,ITEM_OP_PRICE:price,ITEM_NUM:"${item.ITEM_NUM}"},
 			success : function(data){
 				
 			}
@@ -320,9 +327,36 @@ var items=$("li[id='op_list']").get();
 	location.href="";
 }
 function buyItem(){
+	var items=$("li[id='op_list']").get();
+	if(items.length==0){
+		alert("옵션항목을 추가하세요!");
+		return;
+	}
+	$.ajax({
+		type : "POST",
+		url : '<c:url value="/item/delBuyItemCart"/>',
+		success : function(data){
+		}
+	}); 
+	var total=0;
+	$.each(items,function(index,item){
+		var op_name=$("li[id='op_list']:eq("+index+")").find('#op_text').text();
+		var price=parseInt($("li[id='op_list']:eq("+index+")").find('#op_price').attr('op_price'));
+		var num=parseInt($("li[id='op_list']:eq("+index+")").find('.count').val());
+		 
+		$.ajax({
+			type : "POST",
+			url : '<c:url value="/item/buyItemCart"/>',
+			data : {CART_CNT:num,OP_VALUE:op_name,ITEM_OP_PRICE:price,ITEM_NUM:"${item.ITEM_NUM}"},
+			success : function(data){
+			}
+		});  
+	})
 
+ 	location.href="<c:url value='/item/qmember'/>"; 
 	
 }
+
 </script>
 
 <!------ Include the above in your HEAD tag ---------->
@@ -395,7 +429,7 @@ function buyItem(){
 								</button>
 						</div>
 						<div class="btn-group wishlist">
-							<button type="button" id="buy" class="btn btn-danger">
+							<button type="button" id="buyItem" class="btn btn-danger">
 								바로구매</button>
 						</div>
 						

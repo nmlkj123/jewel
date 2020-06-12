@@ -10,4 +10,13 @@ public interface MyQnAService {
 	Map<String, Object> selectMyInfo(Map<String, Object> map) throws Exception;
 	
 	Map<String, Object> selectMyQnADetail(Map<String, Object> map) throws Exception;
+
+	Map<String, Object> selectMyQnAModifyForm(Map<String, Object> map) throws Exception;
+	
+	int myQnATotalList(Map<String,Object> map);
+	
+	void updateMyQnA(Map<String, Object> map) throws Exception;
+	
+	void deleteMyQnA(Map<String, Object> map) throws Exception;
+
 }

@@ -28,136 +28,136 @@ import com.jewel.member.service.MailService;
 
 @Controller
 public class LoginController {
-	
-	String sendEmailId="nmlkj66@gmail.com";
-	
-	//·Î±ëÀ» À§ÇÑ º¯¼ö
-	Logger log = Logger.getLogger(this.getClass());
-	
-	@Resource(name = "loginService")
-	private LoginService loginService;
-	
-	
+   
+   String sendEmailId="nmlkj66@gmail.com";
+   
+   //ë¡œê¹…ì„ ìœ„í•œ ë³€ìˆ˜
+   Logger log = Logger.getLogger(this.getClass());
+   
+   @Resource(name = "loginService")
+   private LoginService loginService;
+   
+   
     @Resource(name="mailService")
     private MailService mailService;
 
-	
-	
-	@RequestMapping(value="/login/loginForm") 
-	public String loginForm() throws Exception{
-		return "loginForm";
+   
+   
+   @RequestMapping(value="/login/loginForm") 
+   public String loginForm() throws Exception{
+      return "loginForm";
 }
-	//·Î±×ÀÎ Ã³¸®
-	@RequestMapping(value = "/login/login", method = RequestMethod.POST)
-	public ModelAndView login(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mav = new ModelAndView("login");
-		HttpSession session = request.getSession(true);
-		String message="";
-		String url="";
-		Map<String,Object> result = loginService.loginCheck(commandMap.getMap());
-		if(result == null) { //¾ÆÀÌµğ°¡ ÀÖ´ÂÁö È®ÀÎ
-			message="ÇØ´ç ¾ÆÀÌµğ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.";
-			
-		} else { 
-		if(result.get("MEM_PWD").equals(commandMap.get("MEM_PWD"))){ //ºñ¹Ğ¹øÈ£°¡ °°´Ù¸é
-			session.setAttribute("MEM_ID", commandMap.get("MEM_ID")); 
-			session.setAttribute("MEM_RANK", result.get("MEM_RANK"));
-		}
-		else {//ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö¾ÊÀ» ¶§
-			message="ºñ¹Ğ¹øÈ£°¡ ¸ÂÁö ¾Ê½À´Ï´Ù.";
-		}
-		}
-		mav.addObject("message",message);
-		
-		
-		
-		return mav;
+   //ë¡œê·¸ì¸ ì²˜ë¦¬
+   @RequestMapping(value = "/login/login", method = RequestMethod.POST)
+   public ModelAndView login(CommandMap commandMap, HttpServletRequest request) throws Exception {
+      ModelAndView mav = new ModelAndView("login");
+      HttpSession session = request.getSession(true);
+      String message="";
+      String url="";
+      Map<String,Object> result = loginService.loginCheck(commandMap.getMap());
+      if(result == null) { //ì•„ì´ë””ê°€ ìˆëŠ”ì§€ í™•ì¸
+         message="í•´ë‹¹ ì•„ì´ë””ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.";
+         
+      } else { 
+      if(result.get("MEM_PWD").equals(commandMap.get("MEM_PWD"))){ //ë¹„ë°€ë²ˆí˜¸ê°€ ê°™ë‹¤ë©´
+         session.setAttribute("MEM_ID", commandMap.get("MEM_ID")); 
+         session.setAttribute("MEM_RANK", result.get("MEM_RANK"));
+      }
+      else {//ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ì•Šì„ ë•Œ
+         message="ë¹„ë°€ë²ˆí˜¸ê°€ ë§ì§€ ì•ŠìŠµë‹ˆë‹¤.";
+      }
+      }
+      mav.addObject("message",message);
+      
+      
+      
+      return mav;
 }
-	
-	@RequestMapping(value="/login/logout")//·Î±×¾Æ¿ô
-	public ModelAndView logout(HttpServletRequest request,CommandMap commandMap) throws Exception {
-		HttpSession session = request.getSession(false);
-		if (session != null)
-			session.invalidate();
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/main/main");
-		return mav;
-	}
-	
-	@RequestMapping(value = "/login/findId") // ¾ÆÀÌµğ Ã£±â ÆûÀ» º¸¿©ÁÖ´Â ¸Ş¼Òµå
-	public ModelAndView findId(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("findId");
-		return mv;
-	}
+   
+   @RequestMapping(value="/login/logout")//ë¡œê·¸ì•„ì›ƒ
+   public ModelAndView logout(HttpServletRequest request,CommandMap commandMap) throws Exception {
+      HttpSession session = request.getSession(false);
+      if (session != null)
+         session.invalidate();
+      ModelAndView mav = new ModelAndView();
+      mav.setViewName("redirect:/main/main");
+      return mav;
+   }
+   
+   @RequestMapping(value = "/login/findId") // ì•„ì´ë”” ì°¾ê¸° í¼ì„ ë³´ì—¬ì£¼ëŠ” ë©”ì†Œë“œ
+   public ModelAndView findId(CommandMap commandMap) throws Exception {
+      ModelAndView mv = new ModelAndView("findId");
+      return mv;
+   }
 
-	@RequestMapping(value = "/login/findIdResult", method = RequestMethod.POST) // ÀÔ·ÂÇÑ Á¤º¸¿¡ ¸ÂÃç¼­ ¾ÆÀÌµğ¸¦ Ã£¾ÆÁÖ´Â °Å
-	public ModelAndView findIdResult(CommandMap commandMap) throws Exception {
-			ModelAndView mv = new ModelAndView("findIdResult");
-		
-			List<Map<String, Object>> list = loginService.findIdWithEmail(commandMap.getMap());
-			mv.addObject("list", list);
-			return mv;
-		}
-	
+   @RequestMapping(value = "/login/findIdResult", method = RequestMethod.POST) // ì…ë ¥í•œ ì •ë³´ì— ë§ì¶°ì„œ ì•„ì´ë””ë¥¼ ì°¾ì•„ì£¼ëŠ” ê±°
+   public ModelAndView findIdResult(CommandMap commandMap) throws Exception {
+         ModelAndView mv = new ModelAndView("findIdResult");
+      
+         List<Map<String, Object>> list = loginService.findIdWithEmail(commandMap.getMap());
+         mv.addObject("list", list);
+         return mv;
+      }
+   
 
-		
+      
 
-	@RequestMapping(value = "/login/findPw") // ºñ¹Ğ¹øÈ£ Ã£±â ÆûÀ» º¸¿©ÁÖ´Â ¸Ş¼Òµå
-	public ModelAndView findPw(CommandMap commandMap) throws Exception {
-		ModelAndView mav = new ModelAndView("findPw");
-		return mav;
-	}
+   @RequestMapping(value = "/login/findPw") // ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° í¼ì„ ë³´ì—¬ì£¼ëŠ” ë©”ì†Œë“œ
+   public ModelAndView findPw(CommandMap commandMap) throws Exception {
+      ModelAndView mav = new ModelAndView("findPw");
+      return mav;
+   }
 
-	
-	@RequestMapping(value="/login/findPwConfirm", method=RequestMethod.GET)
-	@ResponseBody
-	public boolean sendNewPw(CommandMap commandMap) throws Exception{
-		   //ÀÓ½Ãºñ¹Ğ¹øÈ£ ÀÌ¸ŞÀÏ·Î º¸³»±â 
-		System.out.println("ddd");
-		int count=loginService.PwdEmailCheck(commandMap.getMap());
-		if(count>0) {
-			Random rnd =new Random();
+   
+   @RequestMapping(value="/login/findPwConfirm", method=RequestMethod.GET)
+   @ResponseBody
+   public boolean sendNewPw(CommandMap commandMap) throws Exception{
+         //ì„ì‹œë¹„ë°€ë²ˆí˜¸ ì´ë©”ì¼ë¡œ ë³´ë‚´ê¸° 
+      System.out.println("ddd");
+      int count=loginService.PwdEmailCheck(commandMap.getMap());
+      if(count>0) {
+         Random rnd =new Random();
 
-			StringBuffer buf =new StringBuffer();
+         StringBuffer buf =new StringBuffer();
 
-			for(int i=0;i<8;i++){
-			    // rnd.nextBoolean() ´Â ·£´ıÀ¸·Î true, false ¸¦ ¸®ÅÏ. trueÀÏ ½Ã ·£´ı ÇÑ ¼Ò¹®ÀÚ¸¦, false ÀÏ ½Ã ·£´ı ÇÑ ¼ıÀÚ¸¦ StringBuffer ¿¡ append ÇÑ´Ù.
-			    if(rnd.nextBoolean()){
-			        buf.append((char)((int)(rnd.nextInt(26))+97));
-			    }else{
-			        buf.append((rnd.nextInt(10)));
-			    }
-			}
-			
-			String subject = "[JEWELS]ÀÓ½Ãºñ¹Ğ¹øÈ£ÀÔ´Ï´Ù.";
-			StringBuilder sb = new StringBuilder();
-			sb.append("±ÍÇÏÀÇ ÀÓ½Ã ºñ¹Ğ¹øÈ£ ´Â  <span style=\"color:red;font-weight:bold;font-size:15px; \">" + buf.toString() + " </span>ÀÔ´Ï´Ù.");
-			if( mailService.send(subject, sb.toString(), sendEmailId,(String)commandMap.get("MEM_EMAIL"), null)) {
-				
-				commandMap.getMap().put("MEM_PWD", buf.toString());
-				
-				loginService.updateTempPw(commandMap.getMap());
-				return true;
-			}else {
-				return false;
-			}
-		}
-		
-		return false;
+         for(int i=0;i<8;i++){
+             // rnd.nextBoolean() ëŠ” ëœë¤ìœ¼ë¡œ true, false ë¥¼ ë¦¬í„´. trueì¼ ì‹œ ëœë¤ í•œ ì†Œë¬¸ìë¥¼, false ì¼ ì‹œ ëœë¤ í•œ ìˆ«ìë¥¼ StringBuffer ì— append í•œë‹¤.
+             if(rnd.nextBoolean()){
+                 buf.append((char)((int)(rnd.nextInt(26))+97));
+             }else{
+                 buf.append((rnd.nextInt(10)));
+             }
+         }
+         
+         String subject = "[JEWELS]ì„ì‹œë¹„ë°€ë²ˆí˜¸ì…ë‹ˆë‹¤.";
+         StringBuilder sb = new StringBuilder();
+         sb.append("ê·€í•˜ì˜ ì„ì‹œ ë¹„ë°€ë²ˆí˜¸ ëŠ”  <span style=\"color:red;font-weight:bold;font-size:15px; \">" + buf.toString() + " </span>ì…ë‹ˆë‹¤.");
+         if( mailService.send(subject, sb.toString(), sendEmailId,(String)commandMap.get("MEM_EMAIL"), null)) {
+            
+            commandMap.getMap().put("MEM_PWD", buf.toString());
+            
+            loginService.updateTempPw(commandMap.getMap());
+            return true;
+         }else {
+            return false;
+         }
+      }
+      
+      return false;
 
-	}
-		 
-			
-		
-	
-	@RequestMapping("/needLogin")
-	//·Î±×ÀÎ ÀÎÅÍ¼ÁÅÍ
-	public ModelAndView needLogin(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/login");
-		String message = "·Î±×ÀÎÀÌ ÇÊ¿äÇÑ ¼­ºñ½ºÀÔ´Ï´Ù.";
-		String url = "/loginForm";
-		mv.addObject("message",message);
-		mv.addObject("url",url);
-		return mv;
-	}
+   }
+       
+         
+      
+   
+   @RequestMapping("/needLogin")
+   //ë¡œê·¸ì¸ ì¸í„°ì…‰í„°
+   public ModelAndView needLogin(CommandMap commandMap) throws Exception {
+      ModelAndView mv = new ModelAndView("/login");
+      String message = "ë¡œê·¸ì¸ì´ í•„ìš”í•œ ì„œë¹„ìŠ¤ì…ë‹ˆë‹¤.";
+      String url = "/loginForm";
+      mv.addObject("message",message);
+      mv.addObject("url",url);
+      return mv;
+   }
 }

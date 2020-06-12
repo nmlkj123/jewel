@@ -40,6 +40,7 @@ public class AdminitemController {
 	public ModelAndView adminItemList(CommandMap commandMap,HttpServletRequest request)throws Exception{
 			ModelAndView mv=new ModelAndView("adminItemList");  
 			
+
 			int show=12;
 	    	int block=5;
 	    	int pg;
@@ -68,12 +69,13 @@ public class AdminitemController {
 	    
 	    	mv.addObject("AdminItemListPaging",AdminItemListPaging);
 	    	  String path="/images/item";
-				String uploadPath=request.getSession().getServletContext().getRealPath(path);
+				String uploadPath=request.getSession().getServletContext().getRealPath("/");
+				System.out.println(uploadPath);
 				mv.addObject("path", uploadPath);
 				
 			List<Map<String,Object>>list=AdminItemService.selectItemList(commandMap.getMap());
 		  mv.addObject("list",list);
-		
+		  
 		 
 		return mv;
 	}
@@ -88,6 +90,7 @@ public class AdminitemController {
 		String uploadPath=request.getSession().getServletContext().getRealPath(path);
 		mv.addObject("path", uploadPath);
 		return mv;
+		
 	}
 	@RequestMapping(value="/openAdminItemWrite")
 	public ModelAndView OpenadminItemWrite(CommandMap commandMap)throws Exception{

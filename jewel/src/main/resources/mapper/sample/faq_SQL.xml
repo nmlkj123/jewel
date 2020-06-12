@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="faq">
+	
+	<select id="faqListAll" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+
+			SELECT
+				 *
+				FROM
+				(SELECT 
+					rownum as RNUM,s.* 
+				from
+				(SELECT
+			    FAQ_NUM,
+			    FAQ_CATE,
+			    FAQ_TITLE,
+			    FAQ_DATE
+			FROM
+			    FAQ		
+			 	ORDER BY FAQ_NUM DESC)s)
+		       WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}
+		]]>
+	</select>
+	
+	<select id="faqList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+			    FAQ_NUM,
+			    FAQ_CATE,
+			    FAQ_TITLE,
+			    FAQ_DATE
+			FROM
+			    FAQ		
+			 WHERE
+				FAQ_CATE = #{FAQ_CATE}   
+			ORDER BY FAQ_NUM DESC
+		]]>
+	</select>
+	
+	
+	
+	
+	<select id="faqDetail" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				FAQ_NUM,
+				FAQ_CATE,
+				FAQ_TITLE,
+				FAQ_DATE,
+				FAQ_CONTENT
+			FROM
+				FAQ
+			WHERE
+				FAQ_NUM = #{FAQ_NUM}		
+		]]>
+		</select>
+		
+		
+		<select id="getTotalList" parameterType="hashmap" resultType="int">
+		SELECT 
+			COUNT(*)as TOTAL 
+		FROM 
+			FAQ 
+		
+	
+	</select>
+	
+	</mapper>

@@ -24,5 +24,9 @@ public class MyOrderListServiceImpl implements MyOrderListService {
 	public Map<String, Object> selectMyInfo(Map<String, Object> map) throws Exception {
 		return myOrderDAO.selectMyInfo(map);
 	}
+	@Override
+	public int orderTotalList(Map<String, Object> map) {
+		return myOrderDAO.orderTotalList(map);
+	}
 	
 }

@@ -81,6 +81,17 @@
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/item/itemDetail.jsp" />
 			</definition>
+			<!-- 아이템 구매페이지 -->
+			<definition name="qmember" template="/WEB-INF/viewtiles2/item/qmember.jsp" >
+				
+
+			</definition>
+			
+			<definition name="itemOrder" extends="base_layout">
+				<put-attribute name="title" value="상품주문" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/item/itemOrder.jsp" />
+			</definition>
 			
 			<definition name="adminItemList" extends="admin_layout">
 				<put-attribute name="title" value="상품목록" />
@@ -128,11 +139,93 @@
 					value="/WEB-INF/viewtiles2/admin/graph.jsp" />
 
 			</definition>	
-			<definition name="graph" extends="admin_layout">
-				<put-attribute name="title" value="그래프" />
+
+			<definition name="faqlistAll" extends="base_layout">
+				<put-attribute name="title" value="faq" />
 				<put-attribute name="body"
-					value="/WEB-INF/viewtiles2/admin/graph.jsp" />
-			</definition>	
+					value="/WEB-INF/viewtiles2/faq/faqlistAll.jsp" />
+			</definition>
+			
+			<definition name="faqlist" extends="base_layout">
+				<put-attribute name="title" value="faq" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/faq/faqlist.jsp" />
+			</definition>
+			
+			<definition name="faqDetail" extends="base_layout">
+				<put-attribute name="title" value="faq" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/faq/faqDetail.jsp" />
+			</definition>
+			
+			<definition name="qnalist" extends="base_layout">
+				<put-attribute name="title" value="qna리스트" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/qna/qnalist.jsp" />
+			</definition>
+			
+			<definition name="qnaDetail" extends="base_layout">
+				<put-attribute name="title" value="qna상세보기" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/qna/qnaDetail.jsp" />
+			</definition>
+			
+				<definition name="qnaWriteForm" extends="base_layout">
+				<put-attribute name="title" value="qna글쓰기폼" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/qna/qnaWriteForm.jsp" />
+			</definition>
+			
+			<definition name="qnaPwConfirmForm" extends="base_layout">
+				<put-attribute name="title" value="qna" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/qna/qnaPwConfirmForm.jsp" />
+			</definition>
+			
+			<definition name="qnaPwConfirm" extends="base_layout">
+				<put-attribute name="title" value="qna" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/qna/qnaPwConfirm.jsp" />
+			</definition>
+			
+			<definition name="qnaUpdateForm" extends="base_layout">
+				<put-attribute name="title" value="qna" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/qna/qnaUpdateForm.jsp" />
+			</definition>
+			
+				<definition name="reviewList" extends="base_layout">
+				<put-attribute name="title" value="review" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/review/reviewList.jsp" />
+			</definition>
+			
+				<definition name="reviewDetail" extends="base_layout">
+				<put-attribute name="title" value="review내용" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/review/reviewDetail.jsp" />
+			</definition>
+			
+			<definition name="reviewWriteForm" extends="base_layout">
+				<put-attribute name="title" value="review글쓰기" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/review/reviewWriteForm.jsp" />
+			</definition>
+			
+			<definition name="noticeList" extends="base_layout">
+				<put-attribute name="title" value="notice리스트" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/notice/noticeList.jsp" />
+			</definition>
+			
+			<definition name="noticeDetail" extends="base_layout">
+				<put-attribute name="title" value="notice상세" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/notice/noticeDetail.jsp" />
+			</definition>
+			
+			
+
 			<definition name="adminIgnoreList" extends="admin_layout">
 				<put-attribute name="title" value="차단회원목록" />
 				<put-attribute name="body"
@@ -278,7 +371,14 @@
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/myPage/myReview.jsp" />
 			</definition>
+			<definition name="myCart" extends="base_layout">
+				<put-attribute name="title" value="마이페이지Cart" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/cart/memberCart.jsp" />
+			</definition>
+
 			
 				
+
 
 		</tiles-definitions>

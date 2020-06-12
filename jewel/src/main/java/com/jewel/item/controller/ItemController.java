@@ -1,6 +1,7 @@
 package com.jewel.item.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -13,14 +14,19 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.CookieGenerator;
+import org.springframework.web.util.HttpSessionMutexListener;
 
 import com.jewel.common.CommandMap;
 import com.jewel.item.dao.ItemDAO;
 import com.jewel.item.service.ItemService;
+import com.jewel.member.service.LoginService;
 import com.jewel.paging.ItemListPaging;
 import com.thoughtworks.xstream.mapper.Mapper.Null;
 
@@ -31,12 +37,14 @@ public class ItemController {
 	ItemService itemService;
 	@Resource(name="itemListPaging")
 	ItemListPaging itemListPaging;
+	@Resource(name="loginService")
+	LoginService loginService;
 	
 	@RequestMapping(value="/item/itemList")
 	   public ModelAndView joinForm(CommandMap commandMap) throws Exception{
 	      ModelAndView mv=new ModelAndView("itemList");
 	      Map<String, Object> map =commandMap.getMap();
-			/* sort=신상품:1,인기순:2,가격높은순:3,가격낮은순:4 리뷰순:5*/
+
 	      String pg=(String) commandMap.get("pg");
 	      String type=(String) commandMap.get("type");
 	      String sort=(String) commandMap.get("sort");
@@ -63,9 +71,10 @@ public class ItemController {
     public ModelAndView openBoardList(CommandMap commandMap,HttpServletRequest request) throws Exception{
     	ModelAndView mv = new ModelAndView("jsonView");
     	
-		/*3조 팀원들 의 페이징 처리 시작*/
-    	int show=12;//페이지당 보여줄 상품 개수
-    	int block=5;//페이지당 보여줄 페이지개수
+
+    	int show=12;//�������� ������ ��ǰ ����
+    	int block=5;//�������� ������ ����������
+
     	int pg=Integer.parseInt((String)commandMap.get("pg"));
     	String keyword=(String) commandMap.get("keyword");
     	String sort=(String)commandMap.get("sort");
@@ -78,8 +87,8 @@ public class ItemController {
 		commandMap.put("END_NUM", endNum);
 		
     	@SuppressWarnings("unused")
-		int totalList=itemService.getTotalList(commandMap.getMap());//카테고리 의 상품 총 개수
-    	
+		int totalList=itemService.getTotalList(commandMap.getMap());//ī�װ� �� ��ǰ �� ����
+
     	itemListPaging.setPath(request.getContextPath());
     	itemListPaging.setCurrentPage(pg);
     	itemListPaging.setSort(sort);
@@ -94,11 +103,12 @@ public class ItemController {
     		
     	}
     	else if(type!=null && !type.isEmpty()){
-    		itemListPaging.makePagingHTML();//StringBuffer에 페이징 처리
+
+    		itemListPaging.makePagingHTML();//StringBuffer�뿉 �럹�씠吏� 泥섎━
+
     		mv.addObject("itemListPaging",itemListPaging);
     	}
-    	
-		/* 페이징처리 끝 */
+
     	
     	List<Map<String,Object>> list = itemService.getItemList(commandMap.getMap());
     	mv.addObject("list", list);
@@ -138,9 +148,13 @@ public class ItemController {
     public ModelAndView addCart(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response, @CookieValue(value="Guest_ID", required = false) Cookie cookie) throws Exception{
     	ModelAndView mv = new ModelAndView("jsonView");
     	HttpSession session = request.getSession(true);
+    	CookieGenerator cg = new CookieGenerator();
+
+    	
     	
     	String Guest_ID="";
     	String MEM_ID="";
+    	
     	if(session.getAttribute("MEM_ID")!=null) {
     		MEM_ID=(String)session.getAttribute("MEM_ID");
     	}
@@ -148,17 +162,28 @@ public class ItemController {
     	if(MEM_ID.isEmpty()) {
 			if(cookie==null) {
 				Random rnd =new Random();
-				StringBuffer buf =new StringBuffer();
+				StringBuffer buf;
+				
+				while(true) {
+				buf=new StringBuffer();
 				for(int i=0;i<8;i++){
-				    // rnd.nextBoolean() 는 랜덤으로 true, false 를 리턴. true일 시 랜덤 한 소문자를, false 일 시 랜덤 한 숫자를 StringBuffer 에 append 한다.
+				    // rnd.nextBoolean() �뒗 �옖�뜡�쑝濡� true, false 瑜� 由ы꽩. true�씪 �떆 �옖�뜡 �븳 �냼臾몄옄瑜�, false �씪 �떆 �옖�뜡 �븳 �닽�옄瑜� StringBuffer �뿉 append �븳�떎.
 				    if(rnd.nextBoolean()){
 				        buf.append((char)((int)(rnd.nextInt(26))+97));
 				    }else{
 				        buf.append((rnd.nextInt(10)));
 				    }
 				}
-				Guest_ID=buf.toString();
-	    		response.addCookie(new Cookie("Guest_ID", Guest_ID));
+				
+				int num=itemService.checkGID(buf.toString());
+					if(num==0) {
+						Guest_ID=buf.toString();
+						break;
+					}
+				}
+				cg.setCookieName("Guest_ID");
+		    	cg.addCookie(response, Guest_ID);
+	    		
 			}else {
 				Guest_ID=cookie.getValue();
 			}
@@ -172,6 +197,138 @@ public class ItemController {
     	itemService.addCart(commandMap.getMap());
     	
     	return mv;
+	}
+	@RequestMapping(value="/item/buyItemCart", method=RequestMethod.POST)
+    public ModelAndView buyItemCart(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response, @CookieValue(value="TEMP_ID", required = false) Cookie cookie) throws Exception{
+		ModelAndView mv = new ModelAndView("jsonView"); 	
+    	String TEMP_ID="";
+    	CookieGenerator cg = new CookieGenerator();
+    	
+		if(cookie==null) {
+			Random rnd =new Random();
+			StringBuffer buf;
+			
+			while(true) {
+			buf=new StringBuffer();
+			for(int i=0;i<8;i++){
+			    // rnd.nextBoolean() �뒗 �옖�뜡�쑝濡� true, false 瑜� 由ы꽩. true�씪 �떆 �옖�뜡 �븳 �냼臾몄옄瑜�, false �씪 �떆 �옖�뜡 �븳 �닽�옄瑜� StringBuffer �뿉 append �븳�떎.
+			    if(rnd.nextBoolean()){
+			        buf.append((char)((int)(rnd.nextInt(26))+97));
+			    }else{
+			        buf.append((rnd.nextInt(10)));
+			    }
+			}
+			
+			int num=itemService.checkGID(buf.toString());
+				if(num==0) {
+					TEMP_ID=buf.toString();
+					break;
+				}
+			}
+			cg.setCookieName("TEMP_ID");
+			cg.addCookie(response, TEMP_ID);
+		}else {
+			TEMP_ID=cookie.getValue();
+		}
+		commandMap.put("MEM_ID", TEMP_ID);	
+    	itemService.buyItemCart(commandMap.getMap());
+    	return mv;
+	}
+	@RequestMapping(value="/item/delBuyItemCart", method=RequestMethod.POST)
+    public ModelAndView delBuyItemCart(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response, @CookieValue(value="TEMP_ID", required = false) Cookie cookie) throws Exception{
+		ModelAndView mv = new ModelAndView("jsonView"); 	
+    	if(cookie==null) {
+    		return mv;
+    	}
+    	commandMap.put("MEM_ID", cookie.getValue());	
+		itemService.delBuyItemCart(commandMap.getMap());
+	
+    	return mv;
+	}
+	@RequestMapping(value="/item/qmember")
+	public ModelAndView qmember(CommandMap commandMap,HttpServletRequest request) throws Exception{
+		HttpSession session =request.getSession();
+		ModelAndView mv;
+		if(session.getAttribute("MEM_ID")!=null) {
+			mv= new ModelAndView("itemOrder");
+		}else {
+			mv= new ModelAndView("qmember");
+		}
+
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/item/itemLoginCheck")
+	@ResponseBody
+	public boolean itemLoginCheck(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response) throws Exception{
+	
+		HttpSession session = request.getSession(true);
+		Map<String,Object> result = loginService.loginCheck(commandMap.getMap());
+		if(result == null) { //아이디가 있는지 확인
+			return false;
+			
+		} else { 
+			if(result.get("MEM_PWD").equals(commandMap.get("MEM_PWD"))){ //비밀번호가 같다면
+				session.setAttribute("MEM_ID", commandMap.get("MEM_ID")); 
+				session.setAttribute("MEM_RANK", result.get("MEM_RANK"));
+				return true;
+			}
+		}
+		return false;
+		
+	}
+	
+	@RequestMapping(value="/item/itemOrder")
+	public ModelAndView itemOrder(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response) throws Exception{
+		ModelAndView mv= new ModelAndView("itemOrder");
+		
+		return mv;
+	}
+	@RequestMapping(value="/item/getOrderList", method=RequestMethod.POST)
+    public ModelAndView getOrderList(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response, @CookieValue(value="TEMP_ID", required = false) Cookie cookie) throws Exception{
+    	ModelAndView mv = new ModelAndView("jsonView");
+    	HttpSession session=request.getSession();
+    	String MEM_ID="";
+    	
+    	if(session.getAttribute("MEM_ID")!=null) {
+    		MEM_ID=(String) session.getAttribute("MEM_ID");
+    		commandMap.put("MEM_ID", MEM_ID);
+    		
+    		Map<String,Object> map=loginService.loginCheck(commandMap.getMap());
+    		if(!map.isEmpty()) {
+        		mv.addObject("member",map);
+        	}
+    	}
+    	
+    	
+    	System.out.println(cookie.getValue());
+    	commandMap.put("MEM_ID", cookie.getValue());
+    	List<Map<String, Object>> cart=itemService.getOrderList(commandMap.getMap());
+    	mv.addObject("list",cart);
+    	
+    	
+    	return mv;
+	}
+	
+	@RequestMapping(value="/item/payment", method=RequestMethod.POST)
+    public ModelAndView payment(CommandMap commandMap,HttpServletRequest request) throws Exception{
+    	ModelAndView mv = new ModelAndView("jsonView");
+
+		itemService.setOrder(commandMap.getMap());
+    	
+    	return mv;
+	}
+	@RequestMapping(value="/item/delPoint")
+	public ModelAndView delPoint(CommandMap commandMap,HttpServletRequest request) throws Exception{
+		ModelAndView mv = new ModelAndView("jsonView");
+ 
+		if(commandMap.getMap().get("MEM_NUM")!=null) {
+			itemService.delPoint(commandMap.getMap());
+		}
+
+		
+		return mv;
 	}
 	
 }

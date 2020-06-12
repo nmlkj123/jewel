@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="notice">
+	
+	<select id="SelectNoticeList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				 *
+				FROM
+				(SELECT 
+					rownum as RNUM,s.* 
+				from
+					(SELECT  
+						NT_NUM,
+						NT_TITLE,
+						NT_CONTENT,
+						to_char(NT_DATE,'YYYY/MM/DD')NT_DATE,
+						NT_TYPE 
+					FROM 
+						NOTICE
+		      		ORDER BY
+		          		NT_NUM desc)s)
+		       WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}
+  
+		]]>
+	</select>
+	
+	
+		
+	<select id="NoticeDetail" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				NT_NUM,
+				NT_TITLE,
+				NT_CONTENT,
+				NT_DATE,
+				NT_TYPE
+			FROM
+				NOTICE
+			WHERE
+				NT_NUM = #{NT_NUM}		
+		]]>
+	</select>
+	
+	
+	<select id="getTotalList" parameterType="hashmap" resultType="int">
+		SELECT 
+			COUNT(*)as TOTAL 
+		FROM 
+			NOTICE 
+		
+	</select>
+</mapper>

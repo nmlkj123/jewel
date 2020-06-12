@@ -104,7 +104,7 @@ function fn_checkNickCallback(data){
          </div>
 
          <div class="col-md-6 mb-6">
-            <input type="reset" value="취소하기" >
+            <input type="reset" value="취소하기" onclick="history.go(-1);" >
         
             &emsp;&emsp;
             <button id="reg_submit" onclick="submit_ck(); return false;">

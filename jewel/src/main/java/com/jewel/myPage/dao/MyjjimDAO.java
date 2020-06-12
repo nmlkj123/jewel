@@ -16,4 +16,9 @@ public class MyjjimDAO extends AbstractDAO {
 	public Map<String, Object> selectMyInfo(Map<String, Object> map) {
 		return (Map<String, Object>) selectOne("myPage.selectMyInfo", map);
 	}
+	
+	//나의 총찜개수
+	public int myJJimTotalList(Map<String, Object> map) {
+		return (Integer) selectOne("myPage.myJJimTotalList", map);
+	}
 }
