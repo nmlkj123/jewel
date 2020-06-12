@@ -106,9 +106,8 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value="/review/reviewWrite",method=RequestMethod.POST)
-	public ModelAndView reviewWrite(CommandMap commandMap,HttpServletRequest request) throws Exception{
+	public ModelAndView reviewWrite(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("redirect:/review/reviewList");
-		
 
 		reviewService.insertReviewWrite(commandMap.getMap());
 		mv.addObject("RE_CONTENT",commandMap.get("RE_CONTENT"));
