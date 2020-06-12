@@ -32,6 +32,8 @@
     
     <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0" />
     
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+
     <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />    
     <!--타일즈2  -->
     <bean
