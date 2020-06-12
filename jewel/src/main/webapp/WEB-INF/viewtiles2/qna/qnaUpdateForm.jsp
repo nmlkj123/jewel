@@ -13,7 +13,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 <script type="text/javascript">
-function submit(){
+function fsubmit(){
 
 	var QNA_TITLE = $("#QNA_TITLE")[0].value;
 	var QNA_CONTENT = $("#QNA_CONTENT")[0].value;
@@ -90,7 +90,7 @@ function submit(){
 	<br/>
 	
 	<a href="<c:url value='/qna/qnalist'/>" class="btn1" id="list">목록으로</a>
-	<input type="submit" class="btn1" onclick="submit(); return false;" value="수정완료">
+	<input type="submit" class="btn1" onclick="fsubmit(); return false;" value="수정완료">
 	</form>
 </body>
 </html>
