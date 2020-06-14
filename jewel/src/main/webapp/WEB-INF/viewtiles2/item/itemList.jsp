@@ -23,20 +23,28 @@ $(document).ready(function(){
 					click:function(){
 						$(location).attr('href','<c:url value="/item/itemDetail?ITEM_NUM='+items.ITEM_NUM+'"/>');
 					}
-				})).append($('<h4/>',{
-					class:"text-center",
-					text:"--JEWELS--"
-				})).append($('<p/>',{
-					class:"text-center",
+				})).append($('<h5/>',{
+					class:"text-center pb-3 border-top-0 border-left-0 border-right-0 border border-primary",
+					text:"--JEWELS--",
+					
+				}).css({
+					color:'#4C4C4C',
+				})).append($('<h6/>',{
+					class:"text-center mt-3",
 					text:items.ITEM_NAME
-				})).append($('<p/>',{
-					class:"text-center",
+				}).css({
+					color:'#4C4C4C',
+				})).append($('<h6/>',{
+					class:"text-left mt-5",
 					text:items.ITEM_PRICE+"원"
 				}).css({
-					'text-decoration':'line-through'
-				})).append($('<p/>',{
-					class:"text-center",
-					text:items.ITEM_FP+"원"
+					'text-decoration':'line-through',
+					color:'#A6A6A6',
+				})).append($('<h6/>',{
+					class:"text-left mt-2",
+					text:"할인가 : "+items.ITEM_FP+"원"
+				}).css({
+					color:'#4C4C4C',
 				})).appendTo($('#imageBoard'));		
 				
 			})
@@ -120,7 +128,7 @@ $(document).ready(function(){
 			
 			
 		
-	</div>
+</div>
 
 	
 	

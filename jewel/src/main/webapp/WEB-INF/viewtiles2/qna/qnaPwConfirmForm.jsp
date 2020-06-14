@@ -27,13 +27,14 @@ function fsubmit(){
 
 </head>
 <body>
-	<form id="frm" name="frm" method="post" action="<c:url value='/qna/qnaPwConfirm'/>">
-		<table class="board_view">
+<div class="container" >
+	<form id="frm" name="frm" method="post"   action="<c:url value='/qna/qnaPwConfirm'/>">
+		<table class="board_view" style="width: 100%;">
 			<colgroup>
 				<col width="15%">
 				<col width="*"/>
 			</colgroup>
-			<caption>게시글 작성</caption>
+			
 			<tbody>
 				
 				<tr>
@@ -48,9 +49,9 @@ function fsubmit(){
 		
 		<br/><br/>
 		<button type="submit" class="btn1" onclick="fsubmit(); return false;">확인</button>
-		<a href="<c:url value='/qna/qnalist' />" class="btn2">목록으로</a>
+		<a href="#" onclick="history.back();" class="btn2">목록으로</a>
 	</form>
-	
+	</div>
 	
 </body>
 </html>

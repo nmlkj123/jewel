@@ -10,4 +10,5 @@ public interface MyCartService {
 	int myCartTotal(Map<String,Object> map) throws Exception;
 	void updateMyCart(Map<String, Object> map) throws Exception;
 	void deleteMyCart(Map<String, Object> map) throws Exception;
+	int checkOrderId(Map<String,Object> map) throws Exception;
 }

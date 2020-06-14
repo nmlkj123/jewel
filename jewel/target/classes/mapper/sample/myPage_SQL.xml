@@ -98,7 +98,7 @@
 					(SELECT 
 						rownum as RNUM, s.* 
 					 FROM(		
-						SELECT i.ITEM_IMAGE1, i.ITEM_NAME, i.ITEM_PRICE, i.ITEM_NUM
+						SELECT j.JJIM_NUM, i.ITEM_IMAGE1, i.ITEM_NAME, i.ITEM_PRICE, i.ITEM_NUM
 						FROM JJIM j, ITEM i, MEMBER m
 						WHERE m.MEM_ID = #{MEM_ID}
 						AND m.MEM_NUM = j.MEM_NUM
@@ -118,6 +118,16 @@
 			AND j.MEM_NUM = m.MEM_NUM
 		]]>
 	</select>
+	<!-- 찜삭제 -->
+	<delete id="deleteMyJJim" parameterType="hashmap">
+		<![CDATA[
+			DELETE FROM JJIM
+			WHERE JJIM_NUM = #{JJIM_NUM}
+			AND MEM_NUM = #{MEM_NUM}
+
+		]]>
+	</delete>
+	
 		
 <!-- 회원 Q&A리스트 QNA_NUM로 상세보기 -->
 	<select id="selectMyQnAList" parameterType="hashmap" resultType="hashmap">
@@ -288,6 +298,7 @@
 						SELECT 
 							i.ITEM_IMAGE1,
 							i.ITEM_NAME,
+							i.ITEM_NUM,
 							c.CART_NUM,
 							c.CART_CNT,
 							c.OP_VALUE,
@@ -326,4 +337,22 @@
 		]]>
 	</delete>
 	
+	<!-- 주문페이지 TEMP_ID중복검사 -->
+	<select id="checkOrderId" parameterType="hashmap" resultType="int">
+		<![CDATA[
+			SELECT 
+				COUNT(*) 
+			FROM 
+				ORDERS 
+			WHERE MEM_ID = #{MEM_ID}
+		]]>
+	</select>
+
+	<insert id="addJjim" parameterType="hashmap">
+		INSERT INTO JJIM VALUES(JJIM_NUM_SEQ.NEXTVAL,#{ITEM_NUM},#{MEM_NUM})
+	</insert>
+	<select id="findJjim" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) FROM JJIM WHERE ITEM_NUM=#{ITEM_NUM} AND MEM_NUM=#{MEM_NUM}
+	</select>
+
 </mapper>

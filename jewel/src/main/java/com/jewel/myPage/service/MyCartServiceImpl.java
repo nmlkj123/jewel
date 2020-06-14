@@ -38,4 +38,9 @@ public class MyCartServiceImpl implements MyCartService {
 	public void deleteMyCart(Map<String, Object> map) throws Exception {
 		myCartDAO.deleteMyCart(map);
 	}
+	
+	@Override
+	public int checkOrderId(Map<String, Object> map) throws Exception {
+		return myCartDAO.checkOrderId(map);
+	}
 }

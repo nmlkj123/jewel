@@ -12,26 +12,26 @@
 function popup(num){
 	var url= "/common/myPage/myQnADetail?QNA_NUM="+num;
 	var name = "myQnADetail";
-	var option= "width=600, height=400, top=100, left=200, location=no";
+	var option= "width=600, height=500, top=100, left=200, location=no";
 	window.open(url,name,option);	
 }
 </script>
 
 <body>
 
-	<table class="myQnAList">
-		<br><br>
+	<table class="table table-hover" style="width:80%; margin-left:10%;">
+		<br>
 		<h5 style="margin-left:10%;">나의Q&A</h5>
 		<colgroup>
-			<col width="18%"/>
-			<col width="20%"/>
-	        <col width="25%"/>
+			<col width="15%"/>
+			<col width="15%"/>
+	        <col width="20%"/>
 	        <col width="*%"/>
 	        <col width="20%"/>
         </colgroup>
         <br>
         <thead>
-        	<tr>
+        	<tr class="table-danger" style="text-align:center;">
         		<th scope="col">등록일자</th>
         		<th scope="col">카테고리</th>
         		<th scope="col">상품명</th>

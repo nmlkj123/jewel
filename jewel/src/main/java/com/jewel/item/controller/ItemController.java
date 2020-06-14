@@ -146,7 +146,7 @@ public class ItemController {
 	
 	@RequestMapping(value="/item/addCart", method=RequestMethod.POST)
     public ModelAndView addCart(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response, @CookieValue(value="Guest_ID", required = false) Cookie cookie) throws Exception{
-    	ModelAndView mv = new ModelAndView("jsonView");
+    	ModelAndView mv = new ModelAndView("redirect:/cartList");
     	HttpSession session = request.getSession(true);
     	CookieGenerator cg = new CookieGenerator();
 
@@ -203,7 +203,7 @@ public class ItemController {
 		ModelAndView mv = new ModelAndView("jsonView"); 	
     	String TEMP_ID="";
     	CookieGenerator cg = new CookieGenerator();
-    	
+
 		if(cookie==null) {
 			Random rnd =new Random();
 			StringBuffer buf;
@@ -231,6 +231,7 @@ public class ItemController {
 			TEMP_ID=cookie.getValue();
 		}
 		commandMap.put("MEM_ID", TEMP_ID);	
+    	System.out.println(commandMap.getMap());
     	itemService.buyItemCart(commandMap.getMap());
     	return mv;
 	}
@@ -245,6 +246,7 @@ public class ItemController {
 	
     	return mv;
 	}
+	
 	@RequestMapping(value="/item/qmember")
 	public ModelAndView qmember(CommandMap commandMap,HttpServletRequest request) throws Exception{
 		HttpSession session =request.getSession();

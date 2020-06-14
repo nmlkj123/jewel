@@ -291,6 +291,9 @@ $(document).ready(function(){
    $("#buyItem").click(function(){
       buyItem();
    });
+   $("#addJjim").click(function(){
+	     addJjim();
+	   });
    
 });
    
@@ -364,6 +367,27 @@ function buyItem(){
    
 }
 
+function addJjim(){
+	var num="${MEM_ID}";
+	alert(num);
+	  if(num==""){
+		  alert("로그인이 필요한 서비스입니다.");
+		  return;
+		}
+	      $.ajax({
+	         type : "POST",
+	         url : '<c:url value="/myPage/addJjim"/>',
+	         data : {ITEM_NUM:"${item.ITEM_NUM}"},
+	         success : function(data){
+		         if(data==true){
+					alert("찜목록에 추가했습니다.");
+			     }else{
+					alert("이미 찜목록에 있습니다.");
+				 }
+	         }
+	      });  
+	   
+}
 </script>
 
 <!------ Include the above in your HEAD tag ---------->
@@ -425,7 +449,7 @@ function buyItem(){
                   <hr style="width: 500px;">
                   
                   <div class="btn-group ">
-                  <button class="btn btn-warning" type="button">
+                  <button class="btn btn-warning" id="addJjim" type="button">
                      <i class="fa fa-heart fa-beat"></i>
                   </button>
                   </div>
@@ -449,7 +473,7 @@ function buyItem(){
    
  <div class="container pt-5">
               <div class="row">
-                <div class="col-xs-12 ">
+                <div class="col-xs-12 " style="width:100%">
                   <nav>
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                       <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" style="font-weight: 700;">상세정보</a>
@@ -458,18 +482,22 @@ function buyItem(){
                       <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false" style="font-weight: 700;">Q&A</a>
                     </div>
                   </nav>
-                  <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                  <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent" >
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" >
-                      Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+                   <img alt="" src="http://www.goldmania.info/bracelet/gold/2020/2119B~2121B/2006_2120B_HAN_1.jpg">
                     </div>
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                      Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+       
                     </div>
                     <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                      Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+                     <jsp:include  page="/WEB-INF/viewtiles2/review/reviewList.jsp" flush="true">
+						<jsp:param name="ITEM_NUM" value="${item.ITEM_NUM}"/>
+						</jsp:include>
                     </div>
                     <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-                      Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+                      <jsp:include  page="/WEB-INF/viewtiles2/qna/qnalist.jsp" flush="true">
+						<jsp:param name="ITEM_NUM" value="${item.ITEM_NUM}"/>
+						</jsp:include>
                     </div>
                   </div>
                 
