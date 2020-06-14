@@ -21,4 +21,8 @@ public class MyjjimDAO extends AbstractDAO {
 	public int myJJimTotalList(Map<String, Object> map) {
 		return (Integer) selectOne("myPage.myJJimTotalList", map);
 	}
+	
+	public void deleteMyJJim(Map<String, Object> map) throws Exception {
+		update("myPage.deleteMyJJim", map);
+	}
 }

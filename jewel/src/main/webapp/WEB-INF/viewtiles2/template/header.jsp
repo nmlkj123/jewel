@@ -26,16 +26,22 @@
 				<div style="margin-right: 80px; float: right;">
 					<a href="<c:url value='/join/joinForm'/>">회원가입 </a>
 				</div>
+				<div style="margin-right: 80px; float: right;">
+					<a href="<c:url value='/myPage/myCart'/>">장바구니</a>
+				</div>
 		    </c:when>
 		    <c:when test="${MEM_ID != null}">
 		    	<div style="margin-right: 80px; float: right;">
 					<c:out value="${MEM_ID}"/> 님
 				</div>
 		        <div style="margin-right: 80px; float: right;">
-				<a href="<c:url value='/login/logout'/>">로그아웃 </a>
+					<a href="<c:url value='/login/logout'/>">로그아웃 </a>
 				</div>
 				<div style="margin-right: 80px; float: right;">
-				<a href="<c:url value='/myPage/myOrderList'/>">마이페이지 </a>
+					<a href="<c:url value='/myPage/myOrderList'/>">마이페이지 </a>
+				</div>
+				<div style="margin-right: 80px; float: right;">
+					<a href="<c:url value='/myPage/myCart'/>">장바구니 </a>
 				</div>
 		    </c:when>
 		    <c:otherwise>

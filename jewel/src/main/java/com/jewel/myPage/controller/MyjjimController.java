@@ -72,4 +72,17 @@ public class MyjjimController {
 		return mv;
 	}
 	
+	@RequestMapping(value="/myPage/myJJimDelete")
+	public ModelAndView myJJimDelete(CommandMap commandMap, HttpServletRequest request)
+			throws Exception{
+		ModelAndView mv = new ModelAndView("jsonView");
+		
+		HttpSession session = request.getSession();
+		commandMap.put("MEM_NUM", session.getAttribute("MEM_NUM"));
+		
+		myJJimListService.deleteMyJJim(commandMap.getMap());
+		
+		return mv;
+	}
+	
 }

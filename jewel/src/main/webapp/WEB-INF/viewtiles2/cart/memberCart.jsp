@@ -242,21 +242,12 @@ $(document).ready(function(){
  	
  	$(document).on('click','.minus',function(){
    		 $(this).next('.count').val(parseInt($(this).next('.count').val()) - 1 );
-<<<<<<< HEAD
-   		 var cnt = parseInt($(this).next('.count').val());
-    	 var price =parseInt($(this).parent().parent().parent().find('.price').val());
-    	 var sum = cnt*price; 
-    	 $(this).parent().parent().parent().find('#sum').val(sum);
-    	 var num = parseInt($(this).parent().siblings("#num").val());
-    	 		 
-=======
    		var cnt = parseInt($(this).next('.count').val());
     	var price =parseInt($(this).closest("tr").find('.price').val());
     	var sum = cnt*price; 
     	$(this).closest("tr").find('#sum').val(sum);
     
    		 
->>>>>>> branch 'master' of https://github.com/nmlkj123/jewel.git
        	 if ($(this).next('.count').val() == 0) {
           	$(this).next('.count').val(1);
           	cnt = parseInt($(this).next('.count').val());
@@ -265,17 +256,6 @@ $(document).ready(function(){
         	$(this).closest("tr").find('#sum').val(sum);
         	
          	return;
-<<<<<<< HEAD
-    	 }
-       	 $.ajax({
-			type: "POST",
-			url:"<c:url value='/myPage/myCartUpdate'/>",
-			data:{CART_NUM:num, CART_CNT:cnt},
-			success: function(data){
-					alert("굳");
-				}	
-         });   	 
-=======
     	 }   
 	       	var num = parseInt($(this).parent().siblings("#num").val());
 	    	$.ajax({
@@ -286,7 +266,6 @@ $(document).ready(function(){
 						alert("굳");
 					}	
 	        });	 
->>>>>>> branch 'master' of https://github.com/nmlkj123/jewel.git
 	});
 
 	$(document).on('click','#deleteChk', function(){
@@ -298,15 +277,14 @@ $(document).ready(function(){
  	 	 		
  				var tr = $(this).closest("tr").index();
  				var num = $("#tbody tr").eq(tr).find("#num").val();
- 				alert(num);
- 				  $.ajax({
+ 				$.ajax({
  	 				type: "POST",
  	 				url:"<c:url value='/myPage/myCartDelete'/>",
  	 				data:{CART_NUM:num},
  	 				success: function(data){
  	 						location.reload();
  	 				}	
- 	 	        }); 
+ 	 	        });
  	 	        
  	 		});
  	 	}

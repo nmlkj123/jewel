@@ -4,6 +4,7 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/viewtiles2/include/include-header.jspf" %>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <meta charset="UTF-8">
 <title>나의리뷰수정폼</title>
 </head>
@@ -25,49 +26,60 @@ function updateChk(){
 	document.getElementById("frm").submit();
 }	
 </script>
+<style>
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+  font-size: 14px;
+}
+body label{
+	font-weight: bold;
+}
+.container{
+	border: 1px solid #e7e7e7;
+}
+
+</style>
 
 <body>
-	<form id="frm" method="post" action="<c:url value='/myPage/myReviewModify'/>">
-	<table>
-		<caption>나의리뷰수정</caption>
-		<tr>
-			<th>글번호</th>
-			<td>
-			${myReview.RE_NUM}
-			<input type="hidden" name="RE_NUM" value="${myReview.RE_NUM}">
-			</td>
-		</tr>
-		<tr>
-			<th>조회수</th>
-			<td>${myReview.RE_HIT}</td>
-			<th>추천수</th>
-			<td>${myReview.RE_LIKE}</td>
-		</tr>
-		<tr>
-			<th>상품명</th>
-			<td>${myReview.ITEM_NAME }</td>
-			<th>작성일</th>
-			<td>${myReview.RE_DATE }</td>
-		</tr>
-		<tr>
-			<th>제목</th>
-			<td>
+	<h4 style="text-align:center; font-weight: bold;">나의 리뷰 수정</h4>
+	<article>
+	<div class="container" role="main">
+		<form id="frm" method="post" action="<c:url value='/myPage/myReviewModify'/>">	
+			<br>
+			<div class="mb-3">
+				<label for="num">글번호</label>&nbsp;&nbsp;
+				${myReview.RE_NUM }
+				<input type="hidden" name="RE_NUM" value="${myReview.RE_NUM}">
+			</div>
+			<div class="mb-3">
+				<label for="hit">조회수</label>&nbsp;&nbsp;
+				${myReview.RE_HIT}&nbsp;&nbsp;&nbsp;&nbsp;
+				<label for="likes">추천수</label>&nbsp;&nbsp;
+				${myReview.RE_LIKE}
+			</div>
+			<div class="mb-3">
+				<label for="item">상품명</label>&nbsp;&nbsp;
+				${myReview.ITEM_NAME }&nbsp;&nbsp;&nbsp;&nbsp;
+				<label for="re_date">작성일</label>&nbsp;&nbsp;
+				${myReview.RE_DATE }
+			</div>
+			<div class="mb-3">
+				<label for="title">제목</label>&nbsp;&nbsp;
 				<input type="text" id="title" name="RE_TITLE" value="${myReview.RE_TITLE }"/>
-			</td>	
-		</tr>
-		<tr>
-			<th>내용</th>
-			<td colspan="3">
-				<textarea rows="20" cols="100" title="내용" id="content" name="RE_CONTENT">${myReview.RE_CONTENT }</textarea>
-			</td>
-		</tr>
-	</table>
-	</form>
-	<br><br>
+			</div>
+			<div class="mb-3">
+				<label for="content">내용</label>
+				<textarea class="form-control" rows="5" title="내용" name="RE_CONTENT" id="content" placeholder="${myReview.RE_CONTENT }" ></textarea>
+			</div>
 	
+		</form>
+	</div>
+	</article>
+	<br><br>	
 	<div align="center">
-		<a href="#" onclick="updateChk(); return false;">확인</a>
-		<a href="#" onclick="history.go(-1)">취소</a>
+		<button type="button" class="btn btn-outline-danger" onclick="updateChk(); return false;">확인</button>
+		<button type="button" class="btn btn-outline-danger" onclick="history.go(-1)">취소</button>
 	</div>
 	
 </body>

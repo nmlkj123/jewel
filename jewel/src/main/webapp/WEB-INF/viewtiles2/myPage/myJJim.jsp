@@ -12,23 +12,25 @@
 </script>
 
 <body>
-	<table class="myJJimList">
-		<br><br>
+	<table class="table table-hover" style="width:80%; margin-left:10%;">
+		<br>
 		<h5 style="margin-left:10%;">찜한상품</h5>
-		<colgroup>
+        <br>
+        <colgroup>
+			<col width="20"/>
 			<col width="40"/>
-			<col width="*"/>
+	        <col width="20"/>
 	        <col width="20"/>
         </colgroup>
-        <br>
         <thead>
-        	<tr>
+        	<tr class="table-danger" style="text-align:center;">
         		<th scope="col">사진</th>
         		<th scope="col">상품명</th>
         		<th scope="col">가격</th>
+        		<th scope="col"></th>
         	</tr>
         </thead>
-        <tbody>
+        <tbody id="tbody">
         	<c:forEach items="${jjimList }" var="items">
         		<tr align="center">
         			<td>
@@ -36,7 +38,11 @@
         			</td>
         			<td><a href="<c:url value='/item/itemDetail?ITEM_NUM=${items.ITEM_NUM}'/>">
         				${items.ITEM_NAME }</a></td>
-        			<td>${items.ITEM_PRICE }</td>    			
+        			<td>${items.ITEM_PRICE }</td>
+        			<td>
+        				<input type="hidden" value="${items.JJIM_NUM}" id="JJIM_NUM">
+        				<button type="button" class="btn btn-outline-primary" id="JJimNum">삭제</button>
+					</td>    			
         		</tr>       		
         	</c:forEach>        	
         </tbody>
@@ -46,6 +52,25 @@
 	${myJJimListPaging.pagingHTML}
 	</div>
 	
+<script type="text/javascript">
+ $(document).ready(function(){
+	$(document).on('click','#JJimNum',function(){
+		var tr = $(this).closest("tr").index();
+		var num = $("#tbody tr").eq(tr).find("#JJIM_NUM").val();
+		
+		$.ajax({
+			type: "POST",
+			url:"<c:url value='/myPage/myJJimDelete'/>",
+			data:{JJIM_NUM:num},
+			success: function(data){
+				$("#tbody tr").eq(tr).remove();
+			}	
+        });
+				
+	});
+
+});
+</script>
 	
 </body>
 </html>

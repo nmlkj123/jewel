@@ -149,8 +149,6 @@ public class LoginController {
       return false;
 
    }
-       
-         
       
    
    @RequestMapping("/needLogin")

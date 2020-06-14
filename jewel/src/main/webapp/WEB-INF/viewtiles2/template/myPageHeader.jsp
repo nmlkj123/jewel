@@ -44,7 +44,7 @@ $(document).ready(function() {
 	
 }
 .myPageInfo{
-	border: 1px solid #e7e7e7;
+	border: 3px solid #e7e7e7;
 	font-size: 14px;
 	width:80%;
 	margin-left:10%;
@@ -81,14 +81,6 @@ $(document).ready(function() {
 	
 }
 
-.orderList, .myJJimList, .myReviewList, .myQnAList, .myCart {
-	margin-left: 10%;
-	border: 1px solid #e7e7e7;
-	width:80%;
-	
-}
-
-
 </style>
 <br>
  <h3 style="margin-left:10%;">마이페이지</h3>
@@ -111,12 +103,12 @@ $(document).ready(function() {
 		<br>
 		<!-- 목록박스 -->
 		<div class="btn-group" role="group" aria-label="Basic example">
-		  <button type="button" class="btn btn-secondary" id="myOrder">주문내역</button>
-		  <button type="button" class="btn btn-secondary" id="myJJim">찜한상품</button>
-		  <button type="button" class="btn btn-secondary" id="myQnA">나의Q&A</button>
-		  <button type="button" class="btn btn-secondary" id="myReview">나의리뷰</button>
-		  <button type="button" class="btn btn-secondary" id="modiMember">정보수정</button>
-		  <button type="button" class="btn btn-secondary" id="delMember">회원탈퇴</button>
+		  <button type="button" class="btn btn-danger" id="myOrder">주문내역</button>
+		  <button type="button" class="btn btn-danger" id="myJJim">찜한상품</button>
+		  <button type="button" class="btn btn-danger" id="myQnA">나의Q&A</button>
+		  <button type="button" class="btn btn-danger" id="myReview">나의리뷰</button>
+		  <button type="button" class="btn btn-danger" id="modiMember">정보수정</button>
+		  <button type="button" class="btn btn-danger" id="delMember">회원탈퇴</button>
 		</div>
 	</div>
 	

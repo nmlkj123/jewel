@@ -30,6 +30,9 @@ public class MyjjimListServiceImpl implements MyjjimListService {
 		return myJJimDAO.myJJimTotalList(map);
 	}
 	
-	
+	@Override
+	public void deleteMyJJim(Map<String, Object> map) throws Exception {
+		myJJimDAO.deleteMyJJim(map);
+	}
 
 }

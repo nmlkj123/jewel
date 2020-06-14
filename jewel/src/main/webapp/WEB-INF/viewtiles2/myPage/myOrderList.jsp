@@ -11,21 +11,12 @@
 
 </script>
 <body>
-
-	<table class="orderList">
-	<br><br>
+	<table class="table table-hover" style="width:80%; margin-left:10%;">
+		<br>
 		<h5 style="margin-left:10%;">나의주문내역<h5>
-		<colgroup>
-			<col width="15%"/>
-			<col width="20"/>
-	        <col width="*"/>
-	        <col width="10%"/>
-	        <col width="30%"/>
-	        <col width="10%"/>
-        </colgroup>
-        <br>
+		<br>
         <thead>
-        	<tr>
+        	<tr class="table-danger">
         		<th scope="col">주문일자</th>
         		<th scope="col">사진</th>
         		<th scope="col">상품명</th>
