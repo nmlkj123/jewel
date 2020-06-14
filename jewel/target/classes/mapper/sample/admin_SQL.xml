@@ -315,14 +315,14 @@ WHERE  MEM_NUM=#{MEM_NUM}
 	</update>		
 	<select id="selectNormalList" parameterType="hashmap" resultType="hashmap">
 <![CDATA[select * from(SELECT rownum as RNUM,s.* 
- from  (SELECT DEL_NUM,OR_UNQ,DEL_DATE,OR_NUM,DEL_DS   FROM DELIVERY WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND NOT delivery.del_ds IN(select delivery.del_ds FROM DELIVERY WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND delivery.del_ds LIKE '교환%' OR delivery.del_ds LIKE '환불%' ) 
+ from  (SELECT DEL_NUM,OR_UNQ,TO_CHAR(DEL_DATE,'YY/MM/DD') DEL_DATE,OR_NUM,DEL_DS   FROM DELIVERY WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND NOT delivery.del_ds IN(select delivery.del_ds FROM DELIVERY WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND delivery.del_ds LIKE '교환%' OR delivery.del_ds LIKE '환불%' ) 
 ORDER BY OR_NUM)s) 
  WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}]]>
  
 	</select>
 	<select id="selectRefundList" parameterType="hashmap" resultType="hashmap">
  <![CDATA[select * from(SELECT rownum as RNUM,s.* 
- from  (SELECT  DEL_NUM,OR_UNQ,DEL_DATE,OR_NUM,DEL_DS    FROM DELIVERY WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND delivery.del_ds IN(select delivery.del_ds FROM DELIVERY WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND delivery.del_ds LIKE '교환%' OR delivery.del_ds LIKE '환불%' ) 
+ from  (SELECT  DEL_NUM,OR_UNQ,TO_CHAR(DEL_DATE,'YY/MM/DD') DEL_DATE,OR_NUM,DEL_DS    FROM DELIVERY WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND delivery.del_ds IN(select delivery.del_ds FROM DELIVERY WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND delivery.del_ds LIKE '교환%' OR delivery.del_ds LIKE '환불%' ) 
 ORDER BY OR_NUM)s) 
 WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}]]>
  

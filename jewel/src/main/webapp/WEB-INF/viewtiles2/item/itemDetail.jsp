@@ -331,7 +331,7 @@ var items=$("li[id='op_list']").get();
       });  
    })
    alert("장바구니에담겼습니다!");
-   location.href="";
+   location.href="<c:url value='/myPage/myCart'/>";
 }
 function buyItem(){
    var items=$("li[id='op_list']").get();

@@ -9,7 +9,7 @@
 </head>
 <body>
     <h2>이벤트 목록</h2>
-    <table class="board_list">
+    <table class="table table-head-fixed text-nowrap">
        
         <thead>
             <tr>
@@ -54,7 +54,6 @@
    </div>
     <br/>
  
-    <input type="button" onclick="location.href='<c:url value="/openAdminEventWrite"/>'" value="이벤트등록">
      
    
     

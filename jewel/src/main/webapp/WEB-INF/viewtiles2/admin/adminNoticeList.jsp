@@ -9,7 +9,7 @@
 </head>
 <body>
     <h2>공지 사항</h2>
-    <table class="board_list">
+    <table class="table table-head-fixed text-nowrap">
        
         <thead>
             <tr>
@@ -51,7 +51,8 @@
    
    </div>
     <br/>
-<input type="button" onclick="location.href='<c:url value="/openAdminNoticeWrite"/>'" value="공지사항 등록">
+
+
      
      
    

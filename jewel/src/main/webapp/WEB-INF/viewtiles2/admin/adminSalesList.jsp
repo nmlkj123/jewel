@@ -18,30 +18,37 @@ function changeDate(val){
 
 
 <body>
-<select name="selectBox" id="selectBox">
-    <option value="상품별" selected>상품별</option>
-    <option value="카테고리별">카테고리별</option>
-  
-</select>
+<table>
+<tr>
+	<td colspan="2">
+		<select name="selectBox" id="selectBox">
+    		<option value="상품별" selected>상품별</option>
+    		<option value="카테고리별">카테고리별</option>
+ 	 
+		</select>
+	</td>
+</tr>
+<tr>
+<td>일별 매출</td><td>월별 매출</td>
+</tr>
+<tr>
+<td><input type="text" id="datePicker"></td><td><input type="text" id="monthPicker"></td>
+</tr>
+
+</table>
+
 <br/>
 
-<b>일별 매출   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;월별 매출</b><br>
-<!-----------------------------------------날짜 선택 ----------------------------------->
-<input type="text" id="datePicker">
-<!-----------------------------------------날짜 선택 ----------------------------------->
 
-<!-----------------------------------------월 선택 ----------------------------------->
-<input type="text" id="monthPicker">
-<!-----------------------------------------월 선택 ----------------------------------->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.kr.min.js"></script>
-
+<div class="container text=center"  style="width:100%; height:400px;">
 <!-------------------------------------그래프----------------------------------------->
-<canvas id="myChart"  style="max-width: 600px;"></canvas>
+<canvas id="myChart"></canvas>
 <!-------------------------------------그래프----------------------------------------->
-
+</div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
 integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
@@ -136,6 +143,7 @@ function createidChart(){
     	type: 'bar',
 		data : lineChartData,
 		options :{
+			maintainAspectRatio: false,
 			title:{
 			display:true,
 			text:'일간 상품별 매출현황'
@@ -161,6 +169,7 @@ function createcdChart(){
     	type: 'doughnut',
 		data : lineChartData,
 		options :{
+			maintainAspectRatio: false,
 			title:{
 			display:true,
 			text:'일간 카테고리별 매출현황'
@@ -201,6 +210,7 @@ function createimChart(){
     	type: 'bar',
 		data : lineChartData,
 		options :{
+			maintainAspectRatio: false,
 			title:{
 			display:true,
 			text:'월간 상품별 매출현황'
@@ -232,6 +242,7 @@ if(select=='상품별'){
 	      success : function(data){
 	    	  if(Object.keys(data.list).length==0){
 	    		  myChart=new Chart(ctx, {type:'bar',data:[],options:{
+	    			  maintainAspectRatio: false,
 	    				scales : {
 	    					yAxes : [{
 	    						ticks :{
@@ -301,6 +312,7 @@ else{
 	    	  if(Object.keys(data.list).length==0){
 	    		  
 	    		  myChart=new Chart(ctx, {type:'doughnut',data:[],options:{
+	    			  maintainAspectRatio: false,
 	    				scales : {
 	    					yAxes : [{display: false,
 	    						ticks :{
@@ -383,6 +395,7 @@ function createcmChart(){
 			text:'월간 카테고리별 매출현황'
 			},
 			scales : {
+				maintainAspectRatio: false,
 				yAxes : [{display: false,
 					ticks :{
 						beginAtZero : true,
@@ -406,6 +419,7 @@ function month(){
 		      success : function(data){
 		    	  if(Object.keys(data.list).length==0){
 		    		  myChart=new Chart(ctx, {type:'bar',data:[],options:{
+		    			  maintainAspectRatio: false,
 		    				
 		    				scales : {
 		    					yAxes : [{
@@ -477,6 +491,7 @@ function month(){
 	    	  if(Object.keys(data.list).length==0){
 	    		  
 	    		  myChart=new Chart(ctx, {type:'doughnut',data:[],options:{
+	    			  maintainAspectRatio: false,
 	    				scales : {
 	    					yAxes : [{display: false,
 	    						ticks :{

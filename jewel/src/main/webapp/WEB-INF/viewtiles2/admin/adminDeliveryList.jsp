@@ -19,7 +19,7 @@ $(document).ready(function(){
 	      
 	      success : function(data){
 	    	  
-	    	  var table='<table><thead> <tr> <th scope="col">배송 현황 번호</th><th scope="col">구분 번호</th><th scope="col">주문번호</th><th scope="col">날짜</th><th scope="col">배송상태</th></tr></thead><tbody id="tbody">';
+	    	  var table='<table class="table table-head-fixed text-nowrap"><thead> <tr> <th scope="col">배송 현황 번호</th><th scope="col">구분 번호</th><th scope="col">주문번호</th><th scope="col">날짜</th><th scope="col">배송상태</th></tr></thead><tbody id="tbody">';
 	    	 
 	    	  $.each(data.list,function(index,items){
 					
@@ -57,7 +57,7 @@ function normalList(){
 	      
 	      success : function(data){
 	    	  
-	    	  var table='<table><thead> <tr> <th scope="col">배송 현황 번호</th><th scope="col">구분 번호</th><th scope="col">주문번호</th><th scope="col">날짜</th><th scope="col">배송상태</th></tr></thead><tbody id="tbody">';
+	    	  var table='<table class="table table-head-fixed text-nowrap"><thead> <tr> <th scope="col">배송 현황 번호</th><th scope="col">구분 번호</th><th scope="col">주문번호</th><th scope="col">날짜</th><th scope="col">배송상태</th></tr></thead><tbody id="tbody">';
 	    	  if(data.list.length==0){
 					table += '<tr>'+
 					'<td colspan="5">데이터가 존재하지 않습니다</td>'+
@@ -99,7 +99,7 @@ function refundList(){
 	      
 	      success : function(data){
 	    	  
-	    	  var table='<table><thead> <tr> <th scope="col">배송 현황 번호</th><th scope="col">구분 번호</th><th scope="col">주문번호</th><th scope="col">날짜</th><th scope="col">배송상태</th></tr></thead><tbody id="tbody">';
+	    	  var table='<table class="table table-head-fixed text-nowrap"><thead> <tr> <th scope="col">배송 현황 번호</th><th scope="col">구분 번호</th><th scope="col">주문번호</th><th scope="col">날짜</th><th scope="col">배송상태</th></tr></thead><tbody id="tbody">';
 	    	  if(data.list.length==0){
 					table += '<tr>'+
 					'<td colspan="5">데이터가 존재하지 않습니다</td>'+
@@ -134,8 +134,15 @@ function refundList(){
 </script>
 <body>
 <div id="b">
-<button type="button" onclick="normalList();">일반 배송</button>
-<button type="button" onclick="refundList();">교환/반품</button>
+<table>
+<tr>
+<td><button type="button" class="btn btn-block btn-outline-primary" onclick="normalList();">일반 배송</button>
+</td>
+<td><button type="button" class="btn btn-block btn-outline-danger" onclick="refundList();">교환/반품</button></td>
+
+</tr>
+</table>
+<br>
 </div>
 <div id="div1">
   

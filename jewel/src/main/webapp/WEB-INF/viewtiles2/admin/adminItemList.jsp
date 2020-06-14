@@ -9,7 +9,7 @@
 </head>
 <body>
     <h2>게시판 목록</h2>
-    <table class="board_list">
+    <table class="table table-head-fixed text-nowrap">
      
         <thead>
             <tr>
@@ -50,7 +50,7 @@
     <input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX"/>
     
     <br/>
-    <input type="button" onclick="location.href='<c:url value="/openAdminItemWrite"/>'" value="상품등록">
+  
     
    <div align="center"class="container pt-5" id="categoryPaging" >
    ${AdminItemListPaging.pagingHTML}

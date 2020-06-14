@@ -9,7 +9,7 @@
 </head>
 <body>
     <h2>Faq 목록</h2>
-    <table class="board_list">
+    <table class="table table-head-fixed text-nowrap">
        
         <thead>
             <tr>
@@ -49,7 +49,7 @@
    
    </div>
     <br/>
-<input type="button" onclick="location.href='<c:url value="/openAdminFaqWrite"/>'" value="FAQ등록">
+
      
    
     

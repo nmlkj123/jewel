@@ -99,6 +99,13 @@ public class AdminitemController {
 		 
 		return mv;
 	}
+	@RequestMapping(value="/openAdminMain")
+	public ModelAndView openAdminMain(CommandMap commandMap)throws Exception{
+			ModelAndView mv=new ModelAndView("adminMain");  
+			
+		 
+		return mv;
+	}
 	@RequestMapping(value="/adminItemWrite")
 	public ModelAndView adminItemWrite(CommandMap commandMap,HttpServletRequest request,@RequestParam("ITEM_IMAGE1") MultipartFile file1,@RequestParam("ITEM_IMAGE2") MultipartFile file2)throws Exception{
 			commandMap.put("ITEM_IMAGE1", file1.getOriginalFilename());

@@ -9,7 +9,7 @@
 </head>
 <body>
     <h2>차단  목록</h2>
-    <table class="board_list">
+    <table class="table table-head-fixed text-nowrap">
    
         <thead>
             <tr>

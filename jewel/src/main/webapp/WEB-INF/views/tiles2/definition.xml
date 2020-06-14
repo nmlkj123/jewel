@@ -21,8 +21,9 @@
 					value="/WEB-INF/viewtiles2/template/adminHeader.jsp" />
 			<put-attribute name="left"
 					value="/WEB-INF/viewtiles2/template/sideBar.jsp" />
+			<put-attribute name="body" value=""/>		
 			<put-attribute name="footer"
-					value="/WEB-INF/viewtiles2/template/footer.jsp" />
+					value="/WEB-INF/viewtiles2/template/adminFooter.jsp" />
 			</definition>
 			
 			<definition name="joinForm" extends="base_layout">
@@ -301,7 +302,7 @@
 			<definition name="adminMemberList" extends="admin_layout">
 				<put-attribute name="title" value="회원 목록" />
 				<put-attribute name="body"
-					value="/WEB-INF/viewtiles2/admin/adminMemberList.jsp" />
+					value="/WEB-INF/viewtiles2/admin/adminMemberList.jsp" cascade="true"/>
 			</definition>
 			<definition name="adminMemberDetail" extends="admin_layout">
 				<put-attribute name="title" value="회원 상세" />
@@ -327,6 +328,11 @@
 				<put-attribute name="title" value="배송 상세" />
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/admin/adminDeliveryDetail.jsp" />
+			</definition>
+			<definition name="adminMain" extends="admin_layout">
+				<put-attribute name="title" value="관리자 페이지" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminMain.jsp" />
 			</definition>
 
 

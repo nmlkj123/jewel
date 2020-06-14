@@ -7,33 +7,44 @@
 <head>
 <meta charset="UTF-8">
 <title><tiles:getAsString name="title" /></title>
-<style>
 
-#left{
-            float:left;
-             width:15%;
-            
-        }
-        #content{
-            float:left;
-             width:85%;
-           
-        }
-</style>
+
 </head>
+
 <body>
-<div class='wrap'>
+<div class="wrapper">
+	<nav class="main-header navbar navbar-expand navbar-white navbar-light">
 	<tiles:insertAttribute name="header" />
-	<hr />
-	<div id="left">
-		<tiles:insertAttribute name="left"/>
-	</div>
-		<div id="content">
-			<tiles:insertAttribute name="body" />
-		</div>
+	</nav>
+	<aside class="main-sidebar sidebar-dark-primary elevation-4">
 	
-	<hr/>
+		<tiles:insertAttribute name="left"/>
+	</aside>
+	<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">관리자 페이지</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard v1</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    
+		<section class="content">
+			<tiles:insertAttribute name="body" />
+		</section>
+	</div>
+	<footer class="main-footer">
 	<tiles:insertAttribute name="footer" />
+	</footer>
 </div>
 </body>
 </html>
