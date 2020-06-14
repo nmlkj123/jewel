@@ -37,6 +37,11 @@
 				<div style="margin-right: 80px; float: right;">
 				<a href="<c:url value='/myPage/myOrderList'/>">마이페이지 </a>
 				</div>
+				<c:if test="${MEM_ADMIN eq 'A'}">
+					<div style="margin-right: 80px; float: right;">
+				<a href="<c:url value='/openAdminMain'/>">관리자페이지 </a>
+				</div>
+				</c:if>
 		    </c:when>
 		    <c:otherwise>
 		        
