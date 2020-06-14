@@ -65,6 +65,7 @@ public class LoginController {
 
          session.setAttribute("MEM_RANK", result.get("MEM_RANK"));
          session.setAttribute("MEM_NUM", result.get("MEM_NUM")); 
+         session.setAttribute("MEM_ADMIN", result.get("MEM_ADMIN"));
       }
       else {//비밀번호가 일치하지않을 때
          message="비밀번호가 맞지 않습니다.";
