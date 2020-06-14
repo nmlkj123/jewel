@@ -10,6 +10,9 @@ public interface MyjjimListService {
 	
 	int myJJimTotalList(Map<String,Object> map);
 	
+
 	void deleteMyJJim(Map<String, Object> map) throws Exception;
-	
+
+	int addJjim(Map<String,Object>map);
+
 }

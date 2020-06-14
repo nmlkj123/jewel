@@ -17,9 +17,7 @@
  <input type="button" onclick="location.href='<c:url value="/adminNoticeList"/>'" value="공지사항 관리">
  <input type="button" onclick="location.href='<c:url value="/adminEventList"/>'" value="이벤트 관리">
  <input type="button" onclick="location.href='<c:url value="/adminMemberList"/>'" value="회원 관리">
-<<<<<<< HEAD
+
  <input type="button" onclick="location.href='<c:url value="/openDeliveryList"/>'" value="배송 관리">
 </div>
-=======
-</div>
->>>>>>> branch 'master' of https://github.com/nmlkj123/jewel.git
+

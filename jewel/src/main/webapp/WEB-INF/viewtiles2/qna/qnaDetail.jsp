@@ -57,8 +57,8 @@
 		</tbody>
 	</table>
 	<br/>
-	<a href="<c:url value='/qna/qnalist'/>" class="btn1" id="list">목록으로</a>
+	<a href="<c:url value='/item/itemDetail?ITEM_NUM=${map.ITEM_NUM }'/>" class="btn1" id="list">목록으로</a>
 	<a href="<c:url value='/qna/qnaUpdateForm?QNA_NUM=${map.QNA_NUM}'/>" class="btn1" id="update">수정하기</a>
-	<a href="<c:url value='/qna/qnaDelete?QNA_NUM=${map.QNA_NUM}'/>" class="btn1" id="update">삭제하기</a>
+	<a href="<c:url value='/qna/qnaDelete?QNA_NUM=${map.QNA_NUM}&ITEM_NUM=${map.ITEM_NUM }'/>" class="btn1" id="update">삭제하기</a>
 </body>
 </html>

@@ -27,7 +27,15 @@ public class MyjjimListServiceImpl implements MyjjimListService {
 	}
 	@Override
 	public int myJJimTotalList(Map<String, Object> map) {
+		
 		return myJJimDAO.myJJimTotalList(map);
+	}
+	@Override
+	public int addJjim(Map<String,Object> map) {
+		if(0<myJJimDAO.findJjim(map)) {
+			return 0;
+		}
+		return myJJimDAO.addJjim(map);
 	}
 	
 	@Override
