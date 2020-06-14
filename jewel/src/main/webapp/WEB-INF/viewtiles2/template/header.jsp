@@ -56,7 +56,7 @@
 
 </div>
 <!-- header -->
-<div class="jumbotron text-center mb-0">
+<div class="jumbotron text-center mb-0" style="background-color:white;">
 	<h1>JEWELS</h1>
 	<p>안젤리나 주얼쓰 닐리리맘보!</p> 
 </div> 

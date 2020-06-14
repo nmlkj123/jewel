@@ -326,5 +326,10 @@
 			AND MEM_ID = #{MEM_ID}
 		]]>
 	</delete>
-	
+	<insert id="addJjim" parameterType="hashmap">
+		INSERT INTO JJIM VALUES(JJIM_NUM_SEQ.NEXTVAL,#{ITEM_NUM},#{MEM_NUM})
+	</insert>
+	<select id="findJjim" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) FROM JJIM WHERE ITEM_NUM=#{ITEM_NUM} AND MEM_NUM=#{MEM_NUM}
+	</select>
 </mapper>

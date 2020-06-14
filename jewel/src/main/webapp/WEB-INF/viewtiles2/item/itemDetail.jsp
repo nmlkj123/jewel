@@ -291,6 +291,9 @@ $(document).ready(function(){
    $("#buyItem").click(function(){
       buyItem();
    });
+   $("#addJjim").click(function(){
+	     addJjim();
+	   });
    
 });
    
@@ -364,6 +367,27 @@ function buyItem(){
    
 }
 
+function addJjim(){
+	var num="${MEM_ID}";
+	alert(num);
+	  if(num==""){
+		  alert("로그인이 필요한 서비스입니다.");
+		  return;
+		}
+	      $.ajax({
+	         type : "POST",
+	         url : '<c:url value="/myPage/addJjim"/>',
+	         data : {ITEM_NUM:"${item.ITEM_NUM}"},
+	         success : function(data){
+		         if(data==true){
+					alert("찜목록에 추가했습니다.");
+			     }else{
+					alert("이미 찜목록에 있습니다.");
+				 }
+	         }
+	      });  
+	   
+}
 </script>
 
 <!------ Include the above in your HEAD tag ---------->
@@ -425,7 +449,7 @@ function buyItem(){
                   <hr style="width: 500px;">
                   
                   <div class="btn-group ">
-                  <button class="btn btn-warning" type="button">
+                  <button class="btn btn-warning" id="addJjim" type="button">
                      <i class="fa fa-heart fa-beat"></i>
                   </button>
                   </div>
