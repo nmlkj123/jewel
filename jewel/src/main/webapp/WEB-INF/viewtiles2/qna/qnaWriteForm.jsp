@@ -43,8 +43,9 @@ function fsubmit(){
 
 </script>
 <body>
+<div class="container">
 	<form id="frm" name="frm" method="POST" action="<c:url value='/qna/qnaWrite'/>">
-		<table class="board_view">
+		<table class="board_view" style="width: 100%;">
 			<colgroup>
 				<col width="15%">
 				<col width="*"/>
@@ -93,7 +94,7 @@ function fsubmit(){
 		<input type="button" class="btn1" onclick="fsubmit(); return false;"value="작성하기">
 		<a href="#" onclick="history.back();" class="btn1">목록으로</a>
 	</form>
-	
+</div>	
 	
 </body>
 </html>

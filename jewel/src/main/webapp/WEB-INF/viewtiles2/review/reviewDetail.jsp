@@ -70,7 +70,7 @@ $(document).on('click','#com_write',function(){
 </head>
 <body>
 <div class="container">
-<table class="board_view">
+<table class="board_view" style="width: 100%;">
 		<colgroup>
 			<col width="10%"/>
 			<col width="25%"/>
@@ -102,7 +102,7 @@ $(document).on('click','#com_write',function(){
 	</table>
 	<br/><br/>
 	
-        <table class="board_view">
+        <table class="board_view" style="width: 100%;">
             <colgroup>
                 <col width="15%">
                 <col width="85%">
