@@ -69,6 +69,9 @@ public class FAQController {
 	      mv.addObject("faqListPaging",faqListPaging);
 	      
     	List<Map<String,Object>> list = faqService.faqListAll(commandMap.getMap());
+    	if(list==null) {
+    		return mv;
+    	}
     	mv.addObject("FAQ_CATE",commandMap.get("FAQ_CATE"));
     	mv.addObject("list", list);
     	

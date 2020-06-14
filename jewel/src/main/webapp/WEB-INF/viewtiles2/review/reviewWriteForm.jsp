@@ -1,9 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html >
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta charset="UTF-8">
+
 <title>QNA게시글 작성</title>
 
 
@@ -35,9 +36,9 @@ $(document).ready(function(){
 })
 </script>
 <script type="text/javascript">
-   
-      
-   
+	
+		
+	
 $(document).ready(function() {
       $('#summernote').summernote({
         height: 300,
@@ -54,38 +55,36 @@ $(document).ready(function() {
       });
     });
     
-
+    
+    
     function sendFile(file, el) {
       var form_data = new FormData();
       form_data.append('file', file);
       $.ajax({
         data: form_data,
         type: "POST",
-        url: '/images/reviewImage'
+        url: "<c:url value='/review/contentImage'/>",
         cache: false,
         contentType: false,
         enctype: 'multipart/form-data',
         processData: false,
         success: function(url) {
-           url=url.trim();
-          $(el).summernote('editor.insertImage', url);
-          $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
+        	url=url.trim();
+        	
+          $(el).summernote('editor.insertImage', "<c:url value='/images/reviewImage/"+url+"'/>");
+          alert(url);
+          $('#imageBoard > ul').append('<li><img src="<c:url value="/review/reviewWrite'+url+'"/>" width="480" height="auto"/></li>');
         }
       });
     }
 </script>
 
 <body>
-	<form id="frm" name="frm" method="POST" action="<c:url value='/review/reviewWrite'/>">
+<div class="container" style="width:1000px;">
+	<form id="frm" name="frm" method="POST" style="width:2000px;" action="<c:url value='/review/reviewWrite'/>">
 		<table class="board_view">
-			<colgroup>
-				<col width="15%">
-				<col width="*"/>
-			</colgroup>
-		
 			<tbody>
-			
-				
+
 				<tr>
 					<th scope="row">평점</th>
 					<td><select id="RE_LIKE" name="RE_LIKE">
@@ -114,11 +113,10 @@ $(document).ready(function() {
 		</table>
 		
 		<br/><br/>
-		<button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">저장</button>
-
-		<a href="<c:url value='/review/reviewList' />" class="btn1">목록으로</a>
+		<button type="submit" id="submit" name="submit" class="btn btn-primary ">저장</button>
+		<a href="#" onclick="history.back();" class="btn1">목록으로</a>
 	</form>
-	
+</div>	
 	
 </body>
 </html>

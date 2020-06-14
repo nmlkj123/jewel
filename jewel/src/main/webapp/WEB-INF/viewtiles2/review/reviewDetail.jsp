@@ -69,6 +69,7 @@ $(document).on('click','#com_write',function(){
 
 </head>
 <body>
+<div class="container">
 <table class="board_view">
 		<colgroup>
 			<col width="10%"/>
@@ -148,10 +149,11 @@ $(document).on('click','#com_write',function(){
         </table>
 
 
-    	<a href="<c:url value='/review/reviewList'/>" class="btn1" id="list">목록으로</a>
-   
+    	<a href="#" onclick="history.back();" class="btn1" id="list">목록으로</a>
+   </div>
 </body>
-</html></p>
+
+</html>
 
 
 	

@@ -1,10 +1,13 @@
 package com.jewel.service.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -28,13 +31,17 @@ public class QNAController {
 	
 	@RequestMapping(value="/qna/qnalist")
 	public ModelAndView qnalist(CommandMap commandMap, HttpServletRequest request) throws Exception{
-		ModelAndView mv = new ModelAndView("qnalist");
-		
+		ModelAndView mv = new ModelAndView("jsonView");
+		HttpSession session = request.getSession();
 		Map<String, Object> map =commandMap.getMap();
 		String pg=(String) commandMap.get("pg");  
 		if(map.get("pg")==null|| map.get("pg").equals("")) {
 	    	  pg="1";   	  
 		}
+		if(session.getAttribute("MEM_ID")!=null) {
+			commandMap.put("MEM_ID", session.getAttribute("MEM_ID"));
+		}
+		
 		
 		int show=5;
     	int block=5;
@@ -58,6 +65,8 @@ public class QNAController {
 
     	
 		List<Map<String,Object>> list = qnaService.selectQNAList(commandMap.getMap());
+
+
     	mv.addObject("list", list);
 	
     	return mv;
@@ -66,15 +75,26 @@ public class QNAController {
 	@RequestMapping(value="/qna/qnaWriteForm")
 	public ModelAndView qnaWriteForm(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("qnaWriteForm");
-		
+		mv.addObject("ITEM_NUM",commandMap.get("ITEM_NUM"));
 		return mv;
 	}
 	
 	@RequestMapping(value="/qna/qnaWrite", method=RequestMethod.POST)
-	public ModelAndView qnaWrite(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/qna/qnalist");
+	public ModelAndView qnaWrite(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response) throws Exception{
+		ModelAndView mv = new ModelAndView("main");
+		HttpSession session = request.getSession();
+		if(session.getAttribute("MEM_ID")!=null) {
+			commandMap.put("MEM_ID", session.getAttribute("MEM_ID"));
+		}
 		System.out.println(commandMap.getMap());
 		qnaService.insertQNA(commandMap.getMap());
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		out.println("<script>alert('QNA가 등록 되었습니다.'); location.href='"+request.getContextPath()+"/item/itemDetail?ITEM_NUM="+commandMap.get("ITEM_NUM")+"';</script>");
+		 
+		out.flush();
 		return mv;
 	}
 	
@@ -134,11 +154,17 @@ public class QNAController {
 	}
 	
 	@RequestMapping(value="/qna/qnaDelete")
-	public ModelAndView adminQnADelete(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/qna/qnalist");
+	public ModelAndView adminQnADelete(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response) throws Exception{
+		ModelAndView mv = new ModelAndView("main");
 		
 		qnaService.qnaDelete(commandMap.getMap());
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
 		
+		out.println("<script>alert('QNA가 삭제 되었습니다.'); location.href='"+request.getContextPath()+"/item/itemDetail?ITEM_NUM="+commandMap.get("ITEM_NUM")+"';</script>");
+		 
+		out.flush();
 		return mv;
 	}
 }

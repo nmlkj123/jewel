@@ -18,20 +18,20 @@ public class ReviewListPaging {
 		if(endPage>totalP)endPage=totalP;
 		pagingHTML.append("<ul class='pagination' style='justify-content: center;'>");
 		if(startPage>pageBlock)
-			pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/review/reviewList?pg="+(startPage-1)+"'>����</a></li>");
+			pagingHTML.append("<li class='page-item'><a class='page-link' onclick='reviewPage("+(startPage-1)+")'>이전</a></li>");
 		
 		for(int i=startPage;i<=endPage;i++) {
 			if(i==currentPage) {
-				pagingHTML.append("<li class='page-item active'><a class='page-link' href='"+path+"/review/reviewList?pg="+i+"'>"+i+"</a></li>");
+				pagingHTML.append("<li class='page-item active'><a class='page-link' onclick='reviewPage("+i+")'>"+i+"</a></li>");
 			}else {
-				pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/review/reviewList?pg="+i+"'>"+i+"</a></li>");
+				pagingHTML.append("<li class='page-item'><a class='page-link' onclick='reviewPage("+i+")'>"+i+"</a></li>");
 			}
 			
 			
 		}
 		
 		if(endPage<totalP) {
-			pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/review/reviewList?pg="+(endPage+1)+"'>����</a></li>");
+			pagingHTML.append("<li class='page-item'><a class='page-link' onclick='reviewPage("+(endPage+1)+")'>다음</a></li>");
 		}
 		pagingHTML.append("</ul>");
 	}

@@ -51,10 +51,13 @@ function fsubmit(){
 			</colgroup>
 			<caption>게시글 작성</caption>
 			<tbody>
-			
+				
 				<tr>
 					<th scope="row">작성자</th>
-					<td><input type="text" id="QNA_NAME" name="QNA_NAME" class="wdp_20"></input></td>
+					<td>
+						<input type="text" id="QNA_NAME" name="QNA_NAME" class="wdp_20"></input>
+						<input type="hidden" name="ITEM_NUM" value="${ITEM_NUM}">
+					</td>
 				</tr>
 				
 				<tr>
@@ -88,7 +91,7 @@ function fsubmit(){
 		
 		<br/><br/>
 		<input type="button" class="btn1" onclick="fsubmit(); return false;"value="작성하기">
-		<a href="<c:url value='/qna/qnalist' />" class="btn1">목록으로</a>
+		<a href="#" onclick="history.back();" class="btn1">목록으로</a>
 	</form>
 	
 	
