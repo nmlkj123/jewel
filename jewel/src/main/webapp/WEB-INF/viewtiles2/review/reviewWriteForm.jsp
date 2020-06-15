@@ -21,6 +21,18 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
 </head>
+<style>
+.starR{
+	  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+	  background-size: auto 100%;
+	  width: 30px;
+	  height: 30px;
+	  display: inline-block;
+	  text-indent: -9999px;
+	  cursor: pointer;
+	}
+.starR.ons{background-position:0 0;}
+</style>
 <script type="text/javascript">
 $(document).ready(function(){ 
 	var message = "${message}";
@@ -35,11 +47,18 @@ $(document).ready(function(){
 	}
 })
 </script>
+
 <script type="text/javascript">
 	
 		
 	
 $(document).ready(function() {
+	$('.starRev span').click(function(){
+		  $(this).parent().children('span').removeClass('ons');
+		  $(this).addClass('ons').prevAll('span').addClass('ons');
+		  $("#RE_LIKE").val($(this).text());
+		  return false;
+		});
       $('#summernote').summernote({
         height: 300,
         minHeight: null,
@@ -85,18 +104,20 @@ $(document).ready(function() {
 		<table class="board_view">
 			<tbody>
 
-				<tr>
-					<th scope="row">평점</th>
-					<td><select id="RE_LIKE" name="RE_LIKE">
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-					<option>5</option>
-					</select>
-					</td>
-				</tr>
 				
+				<tr>
+                    <th scope="row">평점</th>
+                    <td>
+                        <div class="starRev">
+						  <span class="starR ons">1</span>
+						  <span class="starR">2</span>
+						  <span class="starR">3</span>
+						  <span class="starR">4</span>
+						  <span class="starR">5</span>  
+						  <input type="hidden" id="RE_LIKE" name="RE_LIKE" value="1"> 
+						</div>
+                    </td>
+                </tr>
 				<tr>
 					<th scope="row">제목</th>
 					<td><input type="text" id="RE_TITLE" name="RE_TITLE" class="wdp_90"></input></td>

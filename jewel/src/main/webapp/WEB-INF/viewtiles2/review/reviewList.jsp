@@ -5,21 +5,20 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/ui.css'/>" /> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
+<style type="text/css">
+.starRc{
+	  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+	  background-size: auto 100%;
+	  width: 10px;
+	  height: 10px;
+	  display: inline-block;
+	  text-indent: -9999px;
+	  cursor: pointer;
+	}
+.starRc.oncs{background-position:0 0;}
+</style>
 
 <script>
-
-$.fn.generateStars = function() {
-    return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
-};
-
-
-// 숫자 평점을 별로 변환하도록 호출하는 함수
-$(function() {
-
-	$('.star-prototype').generateStars();
-});
-
 function reviewPage(page){
 	$("#reviewList tbody").empty();
 	$.ajax({
@@ -40,7 +39,15 @@ function reviewPage(page){
 					'</td>'+
 					'<td>'+items.MEM_ID+'</td>'+
 					'<td>'+items.RE_HIT+'</td>'+
-					'<td><span class="star-prototype">'+items.RE_LIKE+'</span></td>'+
+					'<td>';
+					for(var i=1;i<=5;i++){
+						if(i>items.RE_LIKE){
+						str+='<span class="starRc">별</span>';
+						}else{
+						str+='<span class="starRc oncs">별</span>';
+						}
+					}
+					str+='</td>'+
 					'<td>'+items.RE_DATE+'</td>'+
 					'</tr>';
 

@@ -2,13 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/viewtiles2/include/include-header.jspf" %>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/journal/bootstrap.min.css">
- <!-- JS --> 
+ <!-- JS -->
+  <link href="https://fonts.googleapis.com/css2?family=Poor Story&display=swap" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet"> 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script> 
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
  <link href="<c:url value='/resources/css/product.css'/>" rel="stylesheet">
  <link href="<c:url value='/resources/css/default.css'/>" rel="stylesheet">
 <style type="text/css">
+
 .menu_top{
 	width:100%;
 	height:20px;
@@ -20,34 +23,35 @@
 <div class="menu_top">
 		<c:choose>
 		    <c:when test="${MEM_ID == null}">
-		        <div style="margin-right: 80px; float: right;">
-					<a href="<c:url value='/login/loginForm'/>">로그인 </a>
-				</div>
-				<div style="margin-right: 80px; float: right;">
-					<a href="<c:url value='/join/joinForm'/>">회원가입 </a>
-				</div>
-				<div style="margin-right: 80px; float: right;">
+		    	<div style="margin-right: 80px; float: right;">
 					<a href="<c:url value='/myPage/myCart'/>">장바구니</a>
 				</div>
+		        <div style="margin-right: 20px; float: right;">
+					<a href="<c:url value='/login/loginForm'/>">로그인 </a>
+				</div>
+				<div style="margin-right: 20px; float: right;">
+					<a href="<c:url value='/join/joinForm'/>">회원가입 </a>
+				</div>
+				
 		    </c:when>
 		    <c:when test="${MEM_ID != null}">
-		    	<div style="margin-right: 80px; float: right;">
-					<c:out value="${MEM_ID}"/> 님
-				</div>
-		        <div style="margin-right: 80px; float: right;">
-					<a href="<c:url value='/login/logout'/>">로그아웃 </a>
-				</div>
-				<div style="margin-right: 80px; float: right;">
-					<a href="<c:url value='/myPage/myOrderList'/>">마이페이지 </a>
-				</div>
-				<div style="margin-right: 80px; float: right;">
-					<a href="<c:url value='/myPage/myCart'/>">장바구니 </a>
-				</div>
-				<c:if test="${MEM_ADMIN eq 'A'}">
+		    	<c:if test="${MEM_ADMIN eq 'A'}">
 					<div style="margin-right: 80px; float: right;">
 				<a href="<c:url value='/openAdminMain'/>">관리자페이지 </a>
 				</div>
 				</c:if>
+		        <div style="margin-right: 20px; float: right;">
+					<a href="<c:url value='/login/logout'/>">로그아웃 </a>
+				</div>
+				<div style="margin-right: 20px; float: right;">
+					<a href="<c:url value='/myPage/myOrderList'/>">마이페이지 </a>
+				</div>
+				<div style="margin-right: 20px; float: right;">
+					<a href="<c:url value='/myPage/myCart'/>">장바구니 </a>
+				</div>
+				<div style="margin-right: 20px; float: right;">
+					<c:out value="${MEM_ID}"/> 님
+				</div>
 		    </c:when>
 		    <c:otherwise>
 		        
@@ -89,10 +93,10 @@
     </a>
     <a class="py-2 d-none d-md-inline-block" href="<c:url value='/item/itemList'/>">베스트100</a>
     <a class="py-2 d-none d-md-inline-block" href="<c:url value='/item/itemList?type=N'/>">목걸이</a>
-    <a class="py-2 d-none d-md-inline-block" href="#">반지</a>
-    <a class="py-2 d-none d-md-inline-block" href="#">귀걸이</a>
-    <a class="py-2 d-none d-md-inline-block" href="#">팔찌/발찌</a>
-    <a class="py-2 d-none d-md-inline-block" href="#">커플존</a>
+    <a class="py-2 d-none d-md-inline-block" href="<c:url value='/item/itemList?type=R'/>">반지</a>
+    <a class="py-2 d-none d-md-inline-block" href="<c:url value='/item/itemList?type=E'/>">귀걸이</a>
+    <a class="py-2 d-none d-md-inline-block" href="<c:url value='/item/itemList?type=W'/>">팔찌/발찌</a>
+    <a class="py-2 d-none d-md-inline-block" href="<c:url value='/item/itemList?type=C'/>">커플존</a>
     <a class="py-2 d-none d-md-inline-block" href="#">커뮤니티</a>
 	
     <form class="form-inline my-2 my-lg-0 " action="<c:url value='/item/itemList'/>" >

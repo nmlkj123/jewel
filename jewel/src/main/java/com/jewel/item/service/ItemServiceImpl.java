@@ -48,7 +48,9 @@ public class ItemServiceImpl implements ItemService{
 
 	@Override
 	public int addCart(Map<String, Object> map) {
-		// TODO Auto-generated method stub
+		if(0<itemDAO.findCart(map)) {
+			return 0;
+		}
 		return itemDAO.addCart(map);
 	}
 	@Override
@@ -89,6 +91,9 @@ public class ItemServiceImpl implements ItemService{
 		return itemDAO.delPoint(map);
 	}
 	
-	
-	
+	@Override
+	public List<Map<String, Object>> getItemMatch(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return itemDAO.getItemMatch(map);
+	}
 }

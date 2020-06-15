@@ -6,7 +6,8 @@
 <head>
    <title>상품정보</title>
 </head>
-
+<link type="text/css" rel="stylesheet" href="<c:url value='/resources/magiczoomplus/magiczoomplus.css'/>"/>
+<script src="<c:url value='/resources/magiczoomplus/magiczoomplus.js'/>" charset="utf-8"></script>
 <style type="text/css">
   
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
@@ -33,9 +34,6 @@ nav > div a.nav-item.nav-link:focus
   border-right: 1px solid #FC8D86;
 
 }
-
-
-
 
 .qty .count {
     color: #000;
@@ -156,7 +154,7 @@ $(document).ready(function(){
                        "</tr>";
                }
                str += "<tr >" +
-               "<th class='pl-0' scope='row'>"+items.OP_TYPE+"<br></th>"+
+               "<th class='pl-0' scope='row' style='font-family: Jua, cursive; font-size: 15px;'>"+items.OP_TYPE+"<br></th>"+
                "<td class='p-2' ><select id='op_se' class='form-control p-0 '>"+
                "<option value='non_option'>--옵션선택--</option>"+
                "<option value='"+items.OP_NUM+"'>"+items.OP_VALUE;
@@ -329,7 +327,7 @@ var items=$("li[id='op_list']").get();
          url : '<c:url value="/item/addCart"/>',
          data : {CART_CNT:num,OP_VALUE:op_name,ITEM_OP_PRICE:price,ITEM_NUM:"${item.ITEM_NUM}"},
          success : function(data){
-            
+             
          }
       });  
    })
@@ -369,7 +367,6 @@ function buyItem(){
 
 function addJjim(){
 	var num="${MEM_ID}";
-	alert(num);
 	  if(num==""){
 		  alert("로그인이 필요한 서비스입니다.");
 		  return;
@@ -398,18 +395,14 @@ function addJjim(){
             <div class="wrapper row">
                <div class="preview col-md-6" style="width: 400px; height: auto; display: inline; float: none;">
                   
-                  <img src="http://junjewelry.com/shopimages/koreajisuk/1270010011162.jpg?1569380755" height="350" width="350"><div class="preview-pic tab-content">
-                    <div class="tab-pane active" id="pic-1"></div>
-                    <div class="tab-pane" id="pic-2"><img src="http://placekitten.com/400/252"></div>
-                    <div class="tab-pane" id="pic-3"><img src="http://placekitten.com/400/252"></div>
-                    <div class="tab-pane" id="pic-4"><img src="http://placekitten.com/400/252"></div>
-                    <div class="tab-pane" id="pic-5"><img src="http://placekitten.com/400/252"></div>
-                  </div>
-                  
-                  
+                  <a style="width: 350px;height: 350px;" data-lens-image="" href="<c:url value='/images/item/${item.ITEM_IMAGE1}'/>" data-options="zoomMode: magnifier"class="simpleLens-lens-image MagicZoom"> 
+                  <img  src="<c:url value='/images/item/${item.ITEM_IMAGE1}'/>"
+					class="simpleLens-big-image" alt="ss">
+				  </a>
+
                </div>
                <div class="details col-md-6  pl-0 ml-0" style="">
-                  <h4 class="product-title text-left" style="width: 500px; display: inline-block;">${item.ITEM_NAME}</h4>
+                  <h4 class="product-title text-left" style="font-family: 'Jua', cursive; width: 500px; display: inline-block;">${item.ITEM_NAME}</h4>
 
                   <hr style="line-height: 24px; width: 500px;">
 
@@ -420,18 +413,18 @@ function addJjim(){
                      </thead>
                      <tbody>
                         <tr>
-                           <th class="pl-0" scope="row">판매가</th>
-                           <td><fmt:formatNumber value="${item.ITEM_PRICE}" pattern="#,###"/>원</td>
+                           <th class="pl-0" scope="row" style="font-family: 'Jua', cursive; font-size: 15px;">판매가</th>
+                           <td style="text-decoration:line-through;"><fmt:formatNumber value="${item.ITEM_PRICE}" pattern="#,###"/>원</td>
                         </tr>
                         <tr>
-                           <th class="pl-0" scope="row">할인가</th>
-                           <td style="text-decoration:line-through;"><fmt:formatNumber value="${item.ITEM_FP}" pattern="#,###"/>원</td>
+                           <th class="pl-0" scope="row"style="font-family: 'Jua', cursive; font-size: 15px;">할인가</th>
+                           <td ><fmt:formatNumber value="${item.ITEM_FP}" pattern="#,###"/>원</td>
                         </tr>
                         
                         
                      </tbody>
                   </table>
-                  <div class="text-left " style="display: inline-block;">
+                  <div class="text-left mb-2" style="display: inline-block;">
                      <ul class="list-group"
                         style="width: 500px; justify-content: center; display: inline-block;">
                         
@@ -471,7 +464,7 @@ function addJjim(){
          </div>
       </div>
    
- <div class="container pt-5">
+ <div class="container pt-5 mt-5">
               <div class="row">
                 <div class="col-xs-12 " style="width:100%">
                   <nav>
@@ -484,10 +477,12 @@ function addJjim(){
                   </nav>
                   <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent" >
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" >
-                   <img alt="" src="http://www.goldmania.info/bracelet/gold/2020/2119B~2121B/2006_2120B_HAN_1.jpg">
+                   <img alt="" src="<c:url value='/images/item/${item.ITEM_IMAGE2}'/>" style="width: 100%;">
                     </div>
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-       
+       				<jsp:include  page="/WEB-INF/viewtiles2/item/itemMatch.jsp" flush="true">
+						<jsp:param name="ITEM_NUM" value="${item.ITEM_NUM}"/>
+						</jsp:include>
                     </div>
                     <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                      <jsp:include  page="/WEB-INF/viewtiles2/review/reviewList.jsp" flush="true">

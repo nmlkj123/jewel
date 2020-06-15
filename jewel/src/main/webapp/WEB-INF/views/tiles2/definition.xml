@@ -38,12 +38,11 @@
 					value="/WEB-INF/viewtiles2/main/main.jsp" />
 			</definition>
 			
-			<definition name="loginForm" extends="base_layout">
-				<put-attribute name="title" value="로그인" />
-				<put-attribute name="body"
-					value="/WEB-INF/viewtiles2/login/loginForm.jsp" />
+			<definition name="loginForm" template="/WEB-INF/viewtiles2/login/loginForm.jsp">
+
+
 			</definition>
-			
+
 			<definition name="login" extends="base_layout">
 				<put-attribute name="title" value="로그인" />
 				<put-attribute name="body"

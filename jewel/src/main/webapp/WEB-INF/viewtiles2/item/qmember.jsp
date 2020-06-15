@@ -119,7 +119,10 @@ function fsubmit(){
 		}
 	});
 }
-
+function noMember(){
+	location.href="<c:url value='/item/itemOrder'/>"
+	
+}
 </script>
 <body>
 <div class="sidenav">
@@ -142,7 +145,7 @@ function fsubmit(){
                   </div>
                   <button type="submit" onclick="fsubmit(); return false;" class="btn btn-secondary">로그인</button>
                   <button type="submit" class="btn btn-secondary">회원가입</button>
-                  <button type="submit" class="btn btn-secondary">비회원구매</button>
+                  <button onclick="noMember(); return false;" class="btn btn-secondary">비회원구매</button>
                </form>
             </div>
          </div>

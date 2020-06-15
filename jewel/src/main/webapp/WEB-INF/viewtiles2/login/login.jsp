@@ -13,6 +13,7 @@ $(document).ready(function(){
 		alert(message);
 		location.href = "<c:url value='/login/loginForm'/>";
 	}else{
+		alert("로그인성공!");
 		location.href = "<c:url value='/main/main'/>";
 		
 	}

@@ -79,11 +79,11 @@
     color: #000;
     display: inline-block;
     vertical-align: top;
-    font-size: 25px;
+    font-size: 15px;
     font-weight: 700;
-    line-height: 30px;
-    padding: 0 2px
-    ;min-width: 35px;
+    line-height: 20px;
+    padding: 0 2px;
+    min-width: 35px;
     text-align: center;
 }
 .qty .plus {
@@ -91,9 +91,9 @@
     display: inline-block;
     vertical-align: top;
     color: white;
-    width: 30px;
-    height: 30px;
-    font: 30px/1 Arial,sans-serif;
+    width: 20px;
+    height: 20px;
+    font: 20px/1 Arial,sans-serif;
     text-align: center;
     border-radius: 50%;
     }
@@ -102,9 +102,9 @@
     display: inline-block;
     vertical-align: top;
     color: white;
-    width: 30px;
-    height: 30px;
-    font: 30px/1 Arial,sans-serif;
+    width: 20px;
+    height: 20px;
+    font: 20px/1 Arial,sans-serif;
     text-align: center;
     border-radius: 50%;
     background-clip: padding-box;
@@ -173,7 +173,7 @@ nput::-webkit-outer-spin-button,
         				<input type="checkbox" id="checkRow" name="checkRow">
         			</td>
         			<td>
-        			 <img src="<c:url value="/images/item/${cart.ITEM_IMAGE1 }"/>" style="width:50px">
+        			 <img src="<c:url value='/images/item/${cart.ITEM_IMAGE1}'/>" style="width:50px">
         			</td>
         			<td>${cart.ITEM_NAME }</td>
         			<td>${cart.OP_VALUE }</td>
@@ -195,7 +195,7 @@ nput::-webkit-outer-spin-button,
         			 <input class="price" type="text" name="ITEM_OP_PRICE" id="price" class="price" value="${cart.ITEM_OP_PRICE}" readonly>
         			</td>
         			<td>
-        			 <input type="text" id="sum" class="sum" value="<c:out value="${sum1}"/>">
+        			 <input type="text" id="sum" class="sum" value="<c:out value="${sum1}"/>" readonly>
         			</td>			
         		</tr>      		
         	</c:forEach>	        	
@@ -228,13 +228,13 @@ $(document).ready(function(){
     	var sum = cnt*price; 
     	$(this).closest("tr").find('#sum').val(sum);
     	var num = parseInt($(this).parent().siblings("#num").val());
-    	alert(cnt+" "+price+" "+sum+" "+num);
+    	
     	$.ajax({
 			type: "POST",
 			url:"<c:url value='/myPage/myCartUpdate'/>",
 			data:{CART_NUM:num, CART_CNT:cnt},
 			success: function(data){
-					alert("굳");
+					
 				}	
         	});
         	
@@ -263,7 +263,7 @@ $(document).ready(function(){
 				url:"<c:url value='/myPage/myCartUpdate'/>",
 				data:{CART_NUM:num, CART_CNT:cnt},
 				success: function(data){
-						alert("굳");
+						
 					}	
 	        });	 
 	});
@@ -314,7 +314,7 @@ function buyItem(){
  				data : formOrder,
  				async: false,
  				success : function(data){
- 					alert("d");
+ 					
  					
  				}
  			});
