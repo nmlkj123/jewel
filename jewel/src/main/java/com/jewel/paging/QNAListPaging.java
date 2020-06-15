@@ -4,10 +4,10 @@ import org.springframework.stereotype.Component;
 
 @Component(value = "qnaListPaging")
 public class QNAListPaging {
-	private int currentPage;//ÇöÀçÆäÀÌÁö
-	private int pageBlock;//[ÀÌÀü][][][´ÙÀ½]
-	private int pageSize;//1ÆäÀÌÁö¿¡ 12°³¾¿
-	private int totalList;//ÃÑ±Û¼ö
+	private int currentPage;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private int pageBlock;//[ï¿½ï¿½ï¿½ï¿½][][][ï¿½ï¿½ï¿½ï¿½]
+	private int pageSize;//1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 12ï¿½ï¿½ï¿½ï¿½
+	private int totalList;//ï¿½Ñ±Û¼ï¿½
 	private StringBuffer pagingHTML;
 	private String path;
 	public void makePagingHTML() {
@@ -18,20 +18,20 @@ public class QNAListPaging {
 		if(endPage>totalP)endPage=totalP;
 		pagingHTML.append("<ul class='pagination' style='justify-content: center;'>");
 		if(startPage>pageBlock)
-			pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/qna/qnalist?pg="+(startPage-1)+"'>ÀÌÀü</a></li>");
+			pagingHTML.append("<li class='page-item'><a class='page-link' onclick='qnaPage("+(startPage-1)+")'>ì´ì „</a></li>");
 		
 		for(int i=startPage;i<=endPage;i++) {
 			if(i==currentPage) {
-				pagingHTML.append("<li class='page-item active'><a class='page-link' href='"+path+"/qna/qnalist?pg="+i+"'>"+i+"</a></li>");
+				pagingHTML.append("<li class='page-item active'><a class='page-link' onclick='qnaPage("+i+")'>"+i+"</a></li>");
 			}else {
-				pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/qna/qnalist?pg="+i+"'>"+i+"</a></li>");
+				pagingHTML.append("<li class='page-item'><a class='page-link' onclick='qnaPage("+i+")'>"+i+"</a></li>");
 			}
 			
 			
 		}
 		
 		if(endPage<totalP) {
-			pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/qna/qnalist?pg="+(endPage+1)+"'>´ÙÀ½</a></li>");
+			pagingHTML.append("<li class='page-item'><a class='page-link' onclick='qnaPage("+(endPage+1)+")'>ë‹¤ìŒ</a></li>");
 		}
 		pagingHTML.append("</ul>");
 	}

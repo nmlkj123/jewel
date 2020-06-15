@@ -11,20 +11,62 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/ui.css'/>" /> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+function qnaPage(page){
+	$("#qnaList tbody").empty();
+	$.ajax({
+	      type : "POST",
+	      url : '<c:url value="/qna/qnalist"/>',
+	      data : {ITEM_NUM: "${param.ITEM_NUM}",pg:page},
+	      success : function(data){
+	         var str = "";
+	         var he="";
+	         if(data.list.length>0){
+	         $.each(data.list,function(index,items){
+	        	 str+='<tr>'+
+					'<td>'+items.QNA_NUM+'</td>'+
+					'<td>'+items.ITEM_NUM+'</td>'+
+					'<td class="title">'+
+					'<a href="../qna/qnaPwConfirmForm?QNA_NUM='+items.QNA_NUM+'">['+items.QNA_CATE+']'+items.QNA_TITLE+'</a>'+	
+					'<input type="hidden" id="FAQ_NUM" value="'+items.FAQ_NUM+'">'+
+					'</td>'+
+					'<td>';
+					if(items.MEM_ID==null){
+						str+=items.QNA_NAME;
+					}else{
+						str+=items.MEM_ID;
+					}
+					
+					str+='</td>'+
+					'<td>'+items.QNA_DATE+'</td>'+
+					'<td>'+items.QNA_RSTATE+ '</td>'+
+				'</tr>';
+
+	            
+	         
+	         })
+	         }else{
+	        	 str +=' <tr>'+
+					'<td colspan="6">조회된 결과가 없습니다.</td>'+
+				'</tr>';
+		     }
+	         $("#qnaList tbody").append(str);
+	         $('#categoryPaging2').html(data.qnaListPaging.pagingHTML);
+			 $('#currentPaging2').addClass('active'); 
+	      }
+	});
+
+}
+qnaPage(1);
+</script>
 </head>
 <body>
-<div class="button">
-<input type="button" value="공지사항" class="btn4" onClick="location.href='<c:url value='/event/eventList'/>';">	    
-<input type="button" value="이벤트" class="btn4" onClick="location.href='<c:url value='/faq/faqlist'/>';">	    
-	<input type="button" value="QnA" class="btn4" onClick="location.href='<c:url value='/qna/qnalist'/>';">	    
-	<input type="button" value="FAQ"  class="btn4" onClick="location.href='<c:url value='/notice/noticeList'/>';">
-	
-</div>    
+  
 
 <br/><br/><br/><br/>
 	<h2>QNA</h2>
 
-	<table class="board_list">
+	<table class="board_list" id="qnaList">
 		<colgroup>
 			<col width="10%"/>
 			<col width="15%"/>
@@ -43,54 +85,16 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:choose>
-				<c:when test="${fn:length(list) > 0}">
-					<c:forEach items="${list }" var="row">
-						<tr>
-							<td>${row.QNA_NUM }</td>
-							<td><c:choose>
-							<c:when test="${row.ITEM_NUM eq null}">
-							
-							</c:when>
-							<c:otherwise>
-							${row.ITEM_NUM}
-							</c:otherwise>
-							</c:choose>
-							</td>
-							<td class="title">
-							<a href="../qna/qnaPwConfirmForm?QNA_NUM=${row.QNA_NUM}">[${row.QNA_CATE}]${row.QNA_TITLE }</a>		
-							<input type="hidden" id="FAQ_NUM" value="${row.FAQ_NUM }">
-							</td>
-							
-							<td><c:choose>
-							<c:when test="${row.MEM_ID eq null}">
-							${row.QNA_NAME}
-							</c:when>
-							<c:otherwise>
-							${row.MEM_ID}
-							</c:otherwise>
-							</c:choose>
-							</td>
-							<td>${row.QNA_DATE }</td>
-							<td>${row.QNA_RSTATE }</td>
-						</tr>
-					</c:forEach>
-				</c:when>
-				<c:otherwise>
-					<tr>
-						<td colspan="6">조회된 결과가 없습니다.</td>
-					</tr>
-				</c:otherwise>
-			</c:choose>
+			
 		</tbody>
 	</table>
 	<br/>
 	
 	
-	<a href="<c:url value='/qna/qnaWriteForm'/>" class="btn1" id="write">글쓰기</a>
-	
-		<div align="center"class="container pt-5" id="categoryPaging" >
-		${qnaListPaging.pagingHTML}
+	<a href="<c:url value='/qna/qnaWriteForm?ITEM_NUM=${param.ITEM_NUM }'/>" class="btn1" id="write">글쓰기</a>
+	 
+		<div align="center"class="container pt-5" id="categoryPaging2" >
+		
 		</div>
 </body>
 </html>

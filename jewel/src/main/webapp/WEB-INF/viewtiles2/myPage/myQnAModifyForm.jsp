@@ -4,9 +4,25 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/viewtiles2/include/include-header.jspf" %>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <meta charset="UTF-8">
 <title>나의QNA수정폼</title>
 </head>
+<style>
+body {
+
+  padding-top: 70px;
+  padding-bottom: 30px;
+  font-size: 14px;	
+}
+body label{
+	font-weight: bold;
+}
+
+.container{
+	border: 1px solid #e7e7e7;
+}
+</style>
 <script type="text/javascript">
 
 
@@ -29,42 +45,43 @@ function updateChk(){
 </script>
 
 <body>
-	
-	<form id="frm" method="post" action="<c:url value='/myPage/myQnAModify'/>">
-		<table>
-			<caption>나의QNA수정</caption>
-			<tbody>
-				<tr>
-					<th>QNA 번호</th>
-					<td>
-						${modifyForm.QNA_NUM}
-						<input type="hidden" name="QNA_NUM" value="${modifyForm.QNA_NUM}">
-					</td>
-					<th>상품명</th>
-					<td>${modifyForm.ITEM_NAME }</td>
-				</tr>
-				<tr>
-					<th>작성일</th>
-					<td>${modifyForm.QNA_DATE }</td>
-				</tr>
-				<tr>
-					<th>제목</th>
-					<td>
-						<input type="text" id="title" name="QNA_TITLE" value="${modifyForm.QNA_TITLE }"/>
-					</td>
-				</tr>
-				<tr>
-					<th>내용</th>
-					<td colspan="3">
-						<textarea rows="20" cols="100" title="내용" id="content" name="QNA_CONTENT">${modifyForm.QNA_CONTENT }</textarea>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</form>
+	<h4 style="text-align:center; font-weight: bold;">나의QNA수정</h4>
+	<article>
+	<div class="container" role="main">
+		
+		<br>
+		<form id="frm" method="post" action="<c:url value='/myPage/myQnAModify'/>">			
+			<div class="mb-3">			
+				<label for="num">번호</label>
+				${modifyForm.QNA_NUM}
+				<input type="hidden" name="QNA_NUM" value="${modifyForm.QNA_NUM}">
+			</div>
+			
+			<div class="mb-3">			
+				<label for="itemName">상품명</label>
+				${modifyForm.ITEM_NAME}
+				&nbsp;&nbsp;&nbsp;
+				<label for="date">작성일</label>
+				${modifyForm.QNA_DATE}
+			</div>
+			
+			<div class="mb-3">			
+				<label for="title">제목</label>&nbsp;
+				<input type="text" id="title" name="QNA_TITLE" value="${modifyForm.QNA_TITLE }"/>
+			</div>
+			
+			
+			<div class="mb-3">
+				<label for="content">내용</label>
+				<textarea class="form-control" rows="5" title="내용" name="QNA_CONTENT" id="content" placeholder="${modifyForm.QNA_CONTENT }" ></textarea>
+			</div>
+			
+		</form>
+	</div>
+	</article>
 	<div align="center">
-		<a href="#" onclick="updateChk(); return false;">확인</a>
-		<a href="#" onclick="history.go(-1)">취소</a>
+		<button type="button" class="btn btn-outline-danger" onclick="updateChk(); return false;">확인</button>
+		<button type="button" class="btn btn-outline-danger" onclick="history.go(-1)">취소</button>
 	</div>
 	
 	

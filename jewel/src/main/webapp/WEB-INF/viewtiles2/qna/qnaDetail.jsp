@@ -12,7 +12,8 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/ui.css'/>" /> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <body>
-<table class="board_view">
+<div class="container">
+<table class="board_view" style="width: 100%;">
 		<colgroup>
 			<col width="15%"/>
 			<col width="35%"/>
@@ -57,8 +58,9 @@
 		</tbody>
 	</table>
 	<br/>
-	<a href="<c:url value='/qna/qnalist'/>" class="btn1" id="list">목록으로</a>
+	<a href="<c:url value='/item/itemDetail?ITEM_NUM=${map.ITEM_NUM }'/>" class="btn1" id="list">목록으로</a>
 	<a href="<c:url value='/qna/qnaUpdateForm?QNA_NUM=${map.QNA_NUM}'/>" class="btn1" id="update">수정하기</a>
-	<a href="<c:url value='/qna/qnaDelete?QNA_NUM=${map.QNA_NUM}'/>" class="btn1" id="update">삭제하기</a>
+	<a href="<c:url value='/qna/qnaDelete?QNA_NUM=${map.QNA_NUM}&ITEM_NUM=${map.ITEM_NUM }'/>" class="btn1" id="update">삭제하기</a>
+</div>
 </body>
 </html>

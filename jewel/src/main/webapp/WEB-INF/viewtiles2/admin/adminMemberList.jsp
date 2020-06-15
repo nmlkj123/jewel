@@ -13,7 +13,7 @@
       <input class="form-control mr-sm-1" type="text" name="keyword" placeholder="Search" aria-label="Search">
       <button class="btn btn-secondary my-2 my-sm-0 "  type="submit">Search</button>
     </form>
-    <table class="board_list">
+    <table class="table table-head-fixed text-nowrap">
        
         <thead>
             <tr>

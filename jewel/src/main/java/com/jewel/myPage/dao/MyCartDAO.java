@@ -29,5 +29,9 @@ public class MyCartDAO extends AbstractDAO {
 	public void deleteMyCart(Map<String, Object> map) throws Exception {
 		update("myPage.deleteMyCart", map);
 	}
+	//주문페이지 유효성 검사
+	public int checkOrderId(Map<String, Object> map) throws Exception{
+		return (Integer) selectOne("myPage.checkOrderId", map);
+	}
 
 }

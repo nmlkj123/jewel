@@ -28,8 +28,8 @@ public class AdminFaqController {
 	public ModelAndView adminFaqList(CommandMap commandMap,HttpServletRequest request)throws Exception{
 			ModelAndView mv=new ModelAndView("adminFaqList");  
 			
-			int show=12;//페이지당 보여줄 상품 개수
-	    	int block=5;//페이지당 보여줄 페이지개수
+			int show=12;
+	    	int block=5;
 	    	int pg;
 	    	if(commandMap.get("pg")==null) {
 		    	  pg=1;

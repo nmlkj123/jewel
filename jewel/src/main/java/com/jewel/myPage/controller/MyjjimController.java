@@ -4,11 +4,15 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jewel.common.CommandMap;
@@ -25,6 +29,23 @@ public class MyjjimController {
 	@Resource(name="myJJimListPaging")
 	private MyJJimListPaging myJJimListPaging;
 	
+	@RequestMapping(value="/myPage/addJjim")
+	@ResponseBody
+	public boolean addJjim(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response) throws Exception{
+		
+    	HttpSession session =request.getSession();
+    	
+    	if(session.getAttribute("MEM_NUM")!=null) {
+    		commandMap.put("MEM_NUM", session.getAttribute("MEM_NUM"));
+    	}
+    	System.out.println(commandMap.getMap());
+    	int check=myJJimListService.addJjim(commandMap.getMap());
+    	
+    	if(check>0) {
+    		return true;
+    	}
+    	return false;
+	}
 	
 	@RequestMapping(value="/myPage/myJJimList")
 	public ModelAndView myJJimList(CommandMap commandMap, HttpServletRequest request)
@@ -68,6 +89,19 @@ public class MyjjimController {
 		
 		List<Map<String, Object>> jjimList = myJJimListService.selectMyjjimList(commandMap.getMap());
 		mv.addObject("jjimList", jjimList);
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/myPage/myJJimDelete")
+	public ModelAndView myJJimDelete(CommandMap commandMap, HttpServletRequest request)
+			throws Exception{
+		ModelAndView mv = new ModelAndView("jsonView");
+		
+		HttpSession session = request.getSession();
+		commandMap.put("MEM_NUM", session.getAttribute("MEM_NUM"));
+		
+		myJJimListService.deleteMyJJim(commandMap.getMap());
 		
 		return mv;
 	}

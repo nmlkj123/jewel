@@ -15,10 +15,8 @@
 	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript"
 	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<style>
-
-</style>
-
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+ <script type="text/javascript"src="<c:url value="/resources/js/orderPost.js"/>" ></script>
 
 <script type="text/javascript">
 var totalPrice=0;
@@ -57,8 +55,7 @@ $(document).ready(function(){
 				str+="<tr class='tr-line'>"+
 					"<td class='text-center'>"+
 						"<div class='item-img'>"+
-							"<img src='https://amina.co.kr:49152/demo/data/item/demo/thumb-4_70x70.jpg' width='70' height='70' alt=''>"+
-							"<div class='item-type'>일반</div>"+
+							"<img src='<c:url value='/images/item/"+items.ITEM_IMAGE1+"'/>' width='70' height='70' alt=''>"+
 						"</div>"+
 					"</td>"+
 					"<td>"+
@@ -130,7 +127,7 @@ function card(){
 	    pay_method : 'card',
 	    merchant_uid : 'merchant_' + new Date().getTime(),
 	    name : '주문명:결제테스트',
-	    amount : 100,
+	    amount : 1000,
 	    buyer_email : 'iamport@siot.do',
 	    buyer_name : '구매자이름',
 	    buyer_tel : '010-1234-5678',
@@ -170,7 +167,7 @@ function orderSucess(){
 			data : formOrder,
 			async: false,
 			success : function(data){
-				alert("d");
+				
 				
 			}
 		});
@@ -182,7 +179,7 @@ function orderSucess(){
 		data : formOrder,
 		async: false,
 		success : function(data){
-			alert("d");
+			
 			
 		}
 	});
@@ -323,18 +320,18 @@ function orderf(){
 						<label class="col-sm-3 control-label"><b>주소</b></label>
 						<div class="col-sm-8">
 							<label for="od_b_zip" class="sound_only">우편번호</label> <label> <input
-								type="text" name="OR_ADDR1" id="od_b_zip" required
+								type="text" name="OR_ADDR1" id="sample6_postcode" required
 								class="form-control input-sm" size="6" maxlength="6" >
 							</label> <label>
 								<button type="button" class="btn btn-dark btn-sm"
 									style="margin-top: 0px;"
-									onclick="">주소
+									onclick="sample6_execDaumPostcode()">주소
 									검색</button>
 							</label>
 
 							<div class="addr-line">
 								<label class="sound_only" for="od_b_addr2">상세주소</label> <input
-									type="text" name="OR_ADDR2" id="od_b_addr2"
+									type="text" name="OR_ADDR2" id="sample6_address"
 									class="form-control input-control-sm" size="50" placeholder="상세주소">
 							</div>
 						</div>

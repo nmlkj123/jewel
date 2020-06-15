@@ -9,6 +9,11 @@
 <script type="text/javascript">
 
 function fsubmit(){
+	var form = $('#frm')[0];
+	 var formData = new FormData(form);
+	 var inum=$('#ITEM_NUM').val();
+	 
+	 
 	var ITEM_TYPE = document.getElementById("ITEM_TYPE").value;
 	var ITEM_NAME = document.getElementById("ITEM_NAME").value;
 	var ITEM_PRICE = document.getElementById("ITEM_PRICE").value;
@@ -46,13 +51,98 @@ function fsubmit(){
 		alert("재고를 입력하세요.");
 		return false;
 	}
-	frm.submit();
+	$.ajax({
+	      type : "POST",
+	      enctype: 'multipart/form-data',
+	      url : '<c:url value="/adminItemUpdate"/>',
+	      data:formData,
+	      processData: false,
+        contentType: false,
+        async: false,
+	      success : function(data){
+	    	
+	      }
+	      });
+	
+	
+	var count=$('#opt >tbody tr').length
+	alert(count);
+	for(var i=0;i<count;i++){
+		var OPt=$('#opt >tbody tr').eq(i).find('#OP_TYPE').val();
+		var OPv=$('#opt >tbody tr').eq(i).find('#OP_VALUE').val();
+		var	OPp=$('#opt >tbody tr').eq(i).find('#OP_PRICE').val();
+		
+		$.ajax({
+		      type : "POST",
+		      url : '<c:url value="/insertOption"/>',
+		      async: false,
+		      data : {ITEM_NUM:inum,OP_TYPE:OPt,OP_VALUE:OPv,OP_PRICE:OPp}, 
+		      success : function(data){
+		    	 
+		    	  
+		      }
+		      })
+	}
+	alert("수정완료");
+	location.href = "/common/adminItemList";
+	
 }
 
+
+
+
+
+$(document).ready(function(){
+	
+	$.ajax({
+		type : "POST",
+		url : '<c:url value="/selectOptionList"/>',
+		data : "ITEM_NUM="+$('#ITEM_NUM').val(),
+		async: false,
+		success : function(data){
+			
+			
+			$.each(data.list,function(index,items){
+				
+				var str = '<tr>	<td><input type="text" id="OP_TYPE" name="OP_TYPE" value="'+items.OP_TYPE+'"></td><td>	<input type="text" id="OP_VALUE" name="OP_VALUE" value="'+items.OP_VALUE+'"> </td><td>	<input type="text" id="OP_PRICE" name="OP_PRICE" value="'+items.OP_PRICE+'"><a href="#" class="sbtn" id="delete" name="delete">삭제</a></td></tr>';
+				 $("#opt > tbody:last").append(str); 
+				 
+				 	
+			})
+					
+		}
+	});
+	$(document).on("click",'.sbtn', function(e){
+		 
+		 e.preventDefault();
+		$(this).parent().parent('tr').remove(); 
+		count--;
+		}); 
+	
+	
+	$('#add_opt').click(function(){
+		
+	 	
+		var str = '<tr>	<td><input type="text" id="OP_TYPE" name="OP_TYPE" ></td><td>	<input type="text" id="OP_VALUE" name="OP_VALUE"> </td><td>	<input type="text" id="OP_PRICE" name="OP_PRICE"><a href="#" class="btn" id="delete" name="delete">삭제</a></td></tr>';
+	 $("#opt > tbody:last").append(str);
+	 
+	});
+	
+	$(document).on("click",'.btn', function(e){
+		 
+		 e.preventDefault();
+		$(this).parent().parent('tr').remove(); 
+		
+		}); 	
+	
+
+});
+	
 </script>
 <body>
 	<form id="frm" name="frm" action="<c:url value='/adminItemUpdate'/>" method="post" enctype="multipart/form-data">
-	<input type="hidden" name="ITEM_NUM" value="${map.ITEM_NUM}">
+	<input type="hidden" id="ITEM_NUM" name="ITEM_NUM" value="${map.ITEM_NUM}">
+	
 		<table class="board_view">
 			<colgroup>
 				<col width="15%"/>
@@ -102,83 +192,27 @@ function fsubmit(){
 			</tbody>
 		</table>
 	
-	<button type="button" onclick="fsubmit();">수정하기</button>
-	<input type="button" onclick="location.href='<c:url value="/adminItemList"/>'" value="목록으로">
+	
 	
 	
 	</form>
+	<table id="opt">
+		<thead>
+		<tr>
+		<th>옵션 종류</th>
+		<th>옵션 값</th>
+		<th>옵션 가격</th>
+		
+		</tr>
+		<thead>
+		<tbody>
+		
+		</tbody>
+		</table>
 	
-	<script type="text/javascript">
-		var gfv_count='${fn:length(list)+1}';
-		$(document).ready(function(){
-			$("#list").on("click", function(e){ //목록으로 버튼
-				e.preventDefault();
-				fn_openBoardList();
-			});
-			
-			$("#update").on("click", function(e){ //저장하기 버튼
-				e.preventDefault();
-				fn_updateBoard();
-			});
-			
-			$("#delete").on("click", function(e){ //삭제하기 버튼
-				e.preventDefault();
-				fn_deleteBoard();
-			});
-			$("#addFile").on("click", function(e){ //파일 추가 버튼
-				e.preventDefault(); fn_addFile(); 
-				}); 
-			
-			$("a[name^='delete']").on("click", function(e){ //삭제 버튼 
-				
-				e.preventDefault();
-				fn_deleteFile($(this));
-				
-			});
 	
-			
-		});
-		
-		function fn_openBoardList(){
-			var comSubmit = new ComSubmit();
-			comSubmit.setUrl("<c:url value='/sample/openBoardList.do' />");
-			comSubmit.submit();
-		}
-		
-		function fn_updateBoard(){
-			var comSubmit = new ComSubmit("frm");
-			comSubmit.setUrl("<c:url value='/sample/updateBoard.do' />");
-			comSubmit.submit();
-		}
-		
-		function fn_deleteBoard(){
-			var comSubmit = new ComSubmit();
-			comSubmit.setUrl("<c:url value='/sample/deleteBoard.do' />");
-			comSubmit.addParam("IDX", $("#IDX").val());
-			comSubmit.submit();
-			
-		}
-		
-		function fn_addFile(){ 
-			var str = "<p>" + "<input type='file' id='file_"+(gfv_count)+"' name='file_"+(gfv_count)+"'>"
-			+ "<a href='#this' class='btn' id='delete_"
-			+(gfv_count)+"' name='delete_"+(gfv_count)+"'>삭제</a>" 
-			+ "</p>"; 
-			
-			$("#fileDiv").append(str); 
-			
-			$("#delete_"+(gfv_count++)).on("click", function(e){ //삭제 버튼 
-				e.preventDefault(); 
-				fn_deleteFile($(this)); }); } 
-		
-		function fn_deleteFile(obj){ 
-			obj.parent().remove(); 
-			
-			}
-		
-		
-
-			
-	</script>
+	<button type="button" id="add_opt">옵션 추가</button>	
+	<button type="button" onclick="fsubmit();">수정하기</button>
+	<input type="button" onclick="location.href='<c:url value="/adminItemList"/>'" value="목록으로">
 </body>
 </html>

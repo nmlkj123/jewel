@@ -256,6 +256,30 @@
 	<update id="delPoint">
 		UPDATE MEMBER SET MEM_POINT=MEM_POINT-#{OR_USEP} WHERE MEM_NUM=#{MEM_NUM}
 	</update>
+	<select id="findCart"  parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) FROM CART WHERE MEM_ID=#{MEM_ID} AND ITEM_NUM=#{ITEM_NUM} AND OP_VALUE=#{OP_VALUE}
 	
-	
+	</select>
+	<select id="getItemMatch" parameterType="hashmap" resultType="hashmap">
+		SELECT
+				 *
+				FROM
+				(SELECT 
+					rownum as RNUM,s.* 
+				from
+				    (select 
+				    	ITEM_NUM,ITEM_TYPE,ITEM_NAME,ITEM_PRICE,ITEM_DCP,ITEM_IMAGE1,ITEM_IMAGE2,ITEM_DATE,ITEM_STOCK,ITEM_PRICE-(ITEM_PRICE*(ITEM_DCP/100)) AS ITEM_FP 
+				   	 from 
+				   	 	item  
+				   	 WHERE
+				   	 ITEM_TYPE=#{type}
+				   	 order by ITEM_NUM desc)s)
+		
+			<![CDATA[
+				 WHERE RNUM >= 1 AND RNUM <= #{itemCount}
+			]]>
+		
+	    	
+	   
+	</select>
 </mapper>

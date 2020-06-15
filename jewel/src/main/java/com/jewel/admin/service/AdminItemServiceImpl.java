@@ -66,13 +66,13 @@ public class AdminItemServiceImpl implements AdminItemService {
 		String url = null;
 		
 		try {
-			// ÆÄÀÏ Á¤º¸
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			String originFilename = multipartFile.getOriginalFilename();
 			String extName
 				= originFilename.substring(originFilename.lastIndexOf("."), originFilename.length());
 			Long size = multipartFile.getSize();
 			
-			// ¼­¹ö¿¡¼­ ÀúÀå ÇÒ ÆÄÀÏ ÀÌ¸§
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
 			String saveFileName = originFilename;
 			
 			
@@ -80,8 +80,8 @@ public class AdminItemServiceImpl implements AdminItemService {
 			url = uploadPath +"/"+ saveFileName;
 		}
 		catch (IOException e) {
-			// ¿ø·¡¶ó¸é RuntimeException À» »ó¼Ó¹ÞÀº ¿¹¿Ü°¡ Ã³¸®µÇ¾î¾ß ÇÏÁö¸¸
-			// ÆíÀÇ»ó RuntimeExceptionÀ» ´øÁø´Ù.
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ RuntimeException ï¿½ï¿½ ï¿½ï¿½Ó¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ü°ï¿½ Ã³ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			// ï¿½ï¿½ï¿½Ç»ï¿½ RuntimeExceptionï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 			// throw new FileUploadException();	
 			throw new RuntimeException(e);
 		}
@@ -102,7 +102,7 @@ public class AdminItemServiceImpl implements AdminItemService {
 	 */
 	
 	
-	// ÆÄÀÏÀ» ½ÇÁ¦·Î write ÇÏ´Â ¸Þ¼­µå
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ write ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	private boolean writeFile(MultipartFile multipartFile, String saveFileName,String uploadPath)	throws IOException{
 		boolean result = false;
 
@@ -112,5 +112,28 @@ public class AdminItemServiceImpl implements AdminItemService {
 		fos.close();
 		
 		return result;
+	}
+
+	@Override
+	public String selectItemNum(Map<String, Object> map) throws Exception {
+		
+		return adminItemDAO.selectItemNum(map);
+	}
+
+	@Override
+	public void insertOption(Map<String, Object> map) throws Exception {
+		adminItemDAO.insertOption(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectOptionList(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return adminItemDAO.selectOptionList(map);
+	}
+
+	@Override
+	public void deleteOption(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		adminItemDAO.deleteOption(map);
 	}
 }

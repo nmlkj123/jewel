@@ -47,7 +47,11 @@ public class AdminEventListPaging {
 		if(endPage>totalP)endPage=totalP;
 		pagingHTML.append("<ul class='pagination' style='justify-content: center;'>");
 		if(startPage>pageBlock)
-			pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/item/itemList?keyword="+keyword+"&pg="+(startPage-1)+"&sort="+sort+"'>����</a></li>");
+
+			pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/item/itemList?keyword="+keyword+"&pg="+(startPage-1)+"&sort="+sort+"'>이전</a></li>");
+
+			
+
 		
 		for(int i=startPage;i<=endPage;i++) {
 			if(i==currentPage) {
@@ -60,7 +64,11 @@ public class AdminEventListPaging {
 		}
 		
 		if(endPage<totalP) {
-			pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/item/itemList?keyword="+keyword+"&pg="+(endPage+1)+"&sort="+sort+"'>����</a></li>");
+
+			pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/item/itemList?keyword="+keyword+"&pg="+(endPage+1)+"&sort="+sort+"'>다음</a></li>");
+
+			
+
 		}
 		pagingHTML.append("</ul>");
 	}

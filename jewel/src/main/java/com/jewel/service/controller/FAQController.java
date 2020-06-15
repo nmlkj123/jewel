@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.jewel.common.CommandMap;
 import com.jewel.paging.FAQListPaging;
-import com.jewel.paging.QNAListPaging;
 import com.jewel.service.service.FaqService;
 
 
@@ -59,7 +58,9 @@ public class FAQController {
 		faqListPaging.makePagingHTML();
 	      mv.addObject("faqListPaging",faqListPaging);
 	      
+
     	List<Map<String,Object>> list = faqService.faqlist(commandMap.getMap());
+
     	mv.addObject("FAQ_CATE",commandMap.get("FAQ_CATE"));
     	mv.addObject("list", list);
     	

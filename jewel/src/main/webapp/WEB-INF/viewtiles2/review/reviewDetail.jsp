@@ -12,56 +12,56 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).on('click','#cbtn',function(){
-	var tr = $(this).parent().parent().parent().index();
-	var num = $("#tbody tr").eq(tr).find("#com_NUM").val();
-	 $.ajax({ 
+   var tr = $(this).parent().parent().parent().index();
+   var num = $("#tbody tr").eq(tr).find("#com_NUM").val();
+    $.ajax({ 
          url:'<c:url value="/review/deleteComment"/>', 
          type:'POST',   
          data:{CO_NUM:num}, 
          dataType : "json", 
          success:function(data){
-        	 location.reload();
+            location.reload();
             
          },
 
-            });	
+            });   
     
-	 });
+    });
 </script>
 
 <script type="text/javascript">
 
 function enroll() {
-	var mem_num = <%=session.getAttribute("MEM_NUM")%>
-	if(mem_num==null ||mem_num==""){
-		 alert("회원만 사용 가능합니다");
-		 location.href="<c:url value='/login/loginForm'/>";
-	}
-	else{
+   var mem_num = <%=session.getAttribute("MEM_NUM")%>
+   if(mem_num==null ||mem_num==""){
+       alert("회원만 사용 가능합니다");
+       location.href="<c:url value='/login/loginForm'/>";
+   }
+   else{
 
 
-		}
-	
+      }
+   
 }
 </script>
 
 <script type="text/javascript">
 $(document).on('click','#com_write',function(){
-	 var formData = $("#frm").serialize();
-	 $.ajax({ 
+    var formData = $("#frm").serialize();
+    $.ajax({ 
          url:'<c:url value="/review/insertComment"/>', 
          type:'POST',   
          data:formData, 
          dataType : "json", 
          success:function(data){
            
-			
-        	 location.reload();
+         
+            location.reload();
               
          },
 
-            });	
-	 });
+            });   
+    });
 
 
 
@@ -69,39 +69,40 @@ $(document).on('click','#com_write',function(){
 
 </head>
 <body>
-<table class="board_view">
-		<colgroup>
-			<col width="10%"/>
-			<col width="25%"/>
-			<col width="10%"/>
-			<col width="25%"/>
-			<col width="10%"/>
-			<col width="20%"/>
-		</colgroup>
-		
-		<tbody>
-			<tr>
-				<th scope="row">글 번호</th>
-				<td>${map.RE_NUM}</td>
-				<th scope="row">작성자</th>
-				<td>${map.MEM_ID}</td>
-				<th scope="row">작성일</th>
-				<td>${map.RE_DATE}</td>
-			</tr>
-			<tr>
-				<th scope="row">제목</th>
-				<td colspan="5">${map.RE_TITLE }</td>
-			</tr>
-			<tr>
-				<td colspan="6">${map.RE_CONTENT }</td>
-			</tr>
-			
-			
-		</tbody>
-	</table>
-	<br/><br/>
-	
-        <table class="board_view">
+<div class="container">
+<table class="board_view" style="width: 100%;">
+      <colgroup>
+         <col width="10%"/>
+         <col width="25%"/>
+         <col width="10%"/>
+         <col width="25%"/>
+         <col width="10%"/>
+         <col width="20%"/>
+      </colgroup>
+      
+      <tbody>
+         <tr>
+            <th scope="row">글 번호</th>
+            <td>${map.RE_NUM}</td>
+            <th scope="row">작성자</th>
+            <td>${map.MEM_ID}</td>
+            <th scope="row">작성일</th>
+            <td>${map.RE_DATE}</td>
+         </tr>
+         <tr>
+            <th scope="row">제목</th>
+            <td colspan="5">${map.RE_TITLE }</td>
+         </tr>
+         <tr>
+            <td colspan="6">${map.RE_CONTENT }</td>
+         </tr>
+         
+         
+      </tbody>
+   </table>
+   <br/><br/>
+   
+        <table class="board_view" style="width: 100%;">
             <colgroup>
                 <col width="15%">
                 <col width="85%">
@@ -136,7 +137,7 @@ $(document).on('click','#com_write',function(){
                     <td colspan="2">
                         <div>
                             <input type="hidden" name="MEM_NUM" value="${MEM_NUM}">  
- 				     		<input type="hidden" name="RE_NUM" value="${map.RE_NUM}">
+                        <input type="hidden" name="RE_NUM" value="${map.RE_NUM}">
                             <textarea  rows="5" cols="130" name="CO_CONTENT" onclick="enroll(); return false;"></textarea>
                             <p align="right" ><input type="button"  id="com_write" class="btn1" value="등록"  ></p>
                         </div>
@@ -148,15 +149,15 @@ $(document).on('click','#com_write',function(){
         </table>
 
 
-    	<a href="<c:url value='/review/reviewList'/>" class="btn1" id="list">목록으로</a>
-   
+       <a href="#" onclick="history.back();" class="btn1" id="list">목록으로</a>
+   </div>
 </body>
-</html></p>
 
-
-	
+</html>
 
 
    
 
+
+   
 

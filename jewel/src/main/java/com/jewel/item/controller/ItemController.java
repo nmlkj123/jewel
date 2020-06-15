@@ -145,8 +145,9 @@ public class ItemController {
 	}
 	
 	@RequestMapping(value="/item/addCart", method=RequestMethod.POST)
-    public ModelAndView addCart(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response, @CookieValue(value="Guest_ID", required = false) Cookie cookie) throws Exception{
-    	ModelAndView mv = new ModelAndView("jsonView");
+	@ResponseBody
+    public boolean addCart(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response, @CookieValue(value="Guest_ID", required = false) Cookie cookie) throws Exception{
+    	
     	HttpSession session = request.getSession(true);
     	CookieGenerator cg = new CookieGenerator();
 
@@ -194,16 +195,18 @@ public class ItemController {
     	}
 
     	
-    	itemService.addCart(commandMap.getMap());
-    	
-    	return mv;
+    	int i=itemService.addCart(commandMap.getMap());
+    	if(i==0) {
+    		return false;
+    	}
+    	return true;
 	}
 	@RequestMapping(value="/item/buyItemCart", method=RequestMethod.POST)
     public ModelAndView buyItemCart(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response, @CookieValue(value="TEMP_ID", required = false) Cookie cookie) throws Exception{
 		ModelAndView mv = new ModelAndView("jsonView"); 	
     	String TEMP_ID="";
     	CookieGenerator cg = new CookieGenerator();
-    	
+
 		if(cookie==null) {
 			Random rnd =new Random();
 			StringBuffer buf;
@@ -231,6 +234,7 @@ public class ItemController {
 			TEMP_ID=cookie.getValue();
 		}
 		commandMap.put("MEM_ID", TEMP_ID);	
+    	System.out.println(commandMap.getMap());
     	itemService.buyItemCart(commandMap.getMap());
     	return mv;
 	}
@@ -245,6 +249,7 @@ public class ItemController {
 	
     	return mv;
 	}
+	
 	@RequestMapping(value="/item/qmember")
 	public ModelAndView qmember(CommandMap commandMap,HttpServletRequest request) throws Exception{
 		HttpSession session =request.getSession();
@@ -329,6 +334,16 @@ public class ItemController {
 
 		
 		return mv;
+	}
+	@RequestMapping(value="/item/getItemMatch", method=RequestMethod.POST)
+    public ModelAndView getItemMatch(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response, @CookieValue(value="TEMP_ID", required = false) Cookie cookie) throws Exception{
+    	ModelAndView mv = new ModelAndView("jsonView");
+    	
+    	List<Map<String, Object>> list=itemService.getItemMatch(commandMap.getMap());
+    	mv.addObject("list",list);
+    	
+    	
+    	return mv;
 	}
 	
 }

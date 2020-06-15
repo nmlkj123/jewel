@@ -33,7 +33,7 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public void insertReviewWrite(Map<String, Object> map) throws Exception {
 		reviewDAO.insertReviewWrite(map);
-	
+
 	}
 
 	@Override

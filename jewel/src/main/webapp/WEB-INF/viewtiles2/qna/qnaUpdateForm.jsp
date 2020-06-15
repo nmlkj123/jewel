@@ -35,8 +35,9 @@ function fsubmit(){
 
 </script>
 <body>
+<div class="container" >
 <form id="frm" name="frm" method="POST" action="<c:url value='/qna/qnaUpdate'/>">
-<table class="board_view">
+<table class="board_view"style="width: 100%;">
 		<colgroup>
 			<col width="15%"/>
 			<col width="35%"/>
@@ -82,7 +83,7 @@ function fsubmit(){
 			</tr>
 			<tr>
 					<td colspan="4" class="view_text">
-						<textarea rows="20" cols="100" title="내용" id="QNA_CONTENT" name="QNA_CONTENT">${QNA_CONTENT }</textarea>
+						<textarea class=" text_center" rows="20" cols="100" title="내용" id="QNA_CONTENT" name="QNA_CONTENT">${QNA_CONTENT }</textarea>
 					</td>
 				</tr>
 		</tbody>
@@ -92,5 +93,7 @@ function fsubmit(){
 	<a href="<c:url value='/qna/qnalist'/>" class="btn1" id="list">목록으로</a>
 	<input type="submit" class="btn1" onclick="fsubmit(); return false;" value="수정완료">
 	</form>
+</div>
 </body>
+
 </html>

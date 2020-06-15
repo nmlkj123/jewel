@@ -13,34 +13,27 @@ $(document).ready(function(){
 		url : '<c:url value="/item/getItemList"/>',
 		data : {pg: "${pg}",type:"${type}",sort:"${sort}",keyword:"${keyword}"},
 		success : function(data){
-			
+			var str="";
 			$.each(data.list,function(index,items){
-				$('<div/>',{
-					class:"col-sm-4 pt-5"
-				}).append($('<img>',{
-					class:"img-fluid",
-					src:"http://junjewelry.com/shopimages/koreajisuk/1270010011162.jpg?1569380755",
-					click:function(){
-						$(location).attr('href','<c:url value="/item/itemDetail?ITEM_NUM='+items.ITEM_NUM+'"/>');
-					}
-				})).append($('<h4/>',{
-					class:"text-center",
-					text:"--JEWELS--"
-				})).append($('<p/>',{
-					class:"text-center",
-					text:items.ITEM_NAME
-				})).append($('<p/>',{
-					class:"text-center",
-					text:items.ITEM_PRICE+"원"
-				}).css({
-					'text-decoration':'line-through'
-				})).append($('<p/>',{
-					class:"text-center",
-					text:items.ITEM_FP+"원"
-				})).appendTo($('#imageBoard'));		
+				str+='<div class="col-md-4">'+
+		         ' <div class="card mb-4 border-0">'+
+					'<a href="<c:url value="/item/itemDetail?ITEM_NUM='+items.ITEM_NUM+'"/>"><img class="card-img-top" alt=""height="300px" src="<c:url value="/images/item/'+items.ITEM_IMAGE1+'"/>" ></a>'+
+		           ' <div class="card-body text-center">'+
+		             ' <a href="<c:url value="/item/itemDetail?ITEM_NUM='+items.ITEM_NUM+'"/>" style="font-family: Jua, cursive;  font-size: 20px;" class="text-center mb-2">'+items.ITEM_NAME+'</a>'+
+		              '<hr style="border:solid 2px;width:25px;color:#A6A6A6;"/>'+
+		              '<span class="card-text" style=" color:red; font-size: 15px;">₩ '+items.ITEM_FP+'</span>'+
+		              '<span class="card-text ml-3"style="text-decoration: line-through;color:#A6A6A6; font-size: 14px;">₩ '+items.ITEM_PRICE+'</span>'+
+		              
+		              '<div class="d-flex justify-content-between align-items-center">'+
+		                
+		                '<small class="text-muted mt-2">JEWELS</small>'+
+		              '</div>'+
+		            '</div>'+
+		          '</div>'+
+		        '</div>';	
 				
 			})
-			
+			$("#imageBoard").append(str);
 			$('#categoryPaging').html(data.itemListPaging.pagingHTML);
 			$('#currentPaging').addClass('active'); 
 		}
@@ -120,7 +113,7 @@ $(document).ready(function(){
 			
 			
 		
-	</div>
+</div>
 
 	
 	

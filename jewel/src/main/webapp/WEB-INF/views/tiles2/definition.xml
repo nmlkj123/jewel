@@ -16,11 +16,14 @@
 			
 			
 			<definition name="admin_layout"
-				template="/WEB-INF/viewtiles2/template/layout.jsp">
+				template="/WEB-INF/viewtiles2/template/adminLayout.jsp">
 				<put-attribute name="header"
 					value="/WEB-INF/viewtiles2/template/adminHeader.jsp" />
+			<put-attribute name="left"
+					value="/WEB-INF/viewtiles2/template/sideBar.jsp" />
+			<put-attribute name="body" value=""/>		
 			<put-attribute name="footer"
-					value="/WEB-INF/viewtiles2/template/footer.jsp" />
+					value="/WEB-INF/viewtiles2/template/adminFooter.jsp" />
 			</definition>
 			
 			<definition name="joinForm" extends="base_layout">
@@ -35,12 +38,11 @@
 					value="/WEB-INF/viewtiles2/main/main.jsp" />
 			</definition>
 			
-			<definition name="loginForm" extends="base_layout">
-				<put-attribute name="title" value="로그인" />
-				<put-attribute name="body"
-					value="/WEB-INF/viewtiles2/login/loginForm.jsp" />
+			<definition name="loginForm" template="/WEB-INF/viewtiles2/login/loginForm.jsp">
+
+
 			</definition>
-			
+
 			<definition name="login" extends="base_layout">
 				<put-attribute name="title" value="로그인" />
 				<put-attribute name="body"
@@ -294,7 +296,7 @@
 			<definition name="adminMemberList" extends="admin_layout">
 				<put-attribute name="title" value="회원 목록" />
 				<put-attribute name="body"
-					value="/WEB-INF/viewtiles2/admin/adminMemberList.jsp" />
+					value="/WEB-INF/viewtiles2/admin/adminMemberList.jsp" cascade="true"/>
 			</definition>
 			<definition name="adminMemberDetail" extends="admin_layout">
 				<put-attribute name="title" value="회원 상세" />
@@ -312,6 +314,7 @@
 					value="/WEB-INF/viewtiles2/admin/adminMemberPointUpdate.jsp" />
 			</definition>
 
+
 			<definition name="eventList" extends="base_layout">
 				<put-attribute name="title" value="eventList" />
 				<put-attribute name="body"
@@ -323,24 +326,23 @@
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/event/eventDetail.jsp" />
 			</definition>
+			<definition name="adminDeliveryList" extends="admin_layout">
+				<put-attribute name="title" value="배송 관리" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminDeliveryList.jsp" />
+			</definition>
+			<definition name="adminDeliveryDetail" extends="admin_layout">
+				<put-attribute name="title" value="배송 상세" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminDeliveryDetail.jsp" />
+			</definition>
+			<definition name="adminMain" extends="admin_layout">
+				<put-attribute name="title" value="관리자 페이지" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/admin/adminMain.jsp" />
 
+			</definition>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-			
-			
 			<definition name="myOrderList" extends="base_layout">
 				<put-attribute name="title" value="마이페이지주문내역" />
 				<put-attribute name="body"
@@ -371,9 +373,6 @@
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/cart/memberCart.jsp" />
 			</definition>
-
 			
-				
-
-
-		</tiles-definitions>
+			
+</tiles-definitions>
