@@ -14,8 +14,8 @@
 
 </head>
 <body>
-
-<div class="button">
+<div class="container">
+<div class="button text-center">
 <input type="button" value="공지사항" class="btn4" onClick="location.href='<c:url value='/notice/noticeList'/>';">|	    
 <input type="button" value="이벤트" class="btn4" onClick="location.href='<c:url value='/event/eventList'/>';">|   	    
 <input type="button" value="FAQ"  class="btn4" onClick="location.href='<c:url value='/faq/faqlist'/>';">
@@ -102,6 +102,6 @@
 		</div>
 	</form>
 	<br/>
-
+</div>
 </body>
 </html>

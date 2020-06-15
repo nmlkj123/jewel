@@ -62,11 +62,9 @@ qnaPage(1);
 </head>
 <body>
   
-
-<br/><br/><br/><br/>
 	<h2>QNA</h2>
 
-	<table class="board_list" id="qnaList">
+	<table class="board_list mt-5" id="qnaList">
 		<colgroup>
 			<col width="10%"/>
 			<col width="15%"/>

@@ -15,8 +15,8 @@ $(document).ready(function(){
 		success : function(data){
 			var str="";
 			$.each(data.list,function(index,items){
-				str+='<div class="col-md-4">'+
-		         ' <div class="card mb-4 border-0">'+
+				str+='<div class="col-md-4 ">'+
+		         ' <div class="card mb-4  border-0">'+
 					'<a href="<c:url value="/item/itemDetail?ITEM_NUM='+items.ITEM_NUM+'"/>"><img class="card-img-top" alt=""height="300px" src="<c:url value="/images/item/'+items.ITEM_IMAGE1+'"/>" ></a>'+
 		           ' <div class="card-body text-center">'+
 		             ' <a href="<c:url value="/item/itemDetail?ITEM_NUM='+items.ITEM_NUM+'"/>" style="font-family: Jua, cursive;  font-size: 20px;" class="text-center mb-2">'+items.ITEM_NAME+'</a>'+

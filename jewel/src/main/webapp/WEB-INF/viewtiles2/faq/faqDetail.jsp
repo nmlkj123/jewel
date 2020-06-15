@@ -12,6 +12,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 <body>
+<div class="container">
 	<table class="board_view">
 		<colgroup>
 			<col width="15%"/>
@@ -41,6 +42,6 @@
 	
 	
 	<a href="<c:url value='/faq/faqlist?'/>" class="btn1" id="list">목록으로</a>
-	
+</div>	
 </body>
 </html>

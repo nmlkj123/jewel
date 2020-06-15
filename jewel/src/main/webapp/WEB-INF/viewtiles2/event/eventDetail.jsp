@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/ui.css'/>" /> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <body>
+<div class="container">
 <table class="board_view">
 		<colgroup>
 			<col width="15%"/>
@@ -38,5 +39,6 @@
 	</table>
 	<br/>
 	<a href="<c:url value='/event/eventList'/>" class="btn1" id="list">목록으로</a>
+</div>
 </body>
 </html>

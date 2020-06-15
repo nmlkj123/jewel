@@ -154,7 +154,7 @@ $(document).ready(function(){
                        "</tr>";
                }
                str += "<tr >" +
-               "<th class='pl-0' scope='row' style='font-family: Jua, cursive; font-size: 15px;'>"+items.OP_TYPE+"<br></th>"+
+               "<th class='pl-0' scope='row' style='font-family: Nanum Gothic, cursive; font-size: 15px;'>"+items.OP_TYPE+"<br></th>"+
                "<td class='p-2' ><select id='op_se' class='form-control p-0 '>"+
                "<option value='non_option'>--옵션선택--</option>"+
                "<option value='"+items.OP_NUM+"'>"+items.OP_VALUE;
@@ -402,7 +402,7 @@ function addJjim(){
 
                </div>
                <div class="details col-md-6  pl-0 ml-0" style="">
-                  <h4 class="product-title text-left" style="font-family: 'Jua', cursive; width: 500px; display: inline-block;">${item.ITEM_NAME}</h4>
+                  <h4 class="product-title text-left" style="font-family: 'Nanum Gothic', cursive; width: 500px; display: inline-block;">${item.ITEM_NAME}</h4>
 
                   <hr style="line-height: 24px; width: 500px;">
 
@@ -413,11 +413,11 @@ function addJjim(){
                      </thead>
                      <tbody>
                         <tr>
-                           <th class="pl-0" scope="row" style="font-family: 'Jua', cursive; font-size: 15px;">판매가</th>
+                           <th class="pl-0" scope="row" style="font-family: 'Nanum Gothic', cursive; font-size: 15px;">판매가</th>
                            <td style="text-decoration:line-through;"><fmt:formatNumber value="${item.ITEM_PRICE}" pattern="#,###"/>원</td>
                         </tr>
                         <tr>
-                           <th class="pl-0" scope="row"style="font-family: 'Jua', cursive; font-size: 15px;">할인가</th>
+                           <th class="pl-0" scope="row"style="font-family: 'Nanum Gothic', cursive; font-size: 15px;">할인가</th>
                            <td ><fmt:formatNumber value="${item.ITEM_FP}" pattern="#,###"/>원</td>
                         </tr>
                         

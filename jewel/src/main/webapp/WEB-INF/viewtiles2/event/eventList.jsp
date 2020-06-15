@@ -61,8 +61,9 @@ $.ajax({
 eventList(1,1);
 </script>
 <body>
+<div class="container">
 <div id="b">
-<div class="button">
+<div class="button text-center">
 
 <input type="button" value="공지사항" class="btn4" onClick="location.href='<c:url value='/notice/noticeList'/>';">	|   
 <input type="button" value="이벤트" class="btn4" onClick="location.href='<c:url value='/event/eventList'/>';">|	    
@@ -87,5 +88,6 @@ eventList(1,1);
   
    
    </div>
+ </div>
 </body>
 </html>
