@@ -18,25 +18,21 @@
 			<col width="35%"/>
 			<col width="15%"/>
 			<col width="35%"/>
-			<col width="15%"/>
-			<col width="35%"/>
 		</colgroup>
-		<caption>게시글 상세</caption>
+	
 		<tbody>
 			<tr>
 				<th scope="row">글 번호</th>
 				<td>${map.FAQ_NUM}</td>
 				<th scope="row">카테고리</th>
 				<td>${map.FAQ_CATE}</td>
-				<th scope="row">작성일</th>
-				<td>${map.FAQ_DATE}</td>
 			</tr>
 			<tr>
 				<th scope="row">제목</th>
-				<td colspan="5">${map.FAQ_TITLE }</td>
+				<td colspan="3">${map.FAQ_TITLE }</td>
 			</tr>
 			<tr>
-				<td colspan="6">${map.FAQ_CONTENT }</td>
+				<td colspan="4">${map.FAQ_CONTENT }</td>
 			</tr>
 			
 		</tbody>
@@ -44,7 +40,7 @@
 	<br/>
 	
 	
-	<a href="<c:url value='/faq/faqlist'/>" class="btn1" id="list">목록으로</a>
+	<a href="<c:url value='/faq/faqlist?'/>" class="btn1" id="list">목록으로</a>
 	
 </body>
 </html>

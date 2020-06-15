@@ -82,7 +82,7 @@
     <a class="py-2 d-none d-md-inline-block" href="#">귀걸이</a>
     <a class="py-2 d-none d-md-inline-block" href="#">팔찌/발찌</a>
     <a class="py-2 d-none d-md-inline-block" href="#">커플존</a>
-    <a class="py-2 d-none d-md-inline-block" href="#">커뮤니티</a>
+    <a class="py-2 d-none d-md-inline-block" href="<c:url value='/notice/noticeList'/>">커뮤니티</a>
 	
     <form class="form-inline my-2 my-lg-0 " action="<c:url value='/item/itemList'/>" >
       <input class="form-control mr-sm-1" type="text" name="keyword" placeholder="Search" aria-label="Search">

@@ -312,6 +312,17 @@
 					value="/WEB-INF/viewtiles2/admin/adminMemberPointUpdate.jsp" />
 			</definition>
 
+			<definition name="eventList" extends="base_layout">
+				<put-attribute name="title" value="eventList" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/event/eventList.jsp" />
+			</definition>
+
+			<definition name="eventDetail" extends="base_layout">
+				<put-attribute name="title" value="eventDetail" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/event/eventDetail.jsp" />
+			</definition>
 
 
 

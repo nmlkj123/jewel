@@ -13,8 +13,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 <body>
-	<h2>공지사항</h2>
 
+<div class="button">
+<input type="button" value="공지사항" class="btn4" onClick="location.href='<c:url value='/notice/noticeList'/>';">|	    
+<input type="button" value="이벤트" class="btn4" onClick="location.href='<c:url value='/event/eventList'/>';">|	    
+<input type="button" value="FAQ"  class="btn4" onClick="location.href='<c:url value='/faq/faqlist'/>';">
+	
+</div>
+	<br/><br/><br/>
+	<h3 class="title">공지사항</h3>
+<br/><br/>
 	<table class="board_list">
 		<colgroup>
 			<col width="10%"/>

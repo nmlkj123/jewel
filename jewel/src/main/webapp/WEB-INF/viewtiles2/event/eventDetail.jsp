@@ -15,32 +15,28 @@
 <table class="board_view">
 		<colgroup>
 			<col width="15%"/>
+			<col width="35%"/>
 			<col width="15%"/>
-			<col width="15%"/>
-			<col width="15%"/>
-			<col width="25%"/>
-			<col width="40%"/>
+			<col width="35%"/>
 		</colgroup>
 		
 		<tbody>
 			<tr>
 				<th scope="row">글 번호</th>
-				<td>${map.NT_NUM }</td>
-				<th scope="row">카테고리</th>
-				<td>${map.NT_TYPE }</td>
-				<th scope="row">작성시간</th>
-				<td>${map.NT_DATE }</td>
+				<td>${map.ET_NUM }</td>
+				<th scope="row">이벤트 기간</th>
+				<td>${map.ET_SD }~${map.ET_FD }</td>
 			</tr>
 			<tr>
 				<th scope="row">제목</th>
-				<td colspan="5">${map.NT_TITLE }</td>
+				<td colspan="3">${map.ET_TITLE }</td>
 			</tr>
 			<tr>
-				<td colspan="6">${map.NT_CONTENT }</td>
+				<td colspan="4">${map.ET_CONTENT }</td>
 			</tr>
 		</tbody>
 	</table>
 	<br/>
-	<a href="<c:url value='/notice/noticeList'/>" class="btn1" id="list">목록으로</a>
+	<a href="<c:url value='/event/eventList'/>" class="btn1" id="list">목록으로</a>
 </body>
 </html>

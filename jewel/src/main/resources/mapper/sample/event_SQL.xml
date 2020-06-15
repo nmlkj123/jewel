@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="event">
+	
+	<select id="SelectEventList" parameterType="hashmap" resultType="hashmap">
+		
+			SELECT
+				 *
+				FROM
+				(SELECT 
+					rownum as RNUM,s.* 
+				from
+					(SELECT  
+						ET_NUM,
+						ET_TITLE,
+						to_char(ET_SD,'YYYY/MM/DD')ET_SD,
+						to_char(ET_FD,'YYYY/MM/DD')ET_FD
+					FROM 
+						EVENT
+					<choose>
+				   	 <when test="type==1">	
+				   	WHERE 
+				   	<![CDATA[
+						ET_FD>SYSDATE
+							]]>
+				   	 </when>
+				   	 <when test="type==2">	
+				   	 	WHERE 
+				   	 	<![CDATA[
+						ET_FD< SYSDATE
+						]]>
+				   	 </when> 
+			   	 </choose>
+						
+		      		ORDER BY
+		          		ET_SD desc)s)
+		          	<![CDATA[	
+		       WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}
+  
+	]]>
+	</select>
+	
+	
+	
+		
+	<select id="EventDetail" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				ET_NUM,
+				ET_TITLE,
+				ET_CONTENT,
+				to_char(ET_SD,'YYYY/MM/DD')ET_SD,
+				to_char(ET_FD,'YYYY/MM/DD')ET_FD
+			FROM
+				EVENT
+			WHERE
+				ET_NUM = #{ET_NUM}		
+		]]>
+	</select>
+	
+	
+	<select id="getTotalList" parameterType="hashmap" resultType="int">
+		SELECT 
+			COUNT(*)as TOTAL 
+		FROM 
+			EVENT 
+			<choose>
+			   	 <when test="type==1">	
+			   	WHERE 
+			   	<![CDATA[
+					ET_FD>SYSDATE
+						]]>
+			   	 </when>
+			   	 <when test="type==2">	
+			   	 	WHERE 
+			   	 	<![CDATA[
+					ET_FD< SYSDATE
+					]]>
+			   	 </when> 
+		   	 </choose>
+		
+	</select>
+</mapper>

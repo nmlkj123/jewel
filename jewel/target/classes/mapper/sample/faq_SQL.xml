@@ -14,8 +14,7 @@
 				(SELECT
 			    FAQ_NUM,
 			    FAQ_CATE,
-			    FAQ_TITLE,
-			    FAQ_DATE
+			    FAQ_TITLE
 			FROM
 			    FAQ
 			<choose>
@@ -37,7 +36,6 @@
 				FAQ_NUM,
 				FAQ_CATE,
 				FAQ_TITLE,
-				FAQ_DATE,
 				FAQ_CONTENT
 			FROM
 				FAQ

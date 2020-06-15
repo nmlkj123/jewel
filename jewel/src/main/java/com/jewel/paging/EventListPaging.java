@@ -2,12 +2,13 @@ package com.jewel.paging;
 
 import org.springframework.stereotype.Component;
 
-@Component(value = "faqListPaging")
-public class FAQListPaging {
+@Component(value = "eventListPaging")
+public class EventListPaging {
 	private int currentPage;//����������
 	private int pageBlock;//[����][][][����]
 	private int pageSize;//1�������� 12����
 	private int totalList;//�ѱۼ�
+	private String type;
 	private StringBuffer pagingHTML;
 	private String path;
 	public void makePagingHTML() {
@@ -18,20 +19,20 @@ public class FAQListPaging {
 		if(endPage>totalP)endPage=totalP;
 		pagingHTML.append("<ul class='pagination' style='justify-content: center;'>");
 		if(startPage>pageBlock)
-			pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/faq/faqlist?pg="+(startPage-1)+"'>����</a></li>");
+			pagingHTML.append("<li class='page-item'><a class='page-link' onclick='eventList("+type+","+(startPage-1)+")'>����</a></li>");
 		
 		for(int i=startPage;i<=endPage;i++) {
 			if(i==currentPage) {
-				pagingHTML.append("<li class='page-item active'><a class='page-link' href='"+path+"/faq/faqlist?pg="+i+"'>"+i+"</a></li>");
+				pagingHTML.append("<li class='page-item active'><a class='page-link' onclick='eventList("+type+","+i+")'>"+i+"</a></li>");
 			}else {
-				pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/faq/faqlist?pg="+i+"'>"+i+"</a></li>");
+				pagingHTML.append("<li class='page-item'><a class='page-link' onclick='eventList("+type+","+i+")'>"+i+"</a></li>");
 			}
 			
 			
 		}
 		
 		if(endPage<totalP) {
-			pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/faq/faqlist?pg="+(endPage+1)+"'>����</a></li>");
+			pagingHTML.append("<li class='page-item'><a class='page-link' onclick='eventList("+type+","+(endPage+1)+")'>����</a></li>");
 		}
 		pagingHTML.append("</ul>");
 	}
@@ -74,6 +75,21 @@ public class FAQListPaging {
 	}
 	public void setPath(String path) {
 		this.path = path;
+	}
+
+
+	public String getType() {
+		return type;
+	}
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
 	}
 	
 	

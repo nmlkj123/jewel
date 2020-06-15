@@ -34,7 +34,7 @@
 				NT_NUM,
 				NT_TITLE,
 				NT_CONTENT,
-				NT_DATE,
+				to_char(NT_DATE,'YYYY/MM/DD')NT_DATE,
 				NT_TYPE
 			FROM
 				NOTICE
