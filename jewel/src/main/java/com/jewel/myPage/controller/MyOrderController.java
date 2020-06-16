@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jewel.common.CommandMap;
+import com.jewel.myPage.dao.MyOrderDAO;
 import com.jewel.myPage.service.MyOrderListService;
 import com.jewel.paging.MyOrderListPaging;
 
@@ -70,8 +71,23 @@ public class MyOrderController {
 		return mv;
 			
 	}
-	
-	
-	
+	@RequestMapping(value="/myPage/myOrderExchange")
+	public ModelAndView myOrderExchange(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("jsonView");
+		myOrderListService.deliveryUpdate(commandMap.getMap());		
+		return mv;
+	}
+	@RequestMapping(value="/myPage/myOrderReturn")
+	public ModelAndView myOrderReturn(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("jsonView");
+		myOrderListService.deliveryUpdate(commandMap.getMap());		
+		return mv;
+	}
+	@RequestMapping(value="/myPage/myOrderCancel")
+	public ModelAndView myOrderCancel(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("jsonView");
+		myOrderListService.deliveryUpdate(commandMap.getMap());		
+		return mv;
+	}
 	
 }

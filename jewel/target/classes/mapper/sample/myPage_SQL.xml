@@ -59,7 +59,8 @@
 					(SELECT 
 						rownum as RNUM, s.* 
 					 FROM	
-						(SELECT  				   
+						(SELECT 
+							   o.OR_NUM,	 				   
 							   i.ITEM_NAME,
 							   i.ITEM_NUM,
 							   i.ITEM_IMAGE1,
@@ -88,6 +89,15 @@
 			
 		]]>
 	</select>
+	
+	<update id="deliveryUpdate" parameterType="hashmap" >
+		<![CDATA[
+			UPDATE DELIVERY SET 
+			 	DEL_DS = #{keyword} 			 	
+			WHERE OR_NUM = #{OR_NUM}
+		]]>
+	</update>
+	
 	
 <!-- 나의찜목록 -->
 	<select id="selectMyjjimList" parameterType="hashmap" resultType="hashmap">
