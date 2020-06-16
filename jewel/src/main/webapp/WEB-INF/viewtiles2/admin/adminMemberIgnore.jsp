@@ -4,73 +4,66 @@
 <head>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
-<body>
-	<form id="frm" name="frm" action="<c:url value='/adminMemberIgnore'/>" method="post">
-	<input type="hidden" name="MEM_NUM" value="${map.MEM_NUM}">
-	<input type="hidden"  name="MEM_ID" value="${map.MEM_ID}">
-		<table class="board_view">
-		
-			
-			<tbody>
-			<tr>
-				<th scope="row">회원 번호</th>
-				<td>${map.MEM_NUM}</td>
-			</tr>
-			<tr>
-				<th scope="row">회원 ID</th>
-				<td>${map.MEM_ID}</td>
-			</tr>
-			<tr>
-				<th scope="row">차단 사유</th>
-				<td><textarea rows="10" cols="40" name="IG_WHY"></textarea></td>
-			</tr>
-			
-		<%-- 	<tr>	
-				<th scope="row">회원 이름</th>
-				<td>${map.MEM_NAME}</td>
-			</tr>
-			<tr>	
-				<th scope="row">회원 닉네임</th>
-				<td>${map.MEM_NICK}</td>
-			</tr>
-			<tr>	
-				<th scope="row">회원 이메일</th>
-				<td>${map.MEM_EMAIL}</td>
-			</tr>
-			<tr>	
-				<th scope="row">회원 연락처</th>
-				<td>${map.MEM_PHONE}</td>
-			</tr>
-			<tr>	
-				<th scope="row">회원 주소</th>
-				<td>${map.MEM_ADDR1}</td>
-			</tr>
-			<tr>	
-				<th scope="row">상세 주소</th>
-				<td>${map.MEM_ADDR2}</td>
-			</tr>
-			<tr>	
-				<th scope="row">회원 등급</th>
-				<td>${map.MEM_RANK}</td>
-			</tr>
-			<tr>	
-				<th scope="row">회원 가입일</th>
-				<td>${map.MEM_JOINDATE}</td>
-			</tr>
-			<tr>	
-				<th scope="row">회원 포인트</th>
-				<td>${map.MEM_POINT}</td>
-			</tr>
-			<tr>	
-				<th scope="row">회원 누적금액</th>
-				<td>${map.MEM_STACK}</td>
-			</tr>
-			 --%>
-		</tbody>
-		</table>
+<script type="text/javascript">
+
+function fsubmit(){
+	var IG_WHY = document.getElementById("IG_WHY").value;
 	
-	<input type="submit" value="회원 차단">
-	<input type="button" onclick="location.href='<c:url value="/adminNoticelist"/>'" value="목록으로">
+	if(IG_WHY==null || IG_WHY==''){
+		alert("차단사유를 입력하세요.");
+		return false;
+	}
+	
+
+	frm.submit();
+}
+
+</script>
+<body>
+	<div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">회원 포인트/등급 변경</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form class="form-horizontal" id="frm" name="frm" action="<c:url value='/adminMemberIgnore'/>" method="post">
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">회원 번호</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"  id="MEM_NUM" name="MEM_NUM" value="${map.MEM_NUM}" placeholder="회원 번호" readonly>
+                   
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">회원 ID</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"  id="MEM_ID" name="MEM_ID" value="${map.MEM_ID}" placeholder="회원 ID " readonly>
+                    </div>
+                  </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">차단 사유</label>
+                    <textarea class="form-control" rows="3" id="IG_WHY" name="IG_WHY"></textarea>
+                      
+                    
+                  </div>
+                  </div>
+                <!-- /.card-body -->
+                
+                <!-- /.card-footer -->
+              </form>
+            </div>
+
+	<table>
+	<tr>
+		<td><input type="button" class="btn btn-block btn-outline-success"  onclick="location.href='<c:url value="/adminMemberList"/>'" value="목록으로">
+		</td>
+		<td><button type="button" class="btn btn-block btn-outline-primary" onclick="fsubmit();">회원차단</button>
+		</td>
+	</tr>
+</table>
+	
+	
 	
 
 	</form>

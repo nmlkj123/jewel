@@ -4,8 +4,11 @@
 
 <head>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style type="text/css">
 
+ </style>
 </head>
+
 <script type="text/javascript">
 
 function fsubmit(){
@@ -86,7 +89,7 @@ function fsubmit(){
 		      })
 	}
 
-	alert("수정완료");
+	alert("등록 완료");
 	location.href = "/common/adminItemList";
 }
 $(document).ready(function(){
@@ -132,15 +135,16 @@ $(document).ready(function(){
 
 
 <body>
-	<form id="frm" name="frm"  action="<c:url value='/adminItemWrite'/>" method="post" enctype="multipart/form-data">
-		<table class="board_view" >
-		
-			<caption>게시글 작성</caption>
-			<tbody>
-				<tr>
-					<th scope="row">카테고리 종류</th>
-					<td>
-					<select id="ITEM_TYPE" name="ITEM_TYPE">
+<div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">상품 수정</h3>
+              </div>
+	<form class="form-horizontal" id="frm" name="frm"  action="<c:url value='/adminItemWrite'/>" method="post" enctype="multipart/form-data">
+		<div class="card-body">
+		<div class="form-group  row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">카테고리 종류</label>
+                    <div class="col-sm-10">
+                      <select class="form-control" id="ITEM_TYPE" name="ITEM_TYPE">
 						<option value="N">N</option>
 						<option value="R">R</option>
 						<option value="E">E</option>
@@ -148,41 +152,70 @@ $(document).ready(function(){
 						<option value="C">C</option>
 					
 					</select>
-					
-					</td>
-					<td><input type="text"  id="ITEM_NUM" name="ITEM_NUM" readonly></input></td>
-				</tr>
-				<tr>
-					<th scope="row">이름</th>
-					<td><input type="text"  id="ITEM_NAME" name="ITEM_NAME"></input></td>
-				</tr>
-				<tr>
-					<th scope="row">가격</th>
-					<td><input type="text"  id="ITEM_PRICE" name="ITEM_PRICE"></input></td>
-					
-				</tr>
-				<tr>
-					<th scope="row">할인율</th>
-					<td><input type="text"  id="ITEM_DCP" name="ITEM_DCP"></input></td>
-				</tr>
-				<tr>
-					<th scope="row">이미지1</th>
-					<td><input type="file" id="ITEM_IMAGE1" name="ITEM_IMAGE1"></input></td>
-				</tr>
-				<tr>
-					<th scope="row">이미지2</th>
-					<td><input type="file"  id="ITEM_IMAGE2" name="ITEM_IMAGE2"></input></td>
-				</tr>
-				<tr>
-					<th scope="row">재고</th>
-					<td><input type="text" id="ITEM_STOCK" name="ITEM_STOCK"></input></td>
-				</tr>
-			</tbody>
-		</table>
+                    </div>
+        </div>
+		<div class="form-group row">
+                    <label for="ITEM_NUM" class="col-sm-2 col-form-label">아이템 번호(자동)</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="ITEM_NUM" name="ITEM_NUM" readonly placeholder="카테고리를 선택하세요">
+                    </div>
+        </div>
+        <div class="form-group row">
+                    <label for="ITEM_NAME" class="col-sm-2 col-form-label">이름</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="ITEM_NAME" name="ITEM_NAME"  placeholder="이름">
+                    </div>
+        </div>
+        <div class="form-group row">
+                    <label for="ITEM_PRICE" class="col-sm-2 col-form-label">가격</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="ITEM_PRICE" name="ITEM_PRICE"  placeholder="가격">
+                    </div>
+        </div>	 	 
+		<div class="form-group row">
+                    <label for="ITEM_DCP" class="col-sm-2 col-form-label">할인율</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="ITEM_DCP" name="ITEM_DCP"  placeholder="할인율">
+                    </div>
+        </div>
+        <div class="form-group row">
+                    <label for="ITEM_STOCK" class="col-sm-2 col-form-label">재고</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control"  id="ITEM_STOCK" name="ITEM_STOCK"  placeholder="재고">
+                    </div>
+        </div>
+         <div class="form-group row">
+                    <label for="ITEM_IMAGE1" class="col-sm-2 col-form-label">사진1</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="ITEM_IMAGE1" name="ITEM_IMAGE1">
+                        <label class="custom-file-label" for="ITEM_IMAGE1">Choose file</label>
+                      </div>
+                      
+                    </div>
+         </div>
+         
+         
+         			
+		<div class="form-group row">
+                    <label for="ITEM_IMAGE2" class="col-sm-2 col-form-label">사진2</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="ITEM_IMAGE2" name="ITEM_IMAGE2">
+                        <label class="custom-file-label" for="ITEM_IMAGE2">Choose file</label>
+                      </div>
+                     
+                    </div>
+        </div>
+        	
+				
+		</div>
+			
 		</form>
+		</div>
 		
 		
-		<table id="opt">
+		<table id="opt" style="width:95%;">
 		<thead>
 		<tr>
 		<th>옵션 종류</th>
@@ -193,13 +226,13 @@ $(document).ready(function(){
 		<tbody>
 		<tr>
 		<td>
-				<input type="text" id="OP_TYPE" name="OP_TYPE">
+				<input type="text"  id="OP_TYPE" name="OP_TYPE">
 		</td>
 		<td>
-				<input type="text" id="OP_VALUE" name="OP_VALUE">
+				<input type="text"  id="OP_VALUE" name="OP_VALUE">
 		</td>
 		<td>
-				<input type="text" id="OP_PRICE" name="OP_PRICE">
+				<input type="text"  id="OP_PRICE" name="OP_PRICE">
 		</td>
 		
 		</tr>
@@ -209,14 +242,24 @@ $(document).ready(function(){
 		
 		<br/>
 		<br/>
+	<div class="btn-group">
+	<input type="button" class="btn btn-success" onclick="location.href='<c:url value="/adminItemList"/>'" value="목록으로">
+	<button type="button" class="btn btn-warning" id="add_opt">옵션 추가</button>
+	<button type="button" class="btn btn-primary" onclick="fsubmit();">상품 등록</button>
+	</div>
 	
-	
-	<button type="button" id="add_opt">옵션 추가</button>	
+		
+		
+		
+		
+		
+		
+		
 	
 
-		 <input type="button" onclick="location.href='<c:url value="/adminItemList"/>'" value="목록으로">
+		 
 	
-	<button type="button" onclick="fsubmit();">상품 등록</button>
+	
 	
 	
 

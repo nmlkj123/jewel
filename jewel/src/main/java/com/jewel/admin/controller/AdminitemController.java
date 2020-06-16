@@ -41,6 +41,8 @@ public class AdminitemController {
 			ModelAndView mv=new ModelAndView("adminItemList");  
 			
 
+			String keyword=(String)commandMap.get("keyword");
+
 			int show=12;
 	    	int block=5;
 	    	int pg;
@@ -64,10 +66,16 @@ public class AdminitemController {
 	    	AdminItemListPaging.setTotalList(totalList);
 	    	AdminItemListPaging.setPageBlock(block);
 	    	AdminItemListPaging.setPageSize(show);
-	    	
+	    	if(keyword!=null && !keyword.isEmpty()) {
+	    		AdminItemListPaging.setKeyword(keyword);
+	    		AdminItemListPaging.makeKeywordPagingHTML();
+	     		 mv.addObject("AdminItemListPaging",AdminItemListPaging);
+		      }
+	    	 else {
 	    	AdminItemListPaging.makePagingHTML();
 	    
 	    	mv.addObject("AdminItemListPaging",AdminItemListPaging);
+	    	 }
 	    	  String path="/images/item";
 				String uploadPath=request.getSession().getServletContext().getRealPath("/");
 				System.out.println(uploadPath);

@@ -66,7 +66,7 @@ function fsubmit(){
 	
 	
 	var count=$('#opt >tbody tr').length
-	alert(count);
+	
 	for(var i=0;i<count;i++){
 		var OPt=$('#opt >tbody tr').eq(i).find('#OP_TYPE').val();
 		var OPv=$('#opt >tbody tr').eq(i).find('#OP_VALUE').val();
@@ -116,11 +116,11 @@ $(document).ready(function(){
 		 
 		 e.preventDefault();
 		$(this).parent().parent('tr').remove(); 
-		count--;
+		
 		}); 
 	
 	
-	$('#add_opt').click(function(){
+	$('#add_opt').on("click",function(){
 		
 	 	
 		var str = '<tr>	<td><input type="text" id="OP_TYPE" name="OP_TYPE" ></td><td>	<input type="text" id="OP_VALUE" name="OP_VALUE"> </td><td>	<input type="text" id="OP_PRICE" name="OP_PRICE"><a href="#" class="btn" id="delete" name="delete">삭제</a></td></tr>';
@@ -140,79 +140,107 @@ $(document).ready(function(){
 	
 </script>
 <body>
-	<form id="frm" name="frm" action="<c:url value='/adminItemUpdate'/>" method="post" enctype="multipart/form-data">
-	<input type="hidden" id="ITEM_NUM" name="ITEM_NUM" value="${map.ITEM_NUM}">
-	
-		<table class="board_view">
-			<colgroup>
-				<col width="15%"/>
-				<col width="35%"/>
-				<col width="15%"/>
-				<col width="35%"/>
-			</colgroup>
-			<caption>상품 수정</caption>
-			<tbody>
-				<tr>
-					<th scope="row">카테고리 종류</th>
-					<td><select name="ITEM_TYPE" id="ITEM_TYPE">
+	<div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">상품 등록</h3>
+              </div>
+	<form class="form-horizontal" id="frm" name="frm"  action="<c:url value='/adminItemUpdate'/>" method="post" enctype="multipart/form-data">
+		<div class="card-body">
+		<div class="form-group  row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">카테고리 종류</label>
+                    <div class="col-sm-10">
+                      <select class="form-control" id="ITEM_TYPE" name="ITEM_TYPE">
 						<option value="N" <c:if test="${map.ITEM_TYPE == 'N'}">selected</c:if>>N</option>
 						<option value="R" <c:if test="${map.ITEM_TYPE == 'R'}">selected</c:if>>R</option>
 						<option value="E" <c:if test="${map.ITEM_TYPE == 'E'}">selected</c:if>>E</option>
 						<option value="W" <c:if test="${map.ITEM_TYPE == 'W'}">selected</c:if>>W</option>
 						<option value="C" <c:if test="${map.ITEM_TYPE == 'C'}">selected</c:if>>C</option>
 					
-				</select>
+					</select>
+                    </div>
+        </div>
+		
+        <div class="form-group row">
+                    <label for="ITEM_NAME" class="col-sm-2 col-form-label">이름</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="ITEM_NAME" name="ITEM_NAME" value="${map.ITEM_NUM}" placeholder="이름">
+                      <input type="hidden" id="ITEM_NUM" name="ITEM_NUM" value="${map.ITEM_NUM}">
+                    </div>
+        </div>
+        <div class="form-group row">
+                    <label for="ITEM_PRICE" class="col-sm-2 col-form-label">가격</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="ITEM_PRICE" name="ITEM_PRICE" value="${map.ITEM_PRICE}" placeholder="가격">
+                    </div>
+        </div>	 	 
+		<div class="form-group row">
+                    <label for="ITEM_DCP" class="col-sm-2 col-form-label">할인율</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="ITEM_DCP" name="ITEM_DCP" value="${map.ITEM_DCP}" placeholder="할인율">
+                    </div>
+        </div>
+        <div class="form-group row">
+                    <label for="ITEM_STOCK" class="col-sm-2 col-form-label">재고</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control"  id="ITEM_STOCK" name="ITEM_STOCK"  value="${map.ITEM_STOCK}" placeholder="재고">
+                    </div>
+        </div>
+         <div class="form-group row">
+                    <label for="ITEM_IMAGE1" class="col-sm-2 col-form-label">사진1</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="ITEM_IMAGE1" name="ITEM_IMAGE1">
+                        <label class="custom-file-label" for="ITEM_IMAGE1">Choose file</label>
+                      </div>
+                      
+                    </div>
+         </div>
+         
+         
+         			
+		<div class="form-group row">
+                    <label for="ITEM_IMAGE2" class="col-sm-2 col-form-label">사진2</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="ITEM_IMAGE2" name="ITEM_IMAGE2">
+                        <label class="custom-file-label" for="ITEM_IMAGE2">Choose file</label>
+                      </div>
+                     
+                    </div>
+        </div>
+        	
 				
-					</td>
-				</tr>
-				<tr>
-					<th scope="row">이름</th>
-					<td><input type="text"  id="ITEM_NAME" name="ITEM_NAME" value="${map.ITEM_NAME}"></input></td>
-				</tr>
-				<tr>
-					<th scope="row">가격</th>
-					<td><input type="text"  id="ITEM_PRICE" name="ITEM_PRICE" value="${map.ITEM_PRICE}"></input></td>
-				</tr>
-				<tr>
-					<th scope="row">할인율</th>
-					<td><input type="text" id="ITEM_DCP" name="ITEM_DCP" value="${map.ITEM_DCP}"></input></td>
-				</tr>
-				<tr>
-					<th scope="row">이미지1</th>
-					<td><input type="file" id="ITEM_IMAGE1" name="ITEM_IMAGE1" value="${map.ITEM_IMAGE1}"></input></td>
-				</tr>
-				<tr>
-					<th scope="row">이미지2</th>
-					<td><input type="file"  id="ITEM_IMAGE2" name="ITEM_IMAGE2" value="${map.ITEM_IMAGE2}"></input></td>
-				</tr>
-				<tr>
-					<th scope="row">재고</th>
-					<td><input type="text" id="ITEM_STOCK" name="ITEM_STOCK" value="${map.ITEM_STOCK}"></input></td>
-				</tr>
-			</tbody>
-		</table>
+		</div>
+			
+		</form>
+		</div>
+
 	
 	
 	
 	
-	</form>
-	<table id="opt">
+
+	<table id="opt" style="width:95%;">
 		<thead>
 		<tr>
 		<th>옵션 종류</th>
 		<th>옵션 값</th>
 		<th>옵션 가격</th>
-		
 		</tr>
-		<thead>
+		</thead>
 		<tbody>
 		
 		</tbody>
 		</table>
+	<div class="btn-group">
+	<input type="button" class="btn btn-success" onclick="location.href='<c:url value="/adminItemList"/>'" value="목록으로">
+	<button type="button" class="btn btn-warning" id="add_opt">옵션 추가</button>
+	<button type="button" class="btn btn-primary" onclick="fsubmit();">상품 등록</button>
+	</div>
+
+	
+		
 	
 	
-	<button type="button" id="add_opt">옵션 추가</button>	
-	<button type="button" onclick="fsubmit();">수정하기</button>
-	<input type="button" onclick="location.href='<c:url value="/adminItemList"/>'" value="목록으로">
 </body>
 </html>

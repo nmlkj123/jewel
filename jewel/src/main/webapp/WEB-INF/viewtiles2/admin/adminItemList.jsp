@@ -8,7 +8,29 @@
 
 </head>
 <body>
-    <h2>게시판 목록</h2>
+    <h2>상품 리스트</h2>
+    <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                
+
+                <div class="card-tools">
+                <form class="form-inline my-2 my-lg-0 " action="<c:url value='/adminItemList'/>" >
+      <input class="form-control mr-sm-1" type="text" name="keyword" placeholder="Search" aria-label="Search">
+      <button class="btn btn-secondary my-2 my-sm-0 "  type="submit">Search</button>
+    </form>
+                  <div class="input-group input-group-sm" style="width: 150px;">
+               
+
+                    <div class="input-group-append">
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
     <table class="table table-head-fixed text-nowrap">
      
         <thead>
@@ -46,7 +68,12 @@
             
         </tbody>
     </table>
-    <div id="PAGE_NAVI"></div>
+        </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
     <input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX"/>
     
     <br/>

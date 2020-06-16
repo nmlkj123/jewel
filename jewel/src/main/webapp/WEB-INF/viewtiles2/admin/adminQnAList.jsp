@@ -9,6 +9,26 @@
 </head>
 <body>
     <h2>QnA 목록</h2>
+    <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                
+
+                <div class="card-tools">
+                
+                  <div class="input-group input-group-sm" style="width: 150px;">
+               
+
+                    <div class="input-group-append">
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+    
     <table class="table table-head-fixed text-nowrap">
         <colgroup>
             <col width="10%"/>
@@ -86,6 +106,10 @@
             
         </tbody>
     </table>
+    </div>
+    </div>
+    </div>
+    </div>
     <div align="center"class="container pt-5" id="categoryPaging" >
    ${AdminQnaListPaging.pagingHTML}
    

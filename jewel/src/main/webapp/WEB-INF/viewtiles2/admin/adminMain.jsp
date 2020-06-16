@@ -14,7 +14,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3>23</h3>
 
                 <p>새 주문 건 수</p>
               </div>
@@ -29,9 +29,9 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>6<sup style="font-size: 20px"></sup></h3>
 
-                <p>Bounce Rate</p>
+                <p>QNA 답변 대기 수</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
@@ -44,7 +44,7 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
+                <h3>5</h3>
 
                 <p>신규 가입 회원 수</p>
               </div>
@@ -61,7 +61,7 @@
               <div class="inner">
                 <h3>65</h3>
 
-                <p>Unique Visitors</p>
+                <p>방문자 수</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>

@@ -4,7 +4,18 @@
 <select id="selectitemList" parameterType="hashmap" resultType="hashmap">
 select * from(SELECT rownum as RNUM,s.* 
  from  (SELECT ITEM_NUM,ITEM_TYPE,ITEM_NAME,ITEM_PRICE,ITEM_DCP,ITEM_IMAGE1,ITEM_IMAGE2,ITEM_DATE,ITEM_STOCK
- FROM ITEM order by ITEM_NUM desc)s) 
+ FROM ITEM 
+ <choose>
+				
+				   	 <when test="keyword!=null and keyword!=''">	
+				   	 Where  
+				   	 ITEM_NAME like '%' || #{keyword} ||'%'
+				   	 </when> 
+		   	 </choose>
+ 
+ 
+ 
+ order by ITEM_NUM desc)s) 
  <![CDATA[WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}]]>
  
 	</select>
@@ -13,6 +24,13 @@ select * from(SELECT rownum as RNUM,s.*
 			COUNT(*)as TOTAL 
 		FROM 
 			ITEM 
+			<choose>
+				
+				   	 <when test="keyword!=null and keyword!=''">	
+				   	 Where  
+				   	 ITEM_NAME like '%' || #{keyword} ||'%'
+				   	 </when> 
+		   	 </choose>
 	
 	</select>
 	
@@ -34,8 +52,10 @@ select * from(SELECT rownum as RNUM,s.*
 				ITEM_NUM=#{ITEM_NUM}
 	</select>
 	<select id="selectItemNum" parameterType="hashmap" resultType="String">
-	SELECT #{ITEM_TYPE} || LPAD(MAX(to_number(LTRIM(SUBSTR(ITEM_NUM,2,3),0)))+1,3,0) 
-						FROM ITEM WHERE ITEM_TYPE=#{ITEM_TYPE}	</select>
+	select #{ITEM_TYPE} || nvl2(max(s.item_type),LPAD(MAX(to_number(LTRIM(SUBSTR(s.ITEM_NUM,2,3),0)))+1,3,0),'001')n from(select item_type,item_num  from item where ITEM_TYPE=#{ITEM_TYPE})s	
+
+
+	</select>
 	
 	<insert id="insertItemWrite" parameterType="hashmap" >
 		INSERT INTO ITEM 
@@ -316,14 +336,14 @@ WHERE  MEM_NUM=#{MEM_NUM}
 	<select id="selectNormalList" parameterType="hashmap" resultType="hashmap">
 <![CDATA[select * from(SELECT rownum as RNUM,s.* 
  from  (SELECT DEL_NUM,OR_UNQ,TO_CHAR(DEL_DATE,'YY/MM/DD') DEL_DATE,OR_NUM,DEL_DS   FROM DELIVERY WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND NOT delivery.del_ds IN(select delivery.del_ds FROM DELIVERY WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND delivery.del_ds LIKE '교환%' OR delivery.del_ds LIKE '환불%' ) 
-ORDER BY OR_NUM)s) 
+ORDER BY DEL_NUM desc)s) 
  WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}]]>
  
 	</select>
 	<select id="selectRefundList" parameterType="hashmap" resultType="hashmap">
  <![CDATA[select * from(SELECT rownum as RNUM,s.* 
  from  (SELECT  DEL_NUM,OR_UNQ,TO_CHAR(DEL_DATE,'YY/MM/DD') DEL_DATE,OR_NUM,DEL_DS    FROM DELIVERY WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND delivery.del_ds IN(select delivery.del_ds FROM DELIVERY WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND delivery.del_ds LIKE '교환%' OR delivery.del_ds LIKE '환불%' ) 
-ORDER BY OR_NUM)s) 
+ORDER BY DEL_NUM desc)s) 
 WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}]]>
  
 	</select>

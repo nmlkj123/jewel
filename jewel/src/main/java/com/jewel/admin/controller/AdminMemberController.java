@@ -31,7 +31,7 @@ public class AdminMemberController {
 			int show=12;
 	    	int block=5;
 	    	int pg;
-	    	String keyword=(String)commandMap.get("keyword");;
+	    	String keyword=(String)commandMap.get("keyword");
 	    	if(commandMap.get("pg")==null) {
 		    	  pg=1;
 		      }
