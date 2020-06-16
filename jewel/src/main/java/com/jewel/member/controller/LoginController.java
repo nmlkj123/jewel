@@ -1,5 +1,6 @@
 package com.jewel.member.controller;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import java.util.Random;
 import javax.annotation.Resource;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -79,13 +81,21 @@ public class LoginController {
 }
    
    @RequestMapping(value="/login/logout")//로그아웃
-   public ModelAndView logout(HttpServletRequest request,CommandMap commandMap) throws Exception {
+   public void logout(HttpServletRequest request,HttpServletResponse response,CommandMap commandMap) throws Exception {
       HttpSession session = request.getSession(false);
       if (session != null)
          session.invalidate();
-      ModelAndView mav = new ModelAndView();
-      mav.setViewName("redirect:/main/main");
-      return mav;
+      
+      
+      response.setCharacterEncoding("UTF-8");
+	  response.setContentType("text/html; charset=utf-8");
+	  PrintWriter out = response.getWriter();
+	
+	  out.println("<script>alert('로그아웃 됬습니다.'); location.href='"+request.getContextPath()+"/main/main';</script>");
+	 
+	  out.flush();
+      
+      
    }
    
    @RequestMapping(value = "/login/findId") // 아이디 찾기 폼을 보여주는 메소드
