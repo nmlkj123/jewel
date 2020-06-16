@@ -357,7 +357,7 @@
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/myPage/orderChkForm.jsp" />
 			</definition>
-			
+
 			<definition name="orderChk" extends="base_layout">
 				<put-attribute name="title" value="주문배송조회검증" />
 				<put-attribute name="body"

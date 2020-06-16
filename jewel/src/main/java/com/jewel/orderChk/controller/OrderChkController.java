@@ -27,13 +27,14 @@ public class OrderChkController {
 		ModelAndView mv = new ModelAndView("orderChkPage");
 		
 		int cnt=orderChkService.selectOrderChk(commandMap.getMap());
-		HttpSession session = request.getSession();
-		
+
+		HttpSession session = request.getSession();		
 		if(session.getAttribute("MEM_ID")!=null) {
 			ModelAndView mv1 = new ModelAndView("redirect:/myPage/myOrderList");
 			return mv1;
 			
-		} else if(cnt>0){			
+		} else if(cnt > 0){						
+
 			List<Map<String, Object>> orderChkList = orderChkService.selectOrderChkList(commandMap.getMap());
 			mv.addObject("map",orderChkList);
 			
@@ -44,15 +45,16 @@ public class OrderChkController {
 			return mv2;
 		}
 		return mv;
+
+
 	}
-	//페이지
 	
+	//폼화면
 	@RequestMapping(value="/orderChkForm")
 	public ModelAndView orderChkForm(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("orderChkForm");
 		return mv;		 
 	}
-	
 
 
 }

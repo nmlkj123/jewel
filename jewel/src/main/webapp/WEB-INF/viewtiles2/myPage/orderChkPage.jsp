@@ -9,7 +9,10 @@
 <title>주문배송조회</title>
 </head>
 <script type="text/javascript">
-
+$(document).ready(function(){
+	
+	
+});
 </script>
 <body>
 	<table class="table table-hover" style="width:80%; margin-left:10%;">

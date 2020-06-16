@@ -24,8 +24,8 @@ body .form1, .form2{
  	margin-bottom:5%;
  }
 
- 
 </style>
+
 <script type="text/javascript">
 function submit1(){
 	var id = $("#MEM_ID")[0].value;
@@ -56,7 +56,7 @@ function submit2(){
 	}
 	
 	document.getElementById("form2").submit();
-	
+
 }
 </script>
 <body>
@@ -85,11 +85,11 @@ function submit2(){
 		    <legend>비회원 주문배송조회</legend>
 		  </fieldset>
 		  <div class="form-group">
-		     <label for="exampleInputEmail1">주문번호</label>
+		     <label for="OR_NUM">주문번호</label>
 		     <input type="text" class="form-control" id="OR_NUM" name="OR_NUM" placeholder="주문번호를 입력하세요.">
 		   </div>
 		   <div class="form-group">
-		     <label for="exampleInputPassword1">Password</label>
+		     <label for="OR_PWD">Password</label>
 		     <input type="password" class="form-control" id="OR_PWD" name="OR_PWD" placeholder="Password">
 		   </div>
 		   <button type="button" class="btn btn-primary" onclick="submit2(); return false;">Submit</button>
