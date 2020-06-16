@@ -72,7 +72,7 @@
    <h1>JEWELS</h1>
    <p>안젤리나 주얼쓰 닐리리맘보!</p> 
 </div> 
-<nav class="site-header sticky-top py-1">
+<nav class="site-header sticky-top py-2 ">
   <div class="container d-flex flex-column flex-md-row justify-content-between">
     <a class="py-2 pr-5" href="<c:url value='/main/main'/>" aria-label="주얼쓰" >
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18pt" height="18pt" viewBox="0 0 18 18" version="1.1">

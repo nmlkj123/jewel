@@ -35,7 +35,7 @@ $(document).ready(function(){
 	$.ajax({
 		type : "POST",
 		url : '<c:url value="/item/getItemMatch"/>',
-		data : {type:"N",itemCount:"4"},
+		data : {type:"C",itemCount:"4"},
 		async: false,
 		success : function(data){
 			var str="";
@@ -57,7 +57,7 @@ $(document).ready(function(){
 	$.ajax({
 		type : "POST",
 		url : '<c:url value="/item/getItemMatch"/>',
-		data : {type:"N",itemCount:"4"},
+		data : {type:"E",itemCount:"4"},
 		async: false,
 		success : function(data){
 			var str="";
@@ -97,15 +97,15 @@ $(document).ready(function(){
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="<c:url value='/images/main/main_banner_pc.jpg'/>" alt="Los Angeles" style="width: 100%;">
+        <a href="<c:url value='/event/eventDetail?ET_NUM=1'/>"><img src="<c:url value='/images/main/main_banner_pc.jpg'/>" alt="Los Angeles" style="width: 100%;"></a>
       </div>
       
       <div class="carousel-item">
-        <img src="<c:url value='/images/main/mainbanner_pc.jpg'/>" alt="Seoul" style="width: 100%;">
+       <a href="<c:url value='/event/eventDetail?ET_NUM=3'/>"> <img src="<c:url value='/images/main/mainbanner_pc.jpg'/>" alt="Seoul" style="width: 100%;"></a>
       </div>
           
       <div class="carousel-item">
-        <img src="<c:url value='/images/main/mainbanner_pc(1).jpg'/>" alt="New york" style="width: 100%;">
+       <a href="<c:url value='/event/eventDetail?ET_NUM=2'/>"> <img src="<c:url value='/images/main/mainbanner_pc(1).jpg'/>" alt="New york" style="width: 100%;"></a>
       </div>
 
     </div>
@@ -121,7 +121,7 @@ $(document).ready(function(){
       <div class="container-fluid">
       <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-0 main">
-          <h1 class="page-header" style="text-align: center;">BEST3</h1>
+          <h1 class="page-header" style="font-family: Nanum Gothic, cursive; text-align: center;">BEST3</h1>
           <div class="row placeholders text-center" id="itemList1">
              
              
@@ -130,13 +130,13 @@ $(document).ready(function(){
         </div>
        </div>
       </div>
-
+			
       <hr class="featurette-divider">
       
-       <div class="container-fluid">
+       <div class="container-fluid mt-5">
       <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-0 main">
-          <h1 class="page-header mb-3" style="text-align: center;">주간인기상품</h1>
+          <h1 class="page-header mb-3" style="font-family: Nanum Gothic, cursive; text-align: center;">주간인기상품</h1>
           <div class="row placeholders text-center"id="itemList2">
            
           </div>
@@ -146,17 +146,17 @@ $(document).ready(function(){
           
       <hr class="featurette-divider">
       
-      <div class="container-fluid">
+      <div class="container-fluid mt-5">
          <img src="<c:url value='/images/main/mid_banner_01.jpg'/>" class="img-fluid" alt="Generic placeholder thumbnail">
           <a href=""></a>
       </div>
       
       <hr class="featurette-divider">
       
-      <div class="container-fluid">
+      <div class="container-fluid mt-5">
       <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-0 main">
-          <h1 class="page-header mb-3" style="text-align: center;">주간인기상품</h1>
+          <h1 class="page-header mb-3" style="font-family: Nanum Gothic, cursive;  text-align:center;">주간인기상품</h1>
           <div class="row placeholders text-center" id="itemList3">
             
             
@@ -165,17 +165,20 @@ $(document).ready(function(){
         </div>
        </div>
       </div>
-          
+      <hr class="featurette-divider">
+      <div class="mt-5">
+      <iframe width="100%" height="356" src="https://www.youtube.com/embed/SnI2xfVnLBs?rel=0;amp;autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>   
+      </div>
       <hr class="featurette-divider">
       
-      <div class="container-fluid">
+      <div class="container-fluid mt-5">
          <img src="<c:url value='/images/main/mid_banner_02.jpg'/>" class="img-fluid" alt="Generic placeholder thumbnail">
           <a href=""></a>
       </div>
       
-      <hr class="featurette-divider">
+      <hr class="featurette-divider mt-5">
       
-      <div class="container-fluid">
+      <div class="container-fluid mt-5">
       <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-0 main">
           <div class="row placeholders">
@@ -194,7 +197,7 @@ $(document).ready(function(){
           
       <hr class="featurette-divider">
       
-      <div class="container-fluid">
+      <div class="container-fluid mt-5">
          <img src="<c:url value='/images/main/mid_banner_03.jpg'/>" class="img-fluid" alt="Generic placeholder thumbnail">
           <a href=""></a>
       </div>

@@ -227,7 +227,9 @@ function orderf(){
 	card();
 		
 }
-
+function orderc(){
+	location.href="<c:url value='/main/main'/>";
+}
 function goPost(sdd) {
 var obj1 = sdd;
 
@@ -455,7 +457,7 @@ form.submit();
 			</form>
 			<div id="display_pay_button" class="text-center btn_confirm">
 			    <input type="button" value="주문하기" onclick="orderf();" class=" btn btn-dark">
-			     <input type="button" value="취소" onclick="forderform_check(this.form);" class=" btn btn-primary">
+			     <input type="button" value="취소" onclick="orderc();" class=" btn btn-primary">
 
 			</div>
 			

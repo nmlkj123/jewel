@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/viewtiles2/include/include-header.jspf" %>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/journal/bootstrap.min.css">
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,11 +45,6 @@
     line-height: 20px;
     padding: 0 2px;
     min-width: 35px;
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 30px;
-    padding: 0 2px;
-    min-width: 30px;
     text-align: center;
 }
 .qty .plus {
@@ -60,9 +55,6 @@
     width: 20px;
     height: 20px;
     font: 20px/1 Arial,sans-serif;
-    width: 22px;
-    height: 22px;
-    font: 22px/1 Arial,sans-serif;
     text-align: center;
     border-radius: 50%;
     }
@@ -74,9 +66,6 @@
     width: 20px;
     height: 20px;
     font: 20px/1 Arial,sans-serif;
-    width: 22px;
-    height: 22px;
-    font: 22px/1 Arial,sans-serif;
     text-align: center;
     border-radius: 50%;
     background-clip: padding-box;
@@ -111,7 +100,7 @@ tbody td{
 }
 
 </style>
-
+ <link href="<c:url value='/resources/css/default.css'/>" rel="stylesheet">
 <body>
 	<table class="table table-hover" style="width:80%; margin-left:10%;" id="myCart">
 		<br><br>
