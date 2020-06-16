@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orderChk">
+	
+	<!-- 비회원 주문내역-->
+	<select id="selectOrderChkList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				   i.ITEM_IMAGE1,
+				   i.ITEM_NAME,
+				   to_char(o.OR_DATE,'YYYY.MM.DD') OR_DATE,
+				   o.OR_CNT,
+				   o.OR_FP,
+				   o.OR_OP,
+				   d.DEL_DS
+			FROM ORDERS o, DELIVERY d, ITEM i
+			WHERE o.OR_NUM = #{OR_NUM}
+			AND o.OR_PWD = #{OR_PWD}
+			AND o.ITEM_NUM = i.ITEM_NUM
+			AND o.OR_NUM = d.OR_NUM
+		]]>
+	</select>
+	
+	<select id="selectOrderChk" parameterType="hashmap" resultType="int">
+		<![CDATA[
+			SELECT 
+				   COUNT(*) cnt
+			FROM ORDERS
+			WHERE OR_NUM = #{OR_NUM}
+			AND OR_PWD = #{OR_PWD}
+			
+		]]>
+	</select>
+	
+	
+</mapper>

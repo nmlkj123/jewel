@@ -352,6 +352,25 @@
 
 			</definition>
 
+			<definition name="orderChkForm" extends="base_layout">
+				<put-attribute name="title" value="주문배송조회로그인" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/myPage/orderChkForm.jsp" />
+			</definition>
+			
+			<definition name="orderChk" extends="base_layout">
+				<put-attribute name="title" value="주문배송조회검증" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/myPage/orderChk.jsp" />
+			</definition>
+		
+			
+			<definition name="orderChkPage" extends="base_layout">
+				<put-attribute name="title" value="주문배송조회페이지" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/myPage/orderChkPage.jsp" />
+			</definition>
+
 			<definition name="myOrderList" extends="base_layout">
 				<put-attribute name="title" value="마이페이지주문내역" />
 				<put-attribute name="body"
@@ -378,7 +397,7 @@
 					value="/WEB-INF/viewtiles2/myPage/myReview.jsp" />
 			</definition>
 			<definition name="myCart" extends="base_layout">
-				<put-attribute name="title" value="마이페이지Cart" />
+				<put-attribute name="title" value="장바구니" />
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/cart/memberCart.jsp" />
 			</definition>

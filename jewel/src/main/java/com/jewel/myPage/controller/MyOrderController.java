@@ -33,6 +33,7 @@ public class MyOrderController {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("MEM_ID");		
 		commandMap.put("MEM_ID",id);
+		commandMap.put("MEM_NUM", session.getAttribute("MEM_NUM"));
 
 		String pg=(String) commandMap.get("pg");  
 		

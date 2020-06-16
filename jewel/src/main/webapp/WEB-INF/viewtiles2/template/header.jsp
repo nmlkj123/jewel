@@ -21,9 +21,13 @@
 
 </style>
 <div class="menu_top">
+
       <c:choose>
           <c:when test="${MEM_ID == null}">
-             <div style="margin-right: 80px; float: right;">
+          	<div style="margin-right: 80px; float: right;">
+					<a href="<c:url value='/orderChkForm'/>">주문배송조회</a>
+			</div>
+            <div style="margin-right: 20px; float: right;">
                <a href="<c:url value='/myPage/myCart'/>">장바구니</a>
             </div>
               <div style="margin-right: 20px; float: right;">
@@ -47,6 +51,9 @@
                <a href="<c:url value='/myPage/myOrderList'/>">마이페이지 </a>
             </div>
             <div style="margin-right: 20px; float: right;">
+				<a href="<c:url value='/myPage/myOrderList'/>">주문배송조회</a>
+			</div>
+            <div style="margin-right: 20px; float: right;">
                <a href="<c:url value='/myPage/myCart'/>">장바구니 </a>
             </div>
             <div style="margin-right: 20px; float: right;">
@@ -58,16 +65,6 @@
           </c:otherwise>
       </c:choose>
          
-<%--          <div style="margin-right: 80px; float: right;">
-         <a href="javascript:void(0)"><%=name %> 님 </a>
-         <a href="../member/logout.jsp">로그아웃 </a>
-         <a href="../admin/SpotList.jsp">관리자 </a>
-         </div>
-
-         <div style="margin-right: 80px; float: right;">
-         <a href="javascript:void(0)"> 님 </a>
-         <a href="../member/logout.jsp">로그아웃 </a>
-         </div> --%>
 
 </div>
 <!-- header -->

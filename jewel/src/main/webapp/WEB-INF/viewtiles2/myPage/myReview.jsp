@@ -30,7 +30,7 @@ function reviewDetail(num){
         </colgroup>
         <br>
         <thead>
-        	<tr class="table-danger" style="text-align:center;">
+        	<tr class="table-primary" style="text-align:center;">
         		<th scope="col">등록일자</th>
         		<th scope="col">상품명</th>
         		<th scope="col">제목</th>

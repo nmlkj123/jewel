@@ -83,9 +83,9 @@
 			SELECT 
 				COUNT(*)as TOTAL 
 			FROM 
-				ORDERS o, MEMBER m
-			WHERE m.MEM_ID = #{MEM_ID}
-			AND o.MEM_NUM = m.MEM_NUM
+				ORDERS
+			WHERE MEM_NUM = #{MEM_NUM}
+			
 		]]>
 	</select>
 	

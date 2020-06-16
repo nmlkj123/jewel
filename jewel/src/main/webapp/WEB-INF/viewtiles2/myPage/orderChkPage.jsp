@@ -3,15 +3,18 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<%@include file="/WEB-INF/viewtiles2/template/myPageHeader.jsp" %>
+<%@ include file="/WEB-INF/viewtiles2/include/include-header.jspf" %>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/journal/bootstrap.min.css">
 <meta charset="UTF-8">
-<title>마이페이지 메인</title>
+<title>주문배송조회</title>
 </head>
+<script type="text/javascript">
 
+</script>
 <body>
 	<table class="table table-hover" style="width:80%; margin-left:10%;">
 		<br>
-		<h5 style="margin-left:10%;">나의주문내역<h5>
+		<h5 style="margin-left:10%;">주문배송조회<h5>
 		<br>
 		<colgroup>
 			<col width="15%"/>
@@ -32,7 +35,7 @@
         	</tr>
         </thead>
         <tbody>
-        	<c:forEach items="${myOrder }" var="items">
+        	<c:forEach items="${map }" var="items">
         		<tr align="center">
         			<td>${items.OR_DATE}</td>
         			<td>
@@ -41,7 +44,7 @@
         			<td><a href="<c:url value='/item/itemDetail?ITEM_NUM=${items.ITEM_NUM}'/>">
         				${items.ITEM_NAME }</a></td>
         			<!-- 상품명을 클릭하면 상품디테일처리하는 컨트롤러에 상품번호를 보내서 처리한다. -->
-        			<td id="price"><fmt:formatNumber value="${items.OR_FP }" type="number"/></td>
+        			<td><fmt:formatNumber value="${items.OR_FP }" type="number"/></td>
         			<td>${items.OR_OP }<br>
         				<p style="font-size:11px;">수량:&nbsp;${items.OR_CNT }개</p>
         			</td>
@@ -50,9 +53,7 @@
         	</c:forEach>        	
         </tbody>       
 	</table>
-	<div align="center"class="container pt-5" id="categoryPaging" >
-	${myOrderListPaging.pagingHTML}
-	</div>	
+	
 	
 </body>
 </html>
