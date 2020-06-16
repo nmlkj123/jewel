@@ -6,5 +6,5 @@ import java.util.Map;
 public interface OrderChkService  {
 	public List<Map<String, Object>> selectOrderChkList(Map<String, Object> map) throws Exception;
 	public int selectOrderChk(Map<String, Object> map) throws Exception;
-	
+	void deliveryUpdate(Map<String,Object> map) throws Exception;
 }

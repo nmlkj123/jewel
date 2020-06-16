@@ -29,7 +29,7 @@ public class OrderChkController {
 		int cnt=orderChkService.selectOrderChk(commandMap.getMap());
 
 		HttpSession session = request.getSession();		
-		if(session.getAttribute("MEM_ID")!=null) {
+		if(session.getAttribute("MEM_ID")!= null) {
 			ModelAndView mv1 = new ModelAndView("redirect:/myPage/myOrderList");
 			return mv1;
 			
@@ -37,6 +37,7 @@ public class OrderChkController {
 
 			List<Map<String, Object>> orderChkList = orderChkService.selectOrderChkList(commandMap.getMap());
 			mv.addObject("map",orderChkList);
+			return mv;
 			
 		} else {
 			ModelAndView mv2 = new ModelAndView("orderChk");
@@ -44,7 +45,7 @@ public class OrderChkController {
 		    mv2.addObject("message",message);
 			return mv2;
 		}
-		return mv;
+		
 
 
 	}
@@ -55,6 +56,25 @@ public class OrderChkController {
 		ModelAndView mv = new ModelAndView("orderChkForm");
 		return mv;		 
 	}
+	@RequestMapping(value="/orderExchange")
+	public ModelAndView orderExchange(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("jsonView");
+		orderChkService.deliveryUpdate(commandMap.getMap());		
+		return mv;
+	}
+	@RequestMapping(value="/orderReturn")
+	public ModelAndView orderReturn(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("jsonView");
+		orderChkService.deliveryUpdate(commandMap.getMap());		
+		return mv;
+	}
+	@RequestMapping(value="/orderCancel")
+	public ModelAndView orderCancel(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("jsonView");
+		orderChkService.deliveryUpdate(commandMap.getMap());		
+		return mv;
+	}
+	
 
 
 }

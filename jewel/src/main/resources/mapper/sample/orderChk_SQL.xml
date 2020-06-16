@@ -6,6 +6,7 @@
 	<select id="selectOrderChkList" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
 			SELECT 
+				   o.OR_NUM,
 				   i.ITEM_IMAGE1,
 				   i.ITEM_NAME,
 				   to_char(o.OR_DATE,'YYYY.MM.DD') OR_DATE,
@@ -31,6 +32,12 @@
 			
 		]]>
 	</select>
-	
+	<update id="deliveryUpdate" parameterType="hashmap" >
+		<![CDATA[
+			UPDATE DELIVERY SET 
+			 	DEL_DS = #{keyword} 			 	
+			WHERE OR_NUM = #{OR_NUM}
+		]]>
+	</update>
 	
 </mapper>

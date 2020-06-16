@@ -24,4 +24,9 @@ public class OrderChkServiceImpl implements OrderChkService{
 	public int selectOrderChk(Map<String, Object> map) throws Exception {		
 		return orderChkDAO.selectOrderChk(map);
 	}
+	@Override
+	public void deliveryUpdate(Map<String, Object> map) throws Exception{
+		orderChkDAO.deliveryUpdate(map);
+	}
+	
 }

@@ -18,4 +18,8 @@ public class OrderChkDAO extends AbstractDAO {
 	public int selectOrderChk(Map<String, Object> map) throws Exception {
 		return (Integer) selectOne("orderChk.selectOrderChk",map);
 	}
+	public void deliveryUpdate(Map<String, Object> map) throws Exception{
+		update("orderChk.deliveryUpdate", map);
+	}
+	
 }
