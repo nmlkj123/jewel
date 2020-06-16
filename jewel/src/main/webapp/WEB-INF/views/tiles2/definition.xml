@@ -21,7 +21,7 @@
 					value="/WEB-INF/viewtiles2/template/adminHeader.jsp" />
 			<put-attribute name="left"
 					value="/WEB-INF/viewtiles2/template/sideBar.jsp" />
-			<put-attribute name="body" value=""/>		
+				
 			<put-attribute name="footer"
 					value="/WEB-INF/viewtiles2/template/adminFooter.jsp" />
 			</definition>
@@ -335,6 +335,7 @@
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/event/eventDetail.jsp" />
 			</definition>
+			
 			<definition name="adminDeliveryList" extends="admin_layout">
 				<put-attribute name="title" value="배송 관리" />
 				<put-attribute name="body"
@@ -351,6 +352,8 @@
 					value="/WEB-INF/viewtiles2/admin/adminMain.jsp" />
 
 			</definition>
+
+
 
 			<definition name="orderChkForm" extends="base_layout">
 				<put-attribute name="title" value="주문배송조회로그인" />

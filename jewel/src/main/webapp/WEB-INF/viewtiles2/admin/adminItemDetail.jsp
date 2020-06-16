@@ -5,6 +5,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 </head>
+<script type="text/javascript">
+function delete2(){
+	 if (confirm("삭제하시겠습니까?") == true){   
+
+		 location.href='<c:url value="/adminItemDelete?ITEM_NUM=${map.ITEM_NUM}"/>';
+
+	 }else{   //취소
+
+	     return false;
+
+	 }
+}
+	
+
+
+
+
+</script>
 <body>
 
 	<div class="card card-info">
@@ -69,7 +87,7 @@
         <div class="form-group row">
                     <label for="ITEM_STOCK" class="col-sm-2 col-form-label">사진2</label>
                     <div class="col-sm-10">
-                    <img src="<c:url value="/images/item/${map.ITEM_IMAGE2}"/>" style="width:150px"	>
+                    ${map.ITEM_IMAGE2}
                       
                       
                     </div>
@@ -134,13 +152,13 @@
 	</div>
 	
 	
-	<table>
+	<table align="center">
 	<tr>
 		<td><input type="button" class="btn btn-block btn-outline-success" onclick="location.href='<c:url value="/adminItemList"/>'" value="목록으로">
 		</td>
 		<td><input type="button" class="btn btn-block btn-outline-primary" onclick="location.href='<c:url value="/openAdminItemUpdate?ITEM_NUM=${map.ITEM_NUM}"/>'" value="수정하기">
 		</td>
-		<td><input type="button" class="btn btn-block btn-outline-danger" onclick="location.href='<c:url value="/adminItemDelete?ITEM_NUM=${map.ITEM_NUM}"/>'" value="삭제하기"/>
+		<td><input type="button" class="btn btn-block btn-outline-danger" onclick="delete2()" value="삭제하기"/>
 		</td>
 	</tr>
 </table>

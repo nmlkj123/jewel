@@ -23,7 +23,18 @@ $(document).ready(function() {
     });
   });
   
-  
+function delete2(){
+	 if (confirm("삭제하시겠습니까?") == true){   
+
+		 
+		 location.href='<c:url value="/adminEventDelete?ET_NUM=${map.ET_NUM}"/>'
+
+	 }else{   //취소
+
+	     return false;
+
+	 }
+}
   
   function sendFile(file, el) {
     var form_data = new FormData();
@@ -97,14 +108,14 @@ $(document).ready(function() {
               </form>
             </div>
 	
-	<table>
+	<table align="center">
 <tr>
 <td><input type="button"  class="btn btn-block btn-outline-success" onclick="location.href='<c:url value="/adminEventList"/>'" value="목록으로">
 </td>
 <td>
 <input type="button" class="btn btn-block btn-outline-primary" onclick="location.href='<c:url value="/openAdminEventUpdate?ET_NUM=${map.ET_NUM}"/>'" value="내용 수정">
 </td>
-<td><input type="button" class="btn btn-block btn-outline-danger" onclick="location.href='<c:url value="/adminEventDelete?ET_NUM=${map.ET_NUM}"/>'" value="삭제하기"/>
+<td><input type="button" class="btn btn-block btn-outline-danger" onclick="delete2()" value="삭제하기"/>
 </td>
 </tr>
 </table>

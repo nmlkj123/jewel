@@ -29,7 +29,17 @@ function fsubmit(){
 	}
 	
 	
-	frm2.submit();
+
+	if (confirm("수정 하시겠습니까?") == true){   
+
+		 
+		frm2.submit();
+
+	 }else{   //취소
+
+	     return false;
+
+	 }
 }
 
 </script>
@@ -84,7 +94,7 @@ function fsubmit(){
                   </div>
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">질문 내용</label>
-                    <textarea class="form-control" rows="3" id="FAQ_CONTENT" name="FAQ_CONTENT" disabled>${map.QNA_TITLE}</textarea>
+                    <textarea class="form-control" rows="10" id="FAQ_CONTENT" name="FAQ_CONTENT" disabled>${map.QNA_CONTENT}</textarea>
                       
                     
                   </div>
@@ -114,7 +124,7 @@ function fsubmit(){
                   
                 	<div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">답변 내용</label>
-                    <textarea class="form-control" id="QNA_RCONTENT" name="QNA_RCONTENT" rows="15" placeholder="답변 내용">${map.QNA_RCONTENT}</textarea>
+                    <textarea class="form-control" id="QNA_RCONTENT" name="QNA_RCONTENT" rows="10" placeholder="답변 내용">${map.QNA_RCONTENT}</textarea>
                       
                     
                   </div>	
@@ -148,7 +158,7 @@ function fsubmit(){
                   
                 	<div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">답변 내용</label>
-                    <textarea class="form-control" id="QNA_RCONTENT" name="QNA_RCONTENT" rows="15" placeholder="답변 내용"></textarea>
+                    <textarea class="form-control" id="QNA_RCONTENT" name="QNA_RCONTENT" rows="10" placeholder="답변 내용"></textarea>
                       
                     
                   </div>	
@@ -168,7 +178,7 @@ function fsubmit(){
                 
           
  
-    <table>
+    <table align="center">
 	<tr>
 		<td><input type="button" class="btn btn-block btn-outline-success" onclick="location.href='<c:url value="/adminQnAList"/>'" value="목록으로">
 		</td>

@@ -13,9 +13,18 @@ function fsubmit(){
 		alert("배송상태를 입력하세요.");
 		return false;
 	}
+	 if (confirm("수정하시겠습니까?") == true){   
+
+		 frm.submit();
+
+	 }else{   //취소
+
+	     return false;
+
+	 }
 	
 
-	frm.submit();
+	
 }
 
 </script>
@@ -55,9 +64,20 @@ function fsubmit(){
                   </div>
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">배송상태</label>
-                    <div class="col-sm-10">
-                      <input class="form-control" type="text"  id="DEL_DS" name="DEL_DS" value="${map.DEL_DS}" placeholder="배송상태">
-                    </div>
+                    <select class="form-control" id="DEL_DS" name="DEL_DS" placeholder="배송상태">
+						<option value="상품준비중" <c:if test="${map.DEL_DS == '상품준비중'}">selected</c:if>>상품준비중 </option>
+						<option value="배송준비중" <c:if test="${map.DEL_DS == '배송준비중'}">selected</c:if>>배송준비중 </option>
+						<option value="배송중" <c:if test="${map.DEL_DS == '배송중'}">selected</c:if>>배송중 </option>
+						<option value="배송완료" <c:if test="${map.DEL_DS == '배송완료'}">selected</c:if>>배송완료 </option>
+						<option value="교환처리중" <c:if test="${map.DEL_DS == '교환처리중'}">selected</c:if>>교환처리중</option>
+						<option value="교환완료" <c:if test="${map.DEL_DS == '교환완료'}">selected</c:if>>교환완료</option>
+						<option value="반품처리중" <c:if test="${map.DEL_DS == '반품처리중'}">selected</c:if>>반품처리중</option>
+						<option value="반품완료" <c:if test="${map.DEL_DS == '반품완료'}">selected</c:if>>반품완료</option>
+						<option value="취소진행중" <c:if test="${map.DEL_DS == '취소진행중'}">selected</c:if>>취소진행중</option>
+						<option value="취소완료" <c:if test="${map.DEL_DS == '취소완료'}">selected</c:if>>취소완료</option>
+					
+					</select>
+                    
                   </div>
                   </div>
                 <!-- /.card-body -->

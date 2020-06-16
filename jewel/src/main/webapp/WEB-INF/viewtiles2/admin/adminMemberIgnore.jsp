@@ -13,16 +13,24 @@ function fsubmit(){
 		alert("차단사유를 입력하세요.");
 		return false;
 	}
-	
+	if (confirm("정말 차단하시겠습니까?") == true){   
 
-	frm.submit();
+		 frm.submit();
+
+	 }else{   //취소
+
+	     return false;
+
+	 }
+
+	
 }
 
 </script>
 <body>
 	<div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">회원 포인트/등급 변경</h3>
+                <h3 class="card-title">회원 차단</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -43,7 +51,7 @@ function fsubmit(){
                   </div>
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">차단 사유</label>
-                    <textarea class="form-control" rows="3" id="IG_WHY" name="IG_WHY"></textarea>
+                    <textarea class="form-control" rows="10" id="IG_WHY" name="IG_WHY"></textarea>
                       
                     
                   </div>
@@ -54,7 +62,7 @@ function fsubmit(){
               </form>
             </div>
 
-	<table>
+	<table align="center">
 	<tr>
 		<td><input type="button" class="btn btn-block btn-outline-success"  onclick="location.href='<c:url value="/adminMemberList"/>'" value="목록으로">
 		</td>

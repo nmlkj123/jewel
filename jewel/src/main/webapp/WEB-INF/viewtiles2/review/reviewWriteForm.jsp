@@ -91,8 +91,7 @@ $(document).ready(function() {
            url=url.trim();
            
           $(el).summernote('editor.insertImage', "<c:url value='/images/reviewImage/"+url+"'/>");
-          
-          $('#imageBoard > ul').append('<li><img src="<c:url value="/review/reviewWrite'+url+'"/>" width="480" height="auto"/></li>');
+
         }
       });
     }

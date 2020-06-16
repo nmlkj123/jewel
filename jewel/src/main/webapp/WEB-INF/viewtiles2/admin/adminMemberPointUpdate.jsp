@@ -18,8 +18,16 @@ function fsubmit(){
 		alert("등급을 입력하세요.");
 		return false;
 	}
+	 if (confirm("수정하시겠습니까?") == true){   
+
+		 frm.submit();
+
+	 }else{   //취소
+
+	     return false;
+
+	 }
 	
-	frm.submit();
 }
 
 </script>

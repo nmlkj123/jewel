@@ -26,7 +26,18 @@ function fsubmit(){
 		return false;
 	}
 	
-	frm.submit();
+		 if (confirm("수정 하시겠습니까?") == true){   
+
+			 
+			 frm.submit();
+
+		 }else{   //취소
+
+		     return false;
+
+		 }
+	
+	
 }
 
 </script>
@@ -57,7 +68,7 @@ function fsubmit(){
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">공지사항 내용</label>
                    	
-                    <textarea class="form-control" rows="15" id="NT_CONTENT" name="NT_CONTENT" >${map.NT_CONTENT}</textarea>
+                    <textarea class="form-control" rows="10" id="NT_CONTENT" name="NT_CONTENT" >${map.NT_CONTENT}</textarea>
                     
                     
                   </div>
@@ -68,7 +79,7 @@ function fsubmit(){
               </form>
             </div>
 	
-	<table>
+	<table align="center">
 	<tr>
 		<td><input type="button" class="btn btn-block btn-outline-success" onclick="location.href='<c:url value="/adminNoticeList"/>'" value="목록으로">
 		</td>

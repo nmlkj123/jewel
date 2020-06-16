@@ -7,6 +7,34 @@
 
 
 </head>
+<script type="text/javascript">
+function delete2(){
+	 if (confirm("답변을 삭제 하시겠습니까?") == true){   
+
+		 
+		 location.href='<c:url value="/adminQnAReplyDelete?QNA_NUM=${map.QNA_NUM}"/>';
+	 }else{   //취소
+
+	     return false;
+
+	 }
+}
+	
+function delete3(){
+	 if (confirm("질문 글을 삭제 하시겠습니까?") == true){   
+
+		 
+		 location.href='<c:url value="/deleteQnA?QNA_NUM=${map.QNA_NUM}"/>';
+	 }else{   //취소
+
+	     return false;
+
+	 }
+}
+
+
+
+</script>
 <body>
     
     <div class="card card-info">
@@ -58,7 +86,7 @@
                   </div>
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">질문 내용</label>
-                    <textarea class="form-control" rows="3" id="FAQ_CONTENT" name="FAQ_CONTENT" disabled>${map.QNA_TITLE}</textarea>
+                    <textarea class="form-control" rows="10" id="FAQ_CONTENT" name="FAQ_CONTENT" disabled>${map.QNA_CONTENT}</textarea>
                       
                     
                   </div>
@@ -93,7 +121,7 @@
                   </div>
                 	<div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">답변 내용</label>
-                    <textarea class="form-control" rows="3" id="FAQ_CONTENT" name="FAQ_CONTENT" disabled>${map.QNA_RCONTENT}</textarea>
+                    <textarea class="form-control" rows="10" id="FAQ_CONTENT" name="FAQ_CONTENT" disabled>${map.QNA_RCONTENT}</textarea>
                       
                     
                   </div>	
@@ -130,7 +158,7 @@
                 </c:choose>
     
     
-    <table>
+    <table align="center">
 	<tr>
 		<td><input type="button" class="btn btn-block btn-outline-success" onclick="location.href='adminQnAList'" value="목록으로">
 		</td>
@@ -140,7 +168,7 @@
     		<input type="button" class="btn btn-block btn-outline-primary" onclick="location.href='<c:url value="/openAdminQnAReply?QNA_NUM=${map.QNA_NUM}"/>'" value="답변 수정">
     	</td>
     	<td>
-    		<input type="button" class="btn btn-block btn-outline-danger" onclick="location.href='<c:url value="/adminQnAReplyDelete?QNA_NUM=${map.QNA_NUM}"/>'" value="답변 삭제">
+    		<input type="button" class="btn btn-block btn-outline-danger" onclick="delete2()" value="답변 삭제">
     	</td>
     	</c:when>
         <c:otherwise>
@@ -148,7 +176,7 @@
         </c:otherwise>
     </c:choose>
     <td>
-   <input type="button" class="btn btn-block btn-outline-secondary" onclick="location.href='<c:url value="/deleteQnA?QNA_NUM=${map.QNA_NUM}"/>'" value="QnA게시글 삭제">
+   <input type="button" class="btn btn-block btn-outline-secondary" onclick="delete3()" value="QnA게시글 삭제">
    </td>
 		
 	</tr>

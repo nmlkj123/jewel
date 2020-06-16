@@ -33,7 +33,7 @@ function fsubmit(){
 <body>
 <div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">Horizontal Form</h3>
+                <h3 class="card-title">FAQ 등록</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -62,7 +62,7 @@ function fsubmit(){
                   
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">FAQ 내용</label>
-                    <textarea class="form-control" rows="3" id="FAQ_CONTENT" name="FAQ_CONTENT"></textarea>
+                    <textarea class="form-control" rows="10" id="FAQ_CONTENT" name="FAQ_CONTENT"></textarea>
                       
                     
                   </div>
@@ -75,7 +75,7 @@ function fsubmit(){
 	
 	<table align="center">
 	<tr>
-		<td><input class="btn btn-block bg-gradient-success" type="button" onclick="location.href='<c:url value="/adminFAQlist"/>'" value="목록으로">
+		<td><input class="btn btn-block btn-outline-success" type="button" onclick="location.href='<c:url value="/adminFaqList"/>'" value="목록으로">
 		
 		</td>
 		<td><button type="button" class="btn btn-block btn-outline-primary" onclick="fsubmit();">등록하기</button>

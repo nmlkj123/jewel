@@ -4,6 +4,19 @@
 <head>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
+<script type="text/javascript">
+function delete2(){
+	 if (confirm("회원을 삭제 하시겠습니까?") == true){   
+
+		 
+		 location.href='<c:url value="/adminMemberDelete?MEM_NUM=${map.MEM_NUM}"/>';
+	 }else{   //취소
+
+	     return false;
+
+	 }
+}
+</script>
 <body><div class="card card-info">
               <div class="card-header">
                 <h3 class="card-title">회원정보 상세</h3>
@@ -103,7 +116,7 @@
 		</td>
 		<td><input type="button" class="btn btn-block btn-outline-secondary" onclick="location.href='<c:url value="/openAdminMemberIgnore?MEM_NUM=${map.MEM_NUM}"/>'" value="회원 차단">
 		</td>
-		<td><input type="button" class="btn btn-block btn-outline-danger" onclick="location.href='<c:url value="/adminMemberDelete?MEM_NUM=${map.MEM_NUM}"/>'" value="삭제하기"/>
+		<td><input type="button" class="btn btn-block btn-outline-danger" onclick="delete2()" value="삭제하기"/>
 		</td>
 	</tr>
 </table>

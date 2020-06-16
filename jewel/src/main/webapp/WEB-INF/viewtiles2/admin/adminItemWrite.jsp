@@ -4,13 +4,16 @@
 
 <head>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.standalone.min.css">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
 <style type="text/css">
 
  </style>
 </head>
 
 <script type="text/javascript">
-
 function fsubmit(){
 	
 	 var form = $('#frm')[0];
@@ -24,7 +27,7 @@ function fsubmit(){
 	var ITEM_PRICE = document.getElementById("ITEM_PRICE").value;
 	var ITEM_DCP = document.getElementById("ITEM_DCP").value;
 	var ITEM_IMAGE1 = document.getElementById("ITEM_IMAGE1").value;
-	var ITEM_IMAGE2 = document.getElementById("ITEM_IMAGE2").value;
+	
 	var ITEM_STOCK = document.getElementById("ITEM_STOCK").value;
 	
 	if(ITEM_NUM==null || ITEM_NUM==''){
@@ -51,10 +54,7 @@ function fsubmit(){
 		alert("사진1 을 입력하세요.");
 		return false;
 	}
-	if(ITEM_IMAGE2==null || ITEM_IMAGE2==''){
-		alert("사진1 을 입력하세요.");
-		return false;
-	}
+	
 	if(ITEM_STOCK ==null || ITEM_STOCK ==''){
 		alert("재고를 입력하세요.");
 		return false;
@@ -65,10 +65,10 @@ function fsubmit(){
 	      url : '<c:url value="/adminItemWrite"/>',
 	      data:formData,
 	      processData: false,
-          contentType: false,
-          async: false,
+         contentType: false,
+         async: false,
 	      success : function(data){
-	    	
+	    
 	      }
 	      });
 	var count=$('#opt >tbody tr').length
@@ -92,8 +92,22 @@ function fsubmit(){
 	alert("등록 완료");
 	location.href = "/common/adminItemList";
 }
+
 $(document).ready(function(){
-	
+	$('#summernote').summernote({
+	    height: 300,
+	    minHeight: null,
+	    maxHeight: null,
+	    focus: true,
+	    callbacks: {
+	      onImageUpload: function(files, editor, welEditable) {
+	        for (var i = files.length - 1; i >= 0; i--) {
+	          sendFile(files[i], this);
+	        }
+	      }
+	    }
+	  });
+
 	$('#ITEM_TYPE').change(function(){
 		$.ajax({
 		      type : "POST",
@@ -107,37 +121,64 @@ $(document).ready(function(){
 		      })
 		
 	});
-	
+
 	$('#add_opt').on("click",function(){
 		
 	 	
 		var str = '<tr>	<td><input type="text" id="OP_TYPE" name="OP_TYPE"></td><td>	<input type="text" id="OP_VALUE" name="OP_VALUE"> </td><td>	<input type="text" id="OP_PRICE" name="OP_PRICE"><a href="#" class="btn" id="delete" name="delete">삭제</a></td></tr>';
 		 $("#opt > tbody:last").append(str); 
 		
-	
+
 	});
-	
+
 	$(document).on("click",'.btn', function(e){
 		 
 		 e.preventDefault();
 		$(this).parent().parent('tr').remove(); 
 
 		});  
-	
+
 
 	
+	
+	
+	
+
+
+
 });
+function sendFile(file, el) {
+	  var form_data = new FormData();
+	  form_data.append('file', file);
+	  $.ajax({
+	    data: form_data,
+	    type: "POST",
+	    url: "<c:url value='/adminContentImage'/>",
+	    cache: false,
+	    contentType: false,
+	    enctype: 'multipart/form-data',
+	    processData: false,
+	    success: function(url) {
+	    	url=url.trim();
+	    	
+	      $(el).summernote('editor.insertImage', "<c:url value='/images/item/"+url+"'/>");
+	     
+	     
+	    }
+	  });
+
+
+	}
 
 
 
-	        	
 </script>
 
 
 <body>
 <div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">상품 수정</h3>
+                <h3 class="card-title">상품 등록</h3>
               </div>
 	<form class="form-horizontal" id="frm" name="frm"  action="<c:url value='/adminItemWrite'/>" method="post" enctype="multipart/form-data">
 		<div class="card-body">
@@ -198,22 +239,19 @@ $(document).ready(function(){
          
          			
 		<div class="form-group row">
-                    <label for="ITEM_IMAGE2" class="col-sm-2 col-form-label">사진2</label>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="ITEM_IMAGE2" name="ITEM_IMAGE2">
-                        <label class="custom-file-label" for="ITEM_IMAGE2">Choose file</label>
-                      </div>
-                     
-                    </div>
-        </div>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">사진 2</label>
+                    <textarea class="form-control" rows="10" id="summernote" name="ITEM_IMAGE2"></textarea>
+                    
+                    
+                  </div>
         	
 				
-		</div>
-			
+		
+		</div>	
 		</form>
 		</div>
 		
+	
 		
 		<table id="opt" style="width:95%;">
 		<thead>
@@ -248,9 +286,14 @@ $(document).ready(function(){
 	<button type="button" class="btn btn-primary" onclick="fsubmit();">상품 등록</button>
 	</div>
 	
+	
 		
-		
-		
+			<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- include summernote css/js-->
+    
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>	
 		
 		
 		

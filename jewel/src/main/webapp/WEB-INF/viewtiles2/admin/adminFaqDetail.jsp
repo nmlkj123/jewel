@@ -4,6 +4,21 @@
 <head>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
+<script type="text/javascript">
+function delete2(){
+	 if (confirm("삭제하시겠습니까?") == true){   
+
+		 
+		 location.href='<c:url value="/adminFaqDelete?FAQ_NUM=${map.FAQ_NUM}"/>';
+
+	 }else{   //취소
+
+	     return false;
+
+	 }
+}
+
+</script>
 <body>
 <div class="card card-info">
               <div class="card-header">
@@ -37,7 +52,7 @@
                 
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">FAQ 내용</label>
-                    <textarea class="form-control" rows="15" id="FAQ_CONTENT" name="FAQ_CONTENT" disabled>${map.FAQ_CONTENT}</textarea>
+                    <textarea class="form-control" rows="10" id="FAQ_CONTENT" name="FAQ_CONTENT" disabled>${map.FAQ_CONTENT}</textarea>
                       
                     
                   </div>
@@ -48,7 +63,7 @@
               </form>
             </div>
 
-	<table>
+	<table align="center">
 	<tr>
 		<td>
 			<input type="button" class="btn btn-block btn-outline-success" onclick="location.href='<c:url value="/adminFaqList"/>'" value="목록으로">
@@ -57,7 +72,7 @@
 			<input type="button" class="btn btn-block btn-outline-primary" onclick="location.href='<c:url value="/openAdminFaqUpdate?FAQ_NUM=${map.FAQ_NUM}"/>'" value="내용 수정">
 		</td>
 		<td>
-			<input type="button" class="btn btn-block btn-outline-danger"  onclick="location.href='<c:url value="/adminFaqDelete?FAQ_NUM=${map.FAQ_NUM}"/>'" value="삭제하기"/>
+			<input type="button" class="btn btn-block btn-outline-danger"  onclick="delete2()" value="삭제하기"/>
 		</td>
 	</tr>
 </table>

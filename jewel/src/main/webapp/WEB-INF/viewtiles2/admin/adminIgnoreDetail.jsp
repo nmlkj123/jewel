@@ -4,6 +4,25 @@
 <head>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
+<script type="text/javascript">
+function delete2(){
+	 if (confirm("삭제하시겠습니까?") == true){   
+
+		 
+		 location.href='<c:url value="/adminIgnoreDelete?MEM_NUM=${map.MEM_NUM}"/>';
+
+	 }else{   //취소
+
+	     return false;
+
+	 }
+}
+	
+
+
+
+
+</script>
 <body>
 <div class="card card-info">
               <div class="card-header">
@@ -34,7 +53,7 @@
                   
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">차단사유</label>
-                    <textarea class="form-control" rows="3" id="FAQ_CONTENT" name="FAQ_CONTENT" disabled>${map.IG_WHY}</textarea>
+                    <textarea class="form-control" rows="10" id="FAQ_CONTENT" name="FAQ_CONTENT" disabled>${map.IG_WHY}</textarea>
                       
                     
                   </div>
@@ -45,11 +64,11 @@
               </form>
             </div>
 	
-	<table>
+	<table align="center">
 	<tr>
 		<td><input type="button" class="btn btn-block btn-outline-success"  onclick="location.href='<c:url value="/adminIgnoreList"/>'" value="목록으로">
 		</td>
-		<td><input type="button" class="btn btn-block btn-outline-danger" onclick="location.href='<c:url value="/adminIgnoreDelete?MEM_NUM=${map.MEM_NUM}"/>'" value="삭제하기">
+		<td><input type="button" class="btn btn-block btn-outline-danger" onclick="delete2()" value="삭제하기">
 		
 		</td>
 	</tr>

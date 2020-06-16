@@ -32,6 +32,12 @@
 	});
 });
  */
+ 
+ var isAdmin="${MEM_ADMIN}";
+ if(isAdmin!="A"){
+	 alert("권한이 없습니다");
+	 location.href="/common/main/main";
+ }
 </script>
 <a href="openAdminMain" class="brand-link">
       <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"

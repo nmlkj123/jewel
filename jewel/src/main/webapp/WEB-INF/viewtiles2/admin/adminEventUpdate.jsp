@@ -33,8 +33,16 @@ function esubmit(){
 		alert("이벤트 내용을 입력하세요.");
 		return false;
 	}
+	if (confirm("수정 하시겠습니까?") == true){   
 
-	frm.submit();
+		frm.submit();
+
+	 }else{   //취소
+
+	     return false;
+
+	 }
+	
 }
 $(document).ready(function() {
 
@@ -79,7 +87,7 @@ $(document).ready(function() {
 <body>
 	<div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">이벤트 상세</h3>
+                <h3 class="card-title">이벤트 수정</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -111,7 +119,7 @@ $(document).ready(function() {
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">이벤트 내용</label>
                    	<div>
-                    <textarea class="form-control" rows="15" id="summernote" name="ET_CONTENT" >${map.ET_CONTENT}</textarea>
+                    <textarea class="form-control" rows="10" id="summernote" name="ET_CONTENT" >${map.ET_CONTENT}</textarea>
                     </div>
                     
                   </div>
@@ -122,7 +130,7 @@ $(document).ready(function() {
               </form>
             </div>
 
-		<table>
+		<table align="center">
 <tr>
 <td><input type="button"  class="btn btn-block btn-outline-success" onclick="location.href='<c:url value="/adminEventList"/>'" value="목록으로">
 </td>

@@ -12,21 +12,7 @@
     <div class="row">
           <div class="col-12">
             <div class="card">
-              <div class="card-header">
-                
-
-                <div class="card-tools">
-                
-                  <div class="input-group input-group-sm" style="width: 150px;">
-               
-
-                    <div class="input-group-append">
-                      
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- /.card-header -->
+                            <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
     
     <table class="table table-head-fixed text-nowrap">

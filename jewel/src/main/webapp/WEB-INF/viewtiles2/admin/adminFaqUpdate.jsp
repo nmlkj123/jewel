@@ -25,15 +25,23 @@ function fsubmit(){
 		alert("FAQ 내용을 입력하세요.");
 		return false;
 	}
+	if (confirm("수정 하시겠습니까?") == true){   
 
-	frm.submit();
+		 
+		 frm.submit();
+
+	 }else{   //취소
+
+	     return false;
+
+	 }
 }
 
 </script>
 <body>
 	<div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">FAQ 상세</h3>
+                <h3 class="card-title">FAQ 수정</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -67,7 +75,7 @@ function fsubmit(){
                 
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">FAQ 내용</label>
-                    <textarea class="form-control" rows="15" id="FAQ_CONTENT" name="FAQ_CONTENT" >${map.FAQ_CONTENT}</textarea>
+                    <textarea class="form-control" rows="10" id="FAQ_CONTENT" name="FAQ_CONTENT" >${map.FAQ_CONTENT}</textarea>
                       
                     
                   </div>
@@ -79,7 +87,7 @@ function fsubmit(){
             </div>
 	
 	
-<table>
+<table align="center">
 	<tr>
 		<td><input type="button" class="btn btn-block btn-outline-success" onclick="location.href='<c:url value="/adminFaqList"/>'" value="목록으로">
 		

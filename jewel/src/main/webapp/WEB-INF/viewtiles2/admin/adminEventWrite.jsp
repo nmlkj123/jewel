@@ -72,7 +72,8 @@ function fsubmit(){
 		alert("이벤트 내용을 입력하세요.");
 		return false;
 	}
-
+	alert("등록 완료");
+	
 	frm.submit();
 }
 
@@ -86,7 +87,7 @@ function fsubmit(){
 
 <div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">Horizontal Form</h3>
+                <h3 class="card-title">이벤트 등록</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -95,24 +96,24 @@ function fsubmit(){
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">이벤트 제목</label>
                     <div class="col-sm-10">
-                      <input class="form-control" type="text"  id="ET_TITLE" name="ET_TITLE" placeholder="공지사항 제목">
+                      <input class="form-control" type="text"  id="ET_TITLE" name="ET_TITLE" placeholder="이벤트 제목">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">이벤트 시작일</label>
                     <div class="col-sm-10">
-                      <input class="form-control" type="text"  id="ET_SD" name="ET_SD" placeholder="공지 유형">
+                      <input class="form-control" type="text"  id="ET_SD" name="ET_SD" placeholder="이벤트 시작일">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">이벤트 종료일</label>
                     <div class="col-sm-10">
-                      <input class="form-control" type="text"  id="ET_FD" name="ET_FD" placeholder="공지 유형">
+                      <input class="form-control" type="text"  id="ET_FD" name="ET_FD" placeholder="이벤트 종료일">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">이벤트 내용</label>
-                    <textarea class="form-control" rows="3" id="summernote" name="ET_CONTENT"></textarea>
+                    <textarea class="form-control" rows="10" id="summernote" name="ET_CONTENT"></textarea>
                     
                     
                   </div>

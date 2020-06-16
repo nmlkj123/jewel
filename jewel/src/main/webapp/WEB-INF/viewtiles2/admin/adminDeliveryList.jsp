@@ -20,21 +20,7 @@
 	    	  var table='<div class="row">'+
 	              '<div class="col-12">'+
 	            '<div class="card">'+
-	              '<div class="card-header">'+
-	                
-
-	                '<div class="card-tools">'+
-	                
-	                  '<div class="input-group input-group-sm" style="width: 150px;">'+
-	               
-
-	                    '<div class="input-group-append">'+
-	                      
-	                    '</div>'+
-	                  '</div>'+
-	                '</div>'+
-	              '</div>'+
-	              <!-- /.card-header -->
+	       
 	              '<div class="card-body table-responsive p-0">'+
 	    
 	    '<table class="table table-head-fixed text-nowrap"><thead> <tr> <th scope="col">배송 현황 번호</th><th scope="col">구분 번호</th><th scope="col">주문번호</th><th scope="col">날짜</th><th scope="col">배송상태</th></tr></thead><tbody id="tbody">';
@@ -77,21 +63,7 @@ function normalList(pg){
 	    	  var table='<div class="row">'+
               '<div class="col-12">'+
 	            '<div class="card">'+
-	              '<div class="card-header">'+
-	                
-
-	                '<div class="card-tools">'+
-	                
-	                  '<div class="input-group input-group-sm" style="width: 150px;">'+
-	               
-
-	                    '<div class="input-group-append">'+
-	                      
-	                    '</div>'+
-	                  '</div>'+
-	                '</div>'+
-	              '</div>'+
-	              <!-- /.card-header -->
+	            
 	              '<div class="card-body table-responsive p-0">'+
 	    		  '<table class="table table-head-fixed text-nowrap"><thead> <tr> <th scope="col">배송 현황 번호</th><th scope="col">구분 번호</th><th scope="col">주문번호</th><th scope="col">날짜</th><th scope="col">배송상태</th></tr></thead><tbody id="tbody">';
 	    	  if(data.list.length==0){
@@ -138,20 +110,7 @@ function refundList(pg){
 	    	  var table='<div class="row">'+
               '<div class="col-12">'+
 	            '<div class="card">'+
-	              '<div class="card-header">'+
-	                
-
-	                '<div class="card-tools">'+
-	                
-	                  '<div class="input-group input-group-sm" style="width: 150px;">'+
-	               
-
-	                    '<div class="input-group-append">'+
-	                      
-	                    '</div>'+
-	                  '</div>'+
-	                '</div>'+
-	              '</div>'+
+	              
 	              <!-- /.card-header -->
 	              '<div class="card-body table-responsive p-0">'+
 	    		  '<table class="table table-head-fixed text-nowrap"><thead> <tr> <th scope="col">배송 현황 번호</th><th scope="col">구분 번호</th><th scope="col">주문번호</th><th scope="col">날짜</th><th scope="col">배송상태</th></tr></thead><tbody id="tbody">';

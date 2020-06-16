@@ -9,11 +9,30 @@
 </head>
 <body>
     <h2>회원 목록</h2>
-    <form class="form-inline my-2 my-lg-0 " action="<c:url value='/adminMemberList'/>" >
+    <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                
+
+                <div class="card-tools">
+                  <form class="form-inline my-2 my-lg-0 " action="<c:url value='/adminMemberList'/>" >
       <input class="form-control mr-sm-1" type="text" name="keyword" placeholder="Search" aria-label="Search">
       <button class="btn btn-secondary my-2 my-sm-0 "  type="submit">Search</button>
     </form>
+                  <div class="input-group input-group-sm" style="width: 150px;">
+               
+
+                    <div class="input-group-append">
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
     <table class="table table-head-fixed text-nowrap">
+  
        
         <thead>
             <tr>
@@ -50,7 +69,10 @@
             
         </tbody>
     </table>
-    
+    </div>
+    </div>
+    </div>
+    </div>
     
     <div align="center"class="container pt-5" id="categoryPaging" >
    ${AdminMemberListPaging.pagingHTML}
