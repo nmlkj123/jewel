@@ -477,7 +477,8 @@ function addJjim(){
                   </nav>
                   <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent" >
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" >
-                   <img alt="" src="<c:url value='/images/item/${item.ITEM_IMAGE2}'/>" style="width: 100%;">
+                   	
+                   	<div class="text-center" style="width: 100%;">${item.ITEM_IMAGE2}</div>
                     </div>
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
        				<jsp:include  page="/WEB-INF/viewtiles2/item/itemMatch.jsp" flush="true">

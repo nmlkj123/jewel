@@ -121,13 +121,15 @@ public class AdminitemController {
 	}
 	@RequestMapping(value="/adminItemWrite")
 	public ModelAndView adminItemWrite(CommandMap commandMap,HttpServletRequest request,@RequestParam("ITEM_IMAGE1") MultipartFile file1)throws Exception{
-			commandMap.put("ITEM_IMAGE1", file1.getOriginalFilename());
 			
+			UUID uuid = UUID.randomUUID();
+			String newFileName = uuid.toString() + file1.getOriginalFilename();
+			commandMap.put("ITEM_IMAGE1", newFileName);
 			AdminItemService.insertItemWrite(commandMap.getMap());
 			ModelAndView mv=new ModelAndView("jsonView");
 			String path="/images/item";
 			  String uploadPath=request.getSession().getServletContext().getRealPath(path);
-			  String ITEM_IMAGE1 = AdminItemService.restore(file1,uploadPath);
+			  String ITEM_IMAGE1 = AdminItemService.restore(file1,uploadPath,newFileName);
 			
 			  
 				mv.addObject("img1", ITEM_IMAGE1);
@@ -148,11 +150,13 @@ public class AdminitemController {
 	@RequestMapping(value="/adminItemUpdate")
 	public ModelAndView updateBoard(CommandMap commandMap,HttpServletRequest request,@RequestParam("ITEM_IMAGE1") MultipartFile file1) throws Exception{
 		ModelAndView mv = new ModelAndView("jsonView");
-		commandMap.put("ITEM_IMAGE1", file1.getOriginalFilename());
+		UUID uuid = UUID.randomUUID();
+		String newFileName = uuid.toString() + file1.getOriginalFilename();
+		commandMap.put("ITEM_IMAGE1", newFileName);
 		
 		String path="/images/item";
 		  String uploadPath=request.getSession().getServletContext().getRealPath(path);
-		  String ITEM_IMAGE1 = AdminItemService.restore(file1,uploadPath);
+		  String ITEM_IMAGE1 = AdminItemService.restore(file1,uploadPath,newFileName);
 		  
 		  
 			mv.addObject("img1", ITEM_IMAGE1);

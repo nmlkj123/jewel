@@ -18,7 +18,7 @@
 			WHERE o.OR_NUM = #{OR_NUM}
 			AND o.OR_PWD = #{OR_PWD}
 			AND o.ITEM_NUM = i.ITEM_NUM
-			AND o.OR_NUM = d.OR_NUM
+			AND o.OR_UNQ = d.OR_UNQ
 		]]>
 	</select>
 	

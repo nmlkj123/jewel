@@ -73,7 +73,7 @@
 						WHERE m.MEM_ID = #{MEM_ID}
 						AND m.MEM_NUM = o.MEM_NUM
 						AND o.ITEM_NUM = i.ITEM_NUM
-						AND o.OR_NUM = d.OR_NUM
+						AND o.OR_UNQ = d.OR_UNQ
 						order by OR_DATE desc)s)
 				WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}
 		]]>

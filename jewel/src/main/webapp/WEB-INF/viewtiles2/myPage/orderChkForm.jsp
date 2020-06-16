@@ -27,6 +27,10 @@ body .form1, .form2{
 </style>
 
 <script type="text/javascript">
+var isLogin="${MEM_ID}"
+if(isLogin!=""){
+	location.href="<c:url value='/myPage/myOrderList'/>";
+}
 function submit1(){
 	var id = $("#MEM_ID")[0].value;
 	var pw = $("#MEM_PWD")[0].value;

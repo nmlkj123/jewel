@@ -20,7 +20,7 @@
   <h2 class="mt-5" style="font-family: Nanum Gothic, cursive;">주문번호 : <span style="color: red; font-family: Nanum Gothic, cursive;">${OR_NUM}</span></h2>
   <p class="lead mt-5">
     <a class="btn btn-primary btn" href="<c:url value='/main/main'/>" role="button">홈페이지 가기</a>
-    <a class="btn btn-primary btn" href="#" role="button">주문내역 가기</a>
+    <a class="btn btn-primary btn" href="<c:url value='/orderChkForm'/>" role="button">주문내역 가기</a>
   </p>
 </div>
 </div>
