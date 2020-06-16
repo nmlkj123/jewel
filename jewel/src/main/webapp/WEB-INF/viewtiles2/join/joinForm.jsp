@@ -122,6 +122,7 @@ $( document ).ready(function() {
 					$('#email').attr("check", "1");
 					$('#emailBtn').hide(); 
 					$('#emailAuthBtn').hide(); 
+					$('#email').val("${sessionScope.userEmail}");
 				}else if(data == "false"){
 					alert("인증번호를 잘못 입력하셨습니다.")
 				}
@@ -234,7 +235,7 @@ jQuery(function($) {
 
 <div class="container">
 <h4 class="mb-3 p-3">회원가입</h4>
-   <form id="writeForm" class="form-horizontal" method="POST" action="<c:url value='/join/memberVerify'/>">
+   <form id="writeForm"  class="form-horizontal" method="POST" action="<c:url value='/join/memberVerify'/>">
          
           
          <!-- 이름 -->
@@ -299,11 +300,11 @@ jQuery(function($) {
 			<input type="text"  class="form-control" id="sample6_address" name="MEM_ADDR2" placeholder="주소"><br>
          </div>
 
-         <div class="col-md-6 mb-6">
-            <input type="reset" value="취소하기">
+         <div class=" col-md-6 mb-6 ">
+            <input class="btn btn-outline-primary" type="reset" value="취소하기">
                
             &emsp;&emsp;
-            <button id="reg_submit" onclick="submit_ck(); return false;">
+            <button class="btn btn-outline-danger" id="reg_submit" onclick="submit_ck(); return false;">
                <i aria-hidden="true"></i>가입하기
             </button>
          </div>

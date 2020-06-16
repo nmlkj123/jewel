@@ -86,7 +86,16 @@
 				
 
 			</definition>
-			
+			<definition name="orderSuccess" extends="base_layout">
+				<put-attribute name="title" value="주문완료" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/item/orderSuccess.jsp" />
+			</definition>
+			<definition name="pwdOrder" extends="base_layout">
+				<put-attribute name="title" value="비회원주문" />
+				<put-attribute name="body"
+					value="/WEB-INF/viewtiles2/item/pwdOrder.jsp" />
+			</definition>
 			<definition name="itemOrder" extends="base_layout">
 				<put-attribute name="title" value="상품주문" />
 				<put-attribute name="body"
