@@ -85,6 +85,7 @@
 	 WHERE 
 	 c.MEM_NUM = m.MEM_NUM AND
 	 RE_NUM=#{RE_NUM}
+	 ORDER BY c.CO_NUM ASC
 	 
 	 
 	 

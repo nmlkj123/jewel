@@ -20,7 +20,7 @@
 						THEN SUBSTR(QNA_TITLE,1,10)||'...' 
 						ELSE QNA_TITLE END 
 						QNA_TITLE,
-						QNA_DATE,
+						TO_CHAR(QNA_DATE,'yyyy/mm/dd')QNA_DATE,
 						QNA_RSTATE,
 						QNA_PWD,
 						ITEM_NUM,

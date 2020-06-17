@@ -49,7 +49,7 @@ function fn_checkNickCallback(data){
          <!-- 이름 -->
          <div class="col-md-6 mb-3">
             <label>이름</label>
-               <input type="text" class="form-control" id="MEM_NAME" name="MEM_NAME" value="${myInfo.MEM_NAME}" required >
+               <input type="text" class="form-control" id="MEM_NAME" name="MEM_NAME" value="${myInfo.MEM_NAME}" readonly required >
                <label id="MEM_NAMEW"></label>
          </div>
          
@@ -82,7 +82,7 @@ function fn_checkNickCallback(data){
          <!-- 닉네임 -->
          <div class="col-md-6 mb-3">
                <label for="MEM_NICK">닉네임</label>
-                  <input type="text" class="form-control" check="0" id="MEM_NICK" name="MEM_NICK" value="${myInfo.MEM_NICK}" required="required" oninput="checkNick()"/>  
+                  <input type="text" class="form-control" check="0" id="MEM_NICK" name="MEM_NICK" value="${myInfo.MEM_NICK}" required="required" readonly oninput="checkNick()"/>  
                   <label id="MEM_NICKW"></label>    
            </div>
          
@@ -107,7 +107,7 @@ function fn_checkNickCallback(data){
             <input type="reset" value="취소하기" onclick="history.go(-1);" >
         
             &emsp;&emsp;
-            <button id="reg_submit" onclick="submit_ck(); return false;">
+            <button id="reg_submit" onclick="submit_ck()2; return false;">
                <i aria-hidden="true"></i>수정하기
             </button>
          </div>

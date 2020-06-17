@@ -127,7 +127,7 @@ FROM QNA
 	
 	</update>
 	<select id="selectDaySaleList" parameterType="hashmap" resultType="hashmap">
-	SELECT O.ITEM_NUM,i.item_name  AS ITEM_NAME,SUM(O.OR_CNT) as CNT  FROM ORDERS O,ITEM I WHERE OR_DATE=#{OR_DATE} AND O.ITEM_NUM=I.ITEM_NUM
+	SELECT O.ITEM_NUM,i.item_name  AS ITEM_NAME,SUM(O.OR_CNT) as CNT  FROM ORDERS O,ITEM I WHERE TO_CHAR(OR_DATE,'yyyy-mm-dd')=#{OR_DATE} AND O.ITEM_NUM=I.ITEM_NUM
 GROUP BY O.ITEM_NUM,I.ITEM_NAME order by CNT desc
 	</select>
 	<select id="selectMonthSaleList" parameterType="hashmap" resultType="hashmap">
@@ -136,7 +136,7 @@ WHERE TO_CHAR(OR_DATE,'YYYY-MM')=#{OR_DATE}  AND  O.ITEM_NUM=I.ITEM_NUM
 GROUP BY O.ITEM_NUM,I.ITEM_NAME order by CNT desc
 	</select>
 	<select id="selectCateDaySaleList" parameterType="hashmap" resultType="hashmap">
-		SELECT SUBSTR(ITEM_NUM,1,1) CATEGORY,SUM(OR_CNT) CNT  FROM ORDERS WHERE TO_CHAR(OR_DATE,'YYYY-MM-DD')=#{OR_DATE}
+		SELECT SUBSTR(ITEM_NUM,1,1) CATEGORY,SUM(OR_CNT) CNT  FROM ORDERS WHERE TO_CHAR(OR_DATE,'yyyy-mm-dd')=#{OR_DATE}
 GROUP BY SUBSTR(ITEM_NUM,1,1) order by CNT desc
 	</select>
 	<select id="selectCateMonthSaleList" parameterType="hashmap" resultType="hashmap">

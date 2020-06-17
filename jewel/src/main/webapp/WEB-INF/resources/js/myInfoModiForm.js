@@ -83,7 +83,7 @@ $(document).ready(function(){
 });
 
 
-function submit_ck(){
+function submit_ck2(){
 	if($('#MEM_NAME').val().length==0){
 		$('#MEM_NAMEW').text(" 이름 입력");
 		$('#MEM_NAMEW').css("color","red");
@@ -125,9 +125,6 @@ function submit_ck(){
 		
 	}else if($('#MEM_PWD2').val()!=$('#MEM_PWD').val()){
 		$('#MEM_PWDW2').focus();
-		
-	}else if($('#MEM_NICK').attr("check")=="0"){
-		$('#MEM_NICK').focus();
 		
 	}else if($('#MEM_PHONE').attr("check")=="0"){
 		$('#MEM_PHONE').focus();

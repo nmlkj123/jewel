@@ -127,7 +127,9 @@ jQuery(function($) {
 		   $('#mask').hide();
 		});
 });
-
+function fclose(){
+	location.href="<c:url value='/main/main'/>";
+}
 </script>
 
 <script type="text/javascript">
@@ -168,7 +170,7 @@ $(document).ready(function(){
 	<br>
 </form>
 	<a href="#" class="btn" id="emailSend">찾기</a>
-	<a href="#" class="btn" onclick="close();">취소</a>
+	<a href="#" class="btn" onclick="fclose();">취소</a>
 </div>
 
 </body>
