@@ -57,7 +57,7 @@ function fsubmit(){
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">구분 번호</label>
                     <div class="col-sm-10">
-                      <input class="form-control" type="text"  id="OR_UNQ" name="OR_UNQ" value="${map.OR_UNQ}" placeholder="구분 번호 " disabled>
+                      <input class="form-control" type="text"  id="OR_UNQ" name="OR_UNQ" value="${map.OR_UNQ}" placeholder="구분 번호 " readonly>
                     </div>
                   </div>
                  <div class="form-group row">
