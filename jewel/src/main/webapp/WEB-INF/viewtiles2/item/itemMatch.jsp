@@ -8,7 +8,7 @@ $(document).ready(function(){
 	$.ajax({
 		type : "POST",
 		url : '<c:url value="/item/getItemMatch"/>',
-		data : {type:"N",itemCount:"8"},
+		data : {type:"${param.ITEM_TYPE}",itemCount:"9"},
 		success : function(data){
 			var str="";
 			$.each(data.list,function(index,items){
@@ -47,21 +47,6 @@ $(document).ready(function(){
     <div class="container">
       <div class="row" id="itemMatchDiv">
       
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-			<img alt="" height="300px" src="http://www.junjewelry.com/shopimages/koreajisuk/124001000621.jpg?1574306433">
-            <div class="card-body text-center">
-              <a href="#" style="font-family: 'Jua', cursive;  font-size: 17px;" class="text-center mb-2">토르소 심플 라인 메쉬</a>
-              <hr/>
-              <span class="card-text" style=" color:red; font-size: 15px;">₩ 10000</span><span class="card-text ml-3"style="text-decoration: line-through;color:#A6A6A6; font-size: 14px;">₩ 1000</span>
-              
-              <div class="d-flex justify-content-between align-items-center">
-                
-                <small class="text-muted">JEWELS</small>
-              </div>
-            </div>
-          </div>
-        </div>
         
        
 

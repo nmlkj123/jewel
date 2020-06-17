@@ -4,44 +4,85 @@
 <head>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
+<script type="text/javascript">
+function delete2(){
+	 if (confirm("삭제하시겠습니까?") == true){   
+
+		 
+		 location.href='<c:url value="/adminNoticeDelete?NT_NUM=${map.NT_NUM}"/>';
+
+	 }else{   //취소
+
+	     return false;
+
+	 }
+}
+
+</script>
 <body>
-	<table>
-		<!-- <colgroup>
-			<col width="15%"/>
-			<col width="35%"/>
-			<col width="15%"/>
-			<col width="35%"/>
-		</colgroup> -->
-		<caption>공지 상세</caption>
-		<tbody>
-			<tr>
-				<th scope="row">공지 번호</th>
-				<td>${map.NT_NUM}</td>
-			</tr>
-			<tr>	
-				<th scope="row">공지 유형</th>
-				<td>${map.NT_TYPE}</td>
-			</tr>
-			<tr>	
-				<th scope="row">공지사항 등록일</th>
-				<td>${map.NT_DATE}</td>
-			</tr>
-			<tr>
-				<th scope="row">공지사항 제목</th>
-				<td>${map.NT_TITLE}</td>
-				
-			</tr>
-			<tr>
-				<th scope="row">공지사항 내용</th>
-				<td>${map.NT_CONTENT}</td>
-				
-			</tr>
-		</tbody>
-	</table>
+	<div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">공지사항 상세</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form class="form-horizontal" id="frm" name="frm" action="<c:url value='/adminFaqWrite'/>" method="post">
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">공지 번호</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"  id="FAQ_TITLE" name="FAQ_TITLE" value="${map.NT_NUM}" placeholder="FAQ 번호" disabled>
+                    </div>
+                  </div>
+                  
+                	
+                	<div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">공지 유형</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"  id="FAQ_CATE" name="FAQ_CATE" value="${map.NT_TYPE}" placeholder="카테고리 종류" disabled>
+                    </div>
+                  </div>
+                
+                	<div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">공지사항 등록일</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"  id="FAQ_CATE" name="FAQ_CATE" value="${map.NT_DATE}" placeholder="회원 ID" disabled>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">공지사항 제목</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"  id="FAQ_CATE" name="FAQ_CATE" value="${map.NT_TITLE}" placeholder="회원 ID" disabled>
+                    </div>
+                  </div>
+                
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">공지사항 내용</label>
+                   	
+                    <textarea class="form-control" rows="10" id="summernote" name="FAQ_CONTENT" disabled>${map.NT_CONTENT}</textarea>
+                    
+                    
+                  </div>
+                  </div>
+                <!-- /.card-body -->
+                
+                <!-- /.card-footer -->
+              </form>
+            </div>
 	
-	<input type="button" onclick="location.href='<c:url value="/adminNoticeList"/>'" value="목록으로">
-	<input type="button" onclick="location.href='<c:url value="/openAdminNoticeUpdate?NT_NUM=${map.NT_NUM}"/>'" value="내용 수정">
-	<input type="button" onclick="location.href='<c:url value="/adminNoticeDelete?NT_NUM=${map.NT_NUM}"/>'" value="삭제하기"/>
+	<table align="center">
+	<tr>
+		<td><input type="button" class="btn btn-block btn-outline-success" onclick="location.href='<c:url value="/adminNoticeList"/>'" value="목록으로">
+		</td>
+		<td><input type="button" class="btn btn-block btn-outline-primary" onclick="location.href='<c:url value="/openAdminNoticeUpdate?NT_NUM=${map.NT_NUM}"/>'" value="내용 수정">
+		</td>
+		<td><input type="button" class="btn btn-block btn-outline-danger" onclick="delete2()" value="삭제하기"/>
+		</td>
+	</tr>
+</table>
+	
+	
+	
 
 	
 </body>

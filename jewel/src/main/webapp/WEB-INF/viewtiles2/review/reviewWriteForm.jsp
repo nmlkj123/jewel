@@ -91,11 +91,21 @@ $(document).ready(function() {
            url=url.trim();
            
           $(el).summernote('editor.insertImage', "<c:url value='/images/reviewImage/"+url+"'/>");
-          alert(url);
-          $('#imageBoard > ul').append('<li><img src="<c:url value="/review/reviewWrite'+url+'"/>" width="480" height="auto"/></li>');
+
         }
       });
     }
+function writeReview(){
+	if($("#RE_TITLE").val()==""){
+		alert("제목을 입력하세요.");
+		return;
+	}
+	if($("#summernote").val()==""){
+		alert("내용을 입력하세요.");
+		return;
+	}
+	frm.submit();
+}
 </script>
 
 <body>
@@ -134,7 +144,11 @@ $(document).ready(function() {
       </table>
       
       <br/><br/>
+<<<<<<< HEAD
       <button type="submit" id="submit" name="submit" class="btn btn-primary">저장</button>
+=======
+      <button onclick="writeReview(); return false;" id="submit" name="submit" class="btn btn-primary ">저장</button>
+>>>>>>> branch 'master' of https://github.com/nmlkj123/jewel.git
       <a href="#" onclick="history.back();" class="btn1">목록으로</a>
    </form>
 </div>   

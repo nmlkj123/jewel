@@ -22,7 +22,7 @@ $( document ).ready(function() {
 		var email = $("#email1").val()+"@"+$("#email2").val();
 		$("#MEM_EMAIL").val(email);
 	/* 이메일 중복 체크 후 메일 발송 비동기 처리 */
-		alert($("#MEM_EMAIL").val());
+
 		$.ajax({
 			type:"GET",
 			url : "<c:url value='/login/findPwConfirm'/>",
@@ -150,10 +150,9 @@ $(document).ready(function(){
 </div>
 <body>
 
-<div class="findpw" style="display: block">
-<form action="<c:url value='/login/findPwConfirm'/>" method="post" id="frm">
-	<img src="/nnb/images/NNBsmall.png" width="300px"><br>
-	<h1>비밀번호 찾기</h1>
+<div class="container findpw" style="display: block">
+<form class="mb-3" action="<c:url value='/login/findPwConfirm'/>" method="post" id="frm">
+	<h1 class="mb-5">비밀번호 찾기</h1>
 	<input type="text" id="MEM_ID" name="MEM_ID" placeholder="아이디"><br>
 	<input type="hidden" id="MEM_EMAIL" name="MEM_EMAIL">
 	<input type="text" id="email1"  placeholder="이메일">
@@ -168,7 +167,7 @@ $(document).ready(function(){
 	</select>
 	<br>
 </form>
-	<a href="#" class="btn" id="emailSend">다음</a>
+	<a href="#" class="btn" id="emailSend">찾기</a>
 	<a href="#" class="btn" onclick="close();">취소</a>
 </div>
 

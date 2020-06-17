@@ -31,36 +31,63 @@ function fsubmit(){
 
 </script>
 <body>
-	<form id="frm" name="frm" action="<c:url value='/adminFaqWrite'/>" method="post">
+<div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">FAQ 등록</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form class="form-horizontal" id="frm" name="frm" action="<c:url value='/adminFaqWrite'/>" method="post">
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">FAQ 제목</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"  id="FAQ_TITLE" name="FAQ_TITLE" placeholder="FAQ 제목">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">FAQ 카테고리</label>
+                    <div class="col-sm-10">
+                      
+                      <select class="form-control" id="FAQ_CATE" name="FAQ_CATE" placeholder="FAQ 카테고리">
+						<option value="goods">상품관련 </option>
+						<option value="change">교환/반품관련 </option>
+						<option value="inquire">문의관련</option>
+						<option value="point">포인트 관련</option>
+						<option value="delivery">배달관련</option>
+					
+					</select>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">FAQ 내용</label>
+                    <textarea class="form-control" rows="10" id="FAQ_CONTENT" name="FAQ_CONTENT"></textarea>
+                      
+                    
+                  </div>
+                  </div>
+                <!-- /.card-body -->
+                
+                <!-- /.card-footer -->
+              </form>
+            </div>
 	
-		<table class="board_view">
-			
-			
-			<tbody>
-				
-				<tr>
-					<th scope="row">FAQ 제목</th>
-					<td><input type="text" id="FAQ_TITLE" name="FAQ_TITLE" ></input></td>
-				</tr>
-				<tr>
-					<th scope="row">FAQ 카테고리</th>
-					<td><input type="text" id="FAQ_CATE" name="FAQ_CATE" ></input></td>
-				</tr>
-				
-				<tr>
-					<th scope="row">FAQ 내용</th>
-					<td><textarea rows="10" cols="40" id="FAQ_CONTENT" name="FAQ_CONTENT"></textarea></td>
-				</tr>
-			</tbody>
-		</table>
+	<table align="center">
+	<tr>
+		<td><input class="btn btn-block btn-outline-success" type="button" onclick="location.href='<c:url value="/adminFaqList"/>'" value="목록으로">
+		
+		</td>
+		<td><button type="button" class="btn btn-block btn-outline-primary" onclick="fsubmit();">등록하기</button>
+		</td>
+	</tr>
+</table>
 	
-	<button type="button" onclick="fsubmit();">수정하기</button>
-	<input type="button" onclick="location.href='<c:url value="/adminFAQlist"/>'" value="목록으로">
+	
 
 
-
 	
-	</form>
+	
 
 </body>
 </html>

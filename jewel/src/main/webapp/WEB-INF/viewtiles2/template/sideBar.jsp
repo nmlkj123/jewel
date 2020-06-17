@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script>
-$(document).ready(function(){
+/* $(document).ready(function(){
 	$(document).on("click",'#item_m', function(e){
 		$("a[class='nav-link active']").each(function() {
 			  $(this).attr('class','nav-link');
@@ -11,20 +11,33 @@ $(document).ready(function(){
 		$(this).attr('class','nav-link active');
 	});
 	$(document).on("click",'#member_m', function(e){
-		$('.content').children().remove();
-	    $('.content').load("adminMemberList");
-
-	   
-	
 		$("a[class='nav-link active']").each(function() {
 			  $(this).attr('class','nav-link');
 			
 			});
 		
 		$(this).attr('class','nav-link active');
+		 $('.content').children().remove();  
+		  $('.content').load('/common/adminMemberList');
+	});
+	$(document).on("click",'#sale_m', function(e){
+		$("a[class='nav-link active']").each(function() {
+			  $(this).attr('class','nav-link');
+			
+			});
+		
+		$(this).attr('class','nav-link active');
+		 $('.content').children().remove();  
+		  $('.content').load('/common/openAdminItemDaySaleList');
 	});
 });
-
+ */
+ 
+ var isAdmin="${MEM_ADMIN}";
+ if(isAdmin!="A"){
+	 alert("권한이 없습니다");
+	 location.href="/common/main/main";
+ }
 </script>
 <a href="openAdminMain" class="brand-link">
       <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
@@ -74,7 +87,7 @@ $(document).ready(function(){
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" id="member_m" class="nav-link">
+            <a href="adminMemberList" id="member_m" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
                	회원관리

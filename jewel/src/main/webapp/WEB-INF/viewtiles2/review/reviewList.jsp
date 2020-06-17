@@ -71,7 +71,7 @@ reviewPage(1);
 
 	<h2>Review</h2>
 
-	<table class="board_list" id="reviewList">
+	<table class="board_list mt-5" id="reviewList">
 		<colgroup>
 			<col width="10%"/>
 			<col width="*"/>

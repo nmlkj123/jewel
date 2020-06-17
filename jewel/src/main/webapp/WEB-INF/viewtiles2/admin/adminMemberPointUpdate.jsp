@@ -18,82 +18,78 @@ function fsubmit(){
 		alert("등급을 입력하세요.");
 		return false;
 	}
+	 if (confirm("수정하시겠습니까?") == true){   
+
+		 frm.submit();
+
+	 }else{   //취소
+
+	     return false;
+
+	 }
 	
-	frm.submit();
 }
 
 </script>
 <body>
-	<form id="frm" name="frm" action="<c:url value='/adminMemberPointUpdate'/>" method="post">
-	<input type="hidden" name="MEM_NUM" value="${map.MEM_NUM}">
+<div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">회원 포인트/등급 변경</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form class="form-horizontal" id="frm" name="frm" action="<c:url value='/adminMemberPointUpdate'/>" method="post">
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">회원 번호</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"  id="NT_TITLE" name="NT_TITLE" value="${map.MEM_NUM}" placeholder="회원 번호" disabled>
+                      <input type="hidden" name="MEM_NUM" value="${map.MEM_NUM}">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">회원 ID</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"  id="NT_TYPE" name="NT_TYPE" value="${map.MEM_ID}" placeholder="회원 ID " disabled>
+                    </div>
+                  </div>
+                 <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">주문 번호</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"  id="NT_TYPE" name="NT_TYPE" value="${map.OR_NUM}" placeholder="주문 번호" disabled>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">포인트</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"  id="MEM_POINT" name="MEM_POINT" value="${map.MEM_POINT}" placeholder="포인트">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">회원 등급</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"  id="MEM_RANK" name="MEM_RANK" value="${map.MEM_RANK}" placeholder="회원 등급">
+                    </div>
+                  </div>
+                  </div>
+                <!-- /.card-body -->
+                
+                <!-- /.card-footer -->
+              </form>
+            </div>
+<
+
 	
-		<table class="board_view">
-		
-			
-			<tbody>
-			<tr>
-				<th scope="row">회원 번호</th>
-				<td>${map.MEM_NUM}</td>
-			</tr>
-			<tr>
-				<th scope="row">회원 ID</th>
-				<td>${map.MEM_ID}</td>
-			</tr>
-			<tr>
-				<th scope="row">포인트</th>
-				<td><input type="text" id="MEM_POINT" name="MEM_POINT" value="${map.MEM_POINT}"></td>
-			</tr>
-			<tr>	
-				<th scope="row">회원 등급</th>
-				<td><input type="text" id="MEM_RANK" name="MEM_RANK" value="${map.MEM_RANK}"></td>
-			</tr>
-			
-		<%-- 	<tr>	
-				<th scope="row">회원 이름</th>
-				<td>${map.MEM_NAME}</td>
-			</tr>
-			<tr>	
-				<th scope="row">회원 닉네임</th>
-				<td>${map.MEM_NICK}</td>
-			</tr>
-			<tr>	
-				<th scope="row">회원 이메일</th>
-				<td>${map.MEM_EMAIL}</td>
-			</tr>
-			<tr>	
-				<th scope="row">회원 연락처</th>
-				<td>${map.MEM_PHONE}</td>
-			</tr>
-			<tr>	
-				<th scope="row">회원 주소</th>
-				<td>${map.MEM_ADDR1}</td>
-			</tr>
-			<tr>	
-				<th scope="row">상세 주소</th>
-				<td>${map.MEM_ADDR2}</td>
-			</tr>
-			<tr>	
-				<th scope="row">회원 등급</th>
-				<td>${map.MEM_RANK}</td>
-			</tr>
-			<tr>	
-				<th scope="row">회원 가입일</th>
-				<td>${map.MEM_JOINDATE}</td>
-			</tr>
-			<tr>	
-				<th scope="row">회원 포인트</th>
-				<td>${map.MEM_POINT}</td>
-			</tr>
-			<tr>	
-				<th scope="row">회원 누적금액</th>
-				<td>${map.MEM_STACK}</td>
-			</tr>
-			 --%>
-		</tbody>
-		</table>
+	<table align="center">
+	<tr>
+		<td><input type="button" class="btn btn-block btn-outline-success" onclick="location.href='<c:url value="/adminMemberList"/>'" value="목록으로">
+		</td>
+		<td><button type="button" class="btn btn-block btn-outline-primary" onclick="fsubmit();">포인트/등급 변경</button>
+		</td>
+	</tr>
+</table>
 	
-	<button type="button" onclick="fsubmit();">포인트/등급 변경</button>
-	<input type="button" onclick="location.href='<c:url value="/adminNoticelist"/>'" value="목록으로">
+	
 	
 
 	</form>

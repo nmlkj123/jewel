@@ -13,8 +13,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 <body>
-
-<div class="button">
+<div class="container">
+<div class="button text-center">
 <input type="button" value="공지사항" class="btn4" onClick="location.href='<c:url value='/notice/noticeList'/>';">|	    
 <input type="button" value="이벤트" class="btn4" onClick="location.href='<c:url value='/event/eventList'/>';">|	    
 <input type="button" value="FAQ"  class="btn4" onClick="location.href='<c:url value='/faq/faqlist'/>';">
@@ -64,5 +64,6 @@
 		<div align="center"class="container pt-5" id="categoryPaging" >
 		${noticeListPaging.pagingHTML}
 		</div>
+</div>
 </body>
 </html>

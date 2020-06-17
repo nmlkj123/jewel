@@ -123,6 +123,9 @@ function noMember(){
 	location.href="<c:url value='/item/itemOrder'/>"
 	
 }
+function writeMember(){
+	location.href="<c:url value='/join/joinForm'/>"
+}
 </script>
 <body>
 <div class="sidenav">
@@ -144,7 +147,7 @@ function noMember(){
                      <input type="password"id="MEM_PWD" name="MEM_PWD"  class="form-control" placeholder="Password">
                   </div>
                   <button type="submit" onclick="fsubmit(); return false;" class="btn btn-secondary">로그인</button>
-                  <button type="submit" class="btn btn-secondary">회원가입</button>
+                  <button onclick="writeMember();return false;" class="btn btn-secondary">회원가입</button>
                   <button onclick="noMember(); return false;" class="btn btn-secondary">비회원구매</button>
                </form>
             </div>

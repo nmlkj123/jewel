@@ -287,7 +287,9 @@ public class ItemController {
 	@RequestMapping(value="/item/itemOrder")
 	public ModelAndView itemOrder(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response) throws Exception{
 		ModelAndView mv= new ModelAndView("itemOrder");
-		
+		if(commandMap.get("OR_PWD")!=null) {
+			mv.addObject("OR_PWD",commandMap.get("OR_PWD"));
+		}
 		return mv;
 	}
 	@RequestMapping(value="/item/getOrderList", method=RequestMethod.POST)
@@ -345,5 +347,16 @@ public class ItemController {
     	
     	return mv;
 	}
-	
+	@RequestMapping(value="/item/pwdOrder")
+	   public ModelAndView pwdOrder(CommandMap commandMap) throws Exception{
+	      ModelAndView mv=new ModelAndView("pwdOrder");
+	      
+	      return mv;      
+	   }
+	@RequestMapping(value="/item/orderSuccess")
+	   public ModelAndView orderSuccess(CommandMap commandMap) throws Exception{
+	      ModelAndView mv=new ModelAndView("orderSuccess");
+	      mv.addObject("OR_NUM",commandMap.get("OR_NUM"));
+	      return mv;      
+	   }
 }

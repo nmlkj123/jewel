@@ -97,7 +97,7 @@ public class AdminDeliveryController {
 	    	AdminDeliveryListPaging.setPageBlock(block);
 	    	AdminDeliveryListPaging.setPageSize(show);
 	    	
-	    	AdminDeliveryListPaging.makePagingHTML();
+	    	AdminDeliveryListPaging.makePagingrHTML();
 	    
 	    	mv.addObject("AdminRefundListPaging",AdminDeliveryListPaging);
 			

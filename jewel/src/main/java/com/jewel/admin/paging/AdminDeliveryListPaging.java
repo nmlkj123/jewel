@@ -21,24 +21,48 @@ public class AdminDeliveryListPaging {
 		if(endPage>totalP)endPage=totalP;
 		pagingHTML.append("<ul class='pagination' style='justify-content: center;'>");
 		if(startPage>pageBlock)
-			pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/adminDeliveryList?pg="+(startPage-1)+"'>이전</a></li>");
+			pagingHTML.append("<li class='page-item'><a class='page-link' onclick='normalList("+(startPage-1)+")'>이전</a></li>");
 		
 		for(int i=startPage;i<=endPage;i++) {
 			if(i==currentPage) {
-				pagingHTML.append("<li class='page-item active'><a class='page-link' href='"+path+"/adminDeliveryList?pg="+i+"'>"+i+"</a></li>");
+				pagingHTML.append("<li class='page-item active'><a class='page-link' onclick='normalList("+i+")'>"+i+"</a></li>");
 			}else {
-				pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/adminDeliveryList?pg="+i+"'>"+i+"</a></li>");
+				pagingHTML.append("<li class='page-item'><a class='page-link' onclick='normalList("+i+")' >"+i+"</a></li>");
 			}
 			
 			
 		}
 		
 		if(endPage<totalP) {
-			pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/adminDeliveryList?type="+type+"&pg="+(endPage+1)+"'>다음</a></li>");
+			pagingHTML.append("<li class='page-item'><a class='page-link' onclick='normalList("+(endPage+1)+")'>다음</a></li>");
 		}
 		pagingHTML.append("</ul>");
 	}
-	
+	public void makePagingrHTML() {
+		pagingHTML=new StringBuffer();
+		int totalP=(totalList+pageSize-1)/pageSize;
+		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		int endPage=startPage+pageBlock-1;
+		if(endPage>totalP)endPage=totalP;
+		pagingHTML.append("<ul class='pagination' style='justify-content: center;'>");
+		if(startPage>pageBlock)
+			pagingHTML.append("<li class='page-item'><a class='page-link' onclick='refundList("+(startPage-1)+")'>이전</a></li>");
+		
+		for(int i=startPage;i<=endPage;i++) {
+			if(i==currentPage) {
+				pagingHTML.append("<li class='page-item active'><a class='page-link' onclick='refundList("+i+")'>"+i+"</a></li>");
+			}else {
+				pagingHTML.append("<li class='page-item'><a class='page-link' onclick='refundList("+i+")'>"+i+"</a></li>");
+			}
+			
+			
+		}
+		
+		if(endPage<totalP) {
+			pagingHTML.append("<li class='page-item'><a class='page-link' onclick='refundList("+(endPage+1)+")'>다음</a></li>");
+		}
+		pagingHTML.append("</ul>");
+	}
 	public void makeKeywordPagingHTML() {
 		pagingHTML=new StringBuffer();
 		int totalP=(totalList+pageSize-1)/pageSize;

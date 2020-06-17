@@ -26,36 +26,69 @@ function fsubmit(){
 		return false;
 	}
 	
-	frm.submit();
+		 if (confirm("수정 하시겠습니까?") == true){   
+
+			 
+			 frm.submit();
+
+		 }else{   //취소
+
+		     return false;
+
+		 }
+	
+	
 }
 
 </script>
 <body>
-	<form id="frm" name="frm" action="<c:url value='/adminNoticeUpdate'/>" method="post">
-	<input type="hidden" name="NT_NUM" value="${map.NT_NUM}">
-		<table class="board_view">
-			
-			
-			<tbody>
-				
-				<tr>
-					<th scope="row">공지사항 제목</th>
-					<td><input type="text"  id="NT_TITLE" name="NT_TITLE" value="${map.NT_TITLE}"></input></td>
-				</tr>
-				<tr>
-					<th scope="row">공지 유형</th>
-					<td><input type="text" id="NT_TYPE" name="NT_TYPE" value="${map.NT_TYPE}"></input></td>
-				</tr>
-				
-				<tr>
-					<th scope="row">공지 내용</th>
-					<td><textarea rows="10" cols="40" id="NT_CONTENT" name="NT_CONTENT">${map.NT_CONTENT}</textarea></td>
-				</tr>
-			</tbody>
-		</table>
+	<div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">공지사항 상세</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form class="form-horizontal" id="frm" name="frm" action="<c:url value='/adminNoticeUpdate'/>" method="post">
+                <div class="card-body">
+                	<div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">공지 유형</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"  id="NT_TYPE" name="NT_TYPE" value="${map.NT_TYPE}" placeholder="공지 유형" >
+                      <input type="hidden" name="NT_NUM" value="${map.NT_NUM}">
+                    </div>
+                  </div>
+                
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">공지사항 제목</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"  id="NT_TITLE" name="NT_TITLE" value="${map.NT_TITLE}"  placeholder="회원 ID" >
+                    </div>
+                  </div>
+                
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">공지사항 내용</label>
+                   	
+                    <textarea class="form-control" rows="10" id="NT_CONTENT" name="NT_CONTENT" >${map.NT_CONTENT}</textarea>
+                    
+                    
+                  </div>
+                  </div>
+                <!-- /.card-body -->
+                
+                <!-- /.card-footer -->
+              </form>
+            </div>
 	
-	<button type="button" onclick="fsubmit();">공지 수정</button>
-	<input type="button" onclick="location.href='<c:url value="/adminNoticelist"/>'" value="목록으로">
+	<table align="center">
+	<tr>
+		<td><input type="button" class="btn btn-block btn-outline-success" onclick="location.href='<c:url value="/adminNoticeList"/>'" value="목록으로">
+		</td>
+		<td><button type="button" class="btn btn-block btn-outline-primary" onclick="fsubmit();">공지 수정</button>
+		</td>
+	</tr>
+</table>
+	
+	
 
 
 

@@ -9,6 +9,12 @@
 </head>
 <body>
     <h2>차단  목록</h2>
+    <div class="row">
+          <div class="col-12">
+            <div class="card">
+                            <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+    
     <table class="table table-head-fixed text-nowrap">
    
         <thead>
@@ -39,7 +45,10 @@
             
         </tbody>
     </table>
-       
+    </div>
+    </div>
+    </div>
+    </div>   
     <br/>
     
     

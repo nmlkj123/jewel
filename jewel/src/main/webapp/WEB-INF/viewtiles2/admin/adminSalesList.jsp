@@ -18,6 +18,7 @@ function changeDate(val){
 
 
 <body>
+<h2>매출 현황</h2>
 <table>
 <tr>
 	<td colspan="2">
@@ -44,7 +45,7 @@ function changeDate(val){
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.kr.min.js"></script>
-<div class="container text=center"  style="width:100%; height:400px;">
+<div class="container text=center"  style="width:100%; height:700px;">
 <!-------------------------------------그래프----------------------------------------->
 <canvas id="myChart"></canvas>
 <!-------------------------------------그래프----------------------------------------->
@@ -389,7 +390,7 @@ function createcmChart(){
     	type: 'doughnut',
 		data : lineChartData,
 		options :{
-			
+			maintainAspectRatio: false,
 			title:{
 			display:true,
 			text:'월간 카테고리별 매출현황'

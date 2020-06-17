@@ -5,9 +5,10 @@
 <%@ include file="/WEB-INF/viewtiles2/include/include-header.jspf" %>
 <!-- 부트스트랩 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script> 
+ 
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/journal/bootstrap.min.css">
+
+ 
  <script type="text/javascript">
 
 $(document).ready(function() {
@@ -44,7 +45,7 @@ $(document).ready(function() {
 	
 }
 .myPageInfo{
-	border: 3px solid #e7e7e7;
+	border: 1px solid #e7e7e7;
 	font-size: 14px;
 	width:80%;
 	margin-left:10%;
@@ -98,17 +99,20 @@ $(document).ready(function() {
 			적립금:&nbsp;&nbsp;<span style="color: red;">${myInfo.MEM_POINT }</span>원
 		</div>
 		<div class="info3">
+			<span>
+				<img src="<c:url value="/images/iconfinder-basket-4341280_120547.png"/>" style="width:60px">
+			</span>
 			<span><a href="<c:url value='/myPage/myCart'/>">장바구니</a></span>
 		</div>
 		<br>
 		<!-- 목록박스 -->
 		<div class="btn-group" role="group" aria-label="Basic example">
-		  <button type="button" class="btn btn-danger" id="myOrder">주문내역</button>
-		  <button type="button" class="btn btn-danger" id="myJJim">찜한상품</button>
-		  <button type="button" class="btn btn-danger" id="myQnA">나의Q&A</button>
-		  <button type="button" class="btn btn-danger" id="myReview">나의리뷰</button>
-		  <button type="button" class="btn btn-danger" id="modiMember">정보수정</button>
-		  <button type="button" class="btn btn-danger" id="delMember">회원탈퇴</button>
+		  <button type="button" class="btn btn-primary" id="myOrder">주문내역</button>
+		  <button type="button" class="btn btn-primary" id="myJJim">찜한상품</button>
+		  <button type="button" class="btn btn-primary" id="myQnA">나의Q&A</button>
+		  <button type="button" class="btn btn-primary" id="myReview">나의리뷰</button>
+		  <button type="button" class="btn btn-primary" id="modiMember">정보수정</button>
+		  <button type="button" class="btn btn-primary" id="delMember">회원탈퇴</button>
 		</div>
 	</div>
 	

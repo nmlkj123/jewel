@@ -23,7 +23,7 @@
 	        <col width="20"/>
         </colgroup>
         <thead>
-        	<tr class="table-danger" style="text-align:center;">
+        	<tr class="table-primary" style="text-align:center;">
         		<th scope="col">사진</th>
         		<th scope="col">상품명</th>
         		<th scope="col">가격</th>
@@ -34,11 +34,11 @@
         	<c:forEach items="${jjimList }" var="items">
         		<tr align="center">
         			<td>
-        			 <img src="<c:url value="/images/item/${items.ITEM_IMAGE1 }"/>" style="width:50px">
+        			 <img src="<c:url value="/images/item/${items.ITEM_IMAGE1 }"/>" style="width:70px">
         			</td>
         			<td><a href="<c:url value='/item/itemDetail?ITEM_NUM=${items.ITEM_NUM}'/>">
         				${items.ITEM_NAME }</a></td>
-        			<td>${items.ITEM_PRICE }</td>
+        			<td><fmt:formatNumber value="${items.ITEM_PRICE }" type="number"/></td>
         			<td>
         				<input type="hidden" value="${items.JJIM_NUM}" id="JJIM_NUM">
         				<button type="button" class="btn btn-outline-primary" id="JJimNum">삭제</button>

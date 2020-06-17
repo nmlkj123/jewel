@@ -1,5 +1,6 @@
 package com.jewel.admin.service;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
@@ -62,22 +63,20 @@ public class AdminItemServiceImpl implements AdminItemService {
 	
 	
 	@Override
-	public String restore(MultipartFile multipartFile,String uploadPath) throws Exception {
+	public String restore(MultipartFile multipartFile,String uploadPath,String newFileName) throws Exception {
 		String url = null;
 		
 		try {
 			// ���� ����
-			String originFilename = multipartFile.getOriginalFilename();
-			String extName
-				= originFilename.substring(originFilename.lastIndexOf("."), originFilename.length());
-			Long size = multipartFile.getSize();
+
+			File f = new File(uploadPath);
+			if (!f.exists()) {
+				f.mkdirs();
+			}
 			
-			// �������� ���� �� ���� �̸�
-			String saveFileName = originFilename;
+			writeFile(multipartFile, newFileName,uploadPath);
+			url = uploadPath +"/"+ newFileName;
 			
-			
-			writeFile(multipartFile, saveFileName,uploadPath);
-			url = uploadPath +"/"+ saveFileName;
 		}
 		catch (IOException e) {
 			// ������� RuntimeException �� ��ӹ��� ���ܰ� ó���Ǿ�� ������

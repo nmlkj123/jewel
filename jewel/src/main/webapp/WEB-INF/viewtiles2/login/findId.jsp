@@ -34,9 +34,9 @@ function fsubmit(){
 </script>
 </head>
 <body>
-<div class="findId">
-<form id="frm" method="post" action="<c:url value='/login/findIdResult'/>">
-	<h1>아이디 찾기</h1>
+<div class="container findId">
+<form class="mb-3" id="frm" method="post" action="<c:url value='/login/findIdResult'/>">
+	<h1 class="mb-5">아이디 찾기</h1>
 	<input type="hidden" id="MEM_EMAIL" name="MEM_EMAIL">
 	<input type="radio" id="findIdByEmail" name="findIdBy" value="email">이메일로 찾기<br>
 	<div class="findIdByEmail">

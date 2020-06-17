@@ -31,7 +31,7 @@ function popup(num){
         </colgroup>
         <br>
         <thead>
-        	<tr class="table-danger" style="text-align:center;">
+        	<tr class="table-primary" style="text-align:center;">
         		<th scope="col">등록일자</th>
         		<th scope="col">카테고리</th>
         		<th scope="col">상품명</th>
@@ -58,7 +58,7 @@ function popup(num){
                
 	</table>
 	
-	<div align="center"class="container pt-5" id="categoryPaging" >
+	<div align="center" class="container pt-5" id="categoryPaging" >
 	${myQnAListPaging.pagingHTML}
 	</div>
 	

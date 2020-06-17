@@ -154,7 +154,7 @@ $(document).ready(function(){
                        "</tr>";
                }
                str += "<tr >" +
-               "<th class='pl-0' scope='row' style='font-family: Jua, cursive; font-size: 15px;'>"+items.OP_TYPE+"<br></th>"+
+               "<th class='pl-0' scope='row' style='font-family: Nanum Gothic, cursive; font-size: 15px;'>"+items.OP_TYPE+"<br></th>"+
                "<td class='p-2' ><select id='op_se' class='form-control p-0 '>"+
                "<option value='non_option'>--옵션선택--</option>"+
                "<option value='"+items.OP_NUM+"'>"+items.OP_VALUE;
@@ -392,8 +392,8 @@ function addJjim(){
 <div class="container pt-5 text-center" >
       <div  >
          <div class="container-fliud">
-            <div class="wrapper row">
-               <div class="preview col-md-6" style="width: 400px; height: auto; display: inline; float: none;">
+            <div class="wrapper row " >
+               <div  class="preview col-md-5" style="width: 400px; height: auto; display: inline; float: none;">
                   
                   <a style="width: 350px;height: 350px;" data-lens-image="" href="<c:url value='/images/item/${item.ITEM_IMAGE1}'/>" data-options="zoomMode: magnifier"class="simpleLens-lens-image MagicZoom"> 
                   <img  src="<c:url value='/images/item/${item.ITEM_IMAGE1}'/>"
@@ -401,8 +401,8 @@ function addJjim(){
 				  </a>
 
                </div>
-               <div class="details col-md-6  pl-0 ml-0" style="">
-                  <h4 class="product-title text-left" style="font-family: 'Jua', cursive; width: 500px; display: inline-block;">${item.ITEM_NAME}</h4>
+               <div class="details col-md-7  pl-0 ml-0" style="">
+                  <h4 class="product-title text-left" style="font-family: 'Nanum Gothic', cursive; width: 500px; display: inline-block;">${item.ITEM_NAME}</h4>
 
                   <hr style="line-height: 24px; width: 500px;">
 
@@ -413,11 +413,11 @@ function addJjim(){
                      </thead>
                      <tbody>
                         <tr>
-                           <th class="pl-0" scope="row" style="font-family: 'Jua', cursive; font-size: 15px;">판매가</th>
+                           <th class="pl-0" scope="row" style="font-family: 'Nanum Gothic', cursive; font-size: 15px;">판매가</th>
                            <td style="text-decoration:line-through;"><fmt:formatNumber value="${item.ITEM_PRICE}" pattern="#,###"/>원</td>
                         </tr>
                         <tr>
-                           <th class="pl-0" scope="row"style="font-family: 'Jua', cursive; font-size: 15px;">할인가</th>
+                           <th class="pl-0" scope="row"style="font-family: 'Nanum Gothic', cursive; font-size: 15px;">할인가</th>
                            <td ><fmt:formatNumber value="${item.ITEM_FP}" pattern="#,###"/>원</td>
                         </tr>
                         
@@ -477,12 +477,14 @@ function addJjim(){
                   </nav>
                   <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent" >
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" >
-                   <img alt="" src="<c:url value='/images/item/${item.ITEM_IMAGE2}'/>" style="width: 100%;">
+                   	
+                   	<div class="text-center" style="width: 100%;">${item.ITEM_IMAGE2}</div>
                     </div>
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
        				<jsp:include  page="/WEB-INF/viewtiles2/item/itemMatch.jsp" flush="true">
 						<jsp:param name="ITEM_NUM" value="${item.ITEM_NUM}"/>
-						</jsp:include>
+						<jsp:param name="ITEM_TYPE" value="${item.ITEM_TYPE}"/>
+					</jsp:include>
                     </div>
                     <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                      <jsp:include  page="/WEB-INF/viewtiles2/review/reviewList.jsp" flush="true">

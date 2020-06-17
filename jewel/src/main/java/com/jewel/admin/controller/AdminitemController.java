@@ -1,17 +1,22 @@
 package com.jewel.admin.controller;
 
+import java.io.File;
+import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.Map.Entry;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -41,6 +46,8 @@ public class AdminitemController {
 			ModelAndView mv=new ModelAndView("adminItemList");  
 			
 
+			String keyword=(String)commandMap.get("keyword");
+
 			int show=12;
 	    	int block=5;
 	    	int pg;
@@ -64,10 +71,16 @@ public class AdminitemController {
 	    	AdminItemListPaging.setTotalList(totalList);
 	    	AdminItemListPaging.setPageBlock(block);
 	    	AdminItemListPaging.setPageSize(show);
-	    	
+	    	if(keyword!=null && !keyword.isEmpty()) {
+	    		AdminItemListPaging.setKeyword(keyword);
+	    		AdminItemListPaging.makeKeywordPagingHTML();
+	     		 mv.addObject("AdminItemListPaging",AdminItemListPaging);
+		      }
+	    	 else {
 	    	AdminItemListPaging.makePagingHTML();
 	    
 	    	mv.addObject("AdminItemListPaging",AdminItemListPaging);
+	    	 }
 	    	  String path="/images/item";
 				String uploadPath=request.getSession().getServletContext().getRealPath("/");
 				System.out.println(uploadPath);
@@ -107,18 +120,20 @@ public class AdminitemController {
 		return mv;
 	}
 	@RequestMapping(value="/adminItemWrite")
-	public ModelAndView adminItemWrite(CommandMap commandMap,HttpServletRequest request,@RequestParam("ITEM_IMAGE1") MultipartFile file1,@RequestParam("ITEM_IMAGE2") MultipartFile file2)throws Exception{
-			commandMap.put("ITEM_IMAGE1", file1.getOriginalFilename());
-			commandMap.put("ITEM_IMAGE2", file2.getOriginalFilename());
+	public ModelAndView adminItemWrite(CommandMap commandMap,HttpServletRequest request,@RequestParam("ITEM_IMAGE1") MultipartFile file1)throws Exception{
+			
+			UUID uuid = UUID.randomUUID();
+			String newFileName = uuid.toString() + file1.getOriginalFilename();
+			commandMap.put("ITEM_IMAGE1", newFileName);
 			AdminItemService.insertItemWrite(commandMap.getMap());
 			ModelAndView mv=new ModelAndView("jsonView");
 			String path="/images/item";
 			  String uploadPath=request.getSession().getServletContext().getRealPath(path);
-			  String ITEM_IMAGE1 = AdminItemService.restore(file1,uploadPath);
-			  String ITEM_IMAGE2 = AdminItemService.restore(file2,uploadPath);
+			  String ITEM_IMAGE1 = AdminItemService.restore(file1,uploadPath,newFileName);
+			
 			  
 				mv.addObject("img1", ITEM_IMAGE1);
-				mv.addObject("img2",ITEM_IMAGE2);
+				
 			
 		return mv;
 	}
@@ -133,17 +148,19 @@ public class AdminitemController {
 		return mv;
 	}
 	@RequestMapping(value="/adminItemUpdate")
-	public ModelAndView updateBoard(CommandMap commandMap,HttpServletRequest request,@RequestParam("ITEM_IMAGE1") MultipartFile file1,@RequestParam("ITEM_IMAGE2") MultipartFile file2) throws Exception{
+	public ModelAndView updateBoard(CommandMap commandMap,HttpServletRequest request,@RequestParam("ITEM_IMAGE1") MultipartFile file1) throws Exception{
 		ModelAndView mv = new ModelAndView("jsonView");
-		commandMap.put("ITEM_IMAGE1", file1.getOriginalFilename());
-		commandMap.put("ITEM_IMAGE2", file2.getOriginalFilename());
+		UUID uuid = UUID.randomUUID();
+		String newFileName = uuid.toString() + file1.getOriginalFilename();
+		commandMap.put("ITEM_IMAGE1", newFileName);
+		
 		String path="/images/item";
 		  String uploadPath=request.getSession().getServletContext().getRealPath(path);
-		  String ITEM_IMAGE1 = AdminItemService.restore(file1,uploadPath);
-		  String ITEM_IMAGE2 = AdminItemService.restore(file2,uploadPath);
+		  String ITEM_IMAGE1 = AdminItemService.restore(file1,uploadPath,newFileName);
+		  
 		  
 			mv.addObject("img1", ITEM_IMAGE1);
-			mv.addObject("img2",ITEM_IMAGE2);
+		
 		AdminItemService.updateItemModify(commandMap.getMap());
 		AdminItemService.deleteOption(commandMap.getMap());
 		
@@ -185,5 +202,30 @@ public class AdminitemController {
 		
 		return mv;
 	}
+	@RequestMapping(value="/adminContentImage",method=RequestMethod.POST)
+	@ResponseBody
+	public String contentImage(MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		response.setContentType("text/html;charset=UTF-8");
+		
+		// 업로드할 폴더 경로
+		String realFolder = request.getSession().getServletContext().getRealPath("\\images\\item");
+		UUID uuid = UUID.randomUUID();
 
+		// 업로드할 파일 이름
+		String org_filename = file.getOriginalFilename();
+		String str_filename = uuid.toString() + org_filename;
+
+		System.out.println("원본 파일명 : " + org_filename);
+		System.out.println("저장할 파일명 : " + str_filename);
+
+		String filepath = realFolder +"\\" + str_filename;
+		System.out.println("파일경로 : " + filepath);
+
+		File f = new File(filepath);
+		if (!f.exists()) {
+			f.mkdirs();
+		}
+		file.transferTo(f);
+		return new String(  URLEncoder.encode( str_filename, "UTF-8" ));
+	}
 }

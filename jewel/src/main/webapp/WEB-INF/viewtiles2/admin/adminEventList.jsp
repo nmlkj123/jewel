@@ -9,6 +9,13 @@
 </head>
 <body>
     <h2>이벤트 목록</h2>
+    <div class="row">
+          <div class="col-12">
+            <div class="card">
+              
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+    
     <table class="table table-head-fixed text-nowrap">
        
         <thead>
@@ -16,7 +23,7 @@
                 <th scope="col">이벤트번호</th>
                 <th scope="col">이벤트제목</th>
                 <th scope="col">아벤트 시작일</th>
-                <th scope="col">아벤트 종료알</th>
+                <th scope="col">아벤트 종료일</th>
                 
             </tr>
         </thead>
@@ -46,7 +53,10 @@
             
         </tbody>
     </table>
-    
+    </div>
+    </div>
+    </div>
+    </div>
     
     <div align="center"class="container pt-5" id="categoryPaging" >
    ${AdminEventListPaging.pagingHTML}

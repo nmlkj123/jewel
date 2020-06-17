@@ -22,100 +22,167 @@ function fsubmit(){
 		alert("답변 제목을 입력하세요.");
 		return false;
 	}
-	alert("check");
+	
 	if(QNA_RCONTENT==null || QNA_RCONTENT==''){
 		alert("답변 내용을 입력하세요.");
 		return false;
 	}
 	
-	alert("check");
-	frm.submit();
+	
+
+	if (confirm("수정 하시겠습니까?") == true){   
+
+		 
+		frm2.submit();
+
+	 }else{   //취소
+
+	     return false;
+
+	 }
 }
 
 </script>
 <body>
-    <h2>QnA 상세</h2>
-    <form id="frm" name="frm" action="<c:url value='/adminQnAReply'/>" method="post">
-    <input type="hidden" name="QNA_NUM" value="${map.QNA_NUM}">
-    <table class="board_list">
-    
-       <tbody>
-        
-            <tr>
-                <th scope="col">QnA번호</th>
-                <td>${map.QNA_NUM}</td>
-                <th scope="col">질문카테고리</th>
-                <td> ${map.QNA_CATE}</td>
-            </tr>
-            <tr>
-            	<c:choose>
+    <h2>QnA 답변</h2>
+    <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">QnA 상세</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form class="form-horizontal" id="frm" name="frm" action="<c:url value='/adminQnAReply'/>" method="post">
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">QnA번호</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"  id="FAQ_TITLE" name="FAQ_TITLE" value="${map.QNA_NUM}" placeholder="QnA번호" disabled>
+                    </div>
+                  </div>
+                  <c:choose>
                 	<c:when test="${map.MEM_ID==null}">
-                		<th scope="col">질문자 이름</th>
-                     	<td>${map.QNA_NAME}</td>
+                	<div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">질문자 이름</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"  id="FAQ_CATE" name="FAQ_CATE" value="${map.QNA_NAME}" placeholder="질문자 이름" disabled>
+                    </div>
+                  </div>
+                		
                 	</c:when>
                 	<c:otherwise>
-                	<th scope="col">회원ID</th>
-                	<td>${map.MEM_ID }</td>
+                	<div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">회원 ID</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"  id="FAQ_CATE" name="FAQ_CATE" value="${map.MEM_ID }" placeholder="회원 ID" disabled>
+                    </div>
+                  </div>
+                	
                 </c:otherwise>
                 </c:choose>
+                  
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">질문 날짜</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"  id="FAQ_CATE" name="FAQ_CATE" value="${map.QNA_DATE}" placeholder="질문 날짜" disabled>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">질문 제목</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"  id="FAQ_CATE" name="FAQ_CATE" value="${map.QNA_TITLE}" placeholder="질문 날짜" disabled>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">질문 내용</label>
+                    <textarea class="form-control" rows="10" id="FAQ_CONTENT" name="FAQ_CONTENT" disabled>${map.QNA_CONTENT}</textarea>
+                      
+                    
+                  </div>
+                  </div>
+                <!-- /.card-body -->
                 
-                <th scope="col">질문날짜</th>
-                <td>${map.QNA_DATE}</td>
-             </tr>
-             <tr>
-             	 <th scope="col">질문제목</th>
-             	 <td>${map.QNA_TITLE}</td>
-             </tr>   
-             <tr>
-             	<th scope="col">질문내용</th>
-             	<td>${map.QNA_CONTENT}</td>
-             </tr>   
-             
-             <tr>
-             	<th scope="col">답변</th>
-             </tr>  
-             
-             	<c:choose>
+                <!-- /.card-footer -->
+              </form>
+            </div>
+            <c:choose>
                 	<c:when test="${map.QNA_RSTATE =='Y'}">
-                	<tr>
-                		<th scope="col">답변 제목</th>
-                		<td><input type="text"  id="QNA_RTITLE" name="QNA_RTITLE" value="${map.QNA_RTITLE}"></input></td>
-               			
-                	</tr>
-                	<tr>
-                		<th>답변 내용</th>
-                		<td><textarea id="QNA_RCONTENT" name="QNA_RCONTENT" rows="15" cols="40"> ${map.QNA_RCONTENT}</textarea></td>
-                	</tr>
+                	<div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">답변내용</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form class="form-horizontal" id="frm2" name="frm2" action="<c:url value='/adminQnAReply'/>" method="post">
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">답변 제목</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"  id="QNA_RTITLE" name="QNA_RTITLE" value="${map.QNA_RTITLE}" placeholder="답변 제목">
+                      <input type="hidden" name="QNA_NUM" value="${map.QNA_NUM}">
+                    </div>
+                  </div>
+                  
+                	<div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">답변 내용</label>
+                    <textarea class="form-control" id="QNA_RCONTENT" name="QNA_RCONTENT" rows="10" placeholder="답변 내용">${map.QNA_RCONTENT}</textarea>
+                      
+                    
+                  </div>	
+                	
+               
+                  
+                  </div>
+                <!-- /.card-body -->
+                
+                <!-- /.card-footer -->
+              </form>
+            </div> 
                 	
                 	</c:when>
                 	<c:otherwise>
-                	<tr>
-                		<th scope="col">답변 제목</th>
-                		<td><input type="text" id="QNA_RTITLE" name="QNA_RTITLE"></input></td>
-               			
-                	</tr>
-                	<tr>
-                		<th>답변 내용</th>
-                		<td><textarea  id="QNA_RCONTENT" name="QNA_RCONTENT" rows="15" cols="30"></textarea></td>
-                	</tr>
+                	<div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">답변내용</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form class="form-horizontal" id="frm2" name="frm2" action="<c:url value='/adminQnAReply'/>" method="post">
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">답변 제목</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"  id="QNA_RTITLE" name="QNA_RTITLE"  placeholder="답변 제목">
+                      <input type="hidden" name="QNA_NUM" value="${map.QNA_NUM}">
+                    </div>
+                  </div>
+                  
+                	<div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">답변 내용</label>
+                    <textarea class="form-control" id="QNA_RCONTENT" name="QNA_RCONTENT" rows="10" placeholder="답변 내용"></textarea>
+                      
+                    
+                  </div>	
+                	
+               
+                  
+                  </div>
+                <!-- /.card-body -->
+                
+                <!-- /.card-footer -->
+              </form>
+            </div> 
                 	
                 	</c:otherwise>
                 </c:choose>
-             
+   
                 
-            
-       
-        
-             
-            
-        </tbody>
-        
-    </table>
-    <div id="PAGE_NAVI"></div>
-    <input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX"/>
-    
-    <input type="button" onclick="location.href='<c:url value="/adminQnAList"/>'" value="목록으로">
-    <button type="button" onclick="fsubmit();">
+          
+ 
+    <table align="center">
+	<tr>
+		<td><input type="button" class="btn btn-block btn-outline-success" onclick="location.href='<c:url value="/adminQnAList"/>'" value="목록으로">
+		</td>
+		<td><button type="button" class="btn btn-block btn-outline-primary" onclick="fsubmit();">
     <c:choose>
     	<c:when test="${map.QNA_RSTATE =='Y'}">
     	수정하기    		
@@ -125,6 +192,13 @@ function fsubmit(){
         </c:otherwise>
     </c:choose>
     </button>
+		</td>
+	</tr>
+</table>
+    
+    
+    
+    
     </form>
 </body>
 </html>

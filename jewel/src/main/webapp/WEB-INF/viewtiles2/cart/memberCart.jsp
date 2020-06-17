@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/viewtiles2/include/include-header.jspf" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 
 <meta charset="UTF-8">
-<title>회원장바구니</title>
+<title>장바구니</title>
 </head>
 <script type="text/javascript">
  function chkAll(){
@@ -19,7 +20,10 @@
  function chkAll2(){
 	     $("input[name=checkRow]").prop("checked", true);
  }
-
+ function numberWithCommas(e) {
+	    return e.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+ 
 </script>
 <style>
 .btn-group{
@@ -27,50 +31,7 @@
 	width:100%;
 	
 }
-.myPageInfo{
-	border: 1px solid #e7e7e7;
-	font-size: 14px;
-	width:80%;
-	margin-left:10%;
-	margin-right:10%;
-}
-.myPageInfo .info1{
-	border: 1px solid #e7e7e7;
-	width: 20%;
-	text-align: center;
-	height:100px;
-	padding-top:20px;
-	float:left;
-}
-.myPageInfo .info2{
-	border: 1px solid #e7e7e7;
-	width: 40%;
-	text-align: left;
-	height:100px;
-	padding-top:20px;
-	padding-left:10px;
-	float:left;
-}
-.myPageInfo .info2 span{
-	font-weight: bold;
-}
-.myPageInfo .info3{
-	float:left;
-	height:100px;
-	padding-top:20px;
-	padding-left:10px;
-	width: 20%;
-	text-align: center;
-	border: 1px solid #e7e7e7;
-	
-}
 
-.orderList, .myJJimList, .myReviewList, .myQnAList, .myCart {
-	margin-left: 10%;
-	border: 1px solid #e7e7e7;
-	width:80%;
-	
-}
 
 
 </style>
@@ -122,7 +83,7 @@
     border: 0;
     width: 2%;
 }
-nput::-webkit-outer-spin-button,
+input::-webkit-outer-spin-button,
 .count::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
@@ -130,29 +91,32 @@ nput::-webkit-outer-spin-button,
 .count:readonly{
     background-color:white;
 }
-.myCart .price, .sum{
+.price, .sum{
 	width:80px;
+	font-size:14px;
+}
+tbody td{
+	font-size:14px;
 }
 
-
 </style>
-
+ <link href="<c:url value='/resources/css/default.css'/>" rel="stylesheet">
 <body>
-	<table class="myCart" id="myCart">
+	<table class="table table-hover" style="width:80%; margin-left:10%;" id="myCart">
 		<br><br>
-		<h5 style="margin-left:10%;">회원장바구니</h5>
+		<h5 style="margin-left:10%;">장바구니</h5>
 		<colgroup>
-			<col width="30"/>
-			<col width="15"/>
-			<col width="25"/>
-	        <col width="10"/>
-	        <col width="60"/>
-	        <col width="20"/>
-	        <col width="20"/>
+			<col width="5%"/>
+			<col width="8%"/>
+			<col width="15%"/>
+	        <col width="25%"/>
+	        <col width="20%"/>
+	        <col width="10%"/>
+	        <col width="20%"/>
         </colgroup>
         <br>
         <thead>
-        	<tr>
+        	<tr class="table-primary" style="text-align:center;">
         		<th scope="col" style="font-size:10px;">
         		 <input type="checkbox" id="chkAll" onclick="chkAll();">
         		</th>
@@ -166,14 +130,13 @@ nput::-webkit-outer-spin-button,
         </thead>
         <tbody id="tbody">
         
-        	<c:forEach items="${myCart }" var="cart" varStatus="status" >
-        		<c:set var="sum1" value="${cart.CART_CNT * cart.ITEM_OP_PRICE}"/>
+        	<c:forEach items="${myCart }" var="cart" varStatus="status" >       		
         		<tr align="center" id="row">
         			<td>
         				<input type="checkbox" id="checkRow" name="checkRow">
         			</td>
         			<td>
-        			 <img src="<c:url value='/images/item/${cart.ITEM_IMAGE1}'/>" style="width:50px">
+        			 <img src="<c:url value="/images/item/${cart.ITEM_IMAGE1 }"/>" style="width:50px;">
         			</td>
         			<td>${cart.ITEM_NAME }</td>
         			<td>${cart.OP_VALUE }</td>
@@ -192,10 +155,13 @@ nput::-webkit-outer-spin-button,
 						</form>
         			</td>
         			<td>
-        			 <input class="price" type="text" name="ITEM_OP_PRICE" id="price" class="price" value="${cart.ITEM_OP_PRICE}" readonly>
+        			 <input class="price" type="hidden" name="ITEM_OP_PRICE" id="price" class="price" value="${cart.ITEM_OP_PRICE}" readonly>
+        			 <fmt:formatNumber value="${cart.ITEM_OP_PRICE}" type="number"/>
         			</td>
         			<td>
-        			 <input type="text" id="sum" class="sum" value="<c:out value="${sum1}"/>" readonly>
+				     <c:set var="sum1" value="${cart.CART_CNT * cart.ITEM_OP_PRICE}"/>
+        			 <fmt:formatNumber value="${sum1}" type="number" var="sss"/>
+        			 <input type="text" id="sum" class="sum" value="${sum1}" readonly>      			 
         			</td>			
         		</tr>      		
         	</c:forEach>	        	
@@ -204,13 +170,13 @@ nput::-webkit-outer-spin-button,
 	
 	<br><br>
 	<div align="center">
-		<button type="button" class="btn btn-danger" onclick="chkAll2();">전체선택</button>
+		<button type="button" class="btn btn-primary" onclick="chkAll2();">전체선택</button>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<button type="button" class="btn btn-danger" id="deleteChk">선택삭제</button>
+		<button type="button" class="btn btn-primary" id="deleteChk">선택삭제</button>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<button type="button" class="btn btn-danger" onclick="buyItem()">선택주문</button>
+		<button type="button" class="btn btn-primary" onclick="buyItem()">선택주문</button>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<button type="button" class="btn btn-danger">메인으로</button>
+		<button type="button" class="btn btn-primary" onclick="location.href='<c:url value='/main/main'/>';">메인으로</button>
 	</div>
 	<div align="center"class="container pt-5" id="categoryPaging" >
 	${myCartPaging.pagingHTML}
@@ -225,7 +191,8 @@ $(document).ready(function(){
 		
     	var cnt = parseInt($(this).prev('.count').val());
     	var price =parseInt($(this).closest("tr").find('.price').val());
-    	var sum = cnt*price; 
+    	var sum = cnt*price;
+    	
     	$(this).closest("tr").find('#sum').val(sum);
     	var num = parseInt($(this).parent().siblings("#num").val());
     	
@@ -234,17 +201,16 @@ $(document).ready(function(){
 			url:"<c:url value='/myPage/myCartUpdate'/>",
 			data:{CART_NUM:num, CART_CNT:cnt},
 			success: function(data){
-					
 				}	
         	});
-        	
+    	var sum = cnt*price;	
  	});
  	
  	$(document).on('click','.minus',function(){
    		 $(this).next('.count').val(parseInt($(this).next('.count').val()) - 1 );
    		var cnt = parseInt($(this).next('.count').val());
     	var price =parseInt($(this).closest("tr").find('.price').val());
-    	var sum = cnt*price; 
+    	var sum = cnt*price;
     	$(this).closest("tr").find('#sum').val(sum);
     
    		 

@@ -19,6 +19,17 @@
  <script type="text/javascript"src="<c:url value="/resources/js/orderPost.js"/>" ></script>
 
 <script type="text/javascript">
+var memId="${MEM_ID}";
+if(memId==""){
+	var memPWD="${OR_PWD}";
+	if(memPWD==""){
+		location.href="<c:url value='/item/pwdOrder'/>";
+	}
+	
+}
+
+	
+
 var totalPrice=0;
 var totalPoint=0;
 var memberPoint=0;
@@ -127,7 +138,7 @@ function card(){
 	    pay_method : 'card',
 	    merchant_uid : 'merchant_' + new Date().getTime(),
 	    name : '주문명:결제테스트',
-	    amount : 1000,
+	    amount : 100,
 	    buyer_email : 'iamport@siot.do',
 	    buyer_name : '구매자이름',
 	    buyer_tel : '010-1234-5678',
@@ -146,7 +157,7 @@ function card(){
 			$("input[name='OR_NUM']").val(sdd[1]);
 			orderSucess();
 			alert("결제성공!");
-			location.href="<c:url value='/main/main'/>";
+			goPost(sdd[1]);
 	    } else {
 		    
 	        var msg = '결제에 실패하였습니다.';
@@ -184,7 +195,6 @@ function orderSucess(){
 		}
 	});
 	
-	
 }
 function orderf(){
 	
@@ -216,6 +226,46 @@ function orderf(){
 
 	card();
 		
+}
+function orderc(){
+	location.href="<c:url value='/main/main'/>";
+}
+function goPost(sdd) {
+var obj1 = sdd;
+
+var form = document.createElement("form");
+
+form.setAttribute("charset", "UTF-8");
+
+form.setAttribute("method", "Post"); // Get 또는 Post 입력
+
+form.setAttribute("action", "<c:url value='/item/orderSuccess'/>");
+
+var hiddenField = document.createElement("input");
+
+hiddenField.setAttribute("type", "hidden");
+
+hiddenField.setAttribute("name", "OR_NUM");
+
+hiddenField.setAttribute("value", obj1);
+
+form.appendChild(hiddenField);
+
+/* var url ="target.jsp"
+
+var title = "testpop"
+
+var status = "toolbar=no,directories=no,scrollbars=no,resizable=no,status=no,menubar=no,width=1240, height=1200, top=0,left=20"
+
+window.open("", title,status); //팝업 창으로 띄우기. 원치 않으면 주석.
+ */
+ 
+document.body.appendChild(form);
+
+ 
+ 
+form.submit();
+
 }
 
 </script>
@@ -279,6 +329,7 @@ function orderf(){
 		<form id="orderForm">
 		<input type="hidden" name="MEM_NUM" >
 		<input type="hidden" name="OR_NUM" >
+		<input type="hidden" name="OR_PWD" value="${OR_PWD}">
 		<section id="sod_frm_taker">
 			<div class="card panel-default">
 				<div class="card-header">
@@ -321,7 +372,7 @@ function orderf(){
 						<div class="col-sm-8">
 							<label for="od_b_zip" class="sound_only">우편번호</label> <label> <input
 								type="text" name="OR_ADDR1" id="sample6_postcode" required
-								class="form-control input-sm" size="6" maxlength="6" >
+								class="form-control input-sm" size="6" maxlength="6" readonly >
 							</label> <label>
 								<button type="button" class="btn btn-dark btn-sm"
 									style="margin-top: 0px;"
@@ -406,7 +457,7 @@ function orderf(){
 			</form>
 			<div id="display_pay_button" class="text-center btn_confirm">
 			    <input type="button" value="주문하기" onclick="orderf();" class=" btn btn-dark">
-			     <input type="button" value="취소" onclick="forderform_check(this.form);" class=" btn btn-primary">
+			     <input type="button" value="취소" onclick="orderc();" class=" btn btn-primary">
 
 			</div>
 			
