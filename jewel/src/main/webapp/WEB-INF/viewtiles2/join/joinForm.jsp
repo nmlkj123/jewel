@@ -10,6 +10,7 @@
  <script type="text/javascript"src="<c:url value="/resources/js/post.js"/>" ></script> 
  <script type="text/javascript"src="<c:url value="/resources/js/joinForm.js"/>" ></script>
 <script type="text/javascript">
+var email="";
 /* 아이디체크 */
 function checkId(){
 	var id = $('#MEM_ID').val();
@@ -96,6 +97,7 @@ $( document ).ready(function() {
 			중 '&'는 하나의 파라미터가 끝나고 다음 파라미터가 온다는 의미이다.
 			그런데 다음과 같이 job의 값에 &가 포함된다면 시스템은 job의 값을 제대로 인식할수 없게 된다. */
 			success : function(data){
+					email=$('#email').val();
 					alert("이메일을 보냈습니다. 인증번호를 입력해주세요.");
 				
 			},
@@ -116,13 +118,13 @@ $( document ).ready(function() {
 			success:function(data){
 				if(data=="complete"){
 					alert("인증이 완료되었습니다.");
-					$('#email').val("${sessionScope.userEmail}");
+					
 					$('#email').attr("readonly", true); 
 					$('#emailAuth').attr("readonly", true);  
 					$('#email').attr("check", "1");
 					$('#emailBtn').hide(); 
 					$('#emailAuthBtn').hide(); 
-					$('#email').val("${sessionScope.userEmail}");
+					$('#email').val(email);
 				}else if(data == "false"){
 					alert("인증번호를 잘못 입력하셨습니다.")
 				}

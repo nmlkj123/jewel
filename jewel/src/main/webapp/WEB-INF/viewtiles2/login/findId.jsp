@@ -31,6 +31,9 @@ function fsubmit(){
 	frm.target = "winName"; */
 	frm.submit();
 }
+function fclose(){
+	location.href="<c:url value='/main/main'/>";
+}
 </script>
 </head>
 <body>

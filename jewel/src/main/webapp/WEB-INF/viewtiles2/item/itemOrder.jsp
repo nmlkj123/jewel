@@ -285,7 +285,7 @@ form.submit();
 						<th scope="col"><span>상품명</span></th>
 						<th scope="col"><span>총수량</span></th>
 						<th scope="col"><span>판매가</span></th>
-						<th scope="col"><span>쿠폰</span></th>
+						<th scope="col"><span>   </span></th>
 						<th scope="col"><span>소계</span></th>
 						<th scope="col"><span>포인트</span></th>
 						<th scope="col"><span class="last">배송비</span></th>
@@ -340,9 +340,7 @@ form.submit();
 					<div class="form-group">
 						<label class="col-sm-2 control-label"><b>배송지선택</b></label>
 						<div class="col-sm-10 radio-line">
-							<label> <input type="checkbox" name="ad_sel_addr"
-								value="same" id="ad_sel_addr_same"> 주문자와 동일
-							</label>
+							
 						</div>
 					</div>
 

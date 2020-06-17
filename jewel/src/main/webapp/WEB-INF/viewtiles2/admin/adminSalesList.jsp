@@ -45,7 +45,7 @@ function changeDate(val){
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.kr.min.js"></script>
-<div class="container text=center"  style="width:100%; height:700px;">
+<div class="container text=center"  style="width:100%; height:700px;overflow-x: scroll;">
 <!-------------------------------------그래프----------------------------------------->
 <canvas id="myChart"></canvas>
 <!-------------------------------------그래프----------------------------------------->
@@ -149,7 +149,11 @@ function createidChart(){
 			display:true,
 			text:'일간 상품별 매출현황'
 			},
-			scales : {
+			scales : {xAxes: [{
+                ticks: {
+                    display: false //this will remove only the label
+                }
+            }],
 				yAxes : [{
 					ticks :{
 						beginAtZero : true,
@@ -217,6 +221,11 @@ function createimChart(){
 			text:'월간 상품별 매출현황'
 			},
 			scales : {
+				xAxes: [{
+	                ticks: {
+	                    display: false //this will remove only the label
+	                }
+	            }],
 				yAxes : [{
 					ticks :{
 						beginAtZero : true,

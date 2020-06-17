@@ -18,8 +18,11 @@ if($("#inputPassword2").val()==""){
 if($("#inputPassword").val()!=$("#inputPassword2").val()){
 	alert("비밀번호가 같지 않습니다");
 	return;
+}else{
+	$("#pwdOrderForm").submit();
 }
-$("#pwdOrderForm").submit();
+
+
 
 
 
@@ -49,7 +52,7 @@ $("#pwdOrderForm").submit();
   <div class="checkbox mb-3">
     
   </div>
-  <button class="btn btn-lg btn-primary btn-block" onclick="order();">주문하기</button>
+  <button class="btn btn-lg btn-primary btn-block" onclick="order(); return false;">주문하기</button>
   <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2020</p>
 </form>
 </div>

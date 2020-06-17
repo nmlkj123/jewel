@@ -138,7 +138,7 @@ tbody td{
         			<td>
         			 <img src="<c:url value="/images/item/${cart.ITEM_IMAGE1 }"/>" style="width:50px;">
         			</td>
-        			<td>${cart.ITEM_NAME }</td>
+        			<td><a href="<c:url value='/item/itemDetail?ITEM_NUM=${cart.ITEM_NUM }'/>">${cart.ITEM_NAME }</a></td>
         			<td>${cart.OP_VALUE }</td>
         			
         			<td>
