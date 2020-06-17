@@ -134,7 +134,7 @@ $(document).ready(function() {
       </table>
       
       <br/><br/>
-      <button type="submit" id="submit" name="submit" class="btn btn-primary ">저장</button>
+      <button type="submit" id="submit" name="submit" class="btn btn-primary">저장</button>
       <a href="#" onclick="history.back();" class="btn1">목록으로</a>
    </form>
 </div>   

@@ -50,7 +50,12 @@
 			COUNT(*)as TOTAL 
 		FROM 
 			FAQ 
-		
+		<choose>
+			<when test="FAQ_CATE!=null and FAQ_CATE !=''">
+			where 
+			FAQ_CATE=#{FAQ_CATE}
+			</when>
+			</choose>		
 	
 	</select>
 	
