@@ -6,7 +6,7 @@
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
- <link href="<c:url value='/resources/css/default.css'/>" rel="stylesheet">
+
 </head>
 <script>
 $(document).ready(function(){
@@ -136,7 +136,7 @@ $(document).ready(function(){
        <div class="container-fluid mt-5">
       <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-0 main">
-          <h1 class="page-header mb-3" style="font-family: Nanum Gothic, cursive; text-align: center;">주간인기상품</h1>
+          <h1 class="page-header mb-3" style="font-family: Nanum Gothic, cursive; text-align: center;">커플링 세트</h1>
           <div class="row placeholders text-center"id="itemList2">
            
           </div>

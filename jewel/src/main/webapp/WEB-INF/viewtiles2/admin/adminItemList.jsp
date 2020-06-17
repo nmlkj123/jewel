@@ -8,7 +8,7 @@
 
 </head>
 <body>
-    <h2>상품 리스트</h2>
+    <h2>상품 목록</h2>
     <div class="row">
           <div class="col-12">
             <div class="card">

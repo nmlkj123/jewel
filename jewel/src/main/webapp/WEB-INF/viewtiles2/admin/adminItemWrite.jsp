@@ -10,6 +10,12 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
 <style type="text/css">
 
+     
+  table {
+    width: 100%;
+  }
+  
+  
  </style>
 </head>
 
@@ -125,7 +131,7 @@ $(document).ready(function(){
 	$('#add_opt').on("click",function(){
 		
 	 	
-		var str = '<tr>	<td><input type="text" id="OP_TYPE" name="OP_TYPE"></td><td>	<input type="text" id="OP_VALUE" name="OP_VALUE"> </td><td>	<input type="text" id="OP_PRICE" name="OP_PRICE"><a href="#" class="btn" id="delete" name="delete">삭제</a></td></tr>';
+		var str = '<tr>	<td><input style="width:100%;" type="text" id="OP_TYPE" name="OP_TYPE"></td><td>	<input type="text" style="width:100%;" id="OP_VALUE" name="OP_VALUE"> </td><td>	<input type="text"style="width:90%;" id="OP_PRICE" name="OP_PRICE"><a href="#" class="btn" id="delete" name="delete">삭제</a></td></tr>';
 		 $("#opt > tbody:last").append(str); 
 		
 
@@ -253,24 +259,24 @@ function sendFile(file, el) {
 		
 	
 		
-		<table id="opt" style="width:95%;">
+		<table id="opt">
 		<thead>
 		<tr>
-		<th>옵션 종류</th>
-		<th>옵션 값</th>
-		<th>옵션 가격</th>
+		<td align="center"><b>옵션 종류</b></td>
+		<td align="center"><b>옵션 값</b></td>
+		<td align="center"><b>옵션 가격</b></td>
 		</tr>
 		</thead>
 		<tbody>
 		<tr>
 		<td>
-				<input type="text"  id="OP_TYPE" name="OP_TYPE">
+				<input style="width:100%;"type="text"  id="OP_TYPE" name="OP_TYPE">
 		</td>
 		<td>
-				<input type="text"  id="OP_VALUE" name="OP_VALUE">
+				<input style="width:100%;" type="text"  id="OP_VALUE" name="OP_VALUE">
 		</td>
 		<td>
-				<input type="text"  id="OP_PRICE" name="OP_PRICE">
+				<input style="width:90%;" type="text"  id="OP_PRICE" name="OP_PRICE">
 		</td>
 		
 		</tr>

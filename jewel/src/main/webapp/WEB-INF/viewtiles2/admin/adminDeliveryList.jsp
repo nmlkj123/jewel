@@ -111,7 +111,7 @@ function refundList(pg){
               '<div class="col-12">'+
 	            '<div class="card">'+
 	              
-	              <!-- /.card-header -->
+	             /*  <!-- /.card-header --> */
 	              '<div class="card-body table-responsive p-0">'+
 	    		  '<table class="table table-head-fixed text-nowrap"><thead> <tr> <th scope="col">배송 현황 번호</th><th scope="col">구분 번호</th><th scope="col">주문번호</th><th scope="col">날짜</th><th scope="col">배송상태</th></tr></thead><tbody id="tbody">';
 	    	  if(data.list.length==0){
@@ -148,6 +148,7 @@ function refundList(pg){
 start(1);
 </script>
 <body>
+<h2>주문 목록</h2>
 <div id="b">
 <table>
 <tr>

@@ -13,6 +13,16 @@ function fsubmit(){
 		alert("배송상태를 입력하세요.");
 		return false;
 	}
+	
+	if(DEL_DS=='상품준비중'||DEL_DS=='배송준비중'||DEL_DS=='배송중'||DEL_DS=='배송완료')
+		document.getElementById('hnum').value="1";
+
+	
+	else
+		document.getElementById("hnum").value="2";
+	
+	
+	
 	 if (confirm("수정하시겠습니까?") == true){   
 
 		 frm.submit();
@@ -40,20 +50,20 @@ function fsubmit(){
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">배송상태 번호</label>
                     <div class="col-sm-10">
-                      <input class="form-control" type="text"  id="NT_TITLE" name="NT_TITLE" value="${map.DEL_NUM}" placeholder="배송상태 번호" disabled>
-                      <input type="hidden" name="DEL_NUM" value="${map.DEL_NUM}">
+                      <input class="form-control" type="text"  id="DEL_NUM" name="DEL_NUM" value="${map.DEL_NUM}" placeholder="배송상태 번호" readonly>
+                      <input type="hidden" id="hnum" name="hnum">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">구분 번호</label>
                     <div class="col-sm-10">
-                      <input class="form-control" type="text"  id="NT_TYPE" name="NT_TYPE" value="${map.OR_UNQ}" placeholder="구분 번호 " disabled>
+                      <input class="form-control" type="text"  id="OR_UNQ" name="OR_UNQ" value="${map.OR_UNQ}" placeholder="구분 번호 " disabled>
                     </div>
                   </div>
                  <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">주문 번호</label>
                     <div class="col-sm-10">
-                      <input class="form-control" type="text"  id="NT_TYPE" name="NT_TYPE" value="${map.OR_NUM}" placeholder="주문 번호" disabled>
+                      <input class="form-control" type="text"  id="OR_NUM" name="OR_NUM" value="${map.OR_NUM}" placeholder="주문 번호" readonly >
                     </div>
                   </div>
                   <div class="form-group row">
