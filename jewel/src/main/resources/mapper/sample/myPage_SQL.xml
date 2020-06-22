@@ -60,6 +60,7 @@
 						rownum as RNUM, s.* 
 					 FROM	
 						(SELECT 
+							   o.OR_UNQ,
 							   o.OR_NUM,	 				   
 							   i.ITEM_NAME,
 							   i.ITEM_NUM,
@@ -68,13 +69,14 @@
 							   o.OR_CNT,
 							   o.OR_FP,
 							   o.OR_OP,
-							   d.DEL_DS				   
+							   d.DEL_DS							   				   
 						FROM ITEM i, ORDERS o, MEMBER m, DELIVERY d
 						WHERE m.MEM_ID = #{MEM_ID}
 						AND m.MEM_NUM = o.MEM_NUM
 						AND o.ITEM_NUM = i.ITEM_NUM
 						AND o.OR_UNQ = d.OR_UNQ
-						order by OR_DATE desc)s)
+						AND d.DEL_DATE in (SELECT max(DEL_DATE) FROM delivery group by OR_UNQ)
+						order by OR_NUM desc)s)
 				WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}
 		]]>
 	</select>
@@ -90,13 +92,30 @@
 		]]>
 	</select>
 	
-	<update id="deliveryUpdate" parameterType="hashmap" >
+	<insert id="deliveryInsert" parameterType="hashmap" >
 		<![CDATA[
-			UPDATE DELIVERY SET 
-			 	DEL_DS = #{keyword} 			 	
-			WHERE OR_NUM = #{OR_NUM}
+			INSERT INTO DELIVERY
+			VALUES
+				(DEL_NUM_SEQ.NEXTVAL,#{OR_UNQ},sysdate,#{OR_NUM},#{keyword})
 		]]>
-	</update>
+	</insert>
+	
+	<select id="selectDelivery" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				d.OR_UNQ,
+				d.OR_NUM,
+				i.ITEM_NAME,
+				to_char(d.DEL_DATE,'YYYY/MM/DD') DEL_DATE,
+				d.DEL_DS
+			FROM 
+				DELIVERY d, ITEM i, ORDERS o
+			WHERE d.OR_UNQ = #{OR_UNQ}
+			AND d.OR_UNQ = o.OR_UNQ
+			AND o.ITEM_NUM = i.ITEM_NUM
+			ORDER BY DEL_DATE DESC		
+		]]>
+	</select>
 	
 	
 <!-- 나의찜목록 -->

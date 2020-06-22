@@ -74,20 +74,29 @@ public class MyOrderController {
 	@RequestMapping(value="/myPage/myOrderExchange")
 	public ModelAndView myOrderExchange(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("jsonView");
-		myOrderListService.deliveryUpdate(commandMap.getMap());		
+		myOrderListService.deliveryInsert(commandMap.getMap());		
 		return mv;
 	}
 	@RequestMapping(value="/myPage/myOrderReturn")
 	public ModelAndView myOrderReturn(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("jsonView");
-		myOrderListService.deliveryUpdate(commandMap.getMap());		
+		myOrderListService.deliveryInsert(commandMap.getMap());		
 		return mv;
 	}
 	@RequestMapping(value="/myPage/myOrderCancel")
 	public ModelAndView myOrderCancel(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("jsonView");
-		myOrderListService.deliveryUpdate(commandMap.getMap());		
+		myOrderListService.deliveryInsert(commandMap.getMap());		
 		return mv;
 	}
 	
+	@RequestMapping(value="/myPage/myDelDetail")
+	public ModelAndView myOrderList(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("myPage/myDelDetail");
+				
+		List<Map<String, Object>> myDelivery = myOrderListService.selectDelivery(commandMap.getMap());
+		mv.addObject("myDelivery", myDelivery);
+		
+		return mv;
+	}
 }

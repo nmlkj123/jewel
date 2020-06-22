@@ -22,9 +22,14 @@ public class MyOrderDAO extends AbstractDAO {
 	public int orderTotalList(Map<String, Object> map) throws Exception{
 		return  (Integer) selectOne("myPage.orderTotalList", map);		
 	}
-	public void deliveryUpdate(Map<String, Object> map) throws Exception{
-		update("myPage.deliveryUpdate", map);
+	public void deliveryInsert(Map<String, Object> map) throws Exception{
+		insert("myPage.deliveryInsert", map);
 	}
+	//배송상태 내역
+	public List<Map<String, Object>> selectDelivery(Map<String, Object> map) throws Exception{
+		return(List<Map<String, Object>>) selectList("myPage.selectDelivery", map);
+	}
+	
 	
 
 }
