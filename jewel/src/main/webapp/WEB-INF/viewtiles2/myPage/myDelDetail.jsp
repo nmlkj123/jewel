@@ -20,14 +20,16 @@ table{
 	<table class="table table-hover" style="width:80%; margin-left:10%;">
 		<br>
 		<h2 style="margin-left:10%;">주문배송처리내역</h2>
-        <br>
+		<br>
+		<img src="<c:url value="/images/myPage/deliveryState.png"/>" style="margin-left:10%; margin-bottom:7%; width:80%;">
+		
         <colgroup>
 			<col width="20%"/>
 			<col width="20%"/>
 	        <col width="30%"/>
 	        <col width="30%"/>
         </colgroup>
-        <thead>
+        <thead>	
         	<tr class="table-info" align="center">
         		<th scope="col">주문번호</th>
         		<th scope="col">상품명</th>
@@ -50,6 +52,5 @@ table{
         </tbody>
                
 	</table>
-	
 </body>
 </html>

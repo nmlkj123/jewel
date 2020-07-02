@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jewel.common.CommandMap;
@@ -91,12 +92,13 @@ public class MyOrderController {
 	}
 	
 	@RequestMapping(value="/myPage/myDelDetail")
-	public ModelAndView myOrderList(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("myPage/myDelDetail");
+	public ModelAndView myDeliveryList(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("/myPage/myDelDetail");
 				
 		List<Map<String, Object>> myDelivery = myOrderListService.selectDelivery(commandMap.getMap());
 		mv.addObject("myDelivery", myDelivery);
 		
 		return mv;
 	}
+	
 }

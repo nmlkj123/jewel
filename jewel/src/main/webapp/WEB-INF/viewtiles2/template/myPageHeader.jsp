@@ -71,7 +71,7 @@ $(document).ready(function() {
 .myPageInfo .info2 span{
 	font-weight: bold;
 }
-.myPageInfo .info3{
+.myPageInfo .info3, .info4 {
 	float:left;
 	height:100px;
 	padding-top:20px;
@@ -100,9 +100,15 @@ $(document).ready(function() {
 		</div>
 		<div class="info3">
 			<span>
-				<img src="<c:url value="/images/iconfinder-basket-4341280_120547.png"/>" style="width:60px">
+				<img src="<c:url value="/images/myPage/iconfinder-basket-4341280_120547.png"/>" style="width:60px">
 			</span>
 			<span><a href="<c:url value='/myPage/myCart'/>">장바구니</a></span>
+		</div>
+		<div class="info4">
+			<span>
+				<img src="<c:url value="/images/myPage/points.png"/>" style="width:60px">
+			</span>
+			<span><a href="<c:url value='/myPage/myCart'/>">포인트조회</a></span>
 		</div>
 		<br>
 		<!-- 목록박스 -->
