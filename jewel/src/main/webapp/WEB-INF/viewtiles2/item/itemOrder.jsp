@@ -183,6 +183,7 @@ function orderSucess(){
 			}
 		});
 	})
+	
 	var formOrder=$("#orderForm").serialize();
 	$.ajax({
 		type : "POST",
