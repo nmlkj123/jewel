@@ -144,11 +144,11 @@ function writeReview(){
       </table>
       
       <br/><br/>
-<<<<<<< HEAD
+
       <button type="submit" id="submit" name="submit" class="btn btn-primary">저장</button>
-=======
+
       <button onclick="writeReview(); return false;" id="submit" name="submit" class="btn btn-primary ">저장</button>
->>>>>>> branch 'master' of https://github.com/nmlkj123/jewel.git
+
       <a href="#" onclick="history.back();" class="btn1">목록으로</a>
    </form>
 </div>   

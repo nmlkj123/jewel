@@ -15,6 +15,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
 <body>
+
 	<form id="frm" method="post" action="<c:url value='/review/insertComment'/>">
         <table class="board_view">
             <colgroup>

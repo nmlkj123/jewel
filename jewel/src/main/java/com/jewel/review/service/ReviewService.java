@@ -25,6 +25,7 @@ public interface ReviewService {
 	int getTotalList(Map<String,Object> map);
 
 
+
 	
 
 	

@@ -22,7 +22,7 @@
 	
 </div>
 <br><br><br>
-	<h3 class="title">FAQ</h3>
+	<h3 class="title">FAQ1</h3>
 	<br><br>
 	<table class="catelist">
 <tr>
