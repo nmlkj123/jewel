@@ -101,4 +101,11 @@ public class MyOrderController {
 		return mv;
 	}
 	
+	@RequestMapping(value="/myPage/myOrderConfirm")
+	public ModelAndView myOrderConfirm(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("jsonView");
+		myOrderListService.deliveryInsert(commandMap.getMap());		
+		return mv;
+	}
+	
 }
