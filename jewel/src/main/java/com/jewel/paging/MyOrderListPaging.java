@@ -5,9 +5,9 @@ import org.springframework.stereotype.Component;
 @Component(value = "myOrderListPaging")
 public class MyOrderListPaging {
 	private int currentPage;
-	private int pageBlock;
-	private int pageSize;
-	private int totalList;
+	private int pageBlock; //한 화면에 보여줄 블럭개수
+	private int pageSize; // 총 블럭개수
+	private int totalList;// 총 데이터개수
 	private StringBuffer pagingHTML;
 	private String path;
 	public void makePagingHTML() {
@@ -16,6 +16,7 @@ public class MyOrderListPaging {
 		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
 		int endPage=startPage+pageBlock-1;
 		if(endPage>totalP)endPage=totalP;
+		
 		pagingHTML.append("<ul class='pagination' style='justify-content: center;'>");
 		if(startPage>pageBlock)
 			pagingHTML.append("<li class='page-item'><a class='page-link' href='"+path+"/myPage/myOrderList?pg="+(startPage-1)+"'>이전</a></li>");

@@ -30,8 +30,14 @@ public class MyOrderListServiceImpl implements MyOrderListService {
 	}
 	
 	@Override
-	public void deliveryUpdate(Map<String, Object> map) throws Exception{
-		myOrderDAO.deliveryUpdate(map);
+	public void deliveryInsert(Map<String, Object> map) throws Exception{
+		myOrderDAO.deliveryInsert(map);
 	}
+	@Override
+	public List<Map<String, Object>> selectDelivery(Map<String, Object> map) throws Exception {
+		return myOrderDAO.selectDelivery(map);
+
+	}
+	
 	
 }
