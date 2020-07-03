@@ -73,8 +73,8 @@ public class AdminDeliveryController {
 	public ModelAndView adminRefundList(CommandMap commandMap,HttpServletRequest request)throws Exception{
 			ModelAndView mv=new ModelAndView("jsonView");  
 			
-			int show=12;//�������� ������ ��ǰ ����
-	    	int block=5;//�������� ������ ����������
+			int show=12;
+	    	int block=5;
 	    	int pg;
 	    	if(commandMap.get("pg")==null) {
 		    	  pg=1;
@@ -106,6 +106,15 @@ public class AdminDeliveryController {
 		 
 		return mv;
 	}
+	@RequestMapping(value="/openAdminDeliveryDetail")
+	public ModelAndView openAdminDeliveryDetail(CommandMap commandMap)throws Exception{
+		ModelAndView mv=new ModelAndView("adminDeliveryDetail");
+		
+	
+		return mv;
+	}
+	
+	
 	@RequestMapping(value="/adminDeliveryDetail")
 	public ModelAndView adminDeliveryDetail(CommandMap commandMap)throws Exception{
 		ModelAndView mv=new ModelAndView("adminDeliveryDetail");

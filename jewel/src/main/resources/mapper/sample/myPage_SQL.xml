@@ -113,7 +113,7 @@
 			WHERE d.OR_UNQ = #{OR_UNQ}
 			AND d.OR_UNQ = o.OR_UNQ
 			AND o.ITEM_NUM = i.ITEM_NUM
-			ORDER BY DEL_DATE DESC		
+			ORDER BY DEL_NUM DESC		
 		]]>
 	</select>
 	

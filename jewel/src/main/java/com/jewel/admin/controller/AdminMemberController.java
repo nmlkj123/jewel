@@ -117,7 +117,7 @@ public class AdminMemberController {
 		ModelAndView mv = new ModelAndView("redirect:adminMemberList");
 	
 		AdminMemberService.updateMemberPoint(commandMap.getMap());
-		
+		AdminMemberService.insertPoint(commandMap.getMap());
 		
 		return mv;
 	}

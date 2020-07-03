@@ -53,23 +53,46 @@ function fsubmit(){
                       <input class="form-control" type="text"  id="NT_TYPE" name="NT_TYPE" value="${map.MEM_ID}" placeholder="회원 ID " disabled>
                     </div>
                   </div>
-                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">주문 번호</label>
+                 
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">보유 포인트</label>
                     <div class="col-sm-10">
-                      <input class="form-control" type="text"  id="NT_TYPE" name="NT_TYPE" value="${map.OR_NUM}" placeholder="주문 번호" disabled>
+                      <input class="form-control" type="text"  id="MEM_POINT" name="MEM_POINT" value="${map.MEM_POINT}" readonly placeholder="포인트">
+                    </div>
+                  </div>
+                  
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">적립/차감</label>
+                    <select class="form-control" id="PO_TYPE" name="PO_TYPE" placeholder="적립/차감">
+                    	<option value="1" selected>적립 </option>
+						<option value="2">차감</option>
+					
+					</select>
+                    
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">포인트 값</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"  id="PO_POINT" name="PO_POINT"  placeholder="포인트">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">포인트</label>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">포인트 내용</label>
                     <div class="col-sm-10">
-                      <input class="form-control" type="text"  id="MEM_POINT" name="MEM_POINT" value="${map.MEM_POINT}" placeholder="포인트">
+                      <input class="form-control" type="text"  id="PO_WHY" name="PO_WHY"  placeholder="포인트 내용">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">회원 등급</label>
-                    <div class="col-sm-10">
-                      <input class="form-control" type="text"  id="MEM_RANK" name="MEM_RANK" value="${map.MEM_RANK}" placeholder="회원 등급">
-                    </div>
+                    <select class="form-control" id="MEM_RANK" name="MEM_RANK" placeholder="회원 등급">
+                    	
+						<option value="일반" <c:if test="${map.MEM_RANK == '일반'}">selected</c:if>>일반</option>
+						<option value="브론즈" <c:if test="${map.MEM_RANK == '브론즈'}">selected</c:if>>브론즈</option>
+						<option value="실버" <c:if test="${map.MEM_RANK == '실버'}">selected</c:if>>실버</option>
+						<option value="골드" <c:if test="${map.MEM_RANK == '골드'}">selected</c:if>>골드</option>
+						<option value="다이아" <c:if test="${map.MEM_RANK == '다이아'}">selected</c:if>>다이아</option>
+					</select>
+                    
                   </div>
                   </div>
                 <!-- /.card-body -->

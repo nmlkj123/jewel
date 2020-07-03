@@ -127,7 +127,7 @@ FROM QNA
 	
 	</update>
 	<select id="selectDaySaleList" parameterType="hashmap" resultType="hashmap">
-	SELECT O.ITEM_NUM,i.item_name  AS ITEM_NAME,SUM(O.OR_CNT) as CNT  FROM ORDERS O,ITEM I WHERE TO_CHAR(OR_DATE,'yyyy-mm-dd')=#{OR_DATE} AND O.ITEM_NUM=I.ITEM_NUM
+	SELECT O.ITEM_NUM,i.item_name  AS ITEM_NAME,SUM(O.OR_CNT) as CNT  FROM ORDERS O,ITEM I WHERE OR_DATE=#{OR_DATE} AND O.ITEM_NUM=I.ITEM_NUM
 GROUP BY O.ITEM_NUM,I.ITEM_NAME order by CNT desc
 	</select>
 	<select id="selectMonthSaleList" parameterType="hashmap" resultType="hashmap">
@@ -136,7 +136,7 @@ WHERE TO_CHAR(OR_DATE,'YYYY-MM')=#{OR_DATE}  AND  O.ITEM_NUM=I.ITEM_NUM
 GROUP BY O.ITEM_NUM,I.ITEM_NAME order by CNT desc
 	</select>
 	<select id="selectCateDaySaleList" parameterType="hashmap" resultType="hashmap">
-		SELECT SUBSTR(ITEM_NUM,1,1) CATEGORY,SUM(OR_CNT) CNT  FROM ORDERS WHERE TO_CHAR(OR_DATE,'yyyy-mm-dd')=#{OR_DATE}
+		SELECT SUBSTR(ITEM_NUM,1,1) CATEGORY,SUM(OR_CNT) CNT  FROM ORDERS WHERE TO_CHAR(OR_DATE,'YYYY-MM-DD')=#{OR_DATE}
 GROUP BY SUBSTR(ITEM_NUM,1,1) order by CNT desc
 	</select>
 	<select id="selectCateMonthSaleList" parameterType="hashmap" resultType="hashmap">
@@ -328,10 +328,49 @@ WHERE  MEM_NUM=#{MEM_NUM}
 	</update>		
 	<update id="updateMemberPoint" parameterType="hashmap">
 	UPDATE MEMBER
-	SET MEM_POINT=#{MEM_POINT},MEM_RANK=#{MEM_RANK} 
+	<choose>
+		<when test="PO_TYPE==1">	 
+				   SET MEM_POINT=(TO_NUMBER(#{MEM_POINT})+TO_NUMBER(#{PO_POINT}))
+		</when>
+		<when test="PO_TYPE==2">	
+				   	SET MEM_POINT=(TO_NUMBER(#{MEM_POINT})-TO_NUMBER(#{PO_POINT}))
+		</when>
+	</choose>
+	,MEM_RANK=#{MEM_RANK} 
 	WHERE  MEM_NUM=#{MEM_NUM}
 	
 	</update>
+	
+	<insert id="insertPoint" parameterType="hashmap">
+	insert into POINTS VALUES(PO_NUM_SEQ.nextval,#{MEM_NUM},
+	<choose>
+		<when test="PO_TYPE==1">	 
+				   	('+'||#{PO_POINT})
+		</when>
+		<when test="PO_TYPE==2">	
+				   	('-'||#{PO_POINT})
+		</when>
+	</choose>
+	
+	,sysdate,#{PO_WHY},
+	
+	<choose>
+		<when test="PO_TYPE==1">	 
+				   (TO_NUMBER(#{MEM_POINT})+TO_NUMBER(#{PO_POINT}))
+		</when>
+		<when test="PO_TYPE==2">	
+				   	(TO_NUMBER(#{MEM_POINT})-TO_NUMBER(#{PO_POINT}))
+		</when>
+	</choose>
+	
+	
+	
+	
+	
+	
+	)
+	
+	</insert>
 	<update id="deleteOption" parameterType="hashmap">
 	Delete
 	FROM 
@@ -359,16 +398,13 @@ SELECT  DEL_NUM,OR_UNQ,TO_CHAR(DEL_DATE,'YYYY-MM-DD') DEL_DATE,OR_NUM,DEL_DS    
 
 	</select>
 	<update id="updateDelivery" parameterType="hashmap">
-	UPDATE DELIVERY SET DEL_DS=#{DEL_DS} 
-	<choose>
-		<when test="hnum==1">	
-				   	 WHERE 
-				   	 OR_NUM=#{OR_NUM}
-		</when>
-		<when test="hnum==2">	
-				   	 WHERE OR_UNQ=#{OR_UNQ}
-		</when>
-	</choose>
+	insert into delivery(del_num,or_unq,del_date,or_num,del_ds)
+	select DEL_NUM_SEQ.nextval,or_unq,sysdate,or_num,#{DEL_DS} from delivery 
+	
+		
+				   	 WHERE OR_UNQ=#{OR_UNQ} and DEL_NUM=(select max(DEL_NUM) from delivery where OR_UNQ=#{OR_UNQ})
+		
+	
 	
 	
 	
