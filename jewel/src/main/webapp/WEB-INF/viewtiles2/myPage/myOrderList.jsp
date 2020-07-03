@@ -26,7 +26,7 @@ color: gray;
  function selectDel(unq){
 	var url ="/common/myPage/myDelDetail?OR_UNQ="+unq;
 	var name="myDelDetail";
-	var option= "width=600, height=300, top=100, left=200, location=no";
+	var option= "width=800, height=500, top=100, left=200, location=no";
 	window.open(url,name,option);
  }
 </script>
@@ -89,8 +89,9 @@ color: gray;
          					<c:if test="${items.DEL_DS == '배송완료'}">
     							<button type="button" class="btn btn-outline-primary" id="confirmPayment" style="padding:0px; font-size:10px; width:80px; height:20px;">구매확정</button>
              				</c:if>
-             			<button type="button" class="btn btn-outline-primary" id="reviewBtn" style="padding:0px; font-size:10px; width:80px; height:20px;">리뷰작성</button>
-             				
+             				<c:if test="${items.DEL_DS == '구매확정'}">
+             					<button type="button" class="btn btn-outline-primary" id="reviewBtn" style="padding:0px; font-size:10px; width:80px; height:20px;">리뷰작성</button>
+             				</c:if>
         				<input type="hidden" value="${items.OR_UNQ}" id="OR_UNQ">
         				<input type="hidden" value="${items.OR_FP}" id="OR_FP">
         				<input type="hidden" value="${items.OR_NUM}" id="OR_NUM">
@@ -234,11 +235,6 @@ color: gray;
 
 });
  
-$(function() {
-	$(document).ready(function() {
-	$("#reviewBtn").hide();
-});
-})
 
  function chkAll(){
 	 if( $("#chkAll").is(':checked') ){
