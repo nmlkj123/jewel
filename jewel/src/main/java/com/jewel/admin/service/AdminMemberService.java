@@ -8,6 +8,7 @@ public interface AdminMemberService {
 	Map<String,Object> selectMemberDetail(Map<String,Object>map)throws Exception;
 	void ignoreMember(Map<String,Object>map)throws Exception;
 	void updateMemberPoint(Map<String,Object>map)throws Exception;
+	void insertPoint(Map<String,Object>map)throws Exception;
 	void deleteMember(Map<String,Object>map )throws Exception;
 	int memberTotalList(Map<String,Object>map)throws Exception;
 }

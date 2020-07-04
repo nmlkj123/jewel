@@ -101,6 +101,7 @@ color: gray;
         				<input type="hidden" value="${items.OR_FP}" id="OR_FP">
         				<input type="hidden" value="${items.OR_NUM}" id="OR_NUM">
         				<input type="hidden" value="${sum1 }" id="point">
+        				<input type='hidden' name='PLUS_POINT' value='"+parseInt(items.CART_CNT*items.ITEM_OP_PRICE)*0.02+"'>
         			</td>     			
         		</tr>       		
         	</c:forEach>    	        	
@@ -221,14 +222,8 @@ color: gray;
 						data:{OR_UNQ:unq,OR_NUM:num,keyword:"구매확정"},
 						success: function(data){
 							alert("구매확정 되었습니다.");
-							$.ajax({
-								type: "POST",
-								url:"<c:url value='/myPage/myOrderPoint'/>",
-								data:{OR_FP:price,MEM_POINT:point},
-								success: function(data){
-									location.reload();
-								}	
-					         });
+							location.reload();
+							
 						}	
 			         });
 			     } else {

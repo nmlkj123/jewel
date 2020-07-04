@@ -49,4 +49,10 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 		 AdminMemberDAO.updateMemberPoint(map);
 	}
 
+	@Override
+	public void insertPoint(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		AdminMemberDAO.insertPoint(map);
+	}
+
 }

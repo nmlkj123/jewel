@@ -78,9 +78,9 @@ public class ItemServiceImpl implements ItemService{
 		
 		int i= itemDAO.setOrder(map);
 		itemDAO.setDelivery(map);
-		/*
-		 * if(map.get("MEM_NUM")!=null) { itemDAO.addPoint(map); }
-		 */
+		
+		 if(map.get("MEM_NUM")!=null) { itemDAO.addPrice(map); }
+		 
 		
 		 return i;
 	}

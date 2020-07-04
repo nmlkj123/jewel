@@ -33,4 +33,7 @@ public class AdminMemberDAO extends AbstractDAO{
 	public void updateMemberPoint(Map<String, Object> map) throws Exception{
 		update("admin.updateMemberPoint", map);
 	}
+	public void insertPoint(Map<String, Object> map) throws Exception{
+		insert("admin.insertPoint", map);
+	}
 }
