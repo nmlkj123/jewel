@@ -31,7 +31,7 @@ table{
         </colgroup>
         <thead>	
         	<tr class="table-info" align="center">
-        		<th scope="col">주문번호</th>
+        		<th scope="col">고유번호</th>
         		<th scope="col">상품명</th>
         		<th scope="col">배송/처리날짜</th>
         		<th scope="col">배송/처리상태</th>
@@ -42,7 +42,7 @@ table{
         		<tr align="center">       			
         			<td>
         				<input type="hidden" value="${items.OR_UNQ}">
-        				${items.OR_NUM}
+        				${items.OR_UNQ}
         			</td>
         			<td>${items.ITEM_NAME}</td>
         			<td>${items.DEL_DATE}</td>

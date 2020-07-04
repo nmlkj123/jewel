@@ -75,8 +75,8 @@
 						AND m.MEM_NUM = o.MEM_NUM
 						AND o.ITEM_NUM = i.ITEM_NUM
 						AND o.OR_UNQ = d.OR_UNQ
-						AND d.DEL_DATE in (SELECT max(DEL_DATE) FROM delivery group by OR_UNQ)
-						order by OR_NUM desc)s)
+						AND d.DEL_NUM in (SELECT max(DEL_NUM) FROM delivery group by OR_UNQ)
+						order by OR_UNQ desc)s)
 				WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}
 		]]>
 	</select>
