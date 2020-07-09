@@ -95,8 +95,8 @@ color: gray;
         				<input type="hidden" value="${items.OR_UNQ}" id="OR_UNQ">
         				<input type="hidden" value="${items.OR_FP}" id="OR_FP">
         				<input type="hidden" value="${items.OR_NUM}" id="OR_NUM">
-        				<input type="hidden" value="${sum1 }" id="point">
-        				<input type='hidden' name='PLUS_POINT' value='"+parseInt(items.CART_CNT*items.ITEM_OP_PRICE)*0.02+"'>
+        				<input type="hidden" value="${sum1}" id="PLUS_POINT">
+        				<!-- <input type='hidden' name='PLUS_POINT' value='"+parseInt(items.CART_CNT*items.ITEM_OP_PRICE)*0.02+"'> -->
         			</td>     			
         		</tr>       		
         	</c:forEach>    	        	
@@ -206,19 +206,18 @@ color: gray;
 				var unq = $("tbody tr").eq(tr).find("#OR_UNQ").val();
 				var num = $("tbody tr").eq(tr).find("#OR_NUM").val();
 				var price = $("tbody tr").eq(tr).find("#OR_FP").val();
-				var point= $("tbody tr").eq(tr).find("#point").val();
+				var point= $("tbody tr").eq(tr).find("#PLUS_POINT").val();
 				point = (Math.floor(point));
-				alert(point);
+				//alert(point);
 				
 				if($("tbody tr").eq(tr).find("#DEL_DS").val()=="배송완료"){
 					$.ajax({
 						type: "POST",
 						url:"<c:url value='/myPage/myOrderConfirm'/>",
-						data:{OR_UNQ:unq,OR_NUM:num,keyword:"구매확정"},
+						data:{OR_UNQ:unq,OR_NUM:num,PLUS_POINT:point,keyword:"구매확정"},
 						success: function(data){
 							alert("구매확정 되었습니다.");
 							location.reload();
-							
 						}	
 			         });
 			     } else {

@@ -568,7 +568,6 @@
                   <div class="col-4 text-center">
                     <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
                            data-fgColor="#39CCCC">
-
                     <div class="text-white">Online</div>
                   </div>
                   <!-- ./col -->
@@ -584,7 +583,7 @@
               </div>
               <!-- /.card-footer -->
             </div>
-            <!-- /.card -->
+            <!-- /.card -->h
 
             <!-- Calendar -->
         

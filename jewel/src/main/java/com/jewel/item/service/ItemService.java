@@ -22,6 +22,8 @@ public interface ItemService {
 	
 	List<Map<String, Object>> getOrderList(Map<String, Object> map);
 	int setOrder(Map<String,Object> map);
+	
+	int addPoint(Map<String,Object> map);
 	int delPoint(Map<String,Object> map);
 	List<Map<String, Object>> getItemMatch(Map<String, Object> map);
 }

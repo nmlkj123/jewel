@@ -51,4 +51,14 @@
     	mem_id=#{MEM_ID} and mem_email=#{MEM_EMAIL} and MEM_DEL_GB = 'N'
 	]]>
 	</update>
+	
+	<!-- 차단된 회원 여부 -->
+	<select id="selectIgnoredUsers" resultType="hashmap">
+	<![CDATA[
+		SELECT 
+			M.MEM_NUM
+		FROM MEMBER M, IGNORE I
+		WHERE M.MEM_NUM=I.MEM_NUM
+	]]>
+	</select>
 </mapper>
