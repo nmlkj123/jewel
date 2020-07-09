@@ -506,7 +506,7 @@ NOCYCLE;
      DECLARE
       v_job_no NUMBER;
     BEGIN
-      -- 현재 시간 기준 1분에 1번씩 ch15_job_test_proc 프로시저를 실행하는 잡 등록
+      -- 현재 시간 기준 하루한번 프로시저를 실행하는 잡 등록
       DBMS_JOB.SUBMIT  ( job => v_job_no, 
                          what => 'DELIVERY_proc;',
                          next_date => SYSDATE,
