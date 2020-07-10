@@ -510,7 +510,7 @@ NOCYCLE;
       DBMS_JOB.SUBMIT  ( job => v_job_no, 
                          what => 'DELIVERY_proc;',
                          next_date => SYSDATE,
-                         interval => 'SYSDATE + 1' );         -- 현재 시간 기준 하루한번
+                         interval => 'TRUNC(SYSDATE+1)' );         -- 현재 시간 기준 하루한번
 
       COMMIT;
 
