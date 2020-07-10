@@ -87,24 +87,57 @@ public class ReviewController {
 
 	return mv;
 }
+	
+	
 	@RequestMapping(value="/review/reviewWriteForm")
-	public ModelAndView reviewWriteForm(CommandMap commandMap,HttpServletRequest request) throws Exception{
+	public ModelAndView reviewWriteForm(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response) throws Exception{
 		ModelAndView mv = new ModelAndView("reviewWriteForm");
 		String message="";
 		String url="";
+		System.out.println(commandMap.get("MEM_NUM")+" "+commandMap.get("ITEM_NUM")+" "+commandMap.get("POINT")+" "+commandMap.get("OR_UNQ"));
+	
 		
+		
+		 int total=reviewService.selectCountMember(commandMap.getMap());
+		 int cnt = reviewService.ReviewDate(commandMap.getMap());
 		 HttpSession session = request.getSession();
+		
+		 
 	      String id = (String) session.getAttribute("MEM_ID");
 	      commandMap.put("MEM_ID",id);
 	      commandMap.put("MEM_NUM",session.getAttribute("MEM_NUM"));
-	      
+	      commandMap.put("MEM_POINT",session.getAttribute("MEM_POINT"));
+	      mv.addObject("MEM_NUM",commandMap.get("MEM_NUM"));
 	      mv.addObject("ITEM_NUM",commandMap.get("ITEM_NUM"));
-			
+	      mv.addObject("POINT",commandMap.get("POINT"));
+	      mv.addObject("OR_UNQ",commandMap.get("OR_UNQ"));
+	 
 
 	      if(commandMap.getMap().get("MEM_ID")!= null) {
-	    	  	mv.addObject("MEM_NUM",commandMap.get("MEM_NUM"));
-				url="/review/reviewWriteForm";
-	}
+	    		if(total>0) {
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=utf-8");
+					PrintWriter out1 = response.getWriter();
+					out1.println("<script>alert('이미 리뷰작성된 물품입니다. '); location.href='javascript:history.back();';</script>");
+					out1.flush();
+	    		}
+					
+					else if(cnt==0){
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script>alert('리뷰기간이 지난 물품입니다. '); location.href='javascript:history.back();';</script>");
+					out.flush();
+	    		}
+	      
+					else {
+					return mv;
+					}
+	    		
+	    		}
+		
+	
+	      
 	      else{
 	    	  
 	    	 message="비회원은 사용할 수 없습니다."; 
@@ -116,6 +149,7 @@ public class ReviewController {
 			
 	     return mv;
 	}
+	
 	@RequestMapping(value="/review/contentImage",method=RequestMethod.POST)
 	@ResponseBody
 	public String contentImage(MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -145,11 +179,8 @@ public class ReviewController {
 	@RequestMapping(value="/review/reviewWrite",method=RequestMethod.POST)
 	public ModelAndView reviewWrite(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response) throws Exception{
 		ModelAndView mv = new ModelAndView("main");
-
+		reviewService.reviewPoint(commandMap.getMap());
 		reviewService.insertReviewWrite(commandMap.getMap());
-		mv.addObject("RE_CONTENT",commandMap.get("RE_CONTENT"));
-		mv.addObject("ITEM_NUM",commandMap.get("ITEM_NUM"));
-		mv.addObject("MEM_NUM",commandMap.get("MEM_NUM"));
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();

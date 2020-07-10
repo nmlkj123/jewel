@@ -139,14 +139,17 @@ function writeReview(){
                </td>
                <td><input type="hidden" id="MEM_NUM" name="MEM_NUM" value="${MEM_NUM}"></input></td>
                <td><input type="hidden" id="ITEM_NUM" name="ITEM_NUM" value="${ITEM_NUM}"></input></td>
+               <td><input type="hidden" id="POINT" name="POINT" value="${POINT}"></input></td>
+               <td><input type="hidden" id="MEM_POINT" name="MEM_POINT" value="${MEM_POINT}"></input></td>
+                <td><input type="hidden" id="OR_UNQ" name="OR_UNQ" value="${OR_UNQ}"></input></td>
             </tr>
+      
          </tbody>
       </table>
       
       <br/><br/>
 
-      <button type="submit" id="submit" name="submit" class="btn btn-primary">저장</button>
-
+      
       <button onclick="writeReview(); return false;" id="submit" name="submit" class="btn btn-primary ">저장</button>
 
       <a href="#" onclick="history.back();" class="btn1">목록으로</a>

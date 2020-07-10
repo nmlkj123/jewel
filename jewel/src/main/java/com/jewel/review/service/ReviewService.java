@@ -14,9 +14,15 @@ public interface ReviewService {
 
 	Map<String, Object> selectReviewDetail(Map<String, Object> map) throws Exception;
 
+	int selectCountMember(Map<String, Object> map) throws Exception;
+	
+	int ReviewDate(Map<String, Object> map) throws Exception;
+	
 	List<Map<String, Object>> ReviewCommentsList(Map<String, Object> map) throws Exception;
 	
 	void insertComments(Map<String, Object> map) throws Exception;
+	
+	void reviewPoint(Map<String, Object> map) throws Exception;
 
 	void updateComments(Map<String, Object> map) throws Exception;
 	

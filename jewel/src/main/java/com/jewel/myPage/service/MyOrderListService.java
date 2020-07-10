@@ -10,4 +10,5 @@ public interface MyOrderListService {
 	int orderTotalList(Map<String,Object> map) throws Exception;
 	void deliveryInsert(Map<String,Object> map) throws Exception;
 	List<Map<String, Object>> selectDelivery(Map<String, Object> map) throws Exception;
+
 }

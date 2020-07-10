@@ -66,6 +66,7 @@ public class LoginController {
          session.setAttribute("MEM_ID", commandMap.get("MEM_ID")); 
 
          session.setAttribute("MEM_RANK", result.get("MEM_RANK"));
+         session.setAttribute("MEM_POINT", result.get("MEM_POINT"));
          session.setAttribute("MEM_NUM", result.get("MEM_NUM")); 
          session.setAttribute("MEM_ADMIN", result.get("MEM_ADMIN"));
       }

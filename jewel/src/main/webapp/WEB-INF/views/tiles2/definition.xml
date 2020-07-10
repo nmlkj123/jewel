@@ -404,7 +404,7 @@
 				<put-attribute name="body"
 					value="/WEB-INF/viewtiles2/cart/memberCart.jsp" />
 			</definition>
-			
+		
 	
 			
 </tiles-definitions>

@@ -69,6 +69,7 @@
 							   o.OR_CNT,
 							   o.OR_FP,
 							   o.OR_OP,
+							   d.DEL_DATE,
 							   d.DEL_DS							   				   
 						FROM ITEM i, ORDERS o, MEMBER m, DELIVERY d
 						WHERE m.MEM_ID = #{MEM_ID}
@@ -251,6 +252,7 @@
 						WHERE m.MEM_ID = #{MEM_ID}
 						AND m.MEM_NUM = r.MEM_NUM
 						AND i.ITEM_NUM = r.ITEM_NUM 
+						AND r.DEL_GB='N'
 						order by RE_DATE desc)s)
 					WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}	
 		]]>
@@ -309,11 +311,19 @@
 	<!-- 회원 내가 쓴 리뷰 삭제 -->
 	<delete id="deleteMyReview" parameterType="hashmap">
 		<![CDATA[
-			DELETE FROM REVIEW
-			WHERE RE_NUM = #{RE_NUM}
+				UPDATE REVIEW
+			SET
+				DEL_GB = 'Y'
+			WHERE
+				RE_NUM = #{RE_NUM}
 		]]>
 	</delete>
 	
+	<select id="ReviewDate" parameterType="hashmap" resultType="int">
+	select count(*) TOTAL from delivery where sysdate between DEL_DATE and DEL_DATE+90 and OR_UNQ=#{OR_UNQ}
+	</select>
+	
+
 <!-- 회원 장바구니  -->
 	<!-- 장바구니 목록 -->
 	<select id="selectMyCartList" parameterType="hashmap" resultType="hashmap">

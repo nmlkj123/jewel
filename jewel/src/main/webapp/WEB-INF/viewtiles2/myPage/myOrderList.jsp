@@ -29,6 +29,8 @@ color: gray;
 	var option= "width=800, height=500, top=100, left=200, location=no";
 	window.open(url,name,option);
  }
+
+
 </script>
 
 <body>
@@ -86,23 +88,26 @@ color: gray;
         			</td>
         			<td><a href="#" onclick="selectDel(${items.OR_UNQ})" style="color:#ff6980; font-weight:550;">${items.DEL_DS }</a>
         				<input type="hidden" value="${items.DEL_DS}" id="DEL_DS">
-         					<c:if test="${items.DEL_DS == '배송완료'}">
-    							<button type="button" class="btn btn-outline-primary" id="confirmPayment" style="padding:0px; font-size:10px; width:80px; height:20px;">구매확정</button>
-             				</c:if>
+         					<c:choose>
+         					<c:when test="${items.DEL_DS == '배송완료'}">
+    							<input type="button" class="btn btn-outline-primary" id="confirmPayment" value="구매확정" style="padding:0px;  font-size:10px; width:80px; height:20px;">
+             				</c:when>
+							
+             				<c:when test="${items.DEL_DS == '구매확정'}">
+             					<input type="submit"  class="btn btn-outline-primary" value="리뷰작성" id="reviewBtn" style="padding:0px;   font-size:10px; width:80px; height:20px;">
+             				</c:when>
+             				</c:choose>
 
-             			
-             				
-
-             				<c:if test="${items.DEL_DS == '구매확정'}">
-             					<button type="button" class="btn btn-outline-primary" id="reviewBtn" style="padding:0px; font-size:10px; width:80px; height:20px;">리뷰작성</button>
-             				</c:if>
-
-        				<input type="hidden" value="${items.OR_UNQ}" id="OR_UNQ">
-        				<input type="hidden" value="${items.OR_FP}" id="OR_FP">
+        				<input type="hidden" name="OR_UNQ" value="${items.OR_UNQ}" id="OR_UNQ">
+        				<input type="hidden" name="OR_FP" value="${items.OR_FP}" id="OR_FP">
+        				<input type="hidden" name="OR_NUM" value="${items.OR_NUM}" id="OR_NUM">
         				<input type="hidden" value="${items.OR_NUM}" id="OR_NUM">
-        				<input type="hidden" value="${sum1 }" id="point">
+        				<input type="hidden" name="ITEM_NUM" value="${items.ITEM_NUM}" id="ITEM_NUM">
+        				<input type="hidden" name="POINT" value="${sum1 }" id="POINT">
         				<input type='hidden' name='PLUS_POINT' value='"+parseInt(items.CART_CNT*items.ITEM_OP_PRICE)*0.02+"'>
+        			
         			</td>     			
+        			
         		</tr>       		
         	</c:forEach>    	        	
         </tbody>       
@@ -233,14 +238,69 @@ color: gray;
  		}
 	});
 
+
+	$(document).on('click','#reviewBtn',function(){
+		if($("input:checkbox[name=checkRow]:checked").length == 0){
+ 			alert("리뷰 작성할 대상을 선택하세요.");
+ 		 	return false;
+ 		}else if(confirm("선택한 리뷰를 작성하시겠습니까?")== true){
+ 			$("input:checkbox[name=checkRow]:checked").each(function(){
+ 				var tr = $(this).closest("tr").index();
+				var unq = $("tbody tr").eq(tr).find("#OR_UNQ").val();
+				var mem_num="${MEM_NUM}";
+				var item_num = $("tbody tr").eq(tr).find("#ITEM_NUM").val();
+				var point= $("tbody tr").eq(tr).find("#POINT").val();
+		
+				
+				point = (Math.floor(point));
+ 				var form = document.createElement("form");
+ 				form.setAttribute("charset", "UTF-8");
+ 				form.setAttribute("method", "Post"); 
+ 				form.setAttribute("action", "<c:url value='/review/reviewWriteForm'/>");
+ 				 
+ 				var hiddenField = document.createElement("input");
+ 				hiddenField.setAttribute("type", "hidden");
+ 				hiddenField.setAttribute("name", "OR_UNQ");
+ 				hiddenField.setAttribute("value", unq);
+ 				form.appendChild(hiddenField);
+
+ 				hiddenField = document.createElement("input");
+ 				hiddenField.setAttribute("type", "hidden");
+ 				hiddenField.setAttribute("name", "MEM_NUM");
+ 				hiddenField.setAttribute("value", mem_num);
+ 				form.appendChild(hiddenField);
+
+ 				hiddenField = document.createElement("input");
+ 				hiddenField.setAttribute("type", "hidden");
+ 				hiddenField.setAttribute("name", "ITEM_NUM");
+ 				hiddenField.setAttribute("value", item_num);
+ 				form.appendChild(hiddenField);
+
+
+ 				hiddenField = document.createElement("input");
+ 				hiddenField.setAttribute("type", "hidden");
+ 				hiddenField.setAttribute("name", "POINT");
+ 				hiddenField.setAttribute("value", point);
+ 				form.appendChild(hiddenField);
+
+ 				
+ 				document.body.appendChild(form);
+
+				 
+				 
+					form.submit();
+ 				
+ 					
+				 	
+			});
+ 		}
+	});
+
+	
 });
  
 
-$(function() {
-	$(document).ready(function() {
-	$("#reviewBtn").hide();
-});
-})
+
 
 
 

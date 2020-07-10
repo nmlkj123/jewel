@@ -67,12 +67,25 @@ public class ReviewServiceImpl implements ReviewService {
 	public int getTotalList(Map<String, Object> map) {
 		return reviewDAO.getTotalList(map);
 	}
+	
+	@Override
+	public int selectCountMember(Map<String, Object> map) throws Exception {
+		return reviewDAO.selectCountMember(map);
+	}
 
 	@Override
 	public void updateComments(Map<String, Object> map) throws Exception {
 		reviewDAO.updateComments(map);	
 	}
 
+	@Override
+	public void reviewPoint(Map<String, Object> map) throws Exception {
+		reviewDAO.reviewPoint(map);	
+	}
 
+	@Override
+	public int ReviewDate(Map<String, Object> map) throws Exception {
+		return reviewDAO.ReviewDate(map);
+	}
 
 }

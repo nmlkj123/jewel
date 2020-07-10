@@ -28,6 +28,10 @@ public class ReviewDAO extends AbstractDAO{
 		insert("review.insertReviewWrite", map);
 	}
 	
+	public int selectCountMember(Map<String,Object>map) throws Exception{
+		return (Integer) selectOne("review.selectCountMember",map);
+	}
+	
 	public void ReviewHit(Map<String, Object> map) throws Exception{
 		update("review.ReviewHit", map);
 	}
@@ -40,6 +44,12 @@ public class ReviewDAO extends AbstractDAO{
 		insert("review.insertComments", map);
 	}
 	
+	
+	public void reviewPoint(Map<String, Object> map) throws Exception{
+		update("review.reviewPoint", map);
+	}
+	
+	
 	public void updateComments(Map<String, Object> map) throws Exception{
 		update("review.updateComments", map);
 	}
@@ -50,6 +60,10 @@ public class ReviewDAO extends AbstractDAO{
 	
 	public int getTotalList(Map<String, Object> map) {
 		return  (Integer) selectOne("review.getTotalList", map);
-}
+    }
+	
+	public int ReviewDate(Map<String,Object>map) throws Exception{
+		return (Integer) selectOne("review.ReviewDate",map);
+	}
 	
 }

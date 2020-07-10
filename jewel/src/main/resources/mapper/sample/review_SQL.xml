@@ -23,9 +23,10 @@
 	      i.ITEM_NUM = #{ITEM_NUM}
 	      AND r.ITEM_NUM = i.ITEM_NUM
 	      AND m.MEM_NUM = r.MEM_NUM
+	      AND DEL_GB='N' 
 	      order by r.RE_NUM desc)s)
 	      WHERE RNUM >= #{START_NUM} AND RNUM <= #{END_NUM}
-  
+  		  
 		]]>
 	</select>
 
@@ -51,7 +52,9 @@
 				RE_LIKE,
 				ITEM_NUM,
 				RE_HIT,
-				MEM_NUM
+				DEL_GB,
+				MEM_NUM,
+				OR_UNQ
 			)
 			VALUES
 			(
@@ -62,7 +65,9 @@
 			    #{RE_LIKE},
 			   	#{ITEM_NUM},
 			    0,
-			    #{MEM_NUM}
+			    'N',
+			    #{MEM_NUM},
+			    #{OR_UNQ}
 			)
 	 
 	 </insert>
@@ -87,10 +92,23 @@
 	 RE_NUM=#{RE_NUM}
 	 ORDER BY c.CO_NUM ASC
 	 
-	 
-	 
 	 </select>
 	 
+	 <select id="ReviewDate" parameterType="hashmap" resultType="int">
+
+	select count(*) total from delivery where sysdate between DEL_DATE and DEL_DATE+90 and OR_UNQ=#{OR_UNQ}
+	 
+	 </select>
+
+	 
+	 <select id="selectCountMember" parameterType="hashmap" resultType="int">
+			SELECT 
+				   COUNT(*) cnt
+			FROM review 
+			WHERE MEM_NUM = #{MEM_NUM}
+			AND OR_UNQ= #{OR_UNQ}
+			</select>
+			
 	<insert id="insertComments" parameterType="hashmap" >
 	INSERT INTO COMMENTS(
 				CO_NUM,
@@ -109,9 +127,20 @@
 			)
 	 </insert>
 	 
+	  <update id="reviewPoint" parameterType="hashmap">
+		<![CDATA[
+			UPDATE MEMBER 
+			SET
+				MEM_POINT=(TO_NUMBER(#{MEM_POINT})+TO_NUMBER(#{POINT}))
+				
+			WHERE
+				MEM_NUM = #{MEM_NUM}	
+		]]>
+	</update>
+	 
 	 <update id="updateComments" parameterType="hashmap">
 		<![CDATA[
-			UPDATE QNA 
+			UPDATE COMMENTS 
 			SET
 				CO_CONTENT = #{QNA_CONTENT}
 				
@@ -121,10 +150,18 @@
 	</update>
 	
 	<update id="deleteComments" parameterType="hashmap">
-	DELETE FROM COMMENTS 
+		DELETE FROM COMMENTS 
 		WHERE CO_NUM=#{CO_NUM} and MEM_NUM=#{MEM_NUM}
+		
+		
 	
+
 	</update>
+	
+	
+	
+
+	
 	 <select id="getTotalList" parameterType="hashmap" resultType="int">
 		SELECT 
 			COUNT(*)as TOTAL 
@@ -134,6 +171,4 @@
 			ITEM_NUM=#{ITEM_NUM}
 		
 	</select>
-	
-	
 </mapper>

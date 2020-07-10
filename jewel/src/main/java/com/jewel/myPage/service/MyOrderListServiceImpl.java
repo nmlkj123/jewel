@@ -38,6 +38,7 @@ public class MyOrderListServiceImpl implements MyOrderListService {
 		return myOrderDAO.selectDelivery(map);
 
 	}
+	
 	//itemDAO.addPoint(map);
 	
 	

@@ -97,7 +97,7 @@ reviewPage(1);
 	
 	<br/>
 	
-	<a href="<c:url value='/review/reviewWriteForm?ITEM_NUM=${param.ITEM_NUM}'/>" class="btn1" id="write">글쓰기</a>
+	
 	 
 	<div align="center"class="container pt-5" id="categoryPaging" >
 
