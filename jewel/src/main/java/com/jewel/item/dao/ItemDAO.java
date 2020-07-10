@@ -62,8 +62,11 @@ public class ItemDAO extends AbstractDAO {
 	public int addPrice(Map<String, Object> map) {
 		return (Integer) update("item.addPrice",map);
 	}
-	public int addPoint(Map<String, Object> map) {
-		return (Integer) update("item.addPoint",map);
+	public int insertPoint(Map<String, Object> map) {
+		return (Integer) insert("item.insertPoint",map);
+	}
+	public int updatePoint(Map<String, Object> map) {
+		return (Integer) update("item.updatePoint",map);
 	}
 	public int delPoint(Map<String, Object> map) {
 		return (Integer) update("item.delPoint",map);

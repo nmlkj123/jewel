@@ -253,9 +253,12 @@
 	<update id="addPrice">
 		UPDATE MEMBER SET MEM_STACK=MEM_STACK+#{OR_FP} WHERE MEM_NUM=#{MEM_NUM}
 	</update>
-	<update id="addPoint">
+	<update id="updatePoint">
 		UPDATE MEMBER SET MEM_POINT=MEM_POINT+#{PLUS_POINT} WHERE MEM_NUM=#{MEM_NUM}
 	</update>
+	<insert id="insertPoint" parameterType="hashmap">
+		INSERT INTO POINTS VALUES(PO_NUM_SEQ.NEXTVAL, #{MEM_ID}, ('+'||#{PLUS_POINT}), SYSDATE,'구매적립',(TO_NUMBER(#{MEM_POINT})+TO_NUMBER(#{PLUS_POINT})))
+	</insert>
 	<update id="delPoint">
 		UPDATE MEMBER SET MEM_POINT=MEM_POINT-#{OR_USEP} WHERE MEM_NUM=#{MEM_NUM}
 	</update>

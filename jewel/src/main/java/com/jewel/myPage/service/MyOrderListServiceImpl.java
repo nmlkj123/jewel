@@ -39,7 +39,6 @@ public class MyOrderListServiceImpl implements MyOrderListService {
 
 	}
 	
-	//itemDAO.addPoint(map);
 	
 	
 }

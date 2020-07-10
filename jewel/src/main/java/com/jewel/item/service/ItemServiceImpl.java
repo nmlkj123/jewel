@@ -86,8 +86,13 @@ public class ItemServiceImpl implements ItemService{
 	}
 	
 	@Override
-	public int addPoint(Map<String,Object> map) {
-		return itemDAO.addPoint(map);
+	public int insertPoint(Map<String, Object> map) {
+		return itemDAO.insertPoint(map);
+	}
+	
+	@Override
+	public int updatePoint(Map<String,Object> map) {
+		return itemDAO.updatePoint(map);
 	}
 	
 
@@ -102,4 +107,6 @@ public class ItemServiceImpl implements ItemService{
 		// TODO Auto-generated method stub
 		return itemDAO.getItemMatch(map);
 	}
+
+
 }
