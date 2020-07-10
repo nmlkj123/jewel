@@ -212,11 +212,8 @@ color: gray;
 
 	
 	$(document).on('click','#confirmPayment',function(){
-		if($("input:checkbox[name=checkRow]:checked").length == 0){
- 			alert("구매확정할 대상을 선택하세요.");
- 		 	return false;
- 		}else if(confirm("선택한 상품을 구매확정하시겠습니까?")== true){
- 			$("input:checkbox[name=checkRow]:checked").each(function(){
+		
+ 		if(confirm("선택한 상품을 구매확정하시겠습니까?")== true){
 				var tr = $(this).closest("tr").index();
 				var unq = $("tbody tr").eq(tr).find("#OR_UNQ").val();
 				var num = $("tbody tr").eq(tr).find("#OR_NUM").val();
@@ -238,17 +235,12 @@ color: gray;
 			     } else {
 				     alert("\'배송완료\'일때만 신청가능합니다.");
 				 }				 	
-			});
- 		}
+			} 		
 	});
 
 
 	$(document).on('click','#reviewBtn',function(){
-		if($("input:checkbox[name=checkRow]:checked").length == 0){
- 			alert("리뷰 작성할 대상을 선택하세요.");
- 		 	return false;
- 		}else if(confirm("선택한 리뷰를 작성하시겠습니까?")== true){
- 			$("input:checkbox[name=checkRow]:checked").each(function(){
+		if(confirm("리뷰를 작성하시겠습니까?") == true){
  				var tr = $(this).closest("tr").index();
 				var unq = $("tbody tr").eq(tr).find("#OR_UNQ").val();
 				var mem_num="${MEM_NUM}";
@@ -280,28 +272,21 @@ color: gray;
  				hiddenField.setAttribute("value", item_num);
  				form.appendChild(hiddenField);
 
-
  				hiddenField = document.createElement("input");
  				hiddenField.setAttribute("type", "hidden");
  				hiddenField.setAttribute("name", "POINT");
  				hiddenField.setAttribute("value", point);
  				form.appendChild(hiddenField);
-
  				
  				document.body.appendChild(form);
-
-				 
-				 
-					form.submit();
- 				
- 					
-				 	
-			});
+ 
+				form.submit();
+ 							
  		}
 	});
-
+ });
 	
-});
+
  
 
 
