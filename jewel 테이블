@@ -490,7 +490,7 @@ NOCYCLE;
     BEGIN
         for vn_delivery in c1 loop
             exit when c1%notfound;
-            if(TO_CHAR(vn_delivery.DEL_DATE+90,'YYYY_MM_DD')=TO_CHAR(sysdate,'YYYY_MM_DD')) then
+            if(TO_CHAR(vn_delivery.DEL_DATE+8,'YYYY_MM_DD')=TO_CHAR(sysdate,'YYYY_MM_DD')) then
                 insert into delivery values(DEL_NUM_SEQ.NEXTVAL,vn_delivery.OR_UNQ,SYSDATE,vn_delivery.OR_NUM,'구매확정');
             end if;
         end loop;
