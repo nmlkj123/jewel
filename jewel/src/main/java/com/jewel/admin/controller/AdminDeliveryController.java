@@ -26,7 +26,6 @@ public class AdminDeliveryController {
 	public ModelAndView openDeliveryList(CommandMap commandMap,HttpServletRequest request)throws Exception{
 		ModelAndView mv=new ModelAndView("adminDeliveryList");
 		
-	 
 	return mv;
 		
 	}

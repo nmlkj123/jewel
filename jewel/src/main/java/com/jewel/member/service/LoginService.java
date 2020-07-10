@@ -15,4 +15,6 @@ public interface LoginService {
 	public int PwdEmailCheck(Map<String, Object> map) throws Exception;
 
 	public void updateTempPw(Map<String,Object> map) throws Exception;
+	
+	public List<Map<String, Object>> selectIgnoredUsers(Map<String, Object> map) throws Exception;
 }

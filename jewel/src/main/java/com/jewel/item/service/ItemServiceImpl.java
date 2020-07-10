@@ -84,6 +84,12 @@ public class ItemServiceImpl implements ItemService{
 		
 		 return i;
 	}
+	
+	@Override
+	public int addPoint(Map<String,Object> map) {
+		return itemDAO.addPoint(map);
+	}
+	
 
 	@Override
 	public int delPoint(Map<String, Object> map) {

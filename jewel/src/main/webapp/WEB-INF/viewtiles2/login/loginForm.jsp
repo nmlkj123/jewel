@@ -14,13 +14,17 @@
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/minty/bootstrap.min.css">
  
-
-
 <script type="text/javascript">
-
 function fsubmit(){
+	//var mem_num = $("#MEM_NUM")[0].value;
+	//alert(mem_num);
+	
+	//var mem_num2 = ${sessionScope.MEM_NUM}
+	//alert(mem_num2); //undefined
+	
 	var id = $("#MEM_ID")[0].value;
 	var pw = $("#MEM_PWD")[0].value;
+	//alert(pw);
 	if(id==null || id==''){
 		alert("아이디를 입력하세요.");
 		return false;
@@ -124,6 +128,7 @@ body {
          <div class="col-md-6 col-sm-12">
             <div class="login-form">
                <form id="loginForm" action="<c:url value='/login/login'/>"  method="POST"  >
+               		 <input type="hidden"  id="MEM_NUM" name="MEM_NUM" value="${MEM_NUM}"> 
                   <div class="form-group">
                      <label>User Name</label>
                      <input type="text" id="MEM_ID" name="MEM_ID"  class="form-control" placeholder="User Name">

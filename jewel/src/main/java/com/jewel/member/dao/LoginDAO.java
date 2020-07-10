@@ -32,6 +32,12 @@ public class LoginDAO extends AbstractDAO{
 		// TODO Auto-generated method stub
 		update("login.updateTempPw",map);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> selectIgnoredUsers(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return selectList("login.selectIgnoredUsers", map);
+	}
 
 
 }

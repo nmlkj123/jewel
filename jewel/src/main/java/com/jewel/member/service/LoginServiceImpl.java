@@ -46,5 +46,10 @@ public class LoginServiceImpl implements LoginService{
 		loginDAO.updateTempPw(map);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectIgnoredUsers(Map<String, Object> map) throws Exception {
+		return loginDAO.selectIgnoredUsers(map);
+	}
+
 }
 
