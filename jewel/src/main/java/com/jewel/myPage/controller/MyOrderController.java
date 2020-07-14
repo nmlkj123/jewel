@@ -139,6 +139,7 @@ public class MyOrderController {
 		 }
 		if(commandMap.getMap().get("MEM_NUM")!=null && commandMap.getMap().get("MEM_POINT")!=null) {
 			 itemService.updatePoint(commandMap.getMap());
+			 itemService.updateRank(commandMap.getMap());
 		 }
 		return mv;
 	}

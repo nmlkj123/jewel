@@ -74,7 +74,10 @@ public class ItemDAO extends AbstractDAO {
 	public int findCart(Map<String, Object> map) {
 		return (Integer) selectOne("item.findCart",map);
 	}
-
+	public int updateRank(Map<String, Object> map) {
+		return (Integer) update("item.updateRank",map);
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> getItemMatch(Map<String, Object> map) {
 		// TODO Auto-generated method stub

@@ -284,8 +284,19 @@
 			<![CDATA[
 				 WHERE RNUM >= 1 AND RNUM <= #{itemCount}
 			]]>
-		
-	    	
-	   
 	</select>
+	<update id="updateRank">
+		UPDATE
+		    MEMBER
+		SET MEM_RANK=
+		CASE
+		    WHEN mem_stack between 0 and 200000 THEN '일반회원'
+		    WHEN mem_stack between 200000 and 500000 THEN '브론즈'
+		    WHEN mem_stack between 500000 and 1000000 THEN '실버'
+		    WHEN mem_stack between 1000000 and 2000000 THEN '골드'
+		    WHEN mem_stack > 2000000 THEN '다이아몬드'
+		END
+		WHERE
+		    MEM_NUM=#{MEM_NUM}
+	</update>
 </mapper>

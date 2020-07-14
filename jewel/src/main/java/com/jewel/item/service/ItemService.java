@@ -26,4 +26,5 @@ public interface ItemService {
 	int updatePoint(Map<String,Object> map);
 	int delPoint(Map<String,Object> map);
 	List<Map<String, Object>> getItemMatch(Map<String, Object> map);
+	int updateRank(Map<String,Object> map);
 }

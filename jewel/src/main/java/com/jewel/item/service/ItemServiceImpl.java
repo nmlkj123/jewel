@@ -108,5 +108,10 @@ public class ItemServiceImpl implements ItemService{
 		return itemDAO.getItemMatch(map);
 	}
 
+	@Override
+	public int updateRank(Map<String, Object> map) {
+		return itemDAO.updateRank(map);
+	}
+
 
 }
