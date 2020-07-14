@@ -12,8 +12,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).on('click','#cbtn',function(){
+	if(confirm("정말 삭제하시겠습니까?")==true){
    var tr = $(this).parent().parent().parent().index();
    var num = $("#tbody tr").eq(tr).find("#com_NUM").val();
+   
     $.ajax({ 
          url:'<c:url value="/review/deleteComment"/>', 
          type:'POST',   
@@ -25,7 +27,7 @@ $(document).on('click','#cbtn',function(){
          },
 
             });   
-    
+	}
     });
 </script>
 
@@ -48,6 +50,7 @@ function enroll() {
 <script type="text/javascript">
 $(document).on('click','#com_write',function(){
     var formData = $("#frm").serialize();
+    if(confirm("댓글을 등록 하시겠습니까?")== true){
     $.ajax({ 
          url:'<c:url value="/review/insertComment"/>', 
          type:'POST',   
@@ -60,7 +63,8 @@ $(document).on('click','#com_write',function(){
               
          },
 
-            });   
+            }); 
+    }  
     });
 
 
@@ -121,12 +125,14 @@ $(document).on('click','#com_write',function(){
                             <td style="background:#f7f7f7;color:#3b3a3a;" >
                                ${com.MEM_ID} <p style="font-size: 8px;" >${com.CO_DATE }</p>
                              <input type="hidden" name="CO_NUM" id="com_NUM" value="${com.CO_NUM}">
-                                
+                               
                             </td>
                             <td>
                                 <div id="com_Div"><input type="hidden" value ="${com.CO_CONTENT}" id="com_CON">${com.CO_CONTENT }</div>
                                 <div align="right">
-                                    <input type="button" name="com_Del"  id="cbtn"  class="btn3" value="삭제" onclick="del(); return false;">
+                      <c:if test="${sessionScope.MEM_ID == com.MEM_ID}">
+                                    <button type="button" name="com_Del"  id="cbtn"  class="btn3"  onclick="del(); return false;">삭제</button>
+                           </c:if>
                                 </div>                            
                             </td>
                         </tr>
@@ -147,6 +153,8 @@ $(document).on('click','#com_write',function(){
             </tbody>
            
         </table>
+        
+        
 
 
        <a href="#" onclick="history.back();" class="btn1" id="list">목록으로</a>

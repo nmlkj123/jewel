@@ -127,6 +127,24 @@
 			)
 	 </insert>
 	 
+	 <insert id="insertReviewPoint" parameterType="hashmap" >
+	INSERT INTO point(
+				CO_NUM,
+				MEM_NUM,
+				CO_CONTENT,
+				CO_DATE,
+				RE_NUM
+			)
+			VALUES
+			(
+				CO_NUM_SEQ.NEXTVAL, 
+				#{MEM_NUM}, 
+			    #{CO_CONTENT},
+			    SYSDATE,
+			    #{RE_NUM}
+			)
+	 </insert>
+	 
 	  <update id="reviewPoint" parameterType="hashmap">
 		<![CDATA[
 			UPDATE MEMBER 
