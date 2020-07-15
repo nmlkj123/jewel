@@ -20,6 +20,8 @@ public interface ReviewService {
 	
 	List<Map<String, Object>> ReviewCommentsList(Map<String, Object> map) throws Exception;
 	
+	void insertPoints(Map<String, Object> map) throws Exception;
+	
 	void insertComments(Map<String, Object> map) throws Exception;
 	
 	void reviewPoint(Map<String, Object> map) throws Exception;

@@ -142,6 +142,7 @@ function writeReview(){
                <td><input type="hidden" id="POINT" name="POINT" value="${POINT}"></input></td>
                <td><input type="hidden" id="MEM_POINT" name="MEM_POINT" value="${MEM_POINT}"></input></td>
                 <td><input type="hidden" id="OR_UNQ" name="OR_UNQ" value="${OR_UNQ}"></input></td>
+             <td><input type="hidden" id="MEM_ID" name="MEM_ID" value="${MEM_ID}"></input></td>
             </tr>
       
          </tbody>

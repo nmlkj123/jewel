@@ -127,6 +127,7 @@
 			)
 	 </insert>
 	 
+	 
 	  <update id="reviewPoint" parameterType="hashmap">
 		<![CDATA[
 			UPDATE MEMBER 
@@ -138,6 +139,10 @@
 		]]>
 	</update>
 	 
+	 <insert id="insertPoints" parameterType="hashmap">
+		INSERT INTO POINTS VALUES(PO_NUM_SEQ.NEXTVAL, #{MEM_ID}, ('+'||#{POINT}), SYSDATE,'리뷰포인트적립',(TO_NUMBER(#{MEM_POINT})+TO_NUMBER(#{POINT})))
+	</insert>
+	
 	 <update id="updateComments" parameterType="hashmap">
 		<![CDATA[
 			UPDATE COMMENTS 
