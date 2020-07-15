@@ -37,6 +37,12 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
+	public void insertPoints(Map<String, Object> map) throws Exception {
+		reviewDAO.insertPoints(map);
+
+	}
+
+	@Override
 	public Map<String, Object> selectReviewDetail(Map<String, Object> map) throws Exception {
 		reviewDAO.ReviewHit(map);
 		Map<String, Object> resultMap = new HashMap<String,Object>();

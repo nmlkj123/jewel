@@ -62,8 +62,11 @@ public class ItemDAO extends AbstractDAO {
 	public int addPrice(Map<String, Object> map) {
 		return (Integer) update("item.addPrice",map);
 	}
-	public int addPoint(Map<String, Object> map) {
-		return (Integer) update("item.addPoint",map);
+	public int insertPoint(Map<String, Object> map) {
+		return (Integer) insert("item.insertPoint",map);
+	}
+	public int updatePoint(Map<String, Object> map) {
+		return (Integer) update("item.updatePoint",map);
 	}
 	public int delPoint(Map<String, Object> map) {
 		return (Integer) update("item.delPoint",map);
@@ -71,7 +74,10 @@ public class ItemDAO extends AbstractDAO {
 	public int findCart(Map<String, Object> map) {
 		return (Integer) selectOne("item.findCart",map);
 	}
-
+	public int updateRank(Map<String, Object> map) {
+		return (Integer) update("item.updateRank",map);
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> getItemMatch(Map<String, Object> map) {
 		// TODO Auto-generated method stub

@@ -102,7 +102,7 @@ color: gray;
         				<input type="hidden" name="OR_FP" value="${items.OR_FP}" id="OR_FP">
         				<input type="hidden" name="OR_NUM" value="${items.OR_NUM}" id="OR_NUM">
         				<input type="hidden" value="${items.OR_NUM}" id="OR_NUM">
-
+        				
         				<input type="hidden" name="ITEM_NUM" value="${items.ITEM_NUM}" id="ITEM_NUM">
         				<input type="hidden" name="POINT" value="${sum1 }" id="POINT">
         				<input type='hidden' name='PLUS_POINT' value='"+parseInt(items.CART_CNT*items.ITEM_OP_PRICE)*0.02+"'>
@@ -246,8 +246,9 @@ color: gray;
 				var mem_num="${MEM_NUM}";
 				var item_num = $("tbody tr").eq(tr).find("#ITEM_NUM").val();
 				var point= $("tbody tr").eq(tr).find("#POINT").val();
-		
-				
+				var mem_id="${MEM_ID}";
+				var mem_point="${MEM_POINT}";
+			
 				point = (Math.floor(point));
  				var form = document.createElement("form");
  				form.setAttribute("charset", "UTF-8");
@@ -276,6 +277,18 @@ color: gray;
  				hiddenField.setAttribute("type", "hidden");
  				hiddenField.setAttribute("name", "POINT");
  				hiddenField.setAttribute("value", point);
+ 				form.appendChild(hiddenField);
+
+ 				hiddenField = document.createElement("input");
+ 				hiddenField.setAttribute("type", "hidden");
+ 				hiddenField.setAttribute("name", "MEM_POINT");
+ 				hiddenField.setAttribute("value", mem_point);
+ 				form.appendChild(hiddenField);
+
+ 				hiddenField = document.createElement("input");
+ 				hiddenField.setAttribute("type", "hidden");
+ 				hiddenField.setAttribute("name", "MEM_ID");
+ 				hiddenField.setAttribute("value", mem_id);
  				form.appendChild(hiddenField);
  				
  				document.body.appendChild(form);

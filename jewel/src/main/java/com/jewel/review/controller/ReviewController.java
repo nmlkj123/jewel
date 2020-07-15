@@ -108,6 +108,7 @@ public class ReviewController {
 	      commandMap.put("MEM_NUM",session.getAttribute("MEM_NUM"));
 	      commandMap.put("MEM_POINT",session.getAttribute("MEM_POINT"));
 	      mv.addObject("MEM_NUM",commandMap.get("MEM_NUM"));
+	      mv.addObject("MEM_ID",commandMap.get("MEM_ID"));
 	      mv.addObject("ITEM_NUM",commandMap.get("ITEM_NUM"));
 	      mv.addObject("POINT",commandMap.get("POINT"));
 	      mv.addObject("OR_UNQ",commandMap.get("OR_UNQ"));
@@ -180,6 +181,7 @@ public class ReviewController {
 	public ModelAndView reviewWrite(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response) throws Exception{
 		ModelAndView mv = new ModelAndView("main");
 		reviewService.reviewPoint(commandMap.getMap());
+		reviewService.insertPoints(commandMap.getMap());
 		reviewService.insertReviewWrite(commandMap.getMap());
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=utf-8");

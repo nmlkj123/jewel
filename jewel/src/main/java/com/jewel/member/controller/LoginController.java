@@ -69,30 +69,19 @@ public class LoginController {
 	         session.setAttribute("MEM_RANK", result.get("MEM_RANK"));
 	         session.setAttribute("MEM_NUM", result.get("MEM_NUM")); 
 	         session.setAttribute("MEM_ADMIN", result.get("MEM_ADMIN"));
-	         
-	         System.out.println("selectId 쿼리문에서 꺼내온 MEM_NUM : "+result.get("MEM_NUM")); //selectId 쿼리문에서 꺼내온 MEM_NUM
-	         System.out.println("selectIgnoredUsers 쿼리문에서 꺼내온 리스트 : "+result2);
 
 
-
-         session.setAttribute("MEM_RANK", result.get("MEM_RANK"));
-         session.setAttribute("MEM_POINT", result.get("MEM_POINT"));
-         session.setAttribute("MEM_NUM", result.get("MEM_NUM")); 
-         session.setAttribute("MEM_ADMIN", result.get("MEM_ADMIN"));
+	         session.setAttribute("MEM_RANK", result.get("MEM_RANK"));
+	         session.setAttribute("MEM_POINT", result.get("MEM_POINT"));
+	         session.setAttribute("MEM_NUM", result.get("MEM_NUM")); 
+	         session.setAttribute("MEM_ADMIN", result.get("MEM_ADMIN"));
 
 			for (int i=0; i<result2.size(); i++) {
 				Map<String, Object> map = result2.get(i);
-				System.out.println("리스트 안에 담긴 map : "+map);
-				//str.get(result2);
-				//System.out.println("map의 값 꺼내기 : "+map.values());;
-				//System.out.println(map.containsValue(result.get("MEM_NUM")));	
-				
 				if(map.containsValue(result.get("MEM_NUM")) == true) {
-					System.out.println("차단된 회원임");
 					message ="차단된 회원입니다.";
 				}
 			}
-	         //System.out.println("이건뭐냐"+commandMap.get("MEM_NUM"));
 	      }
 	      else {//비밀번호가 일치하지않을 때
 	         message="비밀번호가 맞지 않습니다.";

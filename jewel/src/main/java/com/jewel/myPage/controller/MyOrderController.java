@@ -126,14 +126,21 @@ public class MyOrderController {
 		if(session.getAttribute("MEM_NUM")!=null) {
     		commandMap.put("MEM_NUM", session.getAttribute("MEM_NUM"));
     	}
-		System.out.println("MEM_NUM: "+commandMap.getMap().get("MEM_NUM"));
+		if(session.getAttribute("MEM_ID")!=null) {
+    		commandMap.put("MEM_ID", session.getAttribute("MEM_ID"));
+    	}
+		if(session.getAttribute("MEM_POINT")!=null) {
+    		commandMap.put("MEM_POINT", session.getAttribute("MEM_POINT"));
+    	}
 		
 		
-		 if(commandMap.getMap().get("MEM_NUM")!=null) {
-			 itemService.addPoint(commandMap.getMap());
-			 System.out.println();
+		if(commandMap.getMap().get("MEM_ID")!=null) {
+			 itemService.insertPoint(commandMap.getMap());
 		 }
-		 
+		if(commandMap.getMap().get("MEM_NUM")!=null && commandMap.getMap().get("MEM_POINT")!=null) {
+			 itemService.updatePoint(commandMap.getMap());
+			 itemService.updateRank(commandMap.getMap());
+		 }
 		return mv;
 	}
 	
