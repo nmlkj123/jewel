@@ -35,4 +35,12 @@ public class AdminDeliveryDAO extends AbstractDAO{
 	public int refundTotalList(Map<String, Object> map)throws Exception{
 		return (Integer) selectOne("admin.refundTotalList", map);
 	}
+	public Map<String, Object> selectWeek(Map<String,Object>map)throws Exception{
+	
+		return (Map<String,Object>) selectOne("admin.selectWeek",map);
+		
+	}
+	public int selectSaleCnt(String map)throws Exception{
+		return (Integer) selectOne("admin.selectSaleCnt", map);
+	}
 }

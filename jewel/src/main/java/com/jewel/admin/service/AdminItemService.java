@@ -14,9 +14,13 @@ public interface AdminItemService {
 	void updateItemModify(Map<String,Object>map)throws Exception;
 	void deleteItem(Map<String,Object>map )throws Exception;
 	int getTotalList(Map<String,Object>map)throws Exception;
-	String restore(MultipartFile multipartFile, String uploadPath,String newFileName) throws Exception;
+	String restore(MultipartFile multipartFile, String uploadPath) throws Exception;
 	String selectItemNum(Map<String,Object>map)throws Exception;
 	void insertOption(Map<String,Object>map) throws Exception;
 	List<Map<String,Object>> selectOptionList(Map<String,Object>map) throws Exception;
 	void deleteOption(Map<String,Object>map )throws Exception;
+	int getOrderCount(Map<String,Object>map)throws Exception;
+	int getQnACount(Map<String,Object>map)throws Exception;
+	int getMemberCount(Map<String,Object>map)throws Exception;
+	int getRefundCount(Map<String,Object>map)throws Exception;
 }

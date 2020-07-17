@@ -50,7 +50,7 @@ function fsubmit(){
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">회원 ID</label>
                     <div class="col-sm-10">
-                      <input class="form-control" type="text"  id="NT_TYPE" name="NT_TYPE" value="${map.MEM_ID}" placeholder="회원 ID " disabled>
+                      <input class="form-control" type="text"  id="NT_TYPE" name="NT_TYPE" value="${map.MEM_ID}" placeholder="회원 ID " readonly>
                     </div>
                   </div>
                  

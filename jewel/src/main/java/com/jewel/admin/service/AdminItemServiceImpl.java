@@ -1,6 +1,5 @@
 package com.jewel.admin.service;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
@@ -63,20 +62,22 @@ public class AdminItemServiceImpl implements AdminItemService {
 	
 	
 	@Override
-	public String restore(MultipartFile multipartFile,String uploadPath,String newFileName) throws Exception {
+	public String restore(MultipartFile multipartFile,String uploadPath) throws Exception {
 		String url = null;
 		
 		try {
 			// ���� ����
-
-			File f = new File(uploadPath);
-			if (!f.exists()) {
-				f.mkdirs();
-			}
+			String originFilename = multipartFile.getOriginalFilename();
+			String extName
+				= originFilename.substring(originFilename.lastIndexOf("."), originFilename.length());
+			Long size = multipartFile.getSize();
 			
-			writeFile(multipartFile, newFileName,uploadPath);
-			url = uploadPath +"/"+ newFileName;
+			// �������� ���� �� ���� �̸�
+			String saveFileName = originFilename;
 			
+			
+			writeFile(multipartFile, saveFileName,uploadPath);
+			url = uploadPath +"/"+ saveFileName;
 		}
 		catch (IOException e) {
 			// ������� RuntimeException �� ��ӹ��� ���ܰ� ó���Ǿ�� ������
@@ -134,5 +135,29 @@ public class AdminItemServiceImpl implements AdminItemService {
 	public void deleteOption(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		adminItemDAO.deleteOption(map);
+	}
+
+	@Override
+	public int getOrderCount(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return adminItemDAO.getOrderCount(map);
+	}
+
+	@Override
+	public int getQnACount(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return adminItemDAO.getQnACount(map);
+	}
+
+	@Override
+	public int getMemberCount(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return adminItemDAO.getMemberCount(map);
+	}
+
+	@Override
+	public int getRefundCount(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return adminItemDAO.getRefundCount(map);
 	}
 }

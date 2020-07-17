@@ -64,31 +64,18 @@ var chartDate=[];
 var ctx = document.getElementById('myChart');
 
 
-var myChart = new Chart(ctx, {
-	type: 'doughnut',
+var myChart = new Chart.Line(ctx, {
+	
 	data: {
-		labels: [str, 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+		labels: ['월','화','수','목','금','토','일'],
 		datasets: [{		
 			label: '매출', 
-			data: [12, 19, 3, 5, 2, 3],
-			backgroundColor: [
-				'rgba(255,99,132,1)',
-				'rgba(54,162,235,1)',
-				'rgba(255,206,86,1)',
-				'rgba(75,192,192,1)',
-				'rgba(153,102,255,1)',
-				'rgba(255,159,64,1)',
-				],
-			borderColor:[
-				'rgba(255,255,255,1)',
-				'rgba(255,255,255,1)',
-				'rgba(255,255,255,1)',
-				'rgba(255,255,255,1)',
-				'rgba(255,255,255,1)',
-				'rgba(255,255,255,1)',
-			],
-			borderWidth:1
-	
+			data: [12, 19, 3, 5, 2, 3,0],
+			borderColor: "rgba(54,162,235,1)",
+            backgroundColor: "rgba(54,162,235,0.5)",
+            fill: true,
+			lineTension: 0,
+			
 		}]
 		
 	},
@@ -98,7 +85,7 @@ var myChart = new Chart(ctx, {
 			text:'일별 매출별 현황'
 		},
 		scales:{
-			yAxes:[{ display: false,
+			yAxes:[{
 				ticks:{
 					beginAtZero:true
 				}

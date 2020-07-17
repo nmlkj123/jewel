@@ -55,4 +55,16 @@ public class AdminDeliveryServiceImpl implements AdminDeliveryService{
 		return AdminDeliveryDAO.selectDeliveryDetail(map);
 	}
 
+	@Override
+	public Map<String, Object> selectWeek(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return AdminDeliveryDAO.selectWeek(map);
+	}
+
+	@Override
+	public int selectSaleCnt(String  map) throws Exception {
+		// TODO Auto-generated method stub
+		return AdminDeliveryDAO.selectSaleCnt(map);
+	}
+
 }

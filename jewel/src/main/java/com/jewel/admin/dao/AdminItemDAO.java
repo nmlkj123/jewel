@@ -46,4 +46,16 @@ public class AdminItemDAO extends AbstractDAO {
 	public void deleteOption(Map<String, Object> map) throws Exception{
 		update("admin.deleteOption", map);
 	}
+	public int getOrderCount(Map<String, Object> map)throws Exception{
+		return (Integer) selectOne("admin.selectOrder", map);
+	}
+	public int getQnACount(Map<String, Object> map)throws Exception{
+		return (Integer) selectOne("admin.selectQnA", map);
+	}
+	public int getMemberCount(Map<String, Object> map)throws Exception{
+		return (Integer) selectOne("admin.selectMember", map);
+	}
+	public int getRefundCount(Map<String, Object> map)throws Exception{
+		return (Integer) selectOne("admin.selectRefund", map);
+	}
 }

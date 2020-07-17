@@ -342,7 +342,7 @@ WHERE  MEM_NUM=#{MEM_NUM}
 	</update>
 	
 	<insert id="insertPoint" parameterType="hashmap">
-	insert into POINTS VALUES(PO_NUM_SEQ.nextval,#{MEM_NUM},
+	insert into POINTS VALUES(PO_NUM_SEQ.nextval,#{MEM_ID},
 	<choose>
 		<when test="PO_TYPE==1">	 
 				   	('+'||#{PO_POINT})
@@ -424,5 +424,31 @@ WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND NOT deli
 SELECT  COUNT(*) TOTAL
 FROM delivery
 WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND delivery.del_ds IN(select delivery.del_ds FROM DELIVERY WHERE DEL_NUM IN(SELECT MAX(DEL_NUM) FROM delivery GROUP BY OR_UNQ) AND delivery.del_ds LIKE '교환%' OR delivery.del_ds LIKE '반품%' OR delivery.del_ds LIKE '취소%' )
-	</select>	
+	</select>
+	<select id="selectOrder"	parameterType="hashmap" resultType="int">
+	SELECT count(*) cnt FROM ORDERS WHERE TO_CHAR(OR_DATE,'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD')
+	</select>
+	<select id="selectQnA"	parameterType="hashmap" resultType="int">
+	select count(*)cnt from QNA where qna_rstate='N'
+	</select>
+	<select id="selectMember"	parameterType="hashmap" resultType="int">
+	select count(*)cnt from member where  TO_CHAR(mem_joindate,'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD')
+	</select>
+	<select id="selectRefund" parameterType="hashmap" resultType="int">
+	select count(*)cnt from delivery where  del_ds like '교환신청' or del_ds like '반품신청'
+	</select>
+	<select id="selectWeek" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[SELECT 
+TO_CHAR(A.CUR_DATE,'YYYY-MM-DD')AS w1,
+TO_CHAR(A.CUR_DATE+1,'YYYY-MM-DD')AS w2,
+TO_CHAR(A.CUR_DATE+2,'YYYY-MM-DD')AS w3,
+TO_CHAR(A.CUR_DATE+3,'YYYY-MM-DD')AS w4,
+TO_CHAR(A.CUR_DATE+4,'YYYY-MM-DD')AS w5,
+TO_CHAR(A.CUR_DATE+5,'YYYY-MM-DD')AS w6,
+TO_CHAR(A.CUR_DATE+6,'YYYY-MM-DD')AS w7
+FROM(SELECT SYSDATE-(TO_NUMBER(TO_CHAR(SYSDATE,'D'))-1)AS CUR_DATE FROM DUAL)A]]>
+	</select>
+	<select id="selectSaleCnt" parameterType="String" resultType="int">
+	select nvl(SUM(OR_CNT),0) as CNT from orders where OR_DATE=to_date(TO_CHAR(#{value}),'YYYY-MM-DD')
+	</select>
 </mapper>

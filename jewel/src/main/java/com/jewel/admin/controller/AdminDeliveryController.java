@@ -2,6 +2,7 @@ package com.jewel.admin.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +26,7 @@ public class AdminDeliveryController {
 	@RequestMapping(value="/openDeliveryList")
 	public ModelAndView openDeliveryList(CommandMap commandMap,HttpServletRequest request)throws Exception{
 		ModelAndView mv=new ModelAndView("adminDeliveryList");
-		
+		/* asd */
 	return mv;
 		
 	}
@@ -129,4 +130,22 @@ public class AdminDeliveryController {
 		
 		return mv;
 	}
+	@RequestMapping(value="/adminWeek")
+	public ModelAndView adminWeek(CommandMap commandMap,HttpServletRequest request)throws Exception{
+			ModelAndView mv=new ModelAndView("jsonView");  
+			
+			Map<String,Object> map=AdminDeliveryService.selectWeek(commandMap.getMap());
+			for(int i=1;i<=map.size();i++) {
+				String OR_DATE = (String)map.get("W"+i);
+				
+				
+				int cnt =AdminDeliveryService.selectSaleCnt(OR_DATE);
+			
+		        mv.addObject("cnt"+i,cnt);
+		     }
+			
+		 
+		return mv;
+	}
+	
 }

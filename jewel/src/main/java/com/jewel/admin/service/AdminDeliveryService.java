@@ -11,4 +11,6 @@ public interface AdminDeliveryService {
 	void deleteRefund(Map<String,Object>map )throws Exception;
 	int normalTotalList(Map<String,Object>map)throws Exception;
 	int refundTotalList(Map<String,Object>map)throws Exception;
+	Map<String,Object> selectWeek(Map<String,Object>map)throws Exception;
+	int selectSaleCnt(String map)throws Exception;
 }

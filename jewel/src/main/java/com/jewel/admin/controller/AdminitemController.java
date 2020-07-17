@@ -121,15 +121,13 @@ public class AdminitemController {
 	}
 	@RequestMapping(value="/adminItemWrite")
 	public ModelAndView adminItemWrite(CommandMap commandMap,HttpServletRequest request,@RequestParam("ITEM_IMAGE1") MultipartFile file1)throws Exception{
+			commandMap.put("ITEM_IMAGE1", file1.getOriginalFilename());
 			
-			UUID uuid = UUID.randomUUID();
-			String newFileName = uuid.toString() + file1.getOriginalFilename();
-			commandMap.put("ITEM_IMAGE1", newFileName);
 			AdminItemService.insertItemWrite(commandMap.getMap());
 			ModelAndView mv=new ModelAndView("jsonView");
 			String path="/images/item";
 			  String uploadPath=request.getSession().getServletContext().getRealPath(path);
-			  String ITEM_IMAGE1 = AdminItemService.restore(file1,uploadPath,newFileName);
+			  String ITEM_IMAGE1 = AdminItemService.restore(file1,uploadPath);
 			
 			  
 				mv.addObject("img1", ITEM_IMAGE1);
@@ -150,13 +148,11 @@ public class AdminitemController {
 	@RequestMapping(value="/adminItemUpdate")
 	public ModelAndView updateBoard(CommandMap commandMap,HttpServletRequest request,@RequestParam("ITEM_IMAGE1") MultipartFile file1) throws Exception{
 		ModelAndView mv = new ModelAndView("jsonView");
-		UUID uuid = UUID.randomUUID();
-		String newFileName = uuid.toString() + file1.getOriginalFilename();
-		commandMap.put("ITEM_IMAGE1", newFileName);
+		commandMap.put("ITEM_IMAGE1", file1.getOriginalFilename());
 		
 		String path="/images/item";
 		  String uploadPath=request.getSession().getServletContext().getRealPath(path);
-		  String ITEM_IMAGE1 = AdminItemService.restore(file1,uploadPath,newFileName);
+		  String ITEM_IMAGE1 = AdminItemService.restore(file1,uploadPath);
 		  
 		  
 			mv.addObject("img1", ITEM_IMAGE1);
@@ -227,5 +223,20 @@ public class AdminitemController {
 		}
 		file.transferTo(f);
 		return new String(  URLEncoder.encode( str_filename, "UTF-8" ));
+	}
+	@RequestMapping(value="/adminMain")
+	public ModelAndView adminMain(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("jsonView");
+		
+		int cnt1=AdminItemService.getOrderCount(commandMap.getMap());
+		int cnt2=AdminItemService.getQnACount(commandMap.getMap());
+		int cnt3=AdminItemService.getMemberCount(commandMap.getMap());
+		int cnt4=AdminItemService.getRefundCount(commandMap.getMap());
+		mv.addObject("cnt1",cnt1);
+		mv.addObject("cnt2",cnt2);
+		mv.addObject("cnt3",cnt3);
+		mv.addObject("cnt4",cnt4);
+		
+		return mv;
 	}
 }

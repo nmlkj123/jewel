@@ -1,12 +1,95 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script type="text/javascript">
+var chardata=new Array();
+function a(){
+	
+
+	$.ajax({
+	      url : '<c:url value="/adminMain"/>',
+	      dataType :"json",
+	      
+	      success: function(data) {
+	    	 
+	    	  $("#cnt1").html(data.cnt1);
+	    	  $("#cnt2").html(data.cnt2);
+	    	  $("#cnt3").html(data.cnt3);
+	    	  $("#cnt4").html(data.cnt4);
+	      },
+	      error:function(request,status,error){
+	          alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	         }
+	    });
+
+}
+function b(){
+	$.ajax({
+	      url : '<c:url value="/adminWeek"/>',
+	      dataType :"json",
+	      
+	      success: function(data) {
+
+	    		  chardata.push(data.cnt1);
+	    		  chardata.push(data.cnt2);
+	    		  chardata.push(data.cnt3);
+	    		  chardata.push(data.cnt4);
+	    		  chardata.push(data.cnt5);
+	    		  chardata.push(data.cnt6);  
+	    		  chardata.push(data.cnt7);
+	    		  
+	    		  var ctx = document.getElementById('myChart');
+
+
+	    	      var myChart = new Chart.Line(ctx, {
+	    	      	
+	    	      	data: {
+	    	      		labels: ['일','월','화','수','목','금','토'],
+	    	      		datasets: [{		
+	    	      			label: '매출', 
+	    	      			data: chardata,
+	    	      			borderColor: "rgba(54,162,235,1)",
+	    	                  backgroundColor: "rgba(54,162,235,0.5)",
+	    	                  fill: true,
+	    	      			lineTension: 0,
+	    	      			
+	    	      		}]
+	    	      		
+	    	      	},
+	    	      	options:{
+	    	      		maintainAspectRatio: false,
+	    	      		title:{
+	    	      			display:true,
+	    	      			text:'주간 매출'
+	    	      		},
+	    	      		scales:{
+	    	      			yAxes:[{
+	    	      				ticks:{
+	    	      					beginAtZero:true
+	    	      				}
+	    	      			}]
+	    	      		}
+	    	      	}
+	    	      	});
+	    		
+	      },
+	      error:function(request,status,error){
+	          alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	         }
+	    });
+}
+
+
+	
+</script>
 <body>
+
 <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
@@ -14,14 +97,14 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>23</h3>
+                <h3 id=cnt1></h3>
 
                 <p>새 주문 건 수</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="openDeliveryList" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -29,14 +112,14 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>6<sup style="font-size: 20px"></sup></h3>
+                <h3 id=cnt2><sup style="font-size: 20px"></sup></h3>
 
                 <p>QNA 답변 대기 수</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="adminQnAList" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -44,14 +127,14 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>5</h3>
+                <h3 id=cnt3></h3>
 
                 <p>신규 가입 회원 수</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="adminMemberList" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -59,14 +142,14 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>65</h3>
+                <h3 id=cnt4></h3>
 
-                <p>방문자 수</p>
+                <p>교환/반품 건 수</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="openDeliveryList" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -83,27 +166,16 @@
                   <i class="fas fa-chart-pie mr-1"></i>
                   Sales
                 </h3>
-                <div class="card-tools">
-                  <ul class="nav nav-pills ml-auto">
-                    <li class="nav-item">
-                      <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
-                    </li>
-                  </ul>
-                </div>
+ <!-- 그래프 ---------------------------------------------------------------------------------------------------------------------------------------------------- -->              
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content p-0">
                   <!-- Morris chart - Sales -->
                   <div class="chart tab-pane active" id="revenue-chart"
                        style="position: relative; height: 300px;">
-                      <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>                         
+                      <canvas id="myChart">></canvas>                        
                    </div>
-                  <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
-                    <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>                         
-                  </div>  
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->                    
                 </div>
               </div><!-- /.card-body -->
             </div>
@@ -568,6 +640,7 @@
                   <div class="col-4 text-center">
                     <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
                            data-fgColor="#39CCCC">
+
                     <div class="text-white">Online</div>
                   </div>
                   <!-- ./col -->
@@ -583,7 +656,7 @@
               </div>
               <!-- /.card-footer -->
             </div>
-            <!-- /.card -->h
+            <!-- /.card -->
 
             <!-- Calendar -->
         
@@ -593,5 +666,11 @@
         </div>
         <!-- /.row (main row) -->
       </div>
+
 </body>
 </html>
+<script type="text/javascript">
+a();
+b();
+
+</script>
