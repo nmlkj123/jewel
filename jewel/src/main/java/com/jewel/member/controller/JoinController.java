@@ -25,7 +25,7 @@ import com.jewel.member.service.MailService;
 
 @Controller
 public class JoinController {
-   String sendEmailId="nmlkj66@gmail.com";
+   String sendEmailId="ezenyoon3@gmail.com";
 
    @Resource(name="joinService")
    private JoinService joinService;

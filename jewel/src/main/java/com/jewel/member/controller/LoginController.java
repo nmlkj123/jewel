@@ -32,7 +32,7 @@ import com.jewel.member.service.MailService;
 @Controller
 public class LoginController {
    
-   String sendEmailId="nmlkj66@gmail.com";
+   String sendEmailId="ezenyoon3@gmail.com";
    
    //로깅을 위한 변수
    Logger log = Logger.getLogger(this.getClass());
