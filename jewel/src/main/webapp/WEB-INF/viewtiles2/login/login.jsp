@@ -8,7 +8,7 @@
 <script charset="utf-8"></script>
 <script type="text/javascript">
 $(document).ready(function(){ 
-	var mem_num2 = ${sessionScope.MEM_NUM} //로그인시, MEM_NUM 얻기
+	//로그인시, MEM_NUM 얻기
 	
 	var message = "${message}";
 	if(message!=null && message!=''){
@@ -23,6 +23,6 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-      <input type="hidden"  id="MEM_NUM" name="MEM_NUM" value="${MEM_NUM}"> 
+      
 </body>
 </html>

@@ -80,6 +80,8 @@ public class LoginController {
 				Map<String, Object> map = result2.get(i);
 				if(map.containsValue(result.get("MEM_NUM")) == true) {
 					message ="차단된 회원입니다.";
+					session.invalidate();
+					break;
 				}
 			}
 	      }
