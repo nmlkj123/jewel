@@ -23,13 +23,18 @@
 SCREENSHOTS
 -----------
 <div>
-<img src="https://user-images.githubusercontent.com/51207216/89305396-8ce73080-d6a9-11ea-9704-9bf9e940631e.png" width="40%"></img><br>
-<img src="https://user-images.githubusercontent.com/51207216/89306237-8a390b00-d6aa-11ea-8faa-0d7ca836b0d9.png" width="40%"></img>
-<img src="https://user-images.githubusercontent.com/51207216/89306242-8d33fb80-d6aa-11ea-98f5-04e54942e1c1.png" width="40%"></img>
-<img src="https://user-images.githubusercontent.com/51207216/89306255-91601900-d6aa-11ea-8d53-91989168381b.png" width="40%"></img>
-<img src="https://user-images.githubusercontent.com/51207216/89306276-991fbd80-d6aa-11ea-9773-19f438ef6c3b.png" width="40%"></img>
-<img src="https://user-images.githubusercontent.com/51207216/89306281-9b821780-d6aa-11ea-963b-5db3adc23590.png" width="40%"></img>
-<img src="https://user-images.githubusercontent.com/51207216/89306295-a2a92580-d6aa-11ea-8986-e215a920ca35.png" width="40%"></img>
+<img src="https://user-images.githubusercontent.com/51207216/89305396-8ce73080-d6a9-11ea-9704-9bf9e940631e.png" width="30%" "></img>
+<img src="https://user-images.githubusercontent.com/51207216/89306237-8a390b00-d6aa-11ea-8faa-0d7ca836b0d9.png" width="250" height="200"></img>
+<img src="https://user-images.githubusercontent.com/51207216/89306242-8d33fb80-d6aa-11ea-98f5-04e54942e1c1.png" width="250" height="200"></img>
+<img src="https://user-images.githubusercontent.com/51207216/89306255-91601900-d6aa-11ea-8d53-91989168381b.png" width="250" height="200"></img>
+<img src="https://user-images.githubusercontent.com/51207216/89306276-991fbd80-d6aa-11ea-9773-19f438ef6c3b.png" width="250" height="200"></img>
+<img src="https://user-images.githubusercontent.com/51207216/89308980-d89bd900-d6ad-11ea-9ccc-256ecf080932.png" width="250" height="200"></img>
+<img src="https://user-images.githubusercontent.com/51207216/89309302-30d2db00-d6ae-11ea-80cd-574d4f4db7d4.png" width="250" height="200"></img>
+<img src="https://user-images.githubusercontent.com/51207216/89308864-b904b080-d6ad-11ea-9a6d-cbf5c3173488.png" width="250" height="200"></img>
+<img src="https://user-images.githubusercontent.com/51207216/89306281-9b821780-d6aa-11ea-963b-5db3adc23590.png" width="250"></img>
+<img src="https://user-images.githubusercontent.com/51207216/89306295-a2a92580-d6aa-11ea-8986-e215a920ca35.png" width="250" height="200"></img>
+<img src="https://user-images.githubusercontent.com/51207216/89308713-88bd1200-d6ad-11ea-82de-65dcc8d728b6.png" width="250" height="200"></img>
+<img src="https://user-images.githubusercontent.com/51207216/89308732-8fe42000-d6ad-11ea-8810-830e51faf9bf.png" width="250" height="200"></img>
 </div>
 
 ## 7월 23일 자동 구매확정 추가
