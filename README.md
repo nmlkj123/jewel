@@ -19,7 +19,6 @@
 
 > 프로젝트 흐름도 : https://docs.google.com/spreadsheets/d/1aNEKs-a-HIASK7nrZ5AGOi4cE5QN7NkIME-xe-vHKYU/edit?usp=sharing
 
-![image](https://user-images.githubusercontent.com/51207216/89305396-8ce73080-d6a9-11ea-9704-9bf9e940631e.png)
 
 ## 7월 23일 자동 구매확정 추가
 ```c
@@ -62,3 +61,5 @@
     END;
     /
    ```
+   
+   ![image](https://user-images.githubusercontent.com/51207216/89305396-8ce73080-d6a9-11ea-9704-9bf9e940631e.png)
