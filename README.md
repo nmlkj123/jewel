@@ -19,6 +19,7 @@
 
 > 프로젝트 흐름도 : https://docs.google.com/spreadsheets/d/1aNEKs-a-HIASK7nrZ5AGOi4cE5QN7NkIME-xe-vHKYU/edit?usp=sharing
 
+## 7월 23일 자동 구매확정 추가
 ```c
 --------------프로시저--------------
     create or replace PROCEDURE DELIVERY_proc
