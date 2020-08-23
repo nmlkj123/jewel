@@ -19,6 +19,7 @@
 
 > 프로젝트 흐름도 : https://docs.google.com/spreadsheets/d/1aNEKs-a-HIASK7nrZ5AGOi4cE5QN7NkIME-xe-vHKYU/edit?usp=sharing
 
+> 포트폴리오 : https://docs.google.com/presentation/d/1bouUCH_nCZZYUDnC7t_T4pOw_D8J0JP-DxS1vZx9oxE/edit?usp=sharing
 
 ## 7월 23일 자동 구매확정 추가
 ```c
